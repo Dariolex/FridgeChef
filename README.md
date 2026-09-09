@@ -17,8 +17,8 @@ npm install
 npm run dev
 ```
 
-Imposta `XAI_API_KEY` nell’ambiente per la lettura automatica delle foto. Senza chiave, il ricettario locale e il frigo demo restano usabili.
+Imposta `GEMINI_API_KEY` nell’ambiente per la lettura automatica delle foto (chiave gratuita da [Google AI Studio](https://aistudio.google.com/apikey)). Senza chiave, il ricettario locale e il frigo demo restano usabili.
 
 ## Stack
 
-React 19, TanStack Start, Tailwind v4, xAI Grok vision.
+React 19, TanStack Start, Tailwind v4, Google Gemini vision (livello gratuito, via endpoint OpenAI-compatibile).

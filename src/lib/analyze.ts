@@ -73,7 +73,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
       return { ok: true, analysis: asAnalysis(null, prefs, manual) };
     }
 
-    const apiKey = process.env.XAI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey || !data.image) {
       if (manual.length) return { ok: true, analysis: asAnalysis(null, prefs, manual) };
       return {
@@ -111,16 +111,17 @@ Regole: 4-6 ricette ${dietHint}, porzioni ${prefs.servings}, max ${prefs.maxMinu
 Usa soprattutto gli ingredienti visibili.`;
 
     try {
-      const res = await fetch("https://api.x.ai/v1/chat/completions", {
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: "grok-4.5",
+          model: "gemini-2.5-flash-lite",
           max_tokens: 1400,
           temperature: 0.3,
+          response_format: { type: "json_object" },
           messages: [
             {
               role: "user",
