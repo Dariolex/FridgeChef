@@ -332,5 +332,5 @@ export function artForRecipe(title: string, fallback?: string) {
   if (t.includes("limon")) return FOOD_ART.lemon;
   if (t.includes("peperon")) return FOOD_ART.pepper;
   if (t.includes("fungh")) return FOOD_ART.mushrooms;
-  return fallback ?? FOOD_ART.hero;
+  return fallback || FOOD_ART.hero;
 }

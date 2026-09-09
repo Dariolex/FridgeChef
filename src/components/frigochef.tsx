@@ -74,7 +74,10 @@ export function FrigoChef() {
     setAnalysis(next);
     setPhase("ready");
     setTab("home");
-    setHistory(pushHistory(dataUrl, next));
+  };
+
+  const cookRecipe = (recipe: Recipe) => {
+    setHistory(pushHistory(recipe));
   };
 
   const handleFile = async (file: File | null) => {
@@ -310,7 +313,7 @@ export function FrigoChef() {
         {tab === "history" && (
           <section className="space-y-5">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Storia</h2>
+              <h2 className="text-lg font-semibold">Piatti cucinati</h2>
               {history.length > 0 && (
                 <button
                   type="button"
@@ -329,30 +332,38 @@ export function FrigoChef() {
               <div className="glass flex flex-col items-center gap-3 rounded-[32px] px-6 py-14 text-center">
                 <img src={FOOD_ART.hero} alt="" className="h-24 w-36 object-contain" />
                 <p className="text-sm text-muted">
-                  Ancora niente qui. Scatta una foto del frigo e la ritrovi in questa lista.
+                  Ancora nessun piatto. Apri una ricetta e tocca “Ho cucinato questo” per ritrovarla qui.
                 </p>
               </div>
             ) : (
               <ul className="space-y-3">
                 {history.map((h) => (
-                  <li key={h.id} className="glass flex gap-3 overflow-hidden rounded-[24px] p-3">
-                    <img src={h.thumb} alt="" className="size-20 shrink-0 rounded-2xl object-cover" />
-                    <div className="min-w-0 flex-1 space-y-1">
-                      <p className="text-xs text-muted">
-                        {new Date(h.at).toLocaleDateString("it-IT", {
-                          day: "numeric",
-                          month: "long",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </p>
-                      <p className="line-clamp-1 text-sm font-semibold">
-                        {h.recipes.length ? h.recipes.slice(0, 2).join(" · ") : "Nessuna ricetta"}
-                      </p>
-                      <p className="line-clamp-2 text-xs text-muted">
-                        {h.ingredients.length ? h.ingredients.join(", ") : "Nessun ingrediente riconosciuto"}
-                      </p>
-                    </div>
+                  <li key={h.id}>
+                    <button
+                      type="button"
+                      onClick={() => setSelected(h.recipe)}
+                      className="glass flex w-full gap-3 overflow-hidden rounded-[24px] p-3 text-left"
+                    >
+                      <img
+                        src={artForRecipe(h.recipe.title, h.recipe.art)}
+                        alt=""
+                        className="size-20 shrink-0 rounded-2xl object-cover"
+                      />
+                      <div className="min-w-0 flex-1 space-y-1">
+                        <p className="text-xs text-muted">
+                          {new Date(h.at).toLocaleDateString("it-IT", {
+                            day: "numeric",
+                            month: "long",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </p>
+                        <p className="line-clamp-2 text-sm font-semibold leading-snug">{h.recipe.title}</p>
+                        <p className="text-xs text-muted">
+                          {h.recipe.minutes} min · {h.recipe.ingredients.length} ingredienti
+                        </p>
+                      </div>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -472,7 +483,15 @@ export function FrigoChef() {
         onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
       />
 
-      {selected && <RecipeSheet recipe={selected} onClose={() => setSelected(null)} servings={prefs.servings} />}
+      {selected && (
+        <RecipeSheet
+          recipe={selected}
+          onClose={() => setSelected(null)}
+          servings={prefs.servings}
+          onCook={cookRecipe}
+          cooked={history.some((h) => h.recipe.title === selected.title)}
+        />
+      )}
     </main>
   );
 }
@@ -548,10 +567,14 @@ function RecipeSheet({
   recipe,
   onClose,
   servings,
+  onCook,
+  cooked,
 }: {
   recipe: Recipe;
   onClose: () => void;
   servings: number;
+  onCook: (r: Recipe) => void;
+  cooked: boolean;
 }) {
   return (
     <div className="fixed inset-0 z-40 grid place-items-end bg-black/55 p-0 sm:place-items-center sm:p-6">
@@ -596,6 +619,18 @@ function RecipeSheet({
               ))}
             </ol>
           </div>
+          <Button
+            variant="lime"
+            size="lg"
+            className="w-full"
+            onClick={() => {
+              onCook(recipe);
+              onClose();
+            }}
+          >
+            <ChefHat className="size-5" />
+            {cooked ? "Ho cucinato di nuovo" : "Ho cucinato questo"}
+          </Button>
         </div>
       </div>
     </div>

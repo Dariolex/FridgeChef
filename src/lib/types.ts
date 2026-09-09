@@ -32,9 +32,7 @@ export type Analysis = {
 export type HistoryEntry = {
   id: string;
   at: number;
-  thumb: string;
-  ingredients: string[];
-  recipes: string[];
+  recipe: Recipe;
 };
 
 export const DEFAULT_PREFS: Prefs = {

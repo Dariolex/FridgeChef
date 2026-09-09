@@ -48,7 +48,7 @@ function asAnalysis(parsed: Partial<Analysis> | null, prefs: Prefs, fallbackHave
       missing: Array.isArray(r.missing) ? r.missing.map(String) : [],
       ingredients: Array.isArray(r.ingredients) ? r.ingredients.map(String) : [],
       steps: Array.isArray(r.steps) ? r.steps.map(String) : [],
-      art: typeof r.art === "string" ? r.art : "",
+      art: typeof r.art === "string" && r.art.startsWith("/graphics/") ? r.art : "",
     });
   }
 
