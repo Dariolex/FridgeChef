@@ -1,12 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
-import { matchCookbook, sampleAnalysis } from "./cookbook";
+import { matchCookbook } from "./cookbook";
 import type { Analysis, Ingredient, Prefs, Recipe } from "./types";
 
 type CookInput = {
   image?: string;
   ingredients?: string[];
   prefs: Prefs;
-  demo?: boolean;
 };
 
 function safeParse<T>(raw: string): T | null {
@@ -64,9 +63,6 @@ export const cookFromFridge = createServerFn({ method: "POST" })
   .validator((input: CookInput) => input)
   .handler(async ({ data }): Promise<{ ok: true; analysis: Analysis } | { ok: false; error: string; analysis?: Analysis }> => {
     const prefs = data.prefs;
-    if (data.demo) {
-      return { ok: true, analysis: sampleAnalysis(prefs) };
-    }
 
     const manual = (data.ingredients ?? []).map((s) => s.trim()).filter(Boolean);
     if (manual.length && !data.image) {
@@ -78,7 +74,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
       if (manual.length) return { ok: true, analysis: asAnalysis(null, prefs, manual) };
       return {
         ok: false,
-        error: "Vision non disponibile. Aggiungi gli ingredienti a mano o usa il frigo demo.",
+        error: "Vision non disponibile. Aggiungi gli ingredienti a mano.",
         analysis: asAnalysis(null, prefs, manual),
       };
     }
@@ -155,7 +151,7 @@ Usa soprattutto gli ingredienti visibili.`;
     } catch {
       return {
         ok: false,
-        error: "Rete occupata. Prova il frigo demo o aggiungi gli ingredienti.",
+        error: "Rete occupata. Riprova o aggiungi gli ingredienti a mano.",
         analysis: asAnalysis(null, prefs, manual),
       };
     }

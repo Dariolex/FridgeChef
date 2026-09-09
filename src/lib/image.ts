@@ -10,11 +10,3 @@ export async function compressImage(file: File, max = 1280, quality = 0.82): Pro
   bitmap.close();
   return canvas.toDataURL("image/jpeg", quality);
 }
-
-export async function fetchAsDataUrl(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("Impossibile caricare l'immagine");
-  const blob = await res.blob();
-  const file = new File([blob], "sample.jpg", { type: blob.type || "image/jpeg" });
-  return compressImage(file);
-}

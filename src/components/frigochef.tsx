@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Camera,
   ChefHat,
@@ -8,16 +8,24 @@ import {
   Plus,
   Search,
   Sparkles,
+  Trash2,
   UserRound,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cookFromFridge } from "@/lib/analyze";
-import { artForRecipe, FOOD_ART, popularRecipes, sampleAnalysis } from "@/lib/cookbook";
-import { pushHistory } from "@/lib/history";
-import { compressImage, fetchAsDataUrl } from "@/lib/image";
+import { artForRecipe, FOOD_ART, popularRecipes } from "@/lib/cookbook";
+import { clearHistory, loadHistory, pushHistory } from "@/lib/history";
+import { compressImage } from "@/lib/image";
 import { cn } from "@/lib/utils";
-import { DEFAULT_PREFS, type Analysis, type Diet, type Prefs, type Recipe } from "@/lib/types";
+import {
+  DEFAULT_PREFS,
+  type Analysis,
+  type Diet,
+  type HistoryEntry,
+  type Prefs,
+  type Recipe,
+} from "@/lib/types";
 
 type Phase = "idle" | "analyzing" | "ready";
 type Tab = "home" | "recipes" | "camera" | "history" | "profile";
@@ -53,6 +61,11 @@ export function FrigoChef() {
   const [query, setQuery] = useState("");
   const [manual, setManual] = useState("");
   const [selected, setSelected] = useState<Recipe | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+
+  useEffect(() => {
+    setHistory(loadHistory());
+  }, []);
 
   const popular = useMemo(() => popularRecipes({ ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes }), [prefs]);
 
@@ -60,37 +73,27 @@ export function FrigoChef() {
     setPhoto(dataUrl);
     setAnalysis(next);
     setPhase("ready");
-    pushHistory(dataUrl, next);
+    setTab("home");
+    setHistory(pushHistory(dataUrl, next));
   };
 
-  const runAnalysis = async (dataUrl: string, demo = false, extra: string[] = []) => {
-    const res = await cookFromFridge({
-      data: { image: dataUrl, demo, ingredients: extra, prefs },
-    });
-    return res;
-  };
-
-  const handleFile = async (file: File | null, demo = false) => {
-    if (!file && !demo) return;
+  const handleFile = async (file: File | null) => {
+    if (!file) return;
     setPhase("analyzing");
+    setTab("home");
     setError(null);
     setSelected(null);
     try {
-      const dataUrl = demo ? await fetchAsDataUrl("/sample-fridge.jpg") : await compressImage(file!);
+      const dataUrl = await compressImage(file);
       setPhoto(dataUrl);
       const extra = manual
         .split(/[,;\n]/)
         .map((s) => s.trim())
         .filter(Boolean);
-      const res = await runAnalysis(dataUrl, demo, extra);
+      const res = await cookFromFridge({ data: { image: dataUrl, ingredients: extra, prefs } });
       if (res.ok) {
         setError(null);
         await persist(dataUrl, res.analysis);
-        return;
-      }
-      if (demo) {
-        setError(null);
-        await persist(dataUrl, sampleAnalysis(prefs));
         return;
       }
       if (res.analysis && res.analysis.recipes.length) {
@@ -111,7 +114,7 @@ export function FrigoChef() {
         recipes: [],
       });
     } catch {
-      setError("Qualcosa è andato storto. Riprova o usa il frigo demo.");
+      setError("Qualcosa è andato storto. Riprova o aggiungi gli ingredienti a mano.");
       setPhase("idle");
     }
   };
@@ -124,6 +127,7 @@ export function FrigoChef() {
       .filter(Boolean);
     if (!extra.length) return;
     setPhase("analyzing");
+    setTab("home");
     setError(null);
     const res = await cookFromFridge({ data: { ingredients: extra, prefs } });
     if (res.ok || res.analysis) {
@@ -183,7 +187,7 @@ export function FrigoChef() {
           </div>
         </header>
 
-        <div className="relative mb-6">
+        <div className={cn("relative mb-6", tab !== "home" && tab !== "recipes" && "hidden")}>
           <img src={FOOD_ART.avocado} alt="" className="food-float float-a absolute -left-6 -top-7 z-20 w-24" />
           <img src={FOOD_ART.tomato} alt="" className="food-float float-b absolute -right-2 -top-8 z-20 w-20" />
           <img src={FOOD_ART.lettuce} alt="" className="food-float float-c absolute -right-7 top-9 z-0 w-28 opacity-90" />
@@ -200,7 +204,12 @@ export function FrigoChef() {
           </label>
         </div>
 
-        <div className="mb-5 flex gap-2 overflow-x-auto pb-1">
+        <div
+          className={cn(
+            "mb-5 flex gap-2 overflow-x-auto pb-1",
+            tab !== "home" && tab !== "recipes" && "hidden",
+          )}
+        >
           {DIETS.map((d) => (
             <button
               key={d.id}
@@ -216,17 +225,12 @@ export function FrigoChef() {
           ))}
         </div>
 
-        {phase === "idle" && (
+        {tab === "home" && phase === "idle" && (
           <section className="space-y-5">
             <Button variant="lime" size="lg" className="w-full" onClick={() => fileRef.current?.click()}>
               <Camera className="size-5" />
               Scatta una foto
             </Button>
-            <div className="flex gap-2">
-              <Button variant="ghost" className="flex-1" onClick={() => handleFile(null, true)}>
-                Prova il frigo demo
-              </Button>
-            </div>
             <div className="glass rounded-[28px] p-4">
               <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted">Oppure scrivi cosa hai</p>
               <div className="flex gap-2">
@@ -249,7 +253,7 @@ export function FrigoChef() {
           </section>
         )}
 
-        {phase === "analyzing" && (
+        {tab === "home" && phase === "analyzing" && (
           <section className="glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
             <img src={FOOD_ART.hero} alt="" className="h-28 w-40 object-contain" />
             <p className="text-lg font-semibold">Sto guardando nel frigo</p>
@@ -260,7 +264,7 @@ export function FrigoChef() {
           </section>
         )}
 
-        {phase === "ready" && analysis && (
+        {tab === "home" && phase === "ready" && analysis && (
           <section className="space-y-5">
             {photo && (
               <div className="overflow-hidden rounded-[28px]">
@@ -286,6 +290,158 @@ export function FrigoChef() {
               </div>
             </div>
             <RecipeGrid title="Cosa cucini ora" recipes={shownRecipes} onOpen={setSelected} />
+          </section>
+        )}
+
+        {tab === "recipes" && (
+          <section className="space-y-5">
+            {analysis && analysis.recipes.length > 0 && (
+              <RecipeGrid title="Dal tuo frigo" recipes={analysis.recipes} onOpen={setSelected} />
+            )}
+            <RecipeGrid title="Tutti i piatti" recipes={filteredPopular} onOpen={setSelected} />
+            {filteredPopular.length === 0 && (
+              <p className="glass rounded-2xl px-4 py-3 text-sm text-muted">
+                Nessun piatto per questa ricerca. Prova a cambiare filtro o parola.
+              </p>
+            )}
+          </section>
+        )}
+
+        {tab === "history" && (
+          <section className="space-y-5">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Storia</h2>
+              {history.length > 0 && (
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 text-sm text-muted"
+                  onClick={() => {
+                    clearHistory();
+                    setHistory([]);
+                  }}
+                >
+                  <Trash2 className="size-4" />
+                  Svuota
+                </button>
+              )}
+            </div>
+            {history.length === 0 ? (
+              <div className="glass flex flex-col items-center gap-3 rounded-[32px] px-6 py-14 text-center">
+                <img src={FOOD_ART.hero} alt="" className="h-24 w-36 object-contain" />
+                <p className="text-sm text-muted">
+                  Ancora niente qui. Scatta una foto del frigo e la ritrovi in questa lista.
+                </p>
+              </div>
+            ) : (
+              <ul className="space-y-3">
+                {history.map((h) => (
+                  <li key={h.id} className="glass flex gap-3 overflow-hidden rounded-[24px] p-3">
+                    <img src={h.thumb} alt="" className="size-20 shrink-0 rounded-2xl object-cover" />
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <p className="text-xs text-muted">
+                        {new Date(h.at).toLocaleDateString("it-IT", {
+                          day: "numeric",
+                          month: "long",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </p>
+                      <p className="line-clamp-1 text-sm font-semibold">
+                        {h.recipes.length ? h.recipes.slice(0, 2).join(" · ") : "Nessuna ricetta"}
+                      </p>
+                      <p className="line-clamp-2 text-xs text-muted">
+                        {h.ingredients.length ? h.ingredients.join(", ") : "Nessun ingrediente riconosciuto"}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
+
+        {tab === "profile" && (
+          <section className="space-y-4">
+            <h2 className="text-lg font-semibold">Le tue preferenze</h2>
+
+            <div className="glass space-y-3 rounded-[28px] p-4">
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">Dieta</p>
+              <div className="flex flex-wrap gap-2">
+                {DIETS.map((d) => (
+                  <button
+                    key={d.id}
+                    type="button"
+                    onClick={() => setPrefs((p) => ({ ...p, diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 }))}
+                    className={cn(
+                      "h-10 rounded-full px-4 text-sm font-medium transition-colors",
+                      prefs.diet === d.id ? "bg-accent text-accent-fg" : "bg-fg/8 text-fg",
+                    )}
+                  >
+                    {d.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="glass flex items-center justify-between rounded-[28px] p-4">
+              <div>
+                <p className="text-sm font-semibold">Porzioni</p>
+                <p className="text-xs text-muted">Per quante persone cucini</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="grid size-9 place-items-center rounded-full bg-fg/8"
+                  onClick={() => setPrefs((p) => ({ ...p, servings: Math.max(1, p.servings - 1) }))}
+                  aria-label="Meno porzioni"
+                >
+                  <Minus className="size-4" />
+                </button>
+                <span className="min-w-8 text-center text-sm font-semibold">{prefs.servings}</span>
+                <button
+                  type="button"
+                  className="grid size-9 place-items-center rounded-full bg-fg/8"
+                  onClick={() => setPrefs((p) => ({ ...p, servings: Math.min(8, p.servings + 1) }))}
+                  aria-label="Più porzioni"
+                >
+                  <Plus className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="glass flex items-center justify-between rounded-[28px] p-4">
+              <div>
+                <p className="text-sm font-semibold">Tempo massimo</p>
+                <p className="text-xs text-muted">Quanto vuoi stare ai fornelli</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="grid size-9 place-items-center rounded-full bg-fg/8"
+                  onClick={() => setPrefs((p) => ({ ...p, maxMinutes: Math.max(10, p.maxMinutes - 5) }))}
+                  aria-label="Meno minuti"
+                >
+                  <Minus className="size-4" />
+                </button>
+                <span className="min-w-12 text-center text-sm font-semibold">{prefs.maxMinutes} min</span>
+                <button
+                  type="button"
+                  className="grid size-9 place-items-center rounded-full bg-fg/8"
+                  onClick={() => setPrefs((p) => ({ ...p, maxMinutes: Math.min(90, p.maxMinutes + 5) }))}
+                  aria-label="Più minuti"
+                >
+                  <Plus className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="glass rounded-[28px] p-4 text-sm text-muted">
+              <p className="mb-1 font-semibold text-fg">FrigoChef</p>
+              <p>
+                Le foto vengono analizzate solo per riconoscere gli ingredienti. La storia resta salvata su questo
+                dispositivo.
+              </p>
+            </div>
           </section>
         )}
       </div>

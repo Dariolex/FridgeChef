@@ -1,4 +1,4 @@
-import type { Analysis, Diet, Ingredient, Prefs, Recipe } from "./types";
+import type { Diet, Ingredient, Prefs, Recipe } from "./types";
 
 export const FOOD_ART = {
   avocado: "/graphics/avocado.jpg",
@@ -321,18 +321,6 @@ export function popularRecipes(prefs: Prefs): Recipe[] {
       steps: r.steps,
       art: r.art,
     }));
-}
-
-export function sampleAnalysis(prefs: Prefs): Analysis {
-  const recipes = matchCookbook(
-    SAMPLE_INGREDIENTS.map((i) => i.name),
-    prefs,
-  );
-  return {
-    ingredients: SAMPLE_INGREDIENTS,
-    notes: "Demo del frigo italiano: uova, latticini, verdure e pesto.",
-    recipes,
-  };
 }
 
 export function artForRecipe(title: string, fallback?: string) {
