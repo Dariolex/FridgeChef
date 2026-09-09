@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Camera,
+  Check,
   ChefHat,
   Clock3,
   Home,
   Minus,
   Plus,
   Search,
+  ShoppingCart,
   Sparkles,
   Trash2,
   UserRound,
@@ -16,6 +18,13 @@ import { Button } from "@/components/ui/button";
 import { cookFromFridge } from "@/lib/analyze";
 import { artForRecipe, FOOD_ART, popularRecipes } from "@/lib/cookbook";
 import { clearHistory, loadHistory, pushHistory } from "@/lib/history";
+import {
+  addShopping,
+  clearDoneShopping,
+  loadShopping,
+  removeShopping,
+  toggleShopping,
+} from "@/lib/shopping";
 import { compressImage } from "@/lib/image";
 import { cn } from "@/lib/utils";
 import {
@@ -25,6 +34,7 @@ import {
   type HistoryEntry,
   type Prefs,
   type Recipe,
+  type ShoppingItem,
 } from "@/lib/types";
 
 type Phase = "idle" | "analyzing" | "ready";
@@ -62,10 +72,32 @@ export function FrigoChef() {
   const [manual, setManual] = useState("");
   const [selected, setSelected] = useState<Recipe | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [shopping, setShopping] = useState<ShoppingItem[]>([]);
+  const [shoppingOpen, setShoppingOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     setHistory(loadHistory());
+    setShopping(loadShopping());
   }, []);
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2600);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  const toBuy = shopping.filter((i) => !i.done).length;
+
+  const addMissing = (recipe: Recipe) => {
+    if (!recipe.missing.length) return;
+    setShopping(addShopping(recipe.missing, recipe.title));
+    setToast(
+      recipe.missing.length === 1
+        ? "1 ingrediente aggiunto alla spesa"
+        : `${recipe.missing.length} ingredienti aggiunti alla spesa`,
+    );
+  };
 
   const popular = useMemo(() => popularRecipes({ ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes }), [prefs]);
 
@@ -169,24 +201,39 @@ export function FrigoChef() {
               <h1 className="text-xl font-semibold tracking-tight">FrigoChef</h1>
             </div>
           </div>
-          <div className="glass flex items-center gap-2 rounded-full px-2 py-1">
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              className="grid size-8 place-items-center rounded-full text-muted"
-              onClick={() => setPrefs((p) => ({ ...p, servings: Math.max(1, p.servings - 1) }))}
-              aria-label="Meno porzioni"
+              onClick={() => setShoppingOpen(true)}
+              className="glass relative grid size-11 place-items-center rounded-full"
+              aria-label={toBuy ? `Lista della spesa, ${toBuy} da prendere` : "Lista della spesa"}
             >
-              <Minus className="size-3.5" />
+              <ShoppingCart className="size-5" />
+              {toBuy > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 grid min-w-5 place-items-center rounded-full bg-accent px-1 text-[10px] font-bold text-accent-fg">
+                  {toBuy}
+                </span>
+              )}
             </button>
-            <span className="min-w-8 text-center text-sm font-semibold">{prefs.servings}</span>
-            <button
-              type="button"
-              className="grid size-8 place-items-center rounded-full text-muted"
-              onClick={() => setPrefs((p) => ({ ...p, servings: Math.min(8, p.servings + 1) }))}
-              aria-label="Più porzioni"
-            >
-              <Plus className="size-3.5" />
-            </button>
+            <div className="glass flex items-center gap-2 rounded-full px-2 py-1">
+              <button
+                type="button"
+                className="grid size-8 place-items-center rounded-full text-muted"
+                onClick={() => setPrefs((p) => ({ ...p, servings: Math.max(1, p.servings - 1) }))}
+                aria-label="Meno porzioni"
+              >
+                <Minus className="size-3.5" />
+              </button>
+              <span className="min-w-8 text-center text-sm font-semibold">{prefs.servings}</span>
+              <button
+                type="button"
+                className="grid size-8 place-items-center rounded-full text-muted"
+                onClick={() => setPrefs((p) => ({ ...p, servings: Math.min(8, p.servings + 1) }))}
+                aria-label="Più porzioni"
+              >
+                <Plus className="size-3.5" />
+              </button>
+            </div>
           </div>
         </header>
 
@@ -490,7 +537,28 @@ export function FrigoChef() {
           servings={prefs.servings}
           onCook={cookRecipe}
           cooked={history.some((h) => h.recipe.title === selected.title)}
+          onAddMissing={addMissing}
         />
+      )}
+
+      {shoppingOpen && (
+        <ShoppingSheet
+          items={shopping}
+          onClose={() => setShoppingOpen(false)}
+          onToggle={(id) => setShopping(toggleShopping(id))}
+          onRemove={(id) => setShopping(removeShopping(id))}
+          onClearDone={() => setShopping(clearDoneShopping())}
+          onAdd={(name) => setShopping(addShopping([name]))}
+        />
+      )}
+
+      {toast && (
+        <div className="pointer-events-none fixed inset-x-0 bottom-28 z-50 flex justify-center px-6">
+          <p className="glass flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium">
+            <Check className="size-4 text-accent" />
+            {toast}
+          </p>
+        </div>
       )}
     </main>
   );
@@ -569,12 +637,14 @@ function RecipeSheet({
   servings,
   onCook,
   cooked,
+  onAddMissing,
 }: {
   recipe: Recipe;
   onClose: () => void;
   servings: number;
   onCook: (r: Recipe) => void;
   cooked: boolean;
+  onAddMissing: (r: Recipe) => void;
 }) {
   return (
     <div className="fixed inset-0 z-40 grid place-items-end bg-black/55 p-0 sm:place-items-center sm:p-6">
@@ -598,7 +668,20 @@ function RecipeSheet({
             <h3 className="mt-1 text-2xl font-semibold tracking-tight">{recipe.title}</h3>
           </div>
           {recipe.missing.length > 0 && (
-            <p className="text-sm text-muted">Ti manca: {recipe.missing.join(", ")}</p>
+            <div className="glass space-y-3 rounded-[24px] p-4">
+              <div>
+                <p className="text-sm font-semibold">Ti manca</p>
+                <p className="mt-0.5 text-sm text-muted">{recipe.missing.join(", ")}</p>
+              </div>
+              <Button
+                variant="ghost"
+                className="w-full"
+                onClick={() => onAddMissing(recipe)}
+              >
+                <ShoppingCart className="size-4" />
+                Aggiungi alla spesa
+              </Button>
+            </div>
           )}
           <div>
             <h4 className="mb-2 text-sm font-semibold">Ingredienti</h4>
@@ -634,5 +717,145 @@ function RecipeSheet({
         </div>
       </div>
     </div>
+  );
+}
+
+function ShoppingSheet({
+  items,
+  onClose,
+  onToggle,
+  onRemove,
+  onClearDone,
+  onAdd,
+}: {
+  items: ShoppingItem[];
+  onClose: () => void;
+  onToggle: (id: string) => void;
+  onRemove: (id: string) => void;
+  onClearDone: () => void;
+  onAdd: (name: string) => void;
+}) {
+  const [draft, setDraft] = useState("");
+  const toBuy = items.filter((i) => !i.done);
+  const done = items.filter((i) => i.done);
+
+  const submit = () => {
+    const name = draft.trim();
+    if (!name) return;
+    onAdd(name);
+    setDraft("");
+  };
+
+  return (
+    <div className="fixed inset-0 z-40 grid place-items-end bg-black/55 p-0 sm:place-items-center sm:p-6">
+      <div className="relative flex max-h-[92dvh] w-full max-w-[430px] flex-col overflow-hidden rounded-t-[36px] bg-surface sm:rounded-[36px]">
+        <div className="flex items-center justify-between px-5 pb-3 pt-5">
+          <div>
+            <h3 className="text-xl font-semibold tracking-tight">Lista della spesa</h3>
+            <p className="text-xs text-muted">
+              {toBuy.length ? `${toBuy.length} da prendere` : "Niente da prendere"}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="grid size-10 place-items-center rounded-full bg-fg/8 text-fg"
+            aria-label="Chiudi"
+          >
+            <X className="size-5" />
+          </button>
+        </div>
+
+        <div className="flex gap-2 px-5 pb-3">
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") submit();
+            }}
+            placeholder="Aggiungi una voce"
+            className="h-11 flex-1 rounded-full bg-fg/8 px-4 text-sm outline-none placeholder:text-muted"
+          />
+          <Button size="sm" onClick={submit}>
+            Aggiungi
+          </Button>
+        </div>
+
+        <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-8">
+          {items.length === 0 ? (
+            <div className="flex flex-col items-center gap-3 py-14 text-center">
+              <ShoppingCart className="size-8 text-muted" />
+              <p className="text-sm text-muted">
+                Lista vuota. Apri una ricetta e aggiungi quello che ti manca.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-5">
+              <ul className="space-y-2">
+                {toBuy.map((item) => (
+                  <ShoppingRow key={item.id} item={item} onToggle={onToggle} onRemove={onRemove} />
+                ))}
+              </ul>
+
+              {done.length > 0 && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-medium uppercase tracking-wide text-muted">
+                      Presi ({done.length})
+                    </p>
+                    <button type="button" className="text-sm text-muted" onClick={onClearDone}>
+                      Rimuovi presi
+                    </button>
+                  </div>
+                  <ul className="space-y-2">
+                    {done.map((item) => (
+                      <ShoppingRow key={item.id} item={item} onToggle={onToggle} onRemove={onRemove} />
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShoppingRow({
+  item,
+  onToggle,
+  onRemove,
+}: {
+  item: ShoppingItem;
+  onToggle: (id: string) => void;
+  onRemove: (id: string) => void;
+}) {
+  return (
+    <li className="flex items-center gap-3 rounded-2xl bg-fg/5 px-3 py-2.5">
+      <button
+        type="button"
+        onClick={() => onToggle(item.id)}
+        className={cn(
+          "grid size-6 shrink-0 place-items-center rounded-full border transition-colors",
+          item.done ? "border-accent bg-accent text-accent-fg" : "border-fg/25 text-transparent",
+        )}
+        aria-label={item.done ? `Segna ${item.name} da prendere` : `Segna ${item.name} come preso`}
+      >
+        <Check className="size-3.5" />
+      </button>
+      <div className="min-w-0 flex-1">
+        <p className={cn("text-sm font-medium", item.done && "text-muted line-through")}>{item.name}</p>
+        {item.from && <p className="line-clamp-1 text-xs text-muted">per {item.from}</p>}
+      </div>
+      <button
+        type="button"
+        onClick={() => onRemove(item.id)}
+        className="grid size-8 shrink-0 place-items-center rounded-full text-muted"
+        aria-label={`Rimuovi ${item.name}`}
+      >
+        <Trash2 className="size-4" />
+      </button>
+    </li>
   );
 }

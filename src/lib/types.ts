@@ -35,6 +35,14 @@ export type HistoryEntry = {
   recipe: Recipe;
 };
 
+export type ShoppingItem = {
+  id: string;
+  name: string;
+  from: string;
+  done: boolean;
+  at: number;
+};
+
 export const DEFAULT_PREFS: Prefs = {
   diet: "any",
   maxMinutes: 40,
