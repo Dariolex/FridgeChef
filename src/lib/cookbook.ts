@@ -164,6 +164,55 @@ export function popularRecipes(prefs: Prefs): Recipe[] {
     .map((r) => toRecipe(r, prefs.servings, []));
 }
 
+export type CatalogSection = {
+  id: string;
+  title: string;
+  recipes: Recipe[];
+};
+
+/** Catalogo del ricettario organizzato per tipo, filtrato da preferenze e ricerca. */
+export function catalogBySection(prefs: Prefs, query = ""): CatalogSection[] {
+  const q = query.trim().toLowerCase();
+  const maxMin = prefs.diet === "fast" ? 15 : prefs.maxMinutes;
+
+  const filtered = BOOK.filter((r) => dietOk(r, prefs.diet))
+    .filter((r) => courseOk(r, prefs.course))
+    .filter((r) => r.minutes <= maxMin)
+    .filter((r) => !q || r.title.toLowerCase().includes(q) || r.tags.some((t) => t.includes(q)));
+
+  const sectionOf = (r: (typeof BOOK)[number]): { id: string; title: string } => {
+    if (isDessert(r) || r.tags.includes("dessert")) return { id: "dolci", title: "Dolci" };
+    if (r.tags.includes("pasta") || r.tags.includes("riso")) return { id: "primi", title: "Primi" };
+    if (
+      r.tags.some((t) =>
+        ["pollo", "carne macinata", "salsiccia", "guanciale", "tonno", "pesce"].includes(t),
+      )
+    ) {
+      return { id: "secondi", title: "Secondi" };
+    }
+    if (r.tags.includes("uova") || r.tags.includes("frittata")) {
+      return { id: "uova", title: "Uova e frittate" };
+    }
+    return { id: "contorni", title: "Contorni e freschi" };
+  };
+
+  const order = ["primi", "secondi", "uova", "contorni", "dolci"];
+  const buckets = new Map<string, { title: string; recipes: Recipe[] }>();
+  for (const r of filtered) {
+    const s = sectionOf(r);
+    const bucket = buckets.get(s.id) ?? { title: s.title, recipes: [] };
+    bucket.recipes.push(toRecipe(r, prefs.servings, []));
+    buckets.set(s.id, bucket);
+  }
+
+  return order
+    .filter((id) => buckets.has(id) && (buckets.get(id)?.recipes.length ?? 0) > 0)
+    .map((id) => {
+      const b = buckets.get(id)!;
+      return { id, title: b.title, recipes: b.recipes };
+    });
+}
+
 export function sampleAnalysis(prefs: Prefs) {
   return {
     ingredients: SAMPLE_INGREDIENTS,

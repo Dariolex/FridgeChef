@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createRecipes, readFridgePhoto } from "@/lib/analyze";
-import { artForRecipe, FOOD_ART, popularRecipes } from "@/lib/cookbook";
+import { artForRecipe, catalogBySection, FOOD_ART, matchCookbook, popularRecipes } from "@/lib/cookbook";
 import { ingredientLabel } from "@/lib/recipe-ai";
 import { clearHistory, loadHistory, pushHistory } from "@/lib/history";
 import {
@@ -186,6 +186,29 @@ export function FrigoChef() {
     }
   };
 
+  const runCookbookRecipes = () => {
+    const ingredients = selectedLabels();
+    if (!ingredients.length) {
+      setError("Seleziona o aggiungi almeno un ingrediente.");
+      return;
+    }
+    const names = ingredients.map((label) => label.replace(/\s*\([^)]*\)\s*$/, "").trim());
+    const recipes = matchCookbook(names, {
+      ...prefs,
+      maxMinutes: prefs.diet === "fast" ? Math.min(15, prefs.maxMinutes) : prefs.maxMinutes,
+    });
+    setPrefsDirty(false);
+    setAnalysis((prev) => ({
+      ingredients: prev?.ingredients ?? names.map((name) => ({ name, have: true })),
+      notes: prev?.notes || "",
+      recipes,
+      source: "book",
+    }));
+    setError(null);
+    setPhase("ready");
+    setTab("home");
+  };
+
   const handleFile = async (file: File | null) => {
     if (!file) return;
     setPhase("analyzing");
@@ -251,6 +274,14 @@ export function FrigoChef() {
   };
 
   const filteredPopular = popular.filter((r) => !query || r.title.toLowerCase().includes(query.toLowerCase()));
+  const catalogSections = useMemo(
+    () =>
+      catalogBySection(
+        { ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes },
+        query,
+      ),
+    [prefs, query],
+  );
   const shownRecipes = (analysis?.recipes ?? filteredPopular).filter(
     (r) => !query || r.title.toLowerCase().includes(query.toLowerCase()),
   );
@@ -447,23 +478,29 @@ export function FrigoChef() {
                   className="h-11 flex-1 rounded-full bg-fg/8 px-4 text-sm outline-none placeholder:text-muted"
                 />
               </div>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <Button
-                  variant="lime"
-                  size="sm"
-                  onClick={() => void runCreateRecipes()}
-                >
-                  <Sparkles className="size-4" />
-                  Crea ricette
-                </Button>
-                {prefsDirty && analysis.recipes.length > 0 && (
+              <div className="mt-3 space-y-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
+                    variant="lime"
                     size="sm"
                     onClick={() => void runCreateRecipes()}
                   >
-                    Aggiorna ricette con i nuovi filtri
+                    <Sparkles className="size-4" />
+                    Crea ricette
                   </Button>
-                )}
+                  {prefsDirty && analysis.recipes.length > 0 && (
+                    <Button size="sm" onClick={() => void runCreateRecipes()}>
+                      Aggiorna ricette con i nuovi filtri
+                    </Button>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className="text-sm text-muted underline-offset-2 hover:underline"
+                  onClick={() => runCookbookRecipes()}
+                >
+                  Preferisci le classiche del ricettario?
+                </button>
               </div>
             </div>
             {analysis.recipes.length > 0 && (
@@ -498,10 +535,22 @@ export function FrigoChef() {
         {tab === "recipes" && (
           <section className="space-y-5">
             {analysis && analysis.recipes.length > 0 && (
-              <RecipeGrid title="Dal tuo frigo" recipes={analysis.recipes} onOpen={setSelected} />
+              <RecipeGrid
+                title={analysis.source === "book" ? "Dal ricettario (frigo)" : "Dal tuo frigo"}
+                recipes={analysis.recipes}
+                onOpen={setSelected}
+              />
             )}
-            <RecipeGrid title="Tutti i piatti" recipes={filteredPopular} onOpen={setSelected} />
-            {filteredPopular.length === 0 && (
+            <div>
+              <h2 className="mb-1 text-lg font-semibold">Ricettario</h2>
+              <p className="mb-3 text-sm text-muted">
+                Classici di casa organizzati per tipo. Filtra con dieta, tempo e ricerca.
+              </p>
+            </div>
+            {catalogSections.map((section) => (
+              <RecipeGrid key={section.id} title={section.title} recipes={section.recipes} onOpen={setSelected} />
+            ))}
+            {catalogSections.length === 0 && (
               <p className="glass rounded-2xl px-4 py-3 text-sm text-muted">
                 Nessun piatto per questa ricerca. Prova a cambiare filtro o parola.
               </p>
