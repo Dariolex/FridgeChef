@@ -9,9 +9,11 @@ import {
   detectIngredients,
   generateRecipes,
   ingredientLabel,
+  organizeFridge,
   toAppIngredients,
   type AiRecipe,
   type AppIngredient,
+  type FridgeOrganization,
 } from "./recipe-ai";
 import type { Analysis, Prefs, Recipe } from "./types";
 
@@ -38,6 +40,16 @@ export type CreateRecipesFallback = {
   source: "book";
   message: string;
   recipes: Recipe[];
+};
+
+export type OrganizeFridgeOk = {
+  ok: true;
+  plan: FridgeOrganization;
+};
+
+export type OrganizeFridgeErr = {
+  ok: false;
+  message: string;
 };
 
 /** Inventario dalla foto: solo riconoscimento, nessuna ricetta. */
@@ -103,6 +115,20 @@ type CookInput = {
   ingredients?: string[];
   prefs: Prefs;
 };
+
+/** Disposizione ottimale degli alimenti nei ripiani del frigo. */
+export const organizeFridgePlan = createServerFn({ method: "POST" })
+  .validator(
+    (data: { ingredients: { name: string; quantity?: string; confidence?: string }[] }) => data,
+  )
+  .handler(async ({ data }): Promise<OrganizeFridgeOk | OrganizeFridgeErr> => {
+    const res = await organizeFridge(data.ingredients ?? []);
+    if (!res.ok) {
+      console.error("[organizeFridgePlan]", res.reason, res.detail);
+      return { ok: false, message: AI_FAILURE_MESSAGE[res.reason] };
+    }
+    return { ok: true, plan: res.data };
+  });
 
 /**
  * @deprecated Preferire readFridgePhoto + createRecipes.

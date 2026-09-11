@@ -3,6 +3,7 @@ import { RECIPES_BASE } from "./recipes-base";
 import { RECIPES_PASTA } from "./recipes-pasta";
 import { RECIPES_MEAT } from "./recipes-meat";
 import { RECIPES_DESSERT } from "./recipes-dessert";
+import { RECIPES_CLASSIC } from "./recipes-classic";
 
 export const FOOD_ART = {
   avocado: "/graphics/avocado.jpg",
@@ -45,6 +46,7 @@ const BOOK: BookRecipe[] = [
   ...RECIPES_PASTA,
   ...RECIPES_MEAT,
   ...RECIPES_DESSERT,
+  ...RECIPES_CLASSIC,
 ];
 
 const ALIASES: Record<string, string[]> = {

@@ -427,6 +427,158 @@ export async function generateRecipes(
   return { ok: true, data: { recipes, notes } };
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Organizzazione del frigorifero
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type FridgeZoneItem = { food: string; reason: string };
+export type FridgeZone = { zone: string; items: FridgeZoneItem[] };
+export type FridgeOrganization = {
+  fridge_organization: FridgeZone[];
+  priority_actions: string[];
+  general_tip: string;
+};
+
+export const ORGANIZE_SYSTEM_PROMPT = `Sei un esperto di conservazione degli alimenti e organizzazione dei frigoriferi domestici italiani.
+
+Ricevi l'elenco degli alimenti riconosciuti in un frigorifero (con eventuale quantità e affidabilità). Propponi la disposizione ottimale per:
+1. temperatura e umidità adatte a ciascun alimento;
+2. massima freschezza e durata;
+3. ridurre contaminazione e contaminazione crociata (crudi vs pronti al consumo);
+4. praticità d'uso quotidiano.
+
+# Zone tipiche (temperature diverse)
+- Ripiano superiore: più stabile; cibi cotti, avanzi, prodotti pronti al consumo e confezionati.
+- Ripiani centrali: latticini, uova, alimenti che richiedono refrigerazione stabile.
+- Ripiano inferiore: di solito il più freddo; carne e pesce crudi in contenitori chiusi, per evitare sgocciolamenti.
+- Cassetti: frutta e verdura (considera umidità diverse se rilevante).
+- Porta: zone con sbalzi di temperatura; condimenti, salse, bevande, prodotti meno deperibili. Non prioritaria per alimenti molto deperibili.
+
+# Sicurezza
+- Separa sempre crudi e pronti al consumo.
+- Carne e pesce crudi in contenitori chiusi, in basso.
+- Non inventare alimenti assenti dall'elenco.
+- Se confidence è "bassa", segnalalo nella reason e non dare regole troppo specifiche.
+- Motivazioni brevi, concrete, in italiano semplice. Niente indicazioni mediche.
+
+# Output
+Ogni alimento dell'elenco va in una sola zona. Non omettere né aggiungere alimenti.`;
+
+export const ORGANIZE_SCHEMA = {
+  type: "object",
+  properties: {
+    fridge_organization: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          zone: { type: "string" },
+          items: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                food: { type: "string" },
+                reason: { type: "string" },
+              },
+              required: ["food", "reason"],
+              additionalProperties: false,
+            },
+          },
+        },
+        required: ["zone", "items"],
+        additionalProperties: false,
+      },
+    },
+    priority_actions: {
+      type: "array",
+      items: { type: "string" },
+      description: "Azioni importanti e concrete da fare subito.",
+    },
+    general_tip: {
+      type: "string",
+      description: "Un consiglio generale personalizzato per questo frigorifero.",
+    },
+  },
+  required: ["fridge_organization", "priority_actions", "general_tip"],
+  additionalProperties: false,
+};
+
+export async function organizeFridge(
+  ingredients: { name: string; quantity?: string; confidence?: string }[],
+  opts: CallOptions = {},
+): Promise<AiResult<FridgeOrganization>> {
+  const list = ingredients
+    .map((i) => {
+      const name = cleanItem(i.name);
+      if (!name) return null;
+      const parts = [name];
+      if (i.quantity) parts.push(`quantità: ${cleanItem(i.quantity)}`);
+      if (i.confidence) parts.push(`affidabilità: ${i.confidence}`);
+      return `- ${parts.join("; ")}`;
+    })
+    .filter(Boolean) as string[];
+
+  if (!list.length) {
+    return fail("bad_input", "Nessun alimento da organizzare");
+  }
+
+  const user = [
+    "Organizza questi alimenti nel frigorifero.",
+    "",
+    "<alimenti>",
+    ...list,
+    "</alimenti>",
+  ].join("\n");
+
+  const res = await callGeminiJson(
+    {
+      model: opts.model ?? readEnv("GEMINI_RECIPE_MODEL") ?? DEFAULT_RECIPE_MODEL,
+      system: ORGANIZE_SYSTEM_PROMPT,
+      user,
+      schemaName: "frigochef_organizza_frigo",
+      schema: ORGANIZE_SCHEMA,
+      maxTokens: 4096,
+      reasoningEffort: "low",
+      timeoutMs: 45_000,
+    },
+    opts,
+  );
+  if (!res.ok) return res;
+
+  const raw = (res.data && typeof res.data === "object" ? res.data : {}) as {
+    fridge_organization?: unknown;
+    priority_actions?: unknown;
+    general_tip?: unknown;
+  };
+  const zonesIn = Array.isArray(raw.fridge_organization) ? raw.fridge_organization : [];
+  const fridge_organization: FridgeZone[] = [];
+  for (const z of zonesIn) {
+    if (!z || typeof z !== "object") continue;
+    const zone = cleanText((z as { zone?: unknown }).zone, 80);
+    const itemsRaw = Array.isArray((z as { items?: unknown }).items)
+      ? ((z as { items: unknown[] }).items)
+      : [];
+    const items: FridgeZoneItem[] = [];
+    for (const it of itemsRaw) {
+      if (!it || typeof it !== "object") continue;
+      const food = cleanText((it as { food?: unknown }).food, 80);
+      const reason = cleanText((it as { reason?: unknown }).reason, 200);
+      if (food) items.push({ food, reason: reason || "Conservazione consigliata in questa zona." });
+    }
+    if (zone && items.length) fridge_organization.push({ zone, items });
+  }
+  const priority_actions = stringList(raw.priority_actions, 8, 160);
+  const general_tip =
+    cleanText(raw.general_tip, 300) ||
+    "Chiudi bene le confezioni aperte e tieni separati crudi e cibi pronti.";
+
+  if (!fridge_organization.length) {
+    return fail("empty", "Nessuna disposizione restituita");
+  }
+  return { ok: true, data: { fridge_organization, priority_actions, general_tip } };
+}
+
 /** Converte l'inventario per la UI: le voci a bassa affidabilità partono escluse. */
 export function toAppIngredients(detected: DetectedIngredient[]): AppIngredient[] {
   return detected.map((d) => ({

@@ -17,9 +17,9 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { createRecipes, readFridgePhoto } from "@/lib/analyze";
+import { createRecipes, organizeFridgePlan, readFridgePhoto } from "@/lib/analyze";
 import { artForRecipe, catalogBySection, FOOD_ART, matchCookbook, popularRecipes } from "@/lib/cookbook";
-import { ingredientLabel } from "@/lib/recipe-ai";
+import { ingredientLabel, type FridgeOrganization } from "@/lib/recipe-ai";
 import { clearHistory, loadHistory, pushHistory } from "@/lib/history";
 import {
   addShopping,
@@ -82,6 +82,8 @@ export function FrigoChef() {
   const [toast, setToast] = useState<string | null>(null);
   /** Sezione aperta nel tab Ricette (catalogo a fisarmonica). */
   const [openCatalogId, setOpenCatalogId] = useState<string | null>(null);
+  const [fridgePlan, setFridgePlan] = useState<FridgeOrganization | null>(null);
+  const [organizing, setOrganizing] = useState(false);
 
   useEffect(() => {
     setHistory(loadHistory());
@@ -212,6 +214,37 @@ export function FrigoChef() {
     setTab("home");
   };
 
+  const runOrganizeFridge = async () => {
+    const items = (analysis?.ingredients ?? []).filter((i) => i.have);
+    if (!items.length) {
+      setError("Seleziona almeno un alimento da organizzare.");
+      return;
+    }
+    setOrganizing(true);
+    setError(null);
+    try {
+      const res = await organizeFridgePlan({
+        data: {
+          ingredients: items.map((i) => ({
+            name: i.name,
+            quantity: i.quantity,
+            confidence: i.confidence,
+          })),
+        },
+      });
+      if (res.ok) {
+        setFridgePlan(res.plan);
+      } else {
+        setError(res.message);
+      }
+    } catch (e) {
+      console.error(e);
+      setError("Non riesco a organizzare il frigo in questo momento. Riprova.");
+    } finally {
+      setOrganizing(false);
+    }
+  };
+
   const handleFile = async (file: File | null) => {
     if (!file) return;
     setPhase("analyzing");
@@ -273,6 +306,7 @@ export function FrigoChef() {
     setSelected(null);
     setPrefsDirty(false);
     setExtraIngredient("");
+    setFridgePlan(null);
     setTab("home");
   };
 
@@ -498,6 +532,14 @@ export function FrigoChef() {
                   >
                     Ricettario Classico
                   </Button>
+                  <Button
+                    variant="sky"
+                    size="sm"
+                    disabled={organizing}
+                    onClick={() => void runOrganizeFridge()}
+                  >
+                    {organizing ? "Organizzo…" : "Organizza frigo"}
+                  </Button>
                   {prefsDirty && analysis.recipes.length > 0 && (
                     <Button size="sm" onClick={() => void runCreateRecipes()}>
                       Aggiorna ricette con i nuovi filtri
@@ -506,6 +548,48 @@ export function FrigoChef() {
                 </div>
               </div>
             </div>
+            {fridgePlan && (
+              <div className="glass space-y-3 rounded-[24px] p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <h2 className="text-lg font-semibold">Come organizzare il frigo</h2>
+                  <button
+                    type="button"
+                    className="text-sm text-muted"
+                    onClick={() => setFridgePlan(null)}
+                  >
+                    Chiudi
+                  </button>
+                </div>
+                {fridgePlan.general_tip ? (
+                  <p className="text-sm text-muted">{fridgePlan.general_tip}</p>
+                ) : null}
+                {fridgePlan.priority_actions?.length > 0 && (
+                  <ul className="space-y-1.5">
+                    {fridgePlan.priority_actions.map((a, i) => (
+                      <li key={i} className="rounded-2xl bg-sky-400/15 px-3 py-2 text-sm">
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="space-y-3">
+                  {fridgePlan.fridge_organization.map((zone) => (
+                    <div key={zone.zone} className="rounded-[20px] bg-fg/5 p-3">
+                      <p className="mb-2 text-sm font-semibold">{zone.zone}</p>
+                      <ul className="space-y-2">
+                        {zone.items.map((it, idx) => (
+                          <li key={it.food + idx} className="text-sm">
+                            <span className="font-medium">{it.food}</span>
+                            <span className="text-muted"> — {it.reason}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {analysis.recipes.length > 0 && (
               <>
                 {analysis.notes ? (

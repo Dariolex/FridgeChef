@@ -14,6 +14,7 @@ const buttonVariants = cva(
         lime: "bg-accent text-accent-fg hover:brightness-110 shadow-[0_8px_24px_rgba(198,245,61,0.28)]",
         yellow:
           "bg-amber-400 text-stone-900 hover:brightness-105 shadow-[0_8px_24px_rgba(251,191,36,0.35)]",
+        sky: "bg-sky-400 text-sky-950 hover:brightness-105 shadow-[0_8px_24px_rgba(56,189,248,0.35)]",
       },
       size: {
         default: "h-11 px-5",
