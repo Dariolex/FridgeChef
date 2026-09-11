@@ -4,6 +4,7 @@ import { RECIPES_PASTA } from "./recipes-pasta";
 import { RECIPES_MEAT } from "./recipes-meat";
 import { RECIPES_DESSERT } from "./recipes-dessert";
 import { RECIPES_CLASSIC } from "./recipes-classic";
+import { RECIPES_SECONDI } from "./recipes-secondi";
 
 export const FOOD_ART = {
   avocado: "/graphics/avocado.jpg",
@@ -47,6 +48,7 @@ const BOOK: BookRecipe[] = [
   ...RECIPES_MEAT,
   ...RECIPES_DESSERT,
   ...RECIPES_CLASSIC,
+  ...RECIPES_SECONDI,
 ];
 
 const ALIASES: Record<string, string[]> = {
@@ -187,7 +189,31 @@ export function catalogBySection(prefs: Prefs, query = ""): CatalogSection[] {
     if (r.tags.includes("pasta") || r.tags.includes("riso")) return { id: "primi", title: "Primi" };
     if (
       r.tags.some((t) =>
-        ["pollo", "carne macinata", "salsiccia", "guanciale", "tonno", "pesce"].includes(t),
+        [
+          "pollo",
+          "carne macinata",
+          "salsiccia",
+          "guanciale",
+          "tonno",
+          "pesce",
+          "tacchino",
+          "manzo",
+          "vitello",
+          "maiale",
+          "hamburger",
+          "wurstel",
+          "polpette",
+          "calamari",
+          "seppie",
+          "cozze",
+          "vongole",
+          "sardine",
+          "pesce spada",
+          "polpo",
+          "trota",
+          "sgombro",
+          "merluzzo",
+        ].includes(t),
       )
     ) {
       return { id: "secondi", title: "Secondi" };
