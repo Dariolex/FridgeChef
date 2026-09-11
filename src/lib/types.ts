@@ -14,12 +14,14 @@ export type Ingredient = {
 export type Recipe = {
   id: string;
   title: string;
+  description: string;
   minutes: number;
   diet: "omnivore" | "vegetarian" | "vegan";
   servings: number;
   missing: string[];
   ingredients: string[];
   steps: string[];
+  tip?: string;
   art: string;
 };
 
