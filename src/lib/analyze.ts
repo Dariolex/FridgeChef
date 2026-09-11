@@ -97,7 +97,12 @@ export const cookFromFridge = createServerFn({ method: "POST" })
               ? "ricette veloci sotto i 15 minuti"
               : "qualsiasi dieta";
 
-      const prompt = `Sei uno chef italiano di cucina casalinga contemporanea. Analizza la foto del frigo e proponi ricette realistiche, buone da cucinare stasera.
+      const courseHint =
+        prefs.course === "dessert"
+          ? "SOLO dessert e dolci (mousse, budini, crêpes, coppe di yogurt/frutta, tiramisù, ecc.). Niente piatti salati."
+          : "SOLO piatti salati (primi, secondi, contorni). Niente dessert né dolci.";
+
+      const prompt = `Sei uno chef italiano di cucina casalinga contemporanea, con stile chiaro e appetitoso. Analizza la foto del frigo e proponi ricette realistiche, buone da cucinare stasera.
 
 Rispondi SOLO con JSON valido, senza markdown:
 {
@@ -106,24 +111,25 @@ Rispondi SOLO con JSON valido, senza markdown:
   "recipes": [{
     "id": "slug-corto",
     "title": "nome appetitoso e specifico in italiano",
-    "description": "2-4 frasi sensoriali: gusto, texture, profumo e perché funziona con gli ingredienti del frigo",
+    "description": "2-4 frasi sensoriali: gusto, texture, profumo e perché funziona con questi ingredienti. Evita frasi generiche.",
     "minutes": 20,
     "diet": "vegetarian|vegan|omnivore",
     "missing": ["solo ciò che davvero manca"],
-    "ingredients": ["quantità + ingrediente, es. 320 g di pasta"],
+    "ingredients": ["quantità + ingrediente, es. 320 g di pasta corta", "2 cucchiai di olio extravergine"],
     "steps": ["passo dettagliato con tempi e fuoco", "passo 2", "passo 3", "passo 4", "passo 5"],
-    "tip": "un consiglio pratico di cottura, non generico"
+    "tip": "un consiglio pratico di cottura o di tecnica"
   }]
 }
 
 Regole di qualità obbligatorie:
 - 4-6 ricette ${dietHint}, per ${prefs.servings} porzioni, massimo ${prefs.maxMinutes} minuti
+- ${courseHint}
 - Usa soprattutto gli ingredienti visibili; non inventare una dispensa piena
-- Titoli specifici e appetitosi, mai generici
-- description: concreta e sensoriale (gusto, texture, atmosfera), niente frasi vuote
-- ingredients: sempre con quantità o pezzi precisi
-- steps: 4-6 passi con tempi, tipo di fuoco e quando salare
-- tip: un solo consiglio utile e concreto
+- Titoli specifici e invitanti, non generici ("Pasta al pomodoro semplice", non "Pasta")
+- description: linguaggio concreto e sensoriale (es. "setoso", "dorato", "acidulo", "lucido"), spiega texture e perché il piatto funziona
+- ingredients: sempre con quantità o pezzi (g, cucchiai, n. pezzi)
+- steps: 4-6 passi precisi con tempi, tipo di fuoco e quando salare; includi mantecatura o riposo se serve
+- tip: un solo consiglio utile e pratico (tecnica, errore da evitare, variante)
 - missing: lista breve; se non manca nulla usa []`;
 
       try {
