@@ -12,6 +12,8 @@ export type Prefs = {
 export type Ingredient = {
   name: string;
   have: boolean;
+  quantity?: string;
+  confidence?: "alta" | "media" | "bassa";
 };
 
 export type Recipe = {
@@ -32,6 +34,8 @@ export type Analysis = {
   ingredients: Ingredient[];
   notes: string;
   recipes: Recipe[];
+  /** Origine delle ricette mostrate: AI o ricettario di riserva. */
+  source?: "ai" | "book";
 };
 
 export type HistoryEntry = {

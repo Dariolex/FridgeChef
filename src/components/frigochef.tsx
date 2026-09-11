@@ -16,8 +16,9 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cookFromFridge } from "@/lib/analyze";
-import { artForRecipe, FOOD_ART, matchCookbook, popularRecipes } from "@/lib/cookbook";
+import { createRecipes, readFridgePhoto } from "@/lib/analyze";
+import { artForRecipe, FOOD_ART, popularRecipes } from "@/lib/cookbook";
+import { ingredientLabel } from "@/lib/recipe-ai";
 import { clearHistory, loadHistory, pushHistory } from "@/lib/history";
 import {
   addShopping,
@@ -38,7 +39,7 @@ import {
   type ShoppingItem,
 } from "@/lib/types";
 
-type Phase = "idle" | "analyzing" | "ready";
+type Phase = "idle" | "analyzing" | "thinking" | "ready";
 type Tab = "home" | "recipes" | "camera" | "history" | "profile";
 
 const DIETS: { id: Diet; label: string }[] = [
@@ -69,6 +70,8 @@ export function FrigoChef() {
   const [photo, setPhoto] = useState<string | null>(null);
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [prefsDirty, setPrefsDirty] = useState(false);
+  const [extraIngredient, setExtraIngredient] = useState("");
   const [query, setQuery] = useState("");
   const [manual, setManual] = useState("");
   const [selected, setSelected] = useState<Recipe | null>(null);
@@ -100,28 +103,87 @@ export function FrigoChef() {
     );
   };
 
+  const updatePrefs = (patch: Partial<Prefs>) => {
+    setPrefs((p) => ({ ...p, ...patch }));
+    if (analysis?.recipes?.length) setPrefsDirty(true);
+  };
+
   const popular = useMemo(() => popularRecipes({ ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes }), [prefs]);
 
-  useEffect(() => {
-    if (!analysis?.ingredients?.length) return;
-    const names = analysis.ingredients.filter((i) => i.have).map((i) => i.name);
-    const recipes = matchCookbook(names, {
-      ...prefs,
-      maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes,
-    });
-    setAnalysis((prev) => (prev ? { ...prev, recipes } : prev));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prefs.course, prefs.diet, prefs.maxMinutes, prefs.servings]);
-
-  const persist = async (dataUrl: string, next: Analysis) => {
-    setPhoto(dataUrl);
-    setAnalysis(next);
-    setPhase("ready");
-    setTab("home");
-  };
 
   const cookRecipe = (recipe: Recipe) => {
     setHistory(pushHistory(recipe));
+  };
+
+  const toggleIngredient = (name: string) => {
+    setAnalysis((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        ingredients: prev.ingredients.map((i) =>
+          i.name === name ? { ...i, have: !i.have } : i,
+        ),
+      };
+    });
+  };
+
+  const selectedLabels = (): string[] => {
+    const fromFridge = (analysis?.ingredients ?? [])
+      .filter((i) => i.have)
+      .map((i) => ingredientLabel(i));
+    const extra = [
+      ...manual.split(/[,;\n]/).map((s) => s.trim()).filter(Boolean),
+      ...extraIngredient.split(/[,;\n]/).map((s) => s.trim()).filter(Boolean),
+    ];
+    return [...fromFridge, ...extra];
+  };
+
+  const runCreateRecipes = async (opts?: { avoidTitles?: string[]; append?: boolean }) => {
+    const ingredients = selectedLabels();
+    if (!ingredients.length) {
+      setError("Seleziona o aggiungi almeno un ingrediente.");
+      return;
+    }
+    setPhase("thinking");
+    setError(null);
+    setPrefsDirty(false);
+    try {
+      const res = await createRecipes({
+        data: {
+          ingredients,
+          prefs,
+          avoidTitles: opts?.avoidTitles,
+          count: 4,
+        },
+      });
+      if (res.ok) {
+        setAnalysis((prev) => ({
+          ingredients: prev?.ingredients ?? ingredients.map((name) => ({ name, have: true })),
+          notes: res.notes || prev?.notes || "",
+          recipes: opts?.append
+            ? [...(prev?.recipes ?? []), ...res.recipes].slice(0, 12)
+            : res.recipes,
+          source: "ai",
+        }));
+        setError(null);
+      } else {
+        setAnalysis((prev) => ({
+          ingredients: prev?.ingredients ?? ingredients.map((name) => ({ name, have: true })),
+          notes: prev?.notes || "",
+          recipes: opts?.append
+            ? [...(prev?.recipes ?? []), ...res.recipes].slice(0, 12)
+            : res.recipes,
+          source: "book",
+        }));
+        setError(res.message);
+      }
+      setPhase("ready");
+      setTab("home");
+    } catch (e) {
+      console.error(e);
+      setError("Connessione al servizio AI non riuscita. Puoi riprovare o usare il ricettario.");
+      setPhase("ready");
+    }
   };
 
   const handleFile = async (file: File | null) => {
@@ -130,36 +192,30 @@ export function FrigoChef() {
     setTab("home");
     setError(null);
     setSelected(null);
+    setPrefsDirty(false);
     try {
       const dataUrl = await compressImage(file);
       setPhoto(dataUrl);
-      const extra = manual
-        .split(/[,;\n]/)
-        .map((s) => s.trim())
-        .filter(Boolean);
-      const res = await cookFromFridge({ data: { image: dataUrl, ingredients: extra, prefs } });
-      if (res.ok) {
-        setError(null);
-        await persist(dataUrl, res.analysis);
+      const res = await readFridgePhoto({ data: { image: dataUrl } });
+      if (!res.ok) {
+        setError(res.message);
+        setAnalysis({
+          ingredients: [],
+          notes: "",
+          recipes: [],
+          source: undefined,
+        });
+        setPhase("ready");
         return;
       }
-      if (res.analysis && res.analysis.recipes.length) {
-        setError(null);
-        await persist(dataUrl, res.analysis);
-        return;
-      }
-      const fallback = await cookFromFridge({ data: { ingredients: extra, prefs } });
-      if (fallback.ok && fallback.analysis.recipes.length) {
-        setError("Non riesco a leggere la foto in automatico. Ho usato gli ingredienti inseriti.");
-        await persist(dataUrl, fallback.analysis);
-        return;
-      }
-      setError("Non riesco a leggere la foto in automatico. Aggiungi gli ingredienti che vedi.");
-      await persist(dataUrl, {
-        ingredients: extra.map((name) => ({ name, have: true })),
-        notes: "",
+      setAnalysis({
+        ingredients: res.ingredients,
+        notes: res.notes,
         recipes: [],
+        source: undefined,
       });
+      setError(null);
+      setPhase("ready");
     } catch {
       setError("Qualcosa è andato storto. Riprova o aggiungi gli ingredienti a mano.");
       setPhase("idle");
@@ -172,17 +228,15 @@ export function FrigoChef() {
       .map((s) => s.trim())
       .filter(Boolean);
     if (!extra.length) return;
-    setPhase("analyzing");
-    setTab("home");
-    setError(null);
-    const res = await cookFromFridge({ data: { ingredients: extra, prefs } });
-    if (res.ok || res.analysis) {
-      setAnalysis((res.ok ? res.analysis : res.analysis) ?? null);
-      setPhase("ready");
-    } else {
-      setError(res.error);
-      setPhase("idle");
-    }
+    setAnalysis({
+      ingredients: extra.map((name) => ({ name, have: true })),
+      notes: "",
+      recipes: [],
+      source: undefined,
+    });
+    setPhoto(null);
+    setPrefsDirty(false);
+    await runCreateRecipes();
   };
 
   const reset = () => {
@@ -191,6 +245,8 @@ export function FrigoChef() {
     setPhoto(null);
     setError(null);
     setSelected(null);
+    setPrefsDirty(false);
+    setExtraIngredient("");
     setTab("home");
   };
 
@@ -230,7 +286,7 @@ export function FrigoChef() {
               <button
                 type="button"
                 className="grid size-8 place-items-center rounded-full text-muted"
-                onClick={() => setPrefs((p) => ({ ...p, servings: Math.max(1, p.servings - 1) }))}
+                onClick={() => updatePrefs({ servings: Math.max(1, prefs.servings - 1) })}
                 aria-label="Meno porzioni"
               >
                 <Minus className="size-3.5" />
@@ -239,7 +295,7 @@ export function FrigoChef() {
               <button
                 type="button"
                 className="grid size-8 place-items-center rounded-full text-muted"
-                onClick={() => setPrefs((p) => ({ ...p, servings: Math.min(8, p.servings + 1) }))}
+                onClick={() => updatePrefs({ servings: Math.min(8, prefs.servings + 1) })}
                 aria-label="Più porzioni"
               >
                 <Plus className="size-3.5" />
@@ -275,7 +331,7 @@ export function FrigoChef() {
             <button
               key={d.id}
               type="button"
-              onClick={() => setPrefs((p) => ({ ...p, diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 }))}
+              onClick={() => updatePrefs({ diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 })}
               className={cn(
                 "h-10 shrink-0 rounded-full px-4 text-sm font-medium transition-colors",
                 prefs.diet === d.id ? "bg-accent text-accent-fg" : "glass text-fg",
@@ -287,10 +343,9 @@ export function FrigoChef() {
           <button
             type="button"
             onClick={() =>
-              setPrefs((p) => ({
-                ...p,
-                course: p.course === "dessert" ? "main" : "dessert",
-              }))
+              updatePrefs({
+                course: prefs.course === "dessert" ? "main" : "dessert",
+              })
             }
             className={cn(
               "flex h-10 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-medium transition-colors",
@@ -329,7 +384,18 @@ export function FrigoChef() {
           <section className="glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
             <img src={FOOD_ART.hero} alt="" className="h-28 w-40 object-contain" />
             <p className="text-lg font-semibold">Sto guardando nel frigo</p>
-            <p className="text-sm text-muted">Riconosco gli ingredienti e scelgo le ricette.</p>
+            <p className="text-sm text-muted">Riconosco gli alimenti nella foto.</p>
+            <div className="h-1.5 w-40 overflow-hidden rounded-full bg-fg/10">
+              <div className="h-full w-1/2 animate-pulse rounded-full bg-accent" />
+            </div>
+          </section>
+        )}
+
+        {tab === "home" && phase === "thinking" && (
+          <section className="glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
+            <img src={FOOD_ART.hero} alt="" className="h-28 w-40 object-contain" />
+            <p className="text-lg font-semibold">Sto pensando alle ricette</p>
+            <p className="text-sm text-muted">Scelgo piatti adatti a quello che hai.</p>
             <div className="h-1.5 w-40 overflow-hidden rounded-full bg-fg/10">
               <div className="h-full w-1/2 animate-pulse rounded-full bg-accent" />
             </div>
@@ -343,8 +409,10 @@ export function FrigoChef() {
                 <img src={photo} alt="Il tuo frigo" className="h-40 w-full object-cover" />
               </div>
             )}
-            {error && !analysis.recipes.length && (
-              <p className="glass rounded-2xl px-4 py-3 text-sm text-muted">{error}</p>
+            {error && (
+              <p className="glass rounded-2xl px-4 py-3 text-sm text-muted" role="status">
+                {error}
+              </p>
             )}
             <div>
               <div className="mb-3 flex items-center justify-between">
@@ -355,13 +423,75 @@ export function FrigoChef() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {analysis.ingredients.map((ing) => (
-                  <span key={ing.name} className="glass rounded-full px-3 py-1.5 text-sm">
+                  <button
+                    key={ing.name}
+                    type="button"
+                    onClick={() => toggleIngredient(ing.name)}
+                    aria-pressed={ing.have}
+                    className={cn(
+                      "rounded-full px-3 py-1.5 text-sm transition-colors",
+                      ing.have ? "bg-accent text-accent-fg" : "glass text-muted line-through",
+                    )}
+                  >
                     {ing.name}
-                  </span>
+                    {ing.quantity ? ` (${ing.quantity})` : ""}
+                    {ing.confidence === "bassa" ? " ?" : ""}
+                  </button>
                 ))}
               </div>
+              <div className="mt-3 flex gap-2">
+                <input
+                  value={extraIngredient}
+                  onChange={(e) => setExtraIngredient(e.target.value)}
+                  placeholder="Aggiungi altri ingredienti"
+                  className="h-11 flex-1 rounded-full bg-fg/8 px-4 text-sm outline-none placeholder:text-muted"
+                />
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button
+                  variant="lime"
+                  size="sm"
+                  onClick={() => void runCreateRecipes()}
+                >
+                  <Sparkles className="size-4" />
+                  Crea ricette
+                </Button>
+                {prefsDirty && analysis.recipes.length > 0 && (
+                  <Button
+                    size="sm"
+                    onClick={() => void runCreateRecipes()}
+                  >
+                    Aggiorna ricette con i nuovi filtri
+                  </Button>
+                )}
+              </div>
             </div>
-            <RecipeGrid title="Cosa cucini ora" recipes={shownRecipes} onOpen={setSelected} />
+            {analysis.recipes.length > 0 && (
+              <>
+                {analysis.notes ? (
+                  <p className="text-sm text-muted">{analysis.notes}</p>
+                ) : null}
+                <RecipeGrid
+                  title={analysis.source === "book" ? "Dal ricettario di riserva" : "Cosa cucini ora"}
+                  recipes={shownRecipes}
+                  onOpen={setSelected}
+                />
+                {analysis.recipes.length < 12 && (
+                  <Button
+                    size="sm"
+                    className="w-full"
+                    onClick={() =>
+                      void runCreateRecipes({
+                        avoidTitles: analysis.recipes.map((r) => r.title),
+                        append: true,
+                      })
+                    }
+                  >
+                    Altre idee
+                  </Button>
+                )}
+              </>
+            )}
           </section>
         )}
 
@@ -451,7 +581,7 @@ export function FrigoChef() {
                   <button
                     key={d.id}
                     type="button"
-                    onClick={() => setPrefs((p) => ({ ...p, diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 }))}
+                    onClick={() => updatePrefs({ diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 })}
                     className={cn(
                       "h-10 rounded-full px-4 text-sm font-medium transition-colors",
                       prefs.diet === d.id ? "bg-accent text-accent-fg" : "bg-fg/8 text-fg",
@@ -471,10 +601,9 @@ export function FrigoChef() {
               <button
                 type="button"
                 onClick={() =>
-                  setPrefs((p) => ({
-                    ...p,
-                    course: p.course === "dessert" ? "main" : "dessert",
-                  }))
+                  updatePrefs({
+                    course: prefs.course === "dessert" ? "main" : "dessert",
+                  })
                 }
                 className={cn(
                   "flex h-10 items-center gap-1.5 rounded-full px-4 text-sm font-medium transition-colors",
@@ -495,7 +624,7 @@ export function FrigoChef() {
                 <button
                   type="button"
                   className="grid size-9 place-items-center rounded-full bg-fg/8"
-                  onClick={() => setPrefs((p) => ({ ...p, servings: Math.max(1, p.servings - 1) }))}
+                  onClick={() => updatePrefs({ servings: Math.max(1, prefs.servings - 1) })}
                   aria-label="Meno porzioni"
                 >
                   <Minus className="size-4" />
@@ -504,7 +633,7 @@ export function FrigoChef() {
                 <button
                   type="button"
                   className="grid size-9 place-items-center rounded-full bg-fg/8"
-                  onClick={() => setPrefs((p) => ({ ...p, servings: Math.min(8, p.servings + 1) }))}
+                  onClick={() => updatePrefs({ servings: Math.min(8, prefs.servings + 1) })}
                   aria-label="Più porzioni"
                 >
                   <Plus className="size-4" />
@@ -521,7 +650,7 @@ export function FrigoChef() {
                 <button
                   type="button"
                   className="grid size-9 place-items-center rounded-full bg-fg/8"
-                  onClick={() => setPrefs((p) => ({ ...p, maxMinutes: Math.max(10, p.maxMinutes - 5) }))}
+                  onClick={() => updatePrefs({ maxMinutes: Math.max(10, prefs.maxMinutes - 5) })}
                   aria-label="Meno minuti"
                 >
                   <Minus className="size-4" />
@@ -530,7 +659,7 @@ export function FrigoChef() {
                 <button
                   type="button"
                   className="grid size-9 place-items-center rounded-full bg-fg/8"
-                  onClick={() => setPrefs((p) => ({ ...p, maxMinutes: Math.min(90, p.maxMinutes + 5) }))}
+                  onClick={() => updatePrefs({ maxMinutes: Math.min(90, prefs.maxMinutes + 5) })}
                   aria-label="Più minuti"
                 >
                   <Plus className="size-4" />
