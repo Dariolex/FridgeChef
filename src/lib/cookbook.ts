@@ -99,6 +99,15 @@ function dietOk(recipe: BookRecipe, diet: Diet) {
   return true;
 }
 
+function isDessert(recipe: BookRecipe) {
+  return recipe.tags.includes("dessert");
+}
+
+function courseOk(recipe: BookRecipe, course: Prefs["course"]) {
+  if (course === "dessert") return isDessert(recipe);
+  return !isDessert(recipe);
+}
+
 function toRecipe(r: BookRecipe, servings: number, missing: string[]): Recipe {
   return {
     id: r.id,
@@ -117,8 +126,11 @@ function toRecipe(r: BookRecipe, servings: number, missing: string[]): Recipe {
 
 export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
   const have = haveRaw.map(norm).filter(Boolean);
-  const scored = BOOK.filter((r) => dietOk(r, prefs.diet))
-    .filter((r) => r.minutes <= prefs.maxMinutes)
+  const pool = BOOK.filter((r) => dietOk(r, prefs.diet))
+    .filter((r) => courseOk(r, prefs.course))
+    .filter((r) => r.minutes <= prefs.maxMinutes);
+
+  const scored = pool
     .map((r) => {
       const missing = r.ingredients.filter((ing) => !hasIngredient(have, ing));
       const hit = r.ingredients.length - missing.length;
@@ -131,8 +143,7 @@ export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
   const out = scored.map((s) => s.recipe);
   if (out.length >= 4) return out.slice(0, 6);
 
-  const extras = BOOK.filter((r) => dietOk(r, prefs.diet))
-    .filter((r) => r.minutes <= prefs.maxMinutes)
+  const extras = pool
     .filter((r) => !out.some((o) => o.id === r.id))
     .slice(0, 6 - out.length)
     .map((r) =>
@@ -147,6 +158,7 @@ export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
 
 export function popularRecipes(prefs: Prefs): Recipe[] {
   return BOOK.filter((r) => dietOk(r, prefs.diet))
+    .filter((r) => courseOk(r, prefs.course))
     .filter((r) => (prefs.diet === "fast" ? r.minutes <= 15 : r.minutes <= prefs.maxMinutes))
     .slice(0, 6)
     .map((r) => toRecipe(r, prefs.servings, []));
