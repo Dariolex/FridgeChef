@@ -1,7 +1,10 @@
 export type Diet = "any" | "vegetarian" | "vegan" | "fast";
 
+export type Course = "main" | "dessert";
+
 export type Prefs = {
   diet: Diet;
+  course: Course;
   maxMinutes: number;
   servings: number;
 };
@@ -47,6 +50,7 @@ export type ShoppingItem = {
 
 export const DEFAULT_PREFS: Prefs = {
   diet: "any",
+  course: "main",
   maxMinutes: 40,
   servings: 2,
 };
