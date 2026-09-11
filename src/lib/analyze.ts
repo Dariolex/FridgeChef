@@ -97,7 +97,34 @@ export const cookFromFridge = createServerFn({ method: "POST" })
               ? "ricette veloci sotto i 15 minuti"
               : "qualsiasi dieta";
 
-      const prompt = `Sei uno chef italiano di cucina casalinga contemporanea. Analizza la foto del frigo e proponi ricette realistiche, buone da cucinare stasera.\n\nRispondi SOLO con JSON valido, senza markdown:\n{\n  "ingredients": [{"name":"string in italiano minuscolo","have":true}],\n  "notes": "una riga sul frigo",\n  "recipes": [{\n    "id": "slug-corto",\n    "title": "nome appetitoso in italiano",\n    "description": "2-3 frasi su gusto, texture e perché funziona con questi ingredienti",\n    "minutes": 20,\n    "diet": "vegetarian|vegan|omnivore",\n    "missing": ["solo ciò che davvero manca"],\n    "ingredients": ["quantità + ingrediente, es. 320 g di pasta"],\n    "steps": ["passo dettagliato 1", "passo 2", "passo 3", "passo 4", "passo 5"],\n    "tip": "un consiglio pratico di cottura"\n  }]\n}\n\nRegole di qualità:\n- 4-6 ricette ${dietHint}, per ${prefs.servings} porzioni, massimo ${prefs.maxMinutes} minuti\n- Usa soprattutto gli ingredienti visibili; non inventare una dispensa piena\n- Titoli specifici, non generici\n- description concreta, senza frasi vuote\n- ingredients sempre con quantità o pezzi\n- steps: 4-6 passi con tempi, fuoco e quando salare\n- tip: un solo consiglio utile\n- missing: lista breve; se non manca nulla usa []`;
+      const prompt = `Sei uno chef italiano di cucina casalinga contemporanea. Analizza la foto del frigo e proponi ricette realistiche, buone da cucinare stasera.
+
+Rispondi SOLO con JSON valido, senza markdown:
+{
+  "ingredients": [{"name":"string in italiano minuscolo","have":true}],
+  "notes": "una riga sul frigo",
+  "recipes": [{
+    "id": "slug-corto",
+    "title": "nome appetitoso e specifico in italiano",
+    "description": "2-4 frasi sensoriali: gusto, texture, profumo e perché funziona con gli ingredienti del frigo",
+    "minutes": 20,
+    "diet": "vegetarian|vegan|omnivore",
+    "missing": ["solo ciò che davvero manca"],
+    "ingredients": ["quantità + ingrediente, es. 320 g di pasta"],
+    "steps": ["passo dettagliato con tempi e fuoco", "passo 2", "passo 3", "passo 4", "passo 5"],
+    "tip": "un consiglio pratico di cottura, non generico"
+  }]
+}
+
+Regole di qualità obbligatorie:
+- 4-6 ricette ${dietHint}, per ${prefs.servings} porzioni, massimo ${prefs.maxMinutes} minuti
+- Usa soprattutto gli ingredienti visibili; non inventare una dispensa piena
+- Titoli specifici e appetitosi, mai generici
+- description: concreta e sensoriale (gusto, texture, atmosfera), niente frasi vuote
+- ingredients: sempre con quantità o pezzi precisi
+- steps: 4-6 passi con tempi, tipo di fuoco e quando salare
+- tip: un solo consiglio utile e concreto
+- missing: lista breve; se non manca nulla usa []`;
 
       try {
         const res = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {

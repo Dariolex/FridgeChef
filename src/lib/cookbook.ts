@@ -12,21 +12,44 @@ export const FOOD_ART = {
 } as const;
 
 export const SAMPLE_INGREDIENTS: Ingredient[] = [
-  "uova", "latte", "pomodori", "pesto", "mozzarella", "limone", "vino bianco",
-  "parmigiano", "insalata", "yogurt", "carote", "zucchine", "pasta", "cipolla", "olio extravergine",
+  "uova",
+  "latte",
+  "pomodori",
+  "pesto",
+  "mozzarella",
+  "limone",
+  "vino bianco",
+  "parmigiano",
+  "insalata",
+  "yogurt",
+  "carote",
+  "zucchine",
+  "pasta",
+  "cipolla",
+  "olio extravergine",
 ].map((name) => ({ name, have: true }));
 
-type BookRecipe = Omit<Recipe, "missing" | "servings"> & { tags: string[]; baseServings: number };
+type BookRecipe = Omit<Recipe, "missing" | "servings"> & {
+  tags: string[];
+  baseServings: number;
+};
 
 const BOOK: BookRecipe[] = [
   {
     id: "pesto",
     title: "Pasta al pesto cremosa",
-    description: "Un classico ligure reso setoso con acqua di cottura e un filo d'olio a crudo: profumo di basilico, morso al dente, formaggio appena fuso.",
+    description:
+      "Un classico ligure reso setoso con acqua di cottura e un filo d'olio a crudo: profumo di basilico, morso al dente, formaggio appena fuso. Ideale quando in frigo c'è già un buon pesto e un po' di parmigiano.",
     minutes: 20,
     diet: "vegetarian",
     tags: ["pasta", "pesto", "parmigiano", "basilico"],
-    ingredients: ["320 g di pasta corta (trofie, penne o fusilli)", "3–4 cucchiai di pesto genovese", "40 g di parmigiano grattugiato", "1 cucchiaio di olio extravergine", "sale grosso per l'acqua"],
+    ingredients: [
+      "320 g di pasta corta (trofie, penne o fusilli)",
+      "3–4 cucchiai di pesto genovese",
+      "40 g di parmigiano grattugiato",
+      "1 cucchiaio di olio extravergine",
+      "sale grosso per l'acqua",
+    ],
     steps: [
       "Porta a bollore una pentola abbondante d'acqua, sala e tuffa la pasta. Cuoci 1 minuto in meno rispetto al tempo indicato sulla confezione.",
       "In una ciotola larga stempera il pesto con l'olio e 2–3 cucchiai di acqua di cottura calda, fino a una salsa fluida e brillante.",
@@ -41,11 +64,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "caprese",
     title: "Caprese al pomodoro maturo",
-    description: "Pochi ingredienti, massima qualità: mozzarella fredda, pomodori sodi e un filo d'olio intenso. Ideale come antipasto o pranzo leggero.",
+    description:
+      "Pochi ingredienti, massima qualità: mozzarella fredda, pomodori sodi e un filo d'olio intenso. Antipasto o pranzo leggero che valorizza la freschezza del frigo.",
     minutes: 10,
     diet: "vegetarian",
     tags: ["mozzarella", "pomodori", "basilico", "olio"],
-    ingredients: ["250 g di mozzarella (o fior di latte)", "2–3 pomodori maturi ma sodi", "2 cucchiai di olio extravergine", "sale fino e pepe nero", "qualche foglia di basilico (se ce l'hai)"],
+    ingredients: [
+      "250 g di mozzarella (o fior di latte)",
+      "2–3 pomodori maturi ma sodi",
+      "2 cucchiai di olio extravergine",
+      "sale fino e pepe nero",
+      "qualche foglia di basilico (se ce l'hai)",
+    ],
     steps: [
       "Scola bene la mozzarella e lasciala 5 minuti su carta assorbente: così non allaga il piatto.",
       "Affetta mozzarella e pomodori a dischi spessi circa 1 cm, scartando i pezzi troppo acquosi.",
@@ -60,11 +90,19 @@ const BOOK: BookRecipe[] = [
   {
     id: "frittata",
     title: "Frittata alta di zucchine",
-    description: "Frittata dorata e soffice, con zucchine rosate e parmigiano. Perfetta tiepida o fredda, anche da asporto.",
+    description:
+      "Frittata dorata e soffice, con zucchine rosate e parmigiano. Perfetta tiepida o fredda, anche da asporto: un modo intelligente per usare le verdure del frigo.",
     minutes: 25,
     diet: "vegetarian",
     tags: ["uova", "zucchine", "parmigiano", "cipolla"],
-    ingredients: ["4 uova medie", "2 zucchine medie", "1/2 cipolla", "40 g di parmigiano grattugiato", "2 cucchiai di olio extravergine", "sale e pepe"],
+    ingredients: [
+      "4 uova medie",
+      "2 zucchine medie",
+      "1/2 cipolla",
+      "40 g di parmigiano grattugiato",
+      "2 cucchiai di olio extravergine",
+      "sale e pepe",
+    ],
     steps: [
       "Taglia la cipolla a fettine sottili e le zucchine a rondelle. Scalda l'olio in una padella antiaderente da 22–24 cm.",
       "Rosola la cipolla 2 minuti, poi aggiungi le zucchine. Cuoci 8–10 minuti a fuoco medio fino a tenere e leggermente dorate. Sali a metà cottura.",
@@ -80,11 +118,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "insalata",
     title: "Insalata croccante al limone",
-    description: "Insalata fresca e acidula, con carote croccanti e un condimento al limone che sveglia il palato in pochi minuti.",
+    description:
+      "Insalata fresca e acidula, con carote croccanti e un condimento al limone che sveglia il palato in pochi minuti. Ideale come contorno o pranzo leggero.",
     minutes: 8,
     diet: "vegan",
     tags: ["insalata", "limone", "olio", "carote"],
-    ingredients: ["1 cespo di insalata (lattuga, iceberg o misticanza)", "1 carota media", "succo di 1/2 limone", "2 cucchiai di olio extravergine", "sale fino"],
+    ingredients: [
+      "1 cespo di insalata (lattuga, iceberg o misticanza)",
+      "1 carota media",
+      "succo di 1/2 limone",
+      "2 cucchiai di olio extravergine",
+      "sale fino",
+    ],
     steps: [
       "Lava l'insalata in acqua fredda e asciugala bene: l'acqua residua diluisce il condimento.",
       "Sbuccia la carota e tagliala a julienne fine o grattugiala a fori larghi.",
@@ -99,11 +144,19 @@ const BOOK: BookRecipe[] = [
   {
     id: "pomodoro",
     title: "Pasta al pomodoro semplice",
-    description: "Sugo corto, dolce e lucido: cipolla soffritta, pomodori e pasta mantecata in padella. Comfort food italiano.",
+    description:
+      "Sugo corto, dolce e lucido: cipolla soffritta, pomodori e pasta mantecata in padella. Comfort food italiano che trasforma i pomodori del frigo in un piatto completo.",
     minutes: 25,
     diet: "vegan",
     tags: ["pasta", "pomodori", "cipolla", "olio"],
-    ingredients: ["320 g di pasta", "400 g di pomodori maturi (o pelati)", "1 cipolla piccola", "2 cucchiai di olio extravergine", "sale e pepe", "basilico fresco (opzionale)"],
+    ingredients: [
+      "320 g di pasta",
+      "400 g di pomodori maturi (o pelati)",
+      "1 cipolla piccola",
+      "2 cucchiai di olio extravergine",
+      "sale e pepe",
+      "basilico fresco (opzionale)",
+    ],
     steps: [
       "Trita la cipolla e soffriggila nell'olio a fuoco medio-basso 4–5 minuti, senza bruciarla.",
       "Aggiungi i pomodori spezzettati, sala e lascia sobbollire 12–15 minuti finché il sugo si restringe e diventa lucido.",
@@ -118,11 +171,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "funghi",
     title: "Funghi saltati all'aglio",
-    description: "Funghi rosati a fiamma viva, aglio e prezzemolo: contorno saporito o base per crostini e pasta.",
+    description:
+      "Funghi rosati a fiamma viva, aglio e prezzemolo: contorno saporito o base per crostini e pasta. Un modo veloce per dare carattere ai funghi del frigo.",
     minutes: 15,
     diet: "vegan",
     tags: ["funghi", "aglio", "prezzemolo", "olio"],
-    ingredients: ["400 g di funghi champignon (o misti)", "1 spicchio d'aglio", "2 cucchiai di olio extravergine", "prezzemolo tritato", "sale e pepe"],
+    ingredients: [
+      "400 g di funghi champignon (o misti)",
+      "1 spicchio d'aglio",
+      "2 cucchiai di olio extravergine",
+      "prezzemolo tritato",
+      "sale e pepe",
+    ],
     steps: [
       "Pulisci i funghi con un panno umido, senza immergerli. Tagliali a fette regolari.",
       "Scalda bene la padella con l'olio. Aggiungi l'aglio schiacciato 30 secondi senza bruciarlo.",
@@ -137,11 +197,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "peperoni",
     title: "Peperoni stufati in padella",
-    description: "Peperoni dolci e cipolla cotti lentamente fino a diventare morbidi e caramellati. Ottimi anche il giorno dopo.",
+    description:
+      "Peperoni dolci e cipolla cotti lentamente fino a diventare morbidi e caramellati. Ottimi anche il giorno dopo, come contorno o su bruschette.",
     minutes: 25,
     diet: "vegan",
     tags: ["peperoni", "cipolla", "olio"],
-    ingredients: ["3 peperoni (rossi o misti)", "1 cipolla", "2 cucchiai di olio extravergine", "sale", "origano o pepe (opzionale)"],
+    ingredients: [
+      "3 peperoni (rossi o misti)",
+      "1 cipolla",
+      "2 cucchiai di olio extravergine",
+      "sale",
+      "origano o pepe (opzionale)",
+    ],
     steps: [
       "Mondate i peperoni: togli picciolo, semi e filamenti. Tagliali a strisce non troppo sottili.",
       "Affetta la cipolla e mettila in padella con l'olio. Quando traspare, unisci i peperoni.",
@@ -156,11 +223,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "uova-strapazzate",
     title: "Uova cremose al parmigiano",
-    description: "Uova strapazzate lente e cremose, arricchite di parmigiano e un filo di latte. Colazione o cena lampo.",
+    description:
+      "Uova strapazzate lente e cremose, arricchite di parmigiano e un filo di latte. Colazione o cena lampo quando in frigo ci sono solo uova e formaggio.",
     minutes: 8,
     diet: "vegetarian",
     tags: ["uova", "parmigiano", "latte"],
-    ingredients: ["3 uova", "2 cucchiai di latte", "30 g di parmigiano grattugiato", "un noce di burro (o 1 cucchiaio d'olio)", "sale e pepe"],
+    ingredients: [
+      "3 uova",
+      "2 cucchiai di latte",
+      "30 g di parmigiano grattugiato",
+      "un noce di burro (o 1 cucchiaio d'olio)",
+      "sale e pepe",
+    ],
     steps: [
       "Sbatti uova, latte, parmigiano, sale e pepe fino a un composto omogeneo.",
       "Scalda una padella antiaderente a fuoco basso con il burro: deve fondere senza sfrigolare forte.",
@@ -175,11 +249,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "pasta-limone",
     title: "Pasta al limone e parmigiano",
-    description: "Salsa al limone setosa, burro e parmigiano: piatto luminoso e veloce quando in frigo c'è solo un agrume.",
+    description:
+      "Salsa al limone setosa, burro e parmigiano: piatto luminoso e veloce quando in frigo c'è solo un agrume. Acidità e cremosità in perfetto equilibrio.",
     minutes: 18,
     diet: "vegetarian",
     tags: ["pasta", "limone", "parmigiano", "burro"],
-    ingredients: ["320 g di pasta lunga o corta", "1 limone non trattato (scorza e succo)", "40 g di burro", "50 g di parmigiano grattugiato", "sale e pepe nero"],
+    ingredients: [
+      "320 g di pasta lunga o corta",
+      "1 limone non trattato (scorza e succo)",
+      "40 g di burro",
+      "50 g di parmigiano grattugiato",
+      "sale e pepe nero",
+    ],
     steps: [
       "Metti a bollire l'acqua. Grattugia la scorza del limone e spremine metà, filtrando i semi.",
       "In una padella sciogli il burro a fuoco basso con la scorza, senza far colorire.",
@@ -194,11 +275,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "carote-yogurt",
     title: "Insalata di carote allo yogurt",
-    description: "Carote grattugiate in una salsa allo yogurt e limone: contorno fresco, leggero e pronto in pochi minuti.",
+    description:
+      "Carote grattugiate in una salsa allo yogurt e limone: contorno fresco, leggero e pronto in pochi minuti. Ideale per bilanciare piatti più ricchi.",
     minutes: 12,
     diet: "vegetarian",
     tags: ["carote", "yogurt", "limone"],
-    ingredients: ["3 carote medie", "150 g di yogurt bianco", "succo di 1/2 limone", "1 cucchiaio di olio extravergine", "sale e pepe"],
+    ingredients: [
+      "3 carote medie",
+      "150 g di yogurt bianco",
+      "succo di 1/2 limone",
+      "1 cucchiaio di olio extravergine",
+      "sale e pepe",
+    ],
     steps: [
       "Sbuccia le carote e grattugiale a fori medi.",
       "Mescola yogurt, limone, olio, sale e pepe fino a una salsa cremosa ma fluida.",
@@ -213,11 +301,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "zucchine",
     title: "Zucchine trifolate in padella",
-    description: "Zucchine saltate con aglio e olio, tenere fuori e ancora con morso. Contorno veloce o condimento per pasta.",
+    description:
+      "Zucchine saltate con aglio e olio, tenere fuori e ancora con morso. Contorno veloce o condimento per pasta: un classico della cucina di casa.",
     minutes: 15,
     diet: "vegan",
     tags: ["zucchine", "aglio", "olio"],
-    ingredients: ["3 zucchine medie", "1 spicchio d'aglio", "2 cucchiai di olio extravergine", "sale e pepe", "prezzemolo (opzionale)"],
+    ingredients: [
+      "3 zucchine medie",
+      "1 spicchio d'aglio",
+      "2 cucchiai di olio extravergine",
+      "sale e pepe",
+      "prezzemolo (opzionale)",
+    ],
     steps: [
       "Taglia le zucchine a rondelle di 4–5 mm o a bastoncini.",
       "Scalda l'olio con l'aglio schiacciato. Quando profuma, togli l'aglio se preferisci un gusto delicato.",
@@ -232,11 +327,18 @@ const BOOK: BookRecipe[] = [
   {
     id: "mozza-pesto",
     title: "Mozzarella tiepida al pesto",
-    description: "Antipasto lampo: mozzarella scolata, un velo di pesto e olio a crudo. Ideale con pane croccante.",
+    description:
+      "Antipasto lampo: mozzarella scolata, un velo di pesto e olio a crudo. Ideale con pane croccante quando hai poco tempo e vuoi qualcosa di buono.",
     minutes: 6,
     diet: "vegetarian",
     tags: ["mozzarella", "pesto", "olio"],
-    ingredients: ["200 g di mozzarella", "2 cucchiai di pesto", "1 cucchiaio di olio extravergine", "pepe nero", "pane tostato per servire"],
+    ingredients: [
+      "200 g di mozzarella",
+      "2 cucchiai di pesto",
+      "1 cucchiaio di olio extravergine",
+      "pepe nero",
+      "pane tostato per servire",
+    ],
     steps: [
       "Scola e asciuga la mozzarella. Tagliala a fette spesse o a cubetti grossi.",
       "Disponila sul piatto e spalma un velo sottile di pesto su ogni pezzo.",
@@ -246,6 +348,112 @@ const BOOK: BookRecipe[] = [
     tip: "Se la mozzarella è di frigo, lasciala 10 minuti a temperatura ambiente: il sapore si apre.",
     art: FOOD_ART.avocado,
     baseServings: 1,
+  },
+  {
+    id: "uova-purgatorio",
+    title: "Uova in purgatorio",
+    description:
+      "Uova poaché in un sugo di pomodoro speziato e leggero: piatto unico saporito che usa uova e pomodori del frigo. Perfetto per una cena veloce e confortante.",
+    minutes: 20,
+    diet: "vegetarian",
+    tags: ["uova", "pomodori", "cipolla", "aglio"],
+    ingredients: [
+      "4 uova",
+      "400 g di pomodori maturi (o pelati)",
+      "1 spicchio d'aglio",
+      "1/2 cipolla",
+      "2 cucchiai di olio extravergine",
+      "sale, pepe e un pizzico di peperoncino (opzionale)",
+    ],
+    steps: [
+      "Trita cipolla e aglio. Soffriggili nell'olio a fuoco medio 3–4 minuti.",
+      "Aggiungi i pomodori spezzettati, sala e lascia sobbollire 10 minuti fino a un sugo denso ma ancora fluido.",
+      "Con un cucchiaio forma quattro nicchie nel sugo e rompi le uova dentro.",
+      "Copri e cuoci a fuoco basso 4–6 minuti: il bianco deve coagulare, il tuorlo restare morbido.",
+      "Pepa, completa con un filo d'olio e servi con pane tostato.",
+    ],
+    tip: "Non alzare troppo il fuoco: le uova devono cuocere piano nel sugo, non friggere.",
+    art: FOOD_ART.tomato,
+    baseServings: 2,
+  },
+  {
+    id: "pasta-zucchine",
+    title: "Pasta alle zucchine e parmigiano",
+    description:
+      "Pasta mantecata con zucchine dorate e parmigiano: piatto cremoso senza panna, leggero e pieno di sapore. Ideale quando le zucchine iniziano ad accumularsi in frigo.",
+    minutes: 22,
+    diet: "vegetarian",
+    tags: ["pasta", "zucchine", "parmigiano", "aglio"],
+    ingredients: [
+      "320 g di pasta",
+      "3 zucchine medie",
+      "40 g di parmigiano grattugiato",
+      "1 spicchio d'aglio",
+      "2 cucchiai di olio extravergine",
+      "sale e pepe",
+    ],
+    steps: [
+      "Taglia le zucchine a rondelle sottili. Scalda l'olio con l'aglio, poi unisci le zucchine.",
+      "Cuoci 10–12 minuti a fuoco medio-alto fino a dorate e tenere. Sali a metà cottura.",
+      "Cuoci la pasta al dente e scolala tenendo da parte un mestolo d'acqua.",
+      "Trasferisci la pasta nella padella delle zucchine, aggiungi parmigiano e un po' d'acqua di cottura.",
+      "Manteca a fuoco vivo 1 minuto: la salsa deve legare. Pepa e servi subito.",
+    ],
+    tip: "Se vuoi più crema, aggiungi un cucchiaio di pasta di cottura extra e mescola con vigore.",
+    art: FOOD_ART.onion,
+    baseServings: 2,
+  },
+  {
+    id: "insalata-mozza",
+    title: "Insalata di mozzarella e pomodori",
+    description:
+      "Versione più rustica e abbondante della caprese: mozzarella a pezzi, pomodori a spicchi e un condimento generoso. Pranzo leggero o contorno per grigliate.",
+    minutes: 10,
+    diet: "vegetarian",
+    tags: ["mozzarella", "pomodori", "insalata", "olio"],
+    ingredients: [
+      "200 g di mozzarella",
+      "2 pomodori maturi",
+      "un pugno di insalata (se ce l'hai)",
+      "2 cucchiai di olio extravergine",
+      "sale e pepe",
+      "basilico o origano (opzionale)",
+    ],
+    steps: [
+      "Scola e asciuga la mozzarella, poi tagliala a cubetti o a pezzi irregolari.",
+      "Taglia i pomodori a spicchi e, se presente, spezza l'insalata a mano.",
+      "Unisci tutto in una ciotola, condisci con olio, sale e pepe.",
+      "Aggiungi basilico o origano se li hai. Mescola delicatamente.",
+      "Servi subito o lascia riposare 5 minuti a temperatura ambiente.",
+    ],
+    tip: "Non mettere in frigo dopo aver condito: il freddo spegne i sapori dell'olio e dei pomodori.",
+    art: FOOD_ART.tomato,
+    baseServings: 2,
+  },
+  {
+    id: "yogurt-salsa",
+    title: "Salsa yogurt al limone",
+    description:
+      "Salsa fresca e acidula da usare come dip, condimento per verdure o base per insalate. Pronto in 5 minuti con yogurt e limone del frigo.",
+    minutes: 5,
+    diet: "vegetarian",
+    tags: ["yogurt", "limone", "aglio"],
+    ingredients: [
+      "200 g di yogurt bianco",
+      "succo di 1/2 limone",
+      "1 cucchiaio di olio extravergine",
+      "1/2 spicchio d'aglio (opzionale)",
+      "sale e pepe",
+    ],
+    steps: [
+      "In una ciotola mescola yogurt, succo di limone e olio.",
+      "Se usi l'aglio, grattugialo finissimo o passalo allo schiacciaglio e uniscilo.",
+      "Sala, pepa e mescola fino a una salsa liscia e fluida.",
+      "Assaggia e regola di limone o sale. Servi subito o conserva in frigo.",
+    ],
+    tip: "Per una salsa più densa usa yogurt greco; per una più leggera allunga con un filo d'acqua.",
+    art: FOOD_ART.lemon,
+    baseServings: 2,
   },
 ];
 
@@ -269,7 +477,11 @@ const ALIASES: Record<string, string[]> = {
 };
 
 function norm(s: string) {
-  return s.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").trim();
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .trim();
 }
 
 function hasIngredient(have: string[], needed: string) {
@@ -324,7 +536,13 @@ export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
     .filter((r) => r.minutes <= prefs.maxMinutes)
     .filter((r) => !out.some((o) => o.id === r.id))
     .slice(0, 6 - out.length)
-    .map((r) => toRecipe(r, prefs.servings, r.ingredients.filter((ing) => !hasIngredient(have, ing))));
+    .map((r) =>
+      toRecipe(
+        r,
+        prefs.servings,
+        r.ingredients.filter((ing) => !hasIngredient(have, ing)),
+      ),
+    );
   return [...out, ...extras].slice(0, 6);
 }
 
@@ -339,7 +557,10 @@ export function sampleAnalysis(prefs: Prefs) {
   return {
     ingredients: SAMPLE_INGREDIENTS,
     notes: "Demo del frigo italiano: latticini, verdure e basilico.",
-    recipes: matchCookbook(SAMPLE_INGREDIENTS.map((i) => i.name), prefs),
+    recipes: matchCookbook(
+      SAMPLE_INGREDIENTS.map((i) => i.name),
+      prefs,
+    ),
   };
 }
 
@@ -348,7 +569,8 @@ export function artForRecipe(title: string, fallback?: string) {
   if (t.includes("pesto") || t.includes("avocado")) return FOOD_ART.avocado;
   if (t.includes("pomodor") || t.includes("caprese")) return FOOD_ART.tomato;
   if (t.includes("insalat") || t.includes("lattuga") || t.includes("carot")) return FOOD_ART.lettuce;
-  if (t.includes("cipoll") || t.includes("zucchini") || t.includes("frittata") || t.includes("zucchin")) return FOOD_ART.onion;
+  if (t.includes("cipoll") || t.includes("zucchini") || t.includes("frittata") || t.includes("zucchin"))
+    return FOOD_ART.onion;
   if (t.includes("limon")) return FOOD_ART.lemon;
   if (t.includes("peperon")) return FOOD_ART.pepper;
   if (t.includes("fungh")) return FOOD_ART.mushrooms;
