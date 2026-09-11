@@ -491,19 +491,19 @@ export function FrigoChef() {
                     <Sparkles className="size-4" />
                     Crea ricette
                   </Button>
+                  <Button
+                    variant="yellow"
+                    size="sm"
+                    onClick={() => runCookbookRecipes()}
+                  >
+                    Ricettario Classico
+                  </Button>
                   {prefsDirty && analysis.recipes.length > 0 && (
                     <Button size="sm" onClick={() => void runCreateRecipes()}>
                       Aggiorna ricette con i nuovi filtri
                     </Button>
                   )}
                 </div>
-                <button
-                  type="button"
-                  className="text-sm text-muted underline-offset-2 hover:underline"
-                  onClick={() => runCookbookRecipes()}
-                >
-                  Preferisci le classiche del ricettario?
-                </button>
               </div>
             </div>
             {analysis.recipes.length > 0 && (
@@ -545,7 +545,7 @@ export function FrigoChef() {
               />
             )}
             <div>
-              <h2 className="mb-1 text-lg font-semibold">Ricettario</h2>
+              <h2 className="mb-1 text-lg font-semibold">Ricettario classico</h2>
               <p className="mb-3 text-sm text-muted">
                 Tocca una categoria per vedere i piatti. Filtra con dieta, tempo e ricerca.
               </p>
