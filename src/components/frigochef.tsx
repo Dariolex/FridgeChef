@@ -84,11 +84,23 @@ export function FrigoChef() {
   const [openCatalogId, setOpenCatalogId] = useState<string | null>(null);
   const [fridgePlan, setFridgePlan] = useState<FridgeOrganization | null>(null);
   const [organizing, setOrganizing] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [onboardingStep, setOnboardingStep] = useState(0);
 
   useEffect(() => {
     setHistory(loadHistory());
     setShopping(loadShopping());
   }, []);
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined" && !localStorage.getItem("frigochef_onboarding_v1")) {
+        setShowOnboarding(true);
+      }
+    } catch {
+      /* private mode */
+    }
+  }, []);
+
 
   useEffect(() => {
     if (!toast) return;
@@ -298,6 +310,16 @@ export function FrigoChef() {
     await runCreateRecipes();
   };
 
+  const dismissOnboarding = () => {
+    try {
+      localStorage.setItem("frigochef_onboarding_v1", "1");
+    } catch {
+      /* ignore */
+    }
+    setShowOnboarding(false);
+    setOnboardingStep(0);
+  };
+
   const reset = () => {
     setPhase("idle");
     setAnalysis(null);
@@ -328,7 +350,7 @@ export function FrigoChef() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-10%,#1a2430,transparent_60%)]" />
 
       <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col px-5 pb-28 pt-6">
-        <header className="mb-5 flex items-center justify-between">
+        <header className="relative z-10 mb-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <LeafMark className="size-11" />
             <div>
@@ -373,10 +395,13 @@ export function FrigoChef() {
         </header>
 
         <div className={cn("relative mb-6", tab !== "home" && tab !== "recipes" && "hidden")}>
-          <img src={FOOD_ART.avocado} alt="" className="food-float float-a absolute -left-6 -top-7 z-20 w-24" />
-          <img src={FOOD_ART.tomato} alt="" className="food-float float-b absolute -right-2 -top-8 z-20 w-20" />
-          <img src={FOOD_ART.lettuce} alt="" className="food-float float-c absolute -right-7 top-9 z-0 w-28 opacity-90" />
-          <img src={FOOD_ART.onion} alt="" className="food-float float-b absolute -left-7 top-20 z-0 w-20" />
+          {/* Decorative floats: always behind interactive UI */}
+          <div className="pointer-events-none absolute inset-0 -z-0 overflow-visible" aria-hidden>
+            <img src={FOOD_ART.avocado} alt="" className="food-float float-a absolute -left-6 -top-7 w-24 opacity-50" />
+            <img src={FOOD_ART.tomato} alt="" className="food-float float-b absolute -right-2 -top-8 w-20 opacity-50" />
+            <img src={FOOD_ART.lettuce} alt="" className="food-float float-c absolute -right-7 top-9 w-28 opacity-40" />
+            <img src={FOOD_ART.onion} alt="" className="food-float float-b absolute -left-7 top-20 w-20 opacity-45" />
+          </div>
 
           <label className="glass relative z-10 flex h-14 items-center gap-3 rounded-full px-5">
             <Search className="size-5 text-muted" />
@@ -391,7 +416,7 @@ export function FrigoChef() {
 
         <div
           className={cn(
-            "mb-5 flex gap-2 overflow-x-auto pb-1",
+            "relative z-10 mb-5 flex gap-2 overflow-x-auto pb-1",
             tab !== "home" && tab !== "recipes" && "hidden",
           )}
         >
@@ -426,7 +451,7 @@ export function FrigoChef() {
         </div>
 
         {tab === "home" && phase === "idle" && (
-          <section className="space-y-5">
+          <section className="relative z-10 space-y-5">
             <Button variant="lime" size="lg" className="w-full" onClick={() => fileRef.current?.click()}>
               <Camera className="size-5" />
               Scatta una foto
@@ -449,7 +474,7 @@ export function FrigoChef() {
         )}
 
         {tab === "home" && phase === "analyzing" && (
-          <section className="glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
+          <section className="relative z-10 glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
             <img src={FOOD_ART.hero} alt="" className="h-28 w-40 object-contain" />
             <p className="text-lg font-semibold">Sto guardando nel frigo</p>
             <p className="text-sm text-muted">Riconosco gli alimenti nella foto.</p>
@@ -460,7 +485,7 @@ export function FrigoChef() {
         )}
 
         {tab === "home" && phase === "thinking" && (
-          <section className="glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
+          <section className="relative z-10 glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
             <img src={FOOD_ART.hero} alt="" className="h-28 w-40 object-contain" />
             <p className="text-lg font-semibold">Sto pensando alle ricette</p>
             <p className="text-sm text-muted">Scelgo piatti adatti a quello che hai.</p>
@@ -471,7 +496,7 @@ export function FrigoChef() {
         )}
 
         {tab === "home" && phase === "ready" && analysis && (
-          <section className="space-y-5">
+          <section className="relative z-10 space-y-5">
             {photo && (
               <div className="overflow-hidden rounded-[28px]">
                 <img src={photo} alt="Il tuo frigo" className="h-40 w-full object-cover" />
@@ -549,45 +574,7 @@ export function FrigoChef() {
               </div>
             </div>
             {fridgePlan && (
-              <div className="glass space-y-3 rounded-[24px] p-4">
-                <div className="flex items-center justify-between gap-2">
-                  <h2 className="text-lg font-semibold">Come organizzare il frigo</h2>
-                  <button
-                    type="button"
-                    className="text-sm text-muted"
-                    onClick={() => setFridgePlan(null)}
-                  >
-                    Chiudi
-                  </button>
-                </div>
-                {fridgePlan.general_tip ? (
-                  <p className="text-sm text-muted">{fridgePlan.general_tip}</p>
-                ) : null}
-                {fridgePlan.priority_actions?.length > 0 && (
-                  <ul className="space-y-1.5">
-                    {fridgePlan.priority_actions.map((a, i) => (
-                      <li key={i} className="rounded-2xl bg-sky-400/15 px-3 py-2 text-sm">
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <div className="space-y-3">
-                  {fridgePlan.fridge_organization.map((zone) => (
-                    <div key={zone.zone} className="rounded-[20px] bg-fg/5 p-3">
-                      <p className="mb-2 text-sm font-semibold">{zone.zone}</p>
-                      <ul className="space-y-2">
-                        {zone.items.map((it, idx) => (
-                          <li key={it.food + idx} className="text-sm">
-                            <span className="font-medium">{it.food}</span>
-                            <span className="text-muted"> — {it.reason}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <FridgePlanPanel plan={fridgePlan} onClose={() => setFridgePlan(null)} />
             )}
 
             {analysis.recipes.length > 0 && (
@@ -598,6 +585,7 @@ export function FrigoChef() {
                 <RecipeGrid
                   title={analysis.source === "book" ? "Dal ricettario di riserva" : "Cosa cucini ora"}
                   recipes={shownRecipes}
+                  source={analysis.source}
                   onOpen={setSelected}
                 />
                 {analysis.recipes.length < 12 && (
@@ -620,11 +608,12 @@ export function FrigoChef() {
         )}
 
         {tab === "recipes" && (
-          <section className="space-y-5">
+          <section className="relative z-10 space-y-5">
             {analysis && analysis.recipes.length > 0 && (
               <RecipeGrid
                 title={analysis.source === "book" ? "Dal ricettario (frigo)" : "Dal tuo frigo"}
                 recipes={analysis.recipes}
+                source={analysis.source}
                 onOpen={setSelected}
               />
             )}
@@ -675,6 +664,9 @@ export function FrigoChef() {
                                   alt=""
                                   className="h-full w-full object-cover"
                                 />
+                                <span className="absolute left-2 top-2 rounded-full bg-amber-400/95 px-2 py-0.5 text-[10px] font-semibold text-stone-900">
+                                  Classico
+                                </span>
                               </div>
                               <div className="space-y-1 p-2.5">
                                 <p className="line-clamp-2 text-sm font-semibold leading-snug">
@@ -869,6 +861,17 @@ export function FrigoChef() {
         />
       </div>
 
+      {showOnboarding && (
+        <OnboardingOverlay
+          step={onboardingStep}
+          onNext={() => {
+            if (onboardingStep >= 2) dismissOnboarding();
+            else setOnboardingStep((s) => s + 1);
+          }}
+          onSkip={dismissOnboarding}
+        />
+      )}
+
       <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-fg/10 bg-bg/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[430px] items-center justify-around px-2 py-2">
           <NavBtn active={tab === "home"} onClick={() => { setTab("home"); if (phase !== "ready") setPhase("idle"); }} icon={Home} label="Home" />
@@ -942,10 +945,12 @@ function RecipeGrid({
   title,
   recipes,
   onOpen,
+  source,
 }: {
   title: string;
   recipes: Recipe[];
   onOpen: (r: Recipe) => void;
+  source?: "ai" | "book";
 }) {
   if (!recipes.length) return null;
   return (
@@ -965,6 +970,16 @@ function RecipeGrid({
                 alt=""
                 className="h-full w-full object-cover"
               />
+              {source === "ai" && (
+                <span className="absolute left-2 top-2 rounded-full bg-accent/95 px-2 py-0.5 text-[10px] font-semibold text-accent-fg">
+                  Chef AI
+                </span>
+              )}
+              {source === "book" && (
+                <span className="absolute left-2 top-2 rounded-full bg-amber-400/95 px-2 py-0.5 text-[10px] font-semibold text-stone-900">
+                  Classico
+                </span>
+              )}
             </div>
             <div className="space-y-1 p-3">
               <p className="line-clamp-2 text-sm font-semibold leading-snug">{r.title}</p>
@@ -1172,5 +1187,170 @@ function ShoppingRow({
         <Trash2 className="size-4" />
       </button>
     </li>
+  );
+}
+
+
+const FRIDGE_ZONE_ORDER = [
+  { key: "porta", label: "Porta", match: /porta/i },
+  { key: "superiore", label: "Ripiano superiore", match: /superior/i },
+  { key: "centrali", label: "Ripiani centrali", match: /central/i },
+  { key: "inferiore", label: "Ripiano inferiore", match: /inferior/i },
+  { key: "cassetti", label: "Cassetti", match: /casset/i },
+] as const;
+
+function FridgePlanPanel({
+  plan,
+  onClose,
+}: {
+  plan: FridgeOrganization;
+  onClose: () => void;
+}) {
+  const [active, setActive] = useState(0);
+
+  const ordered = (() => {
+    const used = new Set<number>();
+    const result: { label: string; items: { food: string; reason: string }[] }[] = [];
+    for (const slot of FRIDGE_ZONE_ORDER) {
+      const idx = plan.fridge_organization.findIndex(
+        (z, i) => !used.has(i) && slot.match.test(z.zone),
+      );
+      if (idx >= 0) {
+        used.add(idx);
+        result.push({
+          label: plan.fridge_organization[idx].zone || slot.label,
+          items: plan.fridge_organization[idx].items,
+        });
+      } else {
+        result.push({ label: slot.label, items: [] });
+      }
+    }
+    plan.fridge_organization.forEach((z, i) => {
+      if (!used.has(i)) result.push({ label: z.zone, items: z.items });
+    });
+    return result.filter((z) => z.items.length > 0 || FRIDGE_ZONE_ORDER.some((s) => s.label === z.label));
+  })();
+
+  const safeActive = Math.min(active, Math.max(0, ordered.length - 1));
+  const current = ordered[safeActive];
+
+  return (
+    <div className="glass space-y-3 rounded-[24px] p-4">
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="text-lg font-semibold">Come organizzare il frigo</h2>
+        <button type="button" className="text-sm text-muted" onClick={onClose}>
+          Chiudi
+        </button>
+      </div>
+      {plan.general_tip ? <p className="text-sm text-muted">{plan.general_tip}</p> : null}
+      {plan.priority_actions?.length > 0 && (
+        <ul className="space-y-1.5">
+          {plan.priority_actions.map((a, i) => (
+            <li key={i} className="rounded-2xl bg-sky-400/15 px-3 py-2 text-sm">
+              {a}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="flex gap-3">
+        {/* Mini schema verticale del frigo */}
+        <div className="flex w-16 shrink-0 flex-col gap-1 rounded-2xl border border-fg/15 bg-fg/5 p-1.5">
+          {ordered.map((z, i) => {
+            const count = z.items.length;
+            const selected = i === safeActive;
+            return (
+              <button
+                key={z.label + i}
+                type="button"
+                onClick={() => setActive(i)}
+                className={cn(
+                  "flex min-h-10 flex-1 flex-col items-center justify-center rounded-xl px-1 py-1.5 text-center transition",
+                  selected ? "bg-sky-400 text-sky-950" : "bg-fg/5 text-muted hover:bg-fg/10",
+                  count === 0 && !selected && "opacity-40",
+                )}
+                aria-label={z.label}
+              >
+                <span className="text-[9px] font-semibold leading-tight">{z.label.replace(/^Ripiano /i, "")}</span>
+                {count > 0 && (
+                  <span className={cn("text-[10px] font-bold", selected ? "text-sky-950" : "text-fg")}>
+                    {count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="min-w-0 flex-1 rounded-[20px] bg-fg/5 p-3">
+          {current ? (
+            <>
+              <p className="mb-2 text-sm font-semibold">{current.label}</p>
+              {current.items.length === 0 ? (
+                <p className="text-sm text-muted">Niente in questa zona.</p>
+              ) : (
+                <ul className="space-y-2">
+                  {current.items.map((it, idx) => (
+                    <li key={it.food + idx} className="text-sm">
+                      <span className="font-medium">{it.food}</span>
+                      <span className="text-muted"> — {it.reason}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const ONBOARDING_STEPS = [
+  {
+    title: "Scatta il frigo",
+    body: "Fotografa il contenuto del frigorifero: FrigoChef riconosce gli alimenti e te li mostra come chip da confermare.",
+  },
+  {
+    title: "Scegli il percorso",
+    body: "Crea ricette (AI), Ricettario Classico (ricette collaudate) oppure Organizza frigo (dove mettere ogni alimento).",
+  },
+  {
+    title: "Filtra e cucina",
+    body: "Usa dieta, tempo e porzioni prima di generare. Apri una ricetta, cuocila o aggiungi i mancanti alla lista della spesa.",
+  },
+] as const;
+
+function OnboardingOverlay({
+  step,
+  onNext,
+  onSkip,
+}: {
+  step: number;
+  onNext: () => void;
+  onSkip: () => void;
+}) {
+  const s = ONBOARDING_STEPS[Math.min(step, ONBOARDING_STEPS.length - 1)];
+  const last = step >= ONBOARDING_STEPS.length - 1;
+  return (
+    <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 p-4 sm:items-center">
+      <div className="w-full max-w-[400px] rounded-[28px] bg-bg p-5 shadow-2xl">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
+          Benvenuto · {step + 1}/{ONBOARDING_STEPS.length}
+        </p>
+        <h2 className="mt-2 text-xl font-semibold">{s.title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+        <div className="mt-5 flex items-center gap-2">
+          <Button variant="lime" className="flex-1" onClick={onNext}>
+            {last ? "Inizia" : "Avanti"}
+          </Button>
+          {!last && (
+            <button type="button" className="px-3 text-sm text-muted" onClick={onSkip}>
+              Salta
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
