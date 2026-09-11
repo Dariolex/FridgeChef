@@ -102,7 +102,6 @@ export function FrigoChef() {
 
   const popular = useMemo(() => popularRecipes({ ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes }), [prefs]);
 
-  // Se cambiano preferenze (es. tasto Dessert), ricalcola le ricette dagli ingredienti già rilevati
   useEffect(() => {
     if (!analysis?.ingredients?.length) return;
     const names = analysis.ingredients.filter((i) => i.have).map((i) => i.name);
@@ -111,7 +110,6 @@ export function FrigoChef() {
       maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes,
     });
     setAnalysis((prev) => (prev ? { ...prev, recipes } : prev));
-    // Solo quando cambiano le preferenze, non quando cambia analysis
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefs.course, prefs.diet, prefs.maxMinutes, prefs.servings]);
 
@@ -324,7 +322,6 @@ export function FrigoChef() {
                 </Button>
               </div>
             </div>
-            <RecipeGrid title="Popolari oggi" recipes={filteredPopular} onOpen={setSelected} />
           </section>
         )}
 
@@ -844,9 +841,7 @@ function ShoppingRow({
         {item.done && <Check className="size-3.5" />}
       </button>
       <div className="min-w-0 flex-1">
-        <p className={cn("text-sm font-medium", item.done && "line-through")}>
-          {item.name}
-        </p>
+        <p className={cn("text-sm font-medium", item.done && "line-through")}>{item.name}</p>
         {item.from ? <p className="text-[11px] text-muted">da {item.from}</p> : null}
       </div>
       <button
