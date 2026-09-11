@@ -3,6 +3,7 @@ import {
   Camera,
   Check,
   ChefHat,
+  ChevronDown,
   Clock3,
   Home,
   Cake,
@@ -79,6 +80,8 @@ export function FrigoChef() {
   const [shopping, setShopping] = useState<ShoppingItem[]>([]);
   const [shoppingOpen, setShoppingOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  /** Sezione aperta nel tab Ricette (catalogo a fisarmonica). */
+  const [openCatalogId, setOpenCatalogId] = useState<string | null>(null);
 
   useEffect(() => {
     setHistory(loadHistory());
@@ -544,12 +547,66 @@ export function FrigoChef() {
             <div>
               <h2 className="mb-1 text-lg font-semibold">Ricettario</h2>
               <p className="mb-3 text-sm text-muted">
-                Classici di casa organizzati per tipo. Filtra con dieta, tempo e ricerca.
+                Tocca una categoria per vedere i piatti. Filtra con dieta, tempo e ricerca.
               </p>
             </div>
-            {catalogSections.map((section) => (
-              <RecipeGrid key={section.id} title={section.title} recipes={section.recipes} onOpen={setSelected} />
-            ))}
+            <div className="space-y-2">
+              {catalogSections.map((section) => {
+                const open = openCatalogId === section.id;
+                return (
+                  <div key={section.id} className="glass overflow-hidden rounded-[24px]">
+                    <button
+                      type="button"
+                      aria-expanded={open}
+                      onClick={() => setOpenCatalogId(open ? null : section.id)}
+                      className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left"
+                    >
+                      <span className="min-w-0">
+                        <span className="block text-sm font-semibold">{section.title}</span>
+                        <span className="text-xs text-muted">
+                          {section.recipes.length}{" "}
+                          {section.recipes.length === 1 ? "ricetta" : "ricette"}
+                        </span>
+                      </span>
+                      <ChevronDown
+                        className={cn(
+                          "size-5 shrink-0 text-muted transition-transform",
+                          open && "rotate-180",
+                        )}
+                      />
+                    </button>
+                    {open && (
+                      <div className="border-t border-fg/10 px-3 pb-3 pt-2">
+                        <div className="grid grid-cols-2 gap-3">
+                          {section.recipes.map((r) => (
+                            <button
+                              key={r.id}
+                              type="button"
+                              onClick={() => setSelected(r)}
+                              className="overflow-hidden rounded-[20px] bg-fg/5 text-left"
+                            >
+                              <div className="relative aspect-[4/3] overflow-hidden">
+                                <img
+                                  src={artForRecipe(r.title, r.art)}
+                                  alt=""
+                                  className="h-full w-full object-cover"
+                                />
+                              </div>
+                              <div className="space-y-1 p-2.5">
+                                <p className="line-clamp-2 text-sm font-semibold leading-snug">
+                                  {r.title}
+                                </p>
+                                <p className="text-[11px] text-muted">{r.minutes} min</p>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
             {catalogSections.length === 0 && (
               <p className="glass rounded-2xl px-4 py-3 text-sm text-muted">
                 Nessun piatto per questa ricerca. Prova a cambiare filtro o parola.
