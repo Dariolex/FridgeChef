@@ -182,13 +182,14 @@ export function catalogBySection(prefs: Prefs, query = ""): CatalogSection[] {
   const q = query.trim().toLowerCase();
   const maxMin = prefs.diet === "fast" ? 15 : prefs.maxMinutes;
 
+  // Catalogo completo: non applica il filtro "solo dessert" così Primi e Dolci
+  // restano sempre consultabili nel tab Ricette.
   const filtered = BOOK.filter((r) => dietOk(r, prefs.diet))
-    .filter((r) => courseOk(r, prefs.course))
     .filter((r) => r.minutes <= maxMin)
     .filter((r) => !q || r.title.toLowerCase().includes(q) || r.tags.some((t) => t.includes(q)));
 
   const sectionOf = (r: (typeof BOOK)[number]): { id: string; title: string } => {
-    if (isDessert(r) || r.tags.includes("dessert")) return { id: "dolci", title: "Dolci" };
+    if (isDessert(r) || r.tags.includes("dessert")) return { id: "dolci", title: "Dessert" };
     if (r.tags.includes("pasta") || r.tags.includes("riso")) return { id: "primi", title: "Primi" };
     if (
       r.tags.some((t) =>
