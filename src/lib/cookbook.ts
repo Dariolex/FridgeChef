@@ -1,4 +1,8 @@
 import type { Diet, Ingredient, Prefs, Recipe } from "./types";
+import { RECIPES_BASE } from "./recipes-base";
+import { RECIPES_PASTA } from "./recipes-pasta";
+import { RECIPES_MEAT } from "./recipes-meat";
+import { RECIPES_DESSERT } from "./recipes-dessert";
 
 export const FOOD_ART = {
   avocado: "/graphics/avocado.jpg",
@@ -12,15 +16,36 @@ export const FOOD_ART = {
 } as const;
 
 export const SAMPLE_INGREDIENTS: Ingredient[] = [
-  "uova", "latte", "pomodori", "pesto", "mozzarella", "limone", "vino bianco",
-  "parmigiano", "insalata", "yogurt", "carote", "zucchine", "pasta", "cipolla",
-  "olio extravergine", "pollo", "carne macinata",
+  "uova",
+  "latte",
+  "pomodori",
+  "pesto",
+  "mozzarella",
+  "limone",
+  "vino bianco",
+  "parmigiano",
+  "insalata",
+  "yogurt",
+  "carote",
+  "zucchine",
+  "pasta",
+  "cipolla",
+  "olio extravergine",
+  "pollo",
+  "carne macinata",
 ].map((name) => ({ name, have: true }));
 
-type BookRecipe = Omit<Recipe, "missing" | "servings"> & { tags: string[]; baseServings: number };
+type BookRecipe = Omit<Recipe, "missing" | "servings"> & {
+  tags: string[];
+  baseServings: number;
+};
 
-// NOTE: full recipes loaded - see commit for complete BOOK
-const BOOK: BookRecipe[] = [];
+const BOOK: BookRecipe[] = [
+  ...RECIPES_BASE,
+  ...RECIPES_PASTA,
+  ...RECIPES_MEAT,
+  ...RECIPES_DESSERT,
+];
 
 const ALIASES: Record<string, string[]> = {
   pasta: ["spaghetti", "penne", "fusilli", "trofie", "pasta avanzata", "tonnarelli", "rigatoni"],
@@ -51,7 +76,11 @@ const ALIASES: Record<string, string[]> = {
 };
 
 function norm(s: string) {
-  return s.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").trim();
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .trim();
 }
 
 function hasIngredient(have: string[], needed: string) {
@@ -72,9 +101,17 @@ function dietOk(recipe: BookRecipe, diet: Diet) {
 
 function toRecipe(r: BookRecipe, servings: number, missing: string[]): Recipe {
   return {
-    id: r.id, title: r.title, description: r.description, minutes: r.minutes,
-    diet: r.diet, servings, missing, ingredients: r.ingredients, steps: r.steps,
-    tip: r.tip, art: r.art,
+    id: r.id,
+    title: r.title,
+    description: r.description,
+    minutes: r.minutes,
+    diet: r.diet,
+    servings,
+    missing,
+    ingredients: r.ingredients,
+    steps: r.steps,
+    tip: r.tip,
+    art: r.art,
   };
 }
 
@@ -90,13 +127,21 @@ export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
     })
     .filter((x) => x.hit > 0)
     .sort((a, b) => b.score - a.score);
+
   const out = scored.map((s) => s.recipe);
   if (out.length >= 4) return out.slice(0, 6);
+
   const extras = BOOK.filter((r) => dietOk(r, prefs.diet))
     .filter((r) => r.minutes <= prefs.maxMinutes)
     .filter((r) => !out.some((o) => o.id === r.id))
     .slice(0, 6 - out.length)
-    .map((r) => toRecipe(r, prefs.servings, r.ingredients.filter((ing) => !hasIngredient(have, ing))));
+    .map((r) =>
+      toRecipe(
+        r,
+        prefs.servings,
+        r.ingredients.filter((ing) => !hasIngredient(have, ing)),
+      ),
+    );
   return [...out, ...extras].slice(0, 6);
 }
 
@@ -111,17 +156,52 @@ export function sampleAnalysis(prefs: Prefs) {
   return {
     ingredients: SAMPLE_INGREDIENTS,
     notes: "Demo del frigo italiano: latticini, verdure, pollo e basilico.",
-    recipes: matchCookbook(SAMPLE_INGREDIENTS.map((i) => i.name), prefs),
+    recipes: matchCookbook(
+      SAMPLE_INGREDIENTS.map((i) => i.name),
+      prefs,
+    ),
   };
 }
 
 export function artForRecipe(title: string, fallback?: string) {
   const t = norm(title);
   if (t.includes("pesto") || t.includes("avocado")) return FOOD_ART.avocado;
-  if (t.includes("pomodor") || t.includes("caprese") || t.includes("purgatorio") || t.includes("sugo") || t.includes("norma") || t.includes("ragu")) return FOOD_ART.tomato;
-  if (t.includes("insalat") || t.includes("lattuga") || t.includes("carot") || t.includes("frutta") || t.includes("broccoli")) return FOOD_ART.lettuce;
-  if (t.includes("cipoll") || t.includes("zucchini") || t.includes("frittata") || t.includes("zucchin") || t.includes("carbonara") || t.includes("hamburger") || t.includes("aglio")) return FOOD_ART.onion;
-  if (t.includes("limon") || t.includes("cacio") || t.includes("crepes") || t.includes("mousse") || t.includes("budino") || t.includes("scaloppine")) return FOOD_ART.lemon;
+  if (
+    t.includes("pomodor") ||
+    t.includes("caprese") ||
+    t.includes("purgatorio") ||
+    t.includes("sugo") ||
+    t.includes("norma") ||
+    t.includes("ragu")
+  )
+    return FOOD_ART.tomato;
+  if (
+    t.includes("insalat") ||
+    t.includes("lattuga") ||
+    t.includes("carot") ||
+    t.includes("frutta") ||
+    t.includes("broccoli")
+  )
+    return FOOD_ART.lettuce;
+  if (
+    t.includes("cipoll") ||
+    t.includes("zucchini") ||
+    t.includes("frittata") ||
+    t.includes("zucchin") ||
+    t.includes("carbonara") ||
+    t.includes("hamburger") ||
+    t.includes("aglio")
+  )
+    return FOOD_ART.onion;
+  if (
+    t.includes("limon") ||
+    t.includes("cacio") ||
+    t.includes("crepes") ||
+    t.includes("mousse") ||
+    t.includes("budino") ||
+    t.includes("scaloppine")
+  )
+    return FOOD_ART.lemon;
   if (t.includes("peperon") || t.includes("salsiccia")) return FOOD_ART.pepper;
   if (t.includes("fungh")) return FOOD_ART.mushrooms;
   return fallback || FOOD_ART.hero;
