@@ -4,6 +4,7 @@
  */
 import { createServerFn } from "@tanstack/react-start";
 import { matchCookbook } from "./cookbook";
+import { filterShoppingMissing } from "./shopping";
 import {
   AI_FAILURE_MESSAGE,
   detectIngredients,
@@ -16,6 +17,14 @@ import {
   type FridgeOrganization,
 } from "./recipe-ai";
 import type { Analysis, Prefs, Recipe } from "./types";
+
+function withCleanMissing<T extends { missing?: string[] }>(recipes: T[]): T[] {
+  return recipes.map((r) => ({
+    ...r,
+    missing: filterShoppingMissing(r.missing ?? []),
+  }));
+}
+
 
 export type ReadFridgeOk = {
   ok: true;
@@ -91,7 +100,7 @@ export const createRecipes = createServerFn({ method: "POST" })
       return {
         ok: true,
         source: "ai",
-        recipes: res.data.recipes,
+        recipes: withCleanMissing(res.data.recipes),
         notes: res.data.notes,
       };
     }
@@ -171,7 +180,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
             analysis: {
               ingredients: appIngredients,
               notes: gen.data.notes || inv.data.notes,
-              recipes: gen.data.recipes,
+              recipes: withCleanMissing(gen.data.recipes),
               source: "ai",
             },
           };
@@ -205,7 +214,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
           analysis: {
             ingredients: manual.map((name) => ({ name, have: true })),
             notes: gen.data.notes,
-            recipes: gen.data.recipes,
+            recipes: withCleanMissing(gen.data.recipes),
             source: "ai",
           },
         };

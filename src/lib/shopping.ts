@@ -1,5 +1,34 @@
 import type { ShoppingItem } from "./types";
 
+/** Non vanno in lista spesa: sempre considerati disponibili in dispensa. */
+const PANTRY_STAPLES = ["sale", "zucchero", "olio", "pepe", "peperoncino"];
+
+function normShop(s: string) {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .trim();
+}
+
+export function isPantryStaple(name: string): boolean {
+  const n = normShop(name);
+  return PANTRY_STAPLES.some(
+    (s) =>
+      n === s ||
+      n.startsWith(s + " ") ||
+      n.includes(" " + s) ||
+      n.includes(s + " ") ||
+      n.endsWith(" " + s),
+  );
+}
+
+/** Filtra ingredienti mancanti escludendo sale, zucchero, olio, pepe, peperoncino. */
+export function filterShoppingMissing(items: string[]): string[] {
+  return items.map((i) => i.trim()).filter(Boolean).filter((i) => !isPantryStaple(i));
+}
+
+
 const KEY = "frigochef.shopping.v1";
 const MAX = 100;
 
@@ -42,6 +71,7 @@ export function loadShopping(): ShoppingItem[] {
  */
 export function addShopping(names: string[], from = ""): ShoppingItem[] {
   const current = loadShopping();
+  names = filterShoppingMissing(names);
   const byName = new Map(current.map((i) => [norm(i.name), i]));
 
   for (const raw of names) {

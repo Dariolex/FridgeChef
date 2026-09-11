@@ -1,10 +1,12 @@
 import type { Diet, Ingredient, Prefs, Recipe } from "./types";
+import { filterShoppingMissing } from "./shopping";
 import { RECIPES_BASE } from "./recipes-base";
 import { RECIPES_PASTA } from "./recipes-pasta";
 import { RECIPES_MEAT } from "./recipes-meat";
 import { RECIPES_DESSERT } from "./recipes-dessert";
 import { RECIPES_CLASSIC } from "./recipes-classic";
 import { RECIPES_SECONDI } from "./recipes-secondi";
+import { RECIPES_PRIMI_DESSERT } from "./recipes-primi-dessert";
 
 export const FOOD_ART = {
   avocado: "/graphics/avocado.jpg",
@@ -49,6 +51,7 @@ const BOOK: BookRecipe[] = [
   ...RECIPES_DESSERT,
   ...RECIPES_CLASSIC,
   ...RECIPES_SECONDI,
+  ...RECIPES_PRIMI_DESSERT,
 ];
 
 const ALIASES: Record<string, string[]> = {
@@ -120,7 +123,7 @@ function toRecipe(r: BookRecipe, servings: number, missing: string[]): Recipe {
     minutes: r.minutes,
     diet: r.diet,
     servings,
-    missing,
+    missing: filterShoppingMissing(missing),
     ingredients: r.ingredients,
     steps: r.steps,
     tip: r.tip,

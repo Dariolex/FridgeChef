@@ -24,6 +24,7 @@ import { clearHistory, loadHistory, pushHistory } from "@/lib/history";
 import {
   addShopping,
   clearDoneShopping,
+  filterShoppingMissing,
   loadShopping,
   removeShopping,
   toggleShopping,
@@ -111,12 +112,16 @@ export function FrigoChef() {
   const toBuy = shopping.filter((i) => !i.done).length;
 
   const addMissing = (recipe: Recipe) => {
-    if (!recipe.missing.length) return;
-    setShopping(addShopping(recipe.missing, recipe.title));
+    const items = filterShoppingMissing(recipe.missing);
+    if (!items.length) {
+      setToast("Niente da aggiungere: hai già tutto (o solo dispensa base).");
+      return;
+    }
+    setShopping(addShopping(items, recipe.title));
     setToast(
-      recipe.missing.length === 1
+      items.length === 1
         ? "1 ingrediente aggiunto alla spesa"
-        : `${recipe.missing.length} ingredienti aggiunti alla spesa`,
+        : `${items.length} ingredienti aggiunti alla spesa`,
     );
   };
 
@@ -902,6 +907,7 @@ export function FrigoChef() {
           onClose={() => setSelected(null)}
           onCook={cookRecipe}
           onAddMissing={addMissing}
+          shoppingEnabled={Boolean(analysis)}
         />
       )}
 
@@ -1001,12 +1007,14 @@ function RecipeSheet({
   onClose,
   onCook,
   onAddMissing,
+  shoppingEnabled = false,
 }: {
   recipe: Recipe;
   servings: number;
   onClose: () => void;
   onCook: (r: Recipe) => void;
   onAddMissing: (r: Recipe) => void;
+  shoppingEnabled?: boolean;
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-0 sm:items-center sm:p-4">
@@ -1032,13 +1040,10 @@ function RecipeSheet({
             <p className="mt-2 text-sm leading-relaxed text-muted">{recipe.description}</p>
           ) : null}
 
-          {recipe.missing.length > 0 && (
+          {filterShoppingMissing(recipe.missing).length > 0 && (
             <div className="mt-4 rounded-2xl bg-fg/8 p-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted">Ti manca</p>
-              <p className="mt-1 text-sm">{recipe.missing.join(", ")}</p>
-              <Button size="sm" className="mt-2" onClick={() => onAddMissing(recipe)}>
-                Aggiungi alla spesa
-              </Button>
+              <p className="mt-1 text-sm">{filterShoppingMissing(recipe.missing).join(", ")}</p>
             </div>
           )}
 
@@ -1074,7 +1079,18 @@ function RecipeSheet({
             </div>
           ) : null}
         </div>
-        <div className="shrink-0 border-t border-fg/10 p-4">
+        <div className="shrink-0 space-y-2 border-t border-fg/10 p-4">
+          {shoppingEnabled && (
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full"
+              onClick={() => onAddMissing(recipe)}
+            >
+              <ShoppingCart className="size-5" />
+              Aggiungi a lista spesa
+            </Button>
+          )}
           <Button
             variant="lime"
             size="lg"
