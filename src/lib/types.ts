@@ -34,7 +34,7 @@ export type Analysis = {
   ingredients: Ingredient[];
   notes: string;
   recipes: Recipe[];
-  /** Origine delle ricette mostrate: AI o ricettario di riserva. */
+  /** Origine delle ricette mostrate: AI o ricettario classico. */
   source?: "ai" | "book";
 };
 

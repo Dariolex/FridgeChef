@@ -588,7 +588,7 @@ export function FrigoChef() {
                   <p className="text-sm text-muted">{analysis.notes}</p>
                 ) : null}
                 <RecipeGrid
-                  title={analysis.source === "book" ? "Dal ricettario di riserva" : "Cosa cucini ora"}
+                  title={analysis.source === "book" ? "Dal ricettario classico" : "Cosa cucini ora"}
                   recipes={shownRecipes}
                   source={analysis.source}
                   onOpen={setSelected}
