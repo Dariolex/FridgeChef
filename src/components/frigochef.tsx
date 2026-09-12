@@ -354,7 +354,18 @@ export function FrigoChef() {
     <main className="relative min-h-dvh overflow-x-hidden bg-bg text-fg">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-10%,#1a2430,transparent_60%)]" />
 
-      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col px-5 pb-28 pt-6">
+      {/* Decorative floats: span the whole page, always behind interactive UI */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <img src={FOOD_ART.avocado} alt="" className="food-float float-a absolute left-[-24px] top-[2%] w-24 opacity-45" />
+        <img src={FOOD_ART.tomato} alt="" className="food-float float-b absolute right-[-8px] top-[8%] w-20 opacity-45" />
+        <img src={FOOD_ART.lettuce} alt="" className="food-float float-c absolute right-[-28px] top-[18%] w-28 opacity-35" />
+        <img src={FOOD_ART.onion} alt="" className="food-float float-b absolute left-[-28px] top-[27%] w-20 opacity-40" />
+        <img src={FOOD_ART.lemon} alt="" className="food-float float-a absolute left-[-20px] top-[42%] w-24 opacity-40" />
+        <img src={FOOD_ART.pepper} alt="" className="food-float float-c absolute right-[-16px] top-[57%] w-24 opacity-40" />
+        <img src={FOOD_ART.mushrooms} alt="" className="food-float float-a absolute left-[-24px] top-[73%] w-24 opacity-40" />
+      </div>
+
+      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[430px] flex-col px-5 pb-28 pt-6">
         <header className="relative z-10 mb-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <LeafMark className="size-11" />
@@ -400,14 +411,6 @@ export function FrigoChef() {
         </header>
 
         <div className={cn("relative mb-6", tab !== "home" && tab !== "recipes" && "hidden")}>
-          {/* Decorative floats: always behind interactive UI */}
-          <div className="pointer-events-none absolute inset-0 -z-0 overflow-visible" aria-hidden>
-            <img src={FOOD_ART.pasta} alt="" className="food-float float-a absolute -left-6 -top-7 w-24 opacity-50" />
-            <img src={FOOD_ART.tiramisu} alt="" className="food-float float-b absolute -right-2 -top-8 w-20 opacity-50" />
-            <img src={FOOD_ART.vegetables} alt="" className="food-float float-c absolute -right-7 top-9 w-28 opacity-40" />
-            <img src={FOOD_ART.salmon} alt="" className="food-float float-b absolute -left-7 top-20 w-20 opacity-45" />
-          </div>
-
           <label className="glass relative z-10 flex h-14 items-center gap-3 rounded-full px-5">
             <Search className="size-5 text-muted" />
             <input
