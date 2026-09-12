@@ -1,31 +1,38 @@
 # FrigoChef
 
-App italiana: scatti una foto del frigo e ottieni ricette su misura.
+An Italian-language recipe app: snap a photo of your fridge and get recipe suggestions tailored to what you actually have on hand.
 
-## Cosa fa
+## What it does
 
-- Carica o scatta una foto del contenuto del frigo
-- Riconosce gli ingredienti (vision AI + ricettario di riserva)
-- Filtra per dieta: qualsiasi, vegetariano, vegano, veloce
-- Mostra ricette con tempi, ingredienti mancanti e passi
-- Include un **frigo demo** se non vuoi usare la fotocamera
+- Take or upload a photo of your fridge contents
+- AI vision (Google Gemini) identifies the ingredients in the photo
+- Review and adjust the detected ingredients before generating recipes
+- Or skip the photo entirely and type ingredients in by hand
+- Filter by diet: Any, Vegetarian, Vegan, or Fast (≤15 minutes)
+- Toggle a dedicated Desserts mode
+- Adjust servings (1–8) and get recipes scaled accordingly
+- AI-generated recipes tailored to your ingredients, with automatic fallback to a built-in classic Italian cookbook if the AI call fails
+- Browse the classic cookbook by category (Primi, Secondi, Eggs & frittatas, Sides, Desserts)
+- Get an AI-suggested fridge organization plan (where to place each item on the shelves)
+- Automatic shopping list: missing ingredients from recipes are collected for you, with common pantry staples (salt, sugar, oil, pepper, chili) excluded
+- Cooking history: the last 30 dishes you've cooked, stored locally on your device
+- Installable as a Progressive Web App (add to home screen on iOS/Android)
 
-## Avvio
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Imposta `GEMINI_API_KEY` nell’ambiente per la lettura automatica delle foto (chiave gratuita da [Google AI Studio](https://aistudio.google.com/apikey)). Senza chiave, il ricettario locale e il frigo demo restano usabili.
+Set `GEMINI_API_KEY` in your environment for automatic photo recognition (a free key is available from [Google AI Studio](https://aistudio.google.com/apikey)). Without a key, the local cookbook and manual ingredient entry still work.
 
-Variabili d'ambiente facoltative:
-- `GEMINI_VISION_MODEL` (default: `gemini-3.5-flash-lite`) — modello per l'inventario dalla foto
-- `GEMINI_RECIPE_MODEL` (default: `gemini-3.5-flash`) — modello per la generazione delle ricette
+Optional environment variables:
+- `GEMINI_VISION_MODEL` (default: `gemini-3.5-flash-lite`) — model used to read ingredients from the photo
+- `GEMINI_RECIPE_MODEL` (default: `gemini-3.5-flash`) — model used to generate recipes
 
-`GEMINI_API_KEY` deve essere una chiave di tipo **auth** da [Google AI Studio](https://aistudio.google.com/apikey).
-
+`GEMINI_API_KEY` must be an **auth**-type key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 ## Stack
 
-React 19, TanStack Start, Tailwind v4, Google Gemini vision (livello gratuito, via endpoint OpenAI-compatibile).
+React 19, TanStack Start, Tailwind v4, Google Gemini vision and text models (free tier, via an OpenAI-compatible endpoint). The shopping list and cooking history are stored locally in the browser — no server-side database is used.
