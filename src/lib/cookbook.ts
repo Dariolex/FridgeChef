@@ -9,13 +9,12 @@ import { RECIPES_SECONDI } from "./recipes-secondi";
 import { RECIPES_PRIMI_DESSERT } from "./recipes-primi-dessert";
 
 export const FOOD_ART = {
-  avocado: "/graphics/avocado.jpg",
-  tomato: "/graphics/tomato.jpg",
-  lettuce: "/graphics/lettuce.jpg",
-  onion: "/graphics/onion.jpg",
-  lemon: "/graphics/lemon.jpg",
-  pepper: "/graphics/pepper.jpg",
-  mushrooms: "/graphics/mushrooms.jpg",
+  pasta: "/graphics/pasta.jpg",
+  steak: "/graphics/steak.jpg",
+  salmon: "/graphics/salmon.jpg",
+  tiramisu: "/graphics/tiramisu.jpg",
+  egg: "/graphics/egg.jpg",
+  vegetables: "/graphics/vegetables.jpg",
   hero: "/graphics/hero.jpg",
 } as const;
 
@@ -256,46 +255,101 @@ export function sampleAnalysis(prefs: Prefs) {
   };
 }
 
+/**
+ * Assegna la foto di copertina in base al titolo, con priorità dal tipo di
+ * piatto più specifico (pasta/riso) fino alla verdura come ripiego generico —
+ * così un ingrediente citato di sfuggita (es. "pomodoro" in un sugo di pasta)
+ * non scavalca il tipo di piatto vero e proprio.
+ */
 export function artForRecipe(title: string, fallback?: string) {
   const t = norm(title);
-  if (t.includes("pesto") || t.includes("avocado")) return FOOD_ART.avocado;
+
+  // 1) Primi/pasta e riso: parola del piatto, non dell'ingrediente.
   if (
-    t.includes("pomodor") ||
-    t.includes("caprese") ||
-    t.includes("purgatorio") ||
-    t.includes("sugo") ||
-    t.includes("norma") ||
-    t.includes("ragu")
-  )
-    return FOOD_ART.tomato;
-  if (
-    t.includes("insalat") ||
-    t.includes("lattuga") ||
-    t.includes("carot") ||
-    t.includes("frutta") ||
-    t.includes("broccoli")
-  )
-    return FOOD_ART.lettuce;
-  if (
-    t.includes("cipoll") ||
-    t.includes("zucchini") ||
-    t.includes("frittata") ||
-    t.includes("zucchin") ||
+    t.includes("pasta") ||
+    t.includes("spaghett") ||
+    t.includes("penne") ||
+    t.includes("pennette") ||
+    t.includes("fusilli") ||
+    t.includes("orecchiette") ||
+    t.includes("gnocchi") ||
+    t.includes("risotto") ||
     t.includes("carbonara") ||
-    t.includes("hamburger") ||
-    t.includes("aglio")
+    t.includes("cacio")
   )
-    return FOOD_ART.onion;
+    return FOOD_ART.pasta;
+
+  // 2) Dolci: controllato prima di uova/frittata per non perdere "omelette
+  // dolce" o "french toast dolce" a favore della foto delle uova.
   if (
-    t.includes("limon") ||
-    t.includes("cacio") ||
-    t.includes("crepes") ||
+    t.includes("tiramis") ||
     t.includes("mousse") ||
     t.includes("budino") ||
-    t.includes("scaloppine")
+    t.includes("crepes") ||
+    t.includes("panna cotta") ||
+    t.includes("crumble") ||
+    t.includes("cioccolat") ||
+    t.includes("mattonella") ||
+    t.includes("granita") ||
+    t.includes("tartufini") ||
+    t.includes("biscott") ||
+    t.includes("marmellata") ||
+    t.includes("dolce") ||
+    t.includes("dolci") ||
+    t.includes("frutta") ||
+    t.includes("macedonia") ||
+    t.includes("torta") ||
+    t.includes("cake") ||
+    t.includes("crema")
   )
-    return FOOD_ART.lemon;
-  if (t.includes("peperon") || t.includes("salsiccia")) return FOOD_ART.pepper;
-  if (t.includes("fungh")) return FOOD_ART.mushrooms;
-  return fallback || FOOD_ART.hero;
+    return FOOD_ART.tiramisu;
+
+  // 3) Secondi di carne.
+  if (
+    t.includes("pollo") ||
+    t.includes("tacchino") ||
+    t.includes("manzo") ||
+    t.includes("vitello") ||
+    t.includes("maiale") ||
+    t.includes("hamburger") ||
+    t.includes("wurstel") ||
+    t.includes("polpette") ||
+    t.includes("salsiccia") ||
+    t.includes("guanciale") ||
+    t.includes("bistecca") ||
+    t.includes("braciol") ||
+    t.includes("macinato")
+  )
+    return FOOD_ART.steak;
+
+  // 4) Secondi di pesce.
+  if (
+    t.includes("tonno") ||
+    t.includes("pesce") ||
+    t.includes("calamar") ||
+    t.includes("seppi") ||
+    t.includes("cozze") ||
+    t.includes("vongole") ||
+    t.includes("sardine") ||
+    t.includes("polpo") ||
+    t.includes("trota") ||
+    t.includes("sgombro") ||
+    t.includes("merluzzo") ||
+    t.includes("salmone")
+  )
+    return FOOD_ART.salmon;
+
+  // 5) Uova e frittate — parole generiche come "uova" sono sicure solo qui,
+  // perché i piatti dove l'uovo è un ingrediente secondario (pasta, carne)
+  // sono già stati intercettati sopra.
+  if (
+    t.includes("frittata") ||
+    t.includes("omelette") ||
+    t.includes("tegamino") ||
+    t.includes("uov")
+  )
+    return FOOD_ART.egg;
+
+  // 6) Tutto il resto (contorni, insalate, verdure, antipasti) e ripiego finale.
+  return FOOD_ART.vegetables || fallback;
 }

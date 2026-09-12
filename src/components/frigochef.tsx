@@ -402,10 +402,10 @@ export function FrigoChef() {
         <div className={cn("relative mb-6", tab !== "home" && tab !== "recipes" && "hidden")}>
           {/* Decorative floats: always behind interactive UI */}
           <div className="pointer-events-none absolute inset-0 -z-0 overflow-visible" aria-hidden>
-            <img src={FOOD_ART.avocado} alt="" className="food-float float-a absolute -left-6 -top-7 w-24 opacity-50" />
-            <img src={FOOD_ART.tomato} alt="" className="food-float float-b absolute -right-2 -top-8 w-20 opacity-50" />
-            <img src={FOOD_ART.lettuce} alt="" className="food-float float-c absolute -right-7 top-9 w-28 opacity-40" />
-            <img src={FOOD_ART.onion} alt="" className="food-float float-b absolute -left-7 top-20 w-20 opacity-45" />
+            <img src={FOOD_ART.pasta} alt="" className="food-float float-a absolute -left-6 -top-7 w-24 opacity-50" />
+            <img src={FOOD_ART.tiramisu} alt="" className="food-float float-b absolute -right-2 -top-8 w-20 opacity-50" />
+            <img src={FOOD_ART.vegetables} alt="" className="food-float float-c absolute -right-7 top-9 w-28 opacity-40" />
+            <img src={FOOD_ART.salmon} alt="" className="food-float float-b absolute -left-7 top-20 w-20 opacity-45" />
           </div>
 
           <label className="glass relative z-10 flex h-14 items-center gap-3 rounded-full px-5">
