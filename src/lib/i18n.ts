@@ -1,9 +1,10 @@
-export type Locale = "it" | "en" | "pl";
+export type Locale = "it" | "en" | "pl" | "es";
 
 export const LOCALES: { id: Locale; label: string; short: string; flag: string }[] = [
   { id: "it", label: "Italiano", short: "IT", flag: "🇮🇹" },
   { id: "en", label: "English", short: "EN", flag: "🇬🇧" },
   { id: "pl", label: "Polski", short: "PL", flag: "🇵🇱" },
+  { id: "es", label: "Español", short: "ES", flag: "🇪🇸" },
 ];
 
 const STORAGE_KEY = "frigochef_locale";
@@ -11,7 +12,7 @@ const STORAGE_KEY = "frigochef_locale";
 export function loadLocale(): Locale {
   try {
     const v = localStorage.getItem(STORAGE_KEY);
-    if (v === "en" || v === "it" || v === "pl") return v;
+    if (v === "en" || v === "it" || v === "pl" || v === "es") return v;
   } catch {
     /* ignore */
   }
@@ -323,7 +324,106 @@ const pl: Dict = {
   sectionDessert: "Deser",
 };
 
-const tables: Record<Locale, Dict> = { it, en, pl };
+
+const es: Dict = {
+  tagline: "De la nevera al plato",
+  searchPlaceholder: "Buscar una receta",
+  dietAny: "Cualquiera",
+  dietVegetarian: "Vegetariano",
+  dietVegan: "Vegano",
+  dietFast: "Rápido",
+  dessert: "Postre",
+  shootPhoto: "Haz una foto",
+  shootPhotoAria: "Hacer foto",
+  orType: "O escribe lo que tienes",
+  manualPlaceholder: "huevos, tomates, pasta",
+  go: "Ir",
+  analyzing: "Mirando la nevera…",
+  thinking: "Pensando recetas…",
+  inFridge: "En la nevera",
+  extraPlaceholder: "Añade más ingredientes",
+  createRecipes: "Crear recetas",
+  classicCookbook: "Recetario clásico",
+  organizeFridge: "Organizar nevera",
+  organizing: "Organizando…",
+  updateWithFilters: "Actualizar recetas con los filtros",
+  moreIdeas: "Más ideas",
+  cookingNow: "Qué cocinar ahora",
+  fromReserve: "Del recetario de reserva",
+  fromFridge: "De tu nevera",
+  fromBookFridge: "Del recetario (nevera)",
+  classicTitle: "Recetario clásico",
+  classicHint: "Toca una categoría para ver los platos. Filtra por dieta, tiempo y búsqueda.",
+  recipesCount1: "receta",
+  recipesCountN: "recetas",
+  noRecipesSearch: "No hay platos para esta búsqueda. Cambia el filtro o la palabra.",
+  historyTitle: "Platos cocinados",
+  clearAll: "Vaciar",
+  historyEmpty: "Aún no hay platos. Abre una receta y toca “He cocinado esto” para verla aquí.",
+  profileTitle: "Preferencias",
+  portions: "Raciones",
+  maxTime: "Tiempo máximo",
+  minutes: "min",
+  onlyDessert: "Solo postres",
+  onlyDessertHint: "Mostrar solo dulces y postres",
+  on: "Activo",
+  off: "Off",
+  lessPortions: "Menos raciones",
+  morePortions: "Más raciones",
+  shoppingAria: "Lista de la compra",
+  shoppingAriaN: "Lista de la compra, {n} por comprar",
+  shoppingTitle: "Lista de la compra",
+  shoppingEmpty: "La lista está vacía. Añade ingredientes desde las recetas.",
+  clearDone: "Quitar hechos",
+  missingLabel: "Te falta",
+  addToShopping: "Añadir a la lista de la compra",
+  cookedThis: "He cocinado esto",
+  tip: "Consejo",
+  ingredients: "Ingredientes",
+  steps: "Preparación",
+  servingsWord: "raciones",
+  dietOmnivore: "clásico",
+  dietVegetarianShort: "vegetariano",
+  dietVeganShort: "vegano",
+  navHome: "Inicio",
+  navRecipes: "Recetas",
+  navHistory: "Historial",
+  navProfile: "Perfil",
+  chefAI: "Chef IA",
+  classic: "Clásico",
+  organizeTitle: "Cómo organizar la nevera",
+  close: "Cerrar",
+  nothingInZone: "Nada en esta zona.",
+  welcome: "Bienvenido",
+  start: "Empezar",
+  next: "Siguiente",
+  skip: "Saltar",
+  onboarding1Title: "Fotografía la nevera",
+  onboarding1Body:
+    "Haz una foto del interior: FrigoChef reconoce los alimentos y los muestra como chips para confirmar.",
+  onboarding2Title: "Elige el camino",
+  onboarding2Body:
+    "Crear recetas (IA), recetario clásico (platos de siempre) u organizar la nevera (dónde poner cada alimento).",
+  onboarding3Title: "Filtra y cocina",
+  onboarding3Body:
+    "Usa dieta, tiempo y raciones antes de generar. Abre una receta, cocínala o añade lo que falta a la lista de la compra.",
+  errSelectIngredient: "Selecciona o añade al menos un ingrediente.",
+  errSelectFood: "Selecciona al menos un alimento para organizar.",
+  errAiConnection: "No se pudo conectar con la IA. Prueba de nuevo o usa el recetario.",
+  errOrganize: "No puedo organizar la nevera ahora. Inténtalo de nuevo.",
+  errGeneric: "Algo salió mal. Prueba de nuevo o añade los ingredientes a mano.",
+  toastNothing: "Nada que añadir: ya lo tienes todo (o solo despensa básica).",
+  toastOne: "1 ingrediente añadido a la lista",
+  toastMany: "{n} ingredientes añadidos a la lista",
+  language: "Idioma",
+  sectionPrimi: "Primeros",
+  sectionSecondi: "Segundos",
+  sectionUova: "Huevos y tortillas",
+  sectionContorni: "Guarniciones y frescos",
+  sectionDessert: "Postre",
+};
+
+const tables: Record<Locale, Dict> = { it, en, pl, es };
 
 export function t(locale: Locale, key: string, vars?: Record<string, string | number>): string {
   const raw = tables[locale][key] ?? tables.it[key] ?? key;

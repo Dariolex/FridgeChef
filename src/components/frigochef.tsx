@@ -396,7 +396,7 @@ export function FrigoChef() {
                 value={locale}
                 onChange={(e) => {
                   const next = e.target.value as Locale;
-                  if (next === "it" || next === "en" || next === "pl") {
+                  if (next === "it" || next === "en" || next === "pl" || next === "es") {
                     setLocale(next);
                     saveLocale(next);
                   }

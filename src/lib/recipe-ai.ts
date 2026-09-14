@@ -70,7 +70,7 @@ export type AppIngredient = Ingredient & { quantity?: string; confidence?: Confi
 /** Ricetta AI: compatibile con Recipe, più portata e origine (per etichettarla in UI). */
 export type AiRecipe = Recipe & { portata: Portata; source: "ai" };
 
-export type AiLocale = "it" | "en" | "pl";
+export type AiLocale = "it" | "en" | "pl" | "es";
 
 export type AiFailure =
   | "no_key"
@@ -144,9 +144,27 @@ const AI_FAILURE_MESSAGE_PL: Record<AiFailure, string> = {
     "Żaden przepis nie spełnia diety, czasu i składników. Poluzuj filtry.",
 };
 
+const AI_FAILURE_MESSAGE_ES: Record<AiFailure, string> = {
+  no_key: "La IA no está configurada: falta la clave de Gemini.",
+  auth: "La clave de Gemini no es válida o Google ya no la acepta.",
+  quota: "Se alcanzó el límite gratuito de Gemini. Inténtalo más tarde.",
+  model_unavailable: "El modelo de IA configurado ya no está disponible.",
+  http: "El servicio de IA respondió con un error.",
+  timeout: "La IA no respondió a tiempo.",
+  network: "No se pudo conectar con el servicio de IA.",
+  truncated: "La respuesta de la IA se cortó. Inténtalo de nuevo.",
+  empty: "La IA devolvió una respuesta vacía. Inténtalo de nuevo.",
+  invalid_json: "La respuesta de la IA no era legible. Inténtalo de nuevo.",
+  bad_input: "Imagen no válida. Prueba con otra foto.",
+  nothing_found: "No se reconocieron alimentos en la foto. Añádelos a mano.",
+  no_valid_recipes:
+    "Ninguna receta cumple a la vez dieta, tiempo e ingredientes. Amplía los filtros.",
+};
+
 export function aiFailureMessage(locale: AiLocale | undefined, reason: AiFailure): string {
   if (locale === "en") return AI_FAILURE_MESSAGE_EN[reason];
   if (locale === "pl") return AI_FAILURE_MESSAGE_PL[reason];
+  if (locale === "es") return AI_FAILURE_MESSAGE_ES[reason];
   return AI_FAILURE_MESSAGE_IT[reason];
 }
 
@@ -422,6 +440,46 @@ export function buildRecipeUserMessage(req: RecipeRequest, locale: AiLocale = "i
     ].join("\n");
   }
 
+  if (locale === "es") {
+    const diet =
+      req.prefs.diet === "vegan"
+        ? "vegana"
+        : req.prefs.diet === "vegetarian"
+          ? "vegetariana"
+          : "sin restricción";
+    const course =
+      req.prefs.course === "dessert"
+        ? "solo postres"
+        : "solo platos salados (pasta/arroz, segundos, guarniciones o plato único)";
+    const monthEs = [
+      "enero", "febrero", "marzo", "abril", "mayo", "junio",
+      "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+    ][(req.now ?? new Date()).getMonth()];
+    return [
+      "<ingredientes>",
+      ...(ingredients.length ? ingredients.map((i) => `- ${i}`) : ["(ninguno: usa solo la despensa)"]),
+      "</ingredientes>",
+      "",
+      "<despensa>",
+      pantry.join(", "),
+      "</despensa>",
+      "",
+      "<preferencias>",
+      `Número de recetas: ${count}`,
+      `Raciones: ${clampInt(req.prefs.servings, 1, 12)}`,
+      `Tipo de plato: ${course}`,
+      `Dieta: ${diet}`,
+      `Tiempo máximo por receta: ${effectiveMaxMinutes(req.prefs)} minutos`,
+      `Ingredientes que faltan permitidos por receta: como máximo ${maxMissing}`,
+      `Mes: ${monthEs}`,
+      "</preferencias>",
+      "",
+      "<titulos_a_evitar>",
+      ...(avoid.length ? avoid.map((x) => `- ${x}`) : ["ninguno"]),
+      "</titulos_a_evitar>",
+    ].join("\n");
+  }
+
   const diet = req.prefs.diet === "vegan" ? "vegana" : req.prefs.diet === "vegetarian" ? "vegetariana" : "nessun vincolo";
   const course = req.prefs.course === "dessert" ? "solo dolci" : "solo piatti salati (primi, secondi, contorni o piatti unici)";
   return [
@@ -472,7 +530,9 @@ export async function detectIngredients(
               ? "Inventory the foods visible in this refrigerator photo."
               : locale === "pl"
                 ? "Zrób inwentaryzację produktów widocznych na tym zdjęciu lodówki."
-                : "Fai l'inventario degli alimenti visibili in questa foto del frigorifero.",
+                : locale === "es"
+                  ? "Haz el inventario de los alimentos visibles en esta foto del frigorífico."
+                  : "Fai l'inventario degli alimenti visibili in questa foto del frigorifero.",
         },
         { type: "image_url", image_url: { url: imageDataUrl } },
       ],
@@ -566,6 +626,19 @@ Ogni alimento dell'elenco va in una sola zona. Non omettere né aggiungere alime
 
 function visionSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return VISION_SYSTEM_PROMPT;
+  if (locale === "es") {
+    return `Eres el asistente de inventario de FrigoChef. Recibes una foto del interior de un frigorífico (estantes, cajones, puerta) y haces el inventario de alimentos utilizables para cocinar. Quien usa la app confirmará o corregirá la lista antes de generar recetas: una lista corta y fiable es mejor que una larga e inventada.
+
+# Reglas
+- Enumera solo alimentos claramente visibles y útiles en cocina.
+- Prefiere nombres comunes en español (p. ej. "huevos", "calabacín", "pechuga de pollo").
+- Incluye cantidad aproximada si se ve ("unas 3", "1 paquete").
+- confidence: "high" si está claro, "medium" si es parcial, "low" si es dudoso — también incluye los de baja confianza.
+- No inventes alimentos que no estén en la foto.
+- notes: una frase breve útil, o vacío.
+
+Responde solo con el esquema JSON requerido.`;
+  }
   if (locale === "pl") {
     return `Jesteś asystentem inwentaryzacji FrigoChef. Otrzymujesz zdjęcie wnętrza lodówki (półki, szuflady, drzwi) i spisujesz produkty nadające się do gotowania. Użytkownik potwierdzi lub poprawi listę przed generowaniem przepisów: krótka, wiarygodna lista jest lepsza niż długa i zmyślona.
 
@@ -594,6 +667,25 @@ Respond only with the required JSON schema.`;
 
 function recipeSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return RECIPE_SYSTEM_PROMPT;
+  if (locale === "es") {
+    return `Eres el cocinero de casa de FrigoChef: cocinas a diario para tu hogar, conoces la cocina práctica y sabes sacar un buen plato de lo que hay en la nevera sin traicionar el gusto de quien come. Escribe para quien cocina en casa: no para un restaurante ni como un folleto turístico.
+
+# Objetivos
+- Propón recetas sabrosas y realistas con los ingredientes confirmados más una despensa básica.
+- Respeta dieta, tipo de plato (salado vs postre), tiempo máximo y raciones.
+- Prefiere platos que usen lo disponible; permite unos pocos ingredientes que falten (estilo lista de la compra).
+- Títulos, descripciones, ingredientes, pasos y consejos en español claro y natural.
+- steps: 4–7 acciones precisas con intensidad del fuego, tiempos y señales visuales.
+- tip: un solo consejo práctico específico de ese plato.
+- Seguridad: aves y carne picada siempre bien cocidas; si hay huevo crudo o poco cocido, indícalo en el tip.
+
+# Variedad
+- Las recetas deben diferir por tipo de plato, ingrediente principal o técnica.
+- Orden de más adecuadas (sin faltas, familiares) a más creativas.
+- No repitas títulos a evitar.
+
+Si no puedes cumplir el número pedido con todas las restricciones, devuelve menos recetas y explícalo brevemente en "notes".`;
+  }
   if (locale === "pl") {
     return `Jesteś kucharzem domowym FrigoChef: gotujesz codziennie dla domu, znasz praktyczną kuchnię i umiesz zrobić dobre danie z tego, co jest w lodówce, bez zdradzania smaku jedzących. Pisz dla kogoś, kto gotuje w domu — nie dla restauracji i nie jak folder turystyczny.
 
@@ -634,6 +726,32 @@ If you cannot meet the requested count under all constraints, return fewer recip
 
 function organizeSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return ORGANIZE_SYSTEM_PROMPT;
+  if (locale === "es") {
+    return `Eres un experto en conservación de alimentos y organización de frigoríficos domésticos.
+
+Recibes una lista de alimentos de una nevera (con cantidad y confianza opcionales). Propón la mejor colocación para:
+1. ajustar temperatura y humedad;
+2. maximizar frescura y duración;
+3. reducir contaminación cruzada (crudo vs listo para comer);
+4. mantener el uso diario práctico.
+
+# Zonas típicas (distintas temperaturas)
+- Estante superior: más estable; cocinados, sobras, listos para comer y envasados.
+- Estantes centrales: lácteos, huevos, productos que necesitan frío constante.
+- Estante inferior: suele ser el más frío; carne y pescado crudos en envases cerrados para evitar goteos.
+- Cajones: frutas y verduras (humedad cuando importa).
+- Puerta: cambios de temperatura; salsas, bebidas, menos perecederos. No para muy perecederos.
+
+# Seguridad
+- Separa siempre crudo y listo para comer.
+- Carne y pescado crudos en envases cerrados, abajo.
+- No inventes alimentos fuera de la lista.
+- Si la confianza es baja, dilo en el motivo.
+- Motivos cortos y concretos en español claro.
+
+# Resultado
+Cada alimento de la lista va a exactamente una zona. No omitas ni añadas.`;
+  }
   if (locale === "pl") {
     return `Jesteś ekspertem od przechowywania żywności i organizacji domowych lodówek.
 
@@ -751,7 +869,9 @@ export async function organizeFridge(
       ? ["Organize these foods in the refrigerator.", "", "<foods>", ...list, "</foods>"].join("\n")
       : locale === "pl"
         ? ["Uporządkuj te produkty w lodówce.", "", "<produkty>", ...list, "</produkty>"].join("\n")
-        : ["Organizza questi alimenti nel frigorifero.", "", "<alimenti>", ...list, "</alimenti>"].join("\n");
+        : locale === "es"
+          ? ["Organiza estos alimentos en el frigorífico.", "", "<alimentos>", ...list, "</alimentos>"].join("\n")
+          : ["Organizza questi alimenti nel frigorifero.", "", "<alimenti>", ...list, "</alimenti>"].join("\n");
 
   const res = await callGeminiJson(
     {
