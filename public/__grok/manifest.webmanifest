@@ -1,6 +1,6 @@
 {
-  "name": "FrigoChef",
-  "short_name": "FrigoChef",
+  "name": "FridgeChef",
+  "short_name": "FridgeChef",
   "description": "Snap a photo of your fridge and get tailored recipes. 3D grocery UI, navy glass, and lime.",
   "start_url": "/",
   "scope": "/",

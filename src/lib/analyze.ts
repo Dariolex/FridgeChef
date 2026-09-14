@@ -1,5 +1,5 @@
 /**
- * Server functions FrigoChef — inventario foto + generazione ricette.
+ * Server functions FridgeChef — inventario foto + generazione ricette.
  * Usa recipe-ai.ts (due chiamate Gemini separate, errori espliciti, ripiego dichiarato).
  */
 import { createServerFn } from "@tanstack/react-start";

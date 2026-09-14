@@ -68,7 +68,7 @@ function LeafMark({ className }: { className?: string }) {
   );
 }
 
-export function FrigoChef() {
+export function FridgeChef() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [phase, setPhase] = useState<Phase>("idle");
   const [tab, setTab] = useState<Tab>("home");
@@ -382,7 +382,7 @@ export function FrigoChef() {
             <LeafMark className="size-11" />
             <div>
               <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">{t(locale, "tagline")}</p>
-              <h1 className="text-xl font-semibold tracking-tight">FrigoChef</h1>
+              <h1 className="text-xl font-semibold tracking-tight">FridgeChef</h1>
             </div>
           </div>
           <div className="flex items-center gap-2">

@@ -1,5 +1,5 @@
-/* FrigoChef minimal service worker — app shell cache + network-first navigation */
-const CACHE = "frigochef-shell-v1";
+/* FridgeChef minimal service worker — app shell cache + network-first navigation */
+const CACHE = "fridgechef-shell-v1";
 const PRECACHE = [
   "/",
   "/favicon.svg",

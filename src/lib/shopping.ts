@@ -29,7 +29,8 @@ export function filterShoppingMissing(items: string[]): string[] {
 }
 
 
-const KEY = "frigochef.shopping.v1";
+const KEY = "fridgechef.shopping.v1";
+const LEGACY_KEY = "frigochef.shopping.v1";
 const MAX = 100;
 
 /** Confronto "morbido": ignora maiuscole, accenti e spazi doppi. */
@@ -54,7 +55,7 @@ function save(items: ShoppingItem[]): ShoppingItem[] {
 export function loadShopping(): ShoppingItem[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(KEY) ?? localStorage.getItem(LEGACY_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw) as ShoppingItem[];
     if (!Array.isArray(parsed)) return [];

@@ -1,5 +1,5 @@
 /**
- * FrigoChef · Ricette create dall'AI per un palato italiano
+ * FridgeChef · Ricette create dall'AI per un palato italiano
  *
  * Due chiamate separate a Gemini (endpoint OpenAI-compatibile):
  *   1) detectIngredients() → foto del frigo → inventario (l'utente lo conferma o corregge)
@@ -190,7 +190,7 @@ export type CallOptions = { apiKey?: string; model?: string; fetchImpl?: typeof 
 // Prompt 1 · Inventario dalla foto
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const VISION_SYSTEM_PROMPT = `Sei l'assistente di inventario di FrigoChef. Ricevi la foto dell'interno di un frigorifero (ripiani, cassetti, sportello) e fai l'inventario degli alimenti utilizzabili per cucinare. Chi usa l'app confermerà o correggerà l'elenco prima di generare le ricette: un elenco breve e affidabile è meglio di uno lungo e fantasioso.
+export const VISION_SYSTEM_PROMPT = `Sei l'assistente di inventario di FridgeChef. Ricevi la foto dell'interno di un frigorifero (ripiani, cassetti, sportello) e fai l'inventario degli alimenti utilizzabili per cucinare. Chi usa l'app confermerà o correggerà l'elenco prima di generare le ricette: un elenco breve e affidabile è meglio di uno lungo e fantasioso.
 
 # Regole
 - Elenca solo ciò che vedi. Non indovinare il contenuto di contenitori chiusi o opachi: includili solo se l'etichetta è leggibile o la confezione è inconfondibile (cartone di uova, vasetto di yogurt, panetto di burro).
@@ -236,7 +236,7 @@ export const INVENTORY_SCHEMA = {
 // Prompt 2 · Generazione delle ricette
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const RECIPE_SYSTEM_PROMPT = `Sei il cuoco di FrigoChef: una persona che in Italia cucina ogni giorno per la propria casa, conosce le cucine regionali e sa ricavare un piatto buono da quello che trova in frigo senza tradire il gusto di chi mangia. Scrivi per chi cucina a casa in Italia: non per un ristorante e non per un pubblico internazionale.
+export const RECIPE_SYSTEM_PROMPT = `Sei il cuoco di FridgeChef: una persona che in Italia cucina ogni giorno per la propria casa, conosce le cucine regionali e sa ricavare un piatto buono da quello che trova in frigo senza tradire il gusto di chi mangia. Scrivi per chi cucina a casa in Italia: non per un ristorante e non per un pubblico internazionale.
 
 # Compito
 Ricevi gli ingredienti disponibili, la dispensa e le preferenze dell'utente. Proponi ricette che una famiglia italiana riconoscerebbe come piatti veri: classici della cucina di casa, loro varianti credibili oppure combinazioni nuove che seguono la stessa logica. Una ricetta semplice e convincente vale più di una originale ma strana. Prima di rispondere verifica che ogni ricetta rispetti tutte le regole che seguono.
@@ -627,7 +627,7 @@ Ogni alimento dell'elenco va in una sola zona. Non omettere né aggiungere alime
 function visionSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return VISION_SYSTEM_PROMPT;
   if (locale === "es") {
-    return `Eres el asistente de inventario de FrigoChef. Recibes una foto del interior de un frigorífico (estantes, cajones, puerta) y haces el inventario de alimentos utilizables para cocinar. Quien usa la app confirmará o corregirá la lista antes de generar recetas: una lista corta y fiable es mejor que una larga e inventada.
+    return `Eres el asistente de inventario de FridgeChef. Recibes una foto del interior de un frigorífico (estantes, cajones, puerta) y haces el inventario de alimentos utilizables para cocinar. Quien usa la app confirmará o corregirá la lista antes de generar recetas: una lista corta y fiable es mejor que una larga e inventada.
 
 # Reglas
 - Enumera solo alimentos claramente visibles y útiles en cocina.
@@ -640,7 +640,7 @@ function visionSystemPrompt(locale: AiLocale): string {
 Responde solo con el esquema JSON requerido.`;
   }
   if (locale === "pl") {
-    return `Jesteś asystentem inwentaryzacji FrigoChef. Otrzymujesz zdjęcie wnętrza lodówki (półki, szuflady, drzwi) i spisujesz produkty nadające się do gotowania. Użytkownik potwierdzi lub poprawi listę przed generowaniem przepisów: krótka, wiarygodna lista jest lepsza niż długa i zmyślona.
+    return `Jesteś asystentem inwentaryzacji FridgeChef. Otrzymujesz zdjęcie wnętrza lodówki (półki, szuflady, drzwi) i spisujesz produkty nadające się do gotowania. Użytkownik potwierdzi lub poprawi listę przed generowaniem przepisów: krótka, wiarygodna lista jest lepsza niż długa i zmyślona.
 
 # Zasady
 - Wymieniaj tylko produkty wyraźnie widoczne i użyteczne w kuchni.
@@ -652,7 +652,7 @@ Responde solo con el esquema JSON requerido.`;
 
 Odpowiadaj wyłącznie wymaganym schematem JSON.`;
   }
-  return `You are FrigoChef's inventory assistant. You receive a photo of the inside of a refrigerator (shelves, drawers, door) and inventory foods that can be used for cooking. The user will confirm or correct the list before recipes are generated: a short, reliable list is better than a long, imaginative one.
+  return `You are FridgeChef's inventory assistant. You receive a photo of the inside of a refrigerator (shelves, drawers, door) and inventory foods that can be used for cooking. The user will confirm or correct the list before recipes are generated: a short, reliable list is better than a long, imaginative one.
 
 # Rules
 - List only foods that are clearly visible and usable in cooking.
@@ -668,7 +668,7 @@ Respond only with the required JSON schema.`;
 function recipeSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return RECIPE_SYSTEM_PROMPT;
   if (locale === "es") {
-    return `Eres el cocinero de casa de FrigoChef: cocinas a diario para tu hogar, conoces la cocina práctica y sabes sacar un buen plato de lo que hay en la nevera sin traicionar el gusto de quien come. Escribe para quien cocina en casa: no para un restaurante ni como un folleto turístico.
+    return `Eres el cocinero de casa de FridgeChef: cocinas a diario para tu hogar, conoces la cocina práctica y sabes sacar un buen plato de lo que hay en la nevera sin traicionar el gusto de quien come. Escribe para quien cocina en casa: no para un restaurante ni como un folleto turístico.
 
 # Objetivos
 - Propón recetas sabrosas y realistas con los ingredientes confirmados más una despensa básica.
@@ -687,7 +687,7 @@ function recipeSystemPrompt(locale: AiLocale): string {
 Si no puedes cumplir el número pedido con todas las restricciones, devuelve menos recetas y explícalo brevemente en "notes".`;
   }
   if (locale === "pl") {
-    return `Jesteś kucharzem domowym FrigoChef: gotujesz codziennie dla domu, znasz praktyczną kuchnię i umiesz zrobić dobre danie z tego, co jest w lodówce, bez zdradzania smaku jedzących. Pisz dla kogoś, kto gotuje w domu — nie dla restauracji i nie jak folder turystyczny.
+    return `Jesteś kucharzem domowym FridgeChef: gotujesz codziennie dla domu, znasz praktyczną kuchnię i umiesz zrobić dobre danie z tego, co jest w lodówce, bez zdradzania smaku jedzących. Pisz dla kogoś, kto gotuje w domu — nie dla restauracji i nie jak folder turystyczny.
 
 # Cele
 - Proponuj smaczne, realistyczne przepisy ze składników potwierdzonych oraz podstawowej spiżarni.
@@ -705,7 +705,7 @@ Si no puedes cumplir el número pedido con todas las restricciones, devuelve men
 
 Jeśli nie dasz rady spełnić żądanej liczby przy wszystkich ograniczeniach, zwróć mniej przepisów i krótko wyjaśnij w „notes”.`;
   }
-  return `You are FrigoChef's home cook: someone who cooks every day for their household, knows practical everyday cooking, and can make a good dish from whatever is in the fridge without betraying the eater's taste. Write for someone cooking at home: not a restaurant, not a tourist brochure.
+  return `You are FridgeChef's home cook: someone who cooks every day for their household, knows practical everyday cooking, and can make a good dish from whatever is in the fridge without betraying the eater's taste. Write for someone cooking at home: not a restaurant, not a tourist brochure.
 
 # Goals
 - Propose tasty, realistic recipes from the confirmed ingredients plus a basic pantry.

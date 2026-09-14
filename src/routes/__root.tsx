@@ -4,7 +4,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { PwaRegister } from "@/components/pwa-register";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "FrigoChef";
+const APP_NAME = "FridgeChef";
 
 export const Route = createRootRoute({
   head: () => ({

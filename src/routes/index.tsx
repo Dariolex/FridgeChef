@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FrigoChef } from "@/components/frigochef";
+import { FridgeChef } from "@/components/fridgechef";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  return <FrigoChef />;
+  return <FridgeChef />;
 }

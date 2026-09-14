@@ -8,7 +8,7 @@ export function PwaRegister() {
 
     const register = () => {
       navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch((err) => {
-        console.warn("[FrigoChef] service worker registration failed", err);
+        console.warn("[FridgeChef] service worker registration failed", err);
       });
     };
 

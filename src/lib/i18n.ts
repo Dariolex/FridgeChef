@@ -7,11 +7,12 @@ export const LOCALES: { id: Locale; label: string; short: string; flag: string }
   { id: "es", label: "Español", short: "ES", flag: "🇪🇸" },
 ];
 
-const STORAGE_KEY = "frigochef_locale";
+const STORAGE_KEY = "fridgechef_locale";
+const LEGACY_LOCALE_KEY = "frigochef_locale";
 
 export function loadLocale(): Locale {
   try {
-    const v = localStorage.getItem(STORAGE_KEY);
+    const v = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_LOCALE_KEY);
     if (v === "en" || v === "it" || v === "pl" || v === "es") return v;
   } catch {
     /* ignore */
@@ -104,7 +105,7 @@ const it: Dict = {
   skip: "Salta",
   onboarding1Title: "Scatta il frigo",
   onboarding1Body:
-    "Fotografa il contenuto del frigorifero: FrigoChef riconosce gli alimenti e te li mostra come chip da confermare.",
+    "Fotografa il contenuto del frigorifero: FridgeChef riconosce gli alimenti e te li mostra come chip da confermare.",
   onboarding2Title: "Scegli il percorso",
   onboarding2Body:
     "Crea ricette (AI), Ricettario Classico (ricette collaudate) oppure Organizza frigo (dove mettere ogni alimento).",
@@ -202,7 +203,7 @@ const en: Dict = {
   skip: "Skip",
   onboarding1Title: "Snap your fridge",
   onboarding1Body:
-    "Photograph what’s inside: FrigoChef spots the foods and shows them as chips you can confirm.",
+    "Photograph what’s inside: FridgeChef spots the foods and shows them as chips you can confirm.",
   onboarding2Title: "Pick a path",
   onboarding2Body:
     "Create recipes (AI), Classic cookbook (tried-and-true dishes), or Organize fridge (where each item goes).",
@@ -301,7 +302,7 @@ const pl: Dict = {
   skip: "Pomiń",
   onboarding1Title: "Zrób zdjęcie lodówki",
   onboarding1Body:
-    "Sfotografuj zawartość lodówki: FrigoChef rozpozna produkty i pokaże je jako chipy do potwierdzenia.",
+    "Sfotografuj zawartość lodówki: FridgeChef rozpozna produkty i pokaże je jako chipy do potwierdzenia.",
   onboarding2Title: "Wybierz ścieżkę",
   onboarding2Body:
     "Utwórz przepisy (AI), książka klasyczna (sprawdzone dania) albo uporządkuj lodówkę (gdzie położyć każdy produkt).",
@@ -400,7 +401,7 @@ const es: Dict = {
   skip: "Saltar",
   onboarding1Title: "Fotografía la nevera",
   onboarding1Body:
-    "Haz una foto del interior: FrigoChef reconoce los alimentos y los muestra como chips para confirmar.",
+    "Haz una foto del interior: FridgeChef reconoce los alimentos y los muestra como chips para confirmar.",
   onboarding2Title: "Elige el camino",
   onboarding2Body:
     "Crear recetas (IA), recetario clásico (platos de siempre) u organizar la nevera (dónde poner cada alimento).",

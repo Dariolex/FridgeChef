@@ -1,4 +1,4 @@
-# FrigoChef
+# FridgeChef
 
 > **UPDATE — UPDATED VERSION**  
 > Multilingual UI (**IT · EN · PL · ES**), flag language picker, localized classic cookbook, chef prompts, and photo → recipe flow. Clone or pull `main` for the latest release.  
@@ -6,7 +6,7 @@
 
 Photograph the inside of your fridge. Confirm the ingredients. Get recipes you can cook tonight — written in the style of an Italian home kitchen — or a shelf-by-shelf plan to store the food correctly.
 
-**FrigoChef is the first app built with a real Italian chef** to generate everyday recipes in an Italian cooking style: clear steps, realistic times, pantry-aware dishes, and the taste of home rather than restaurant showpieces.
+**FridgeChef is the first app built with a real Italian chef** to generate everyday recipes in an Italian cooking style: clear steps, realistic times, pantry-aware dishes, and the taste of home rather than restaurant showpieces.
 
 Snap a photo of your fridge and get tailored recipes. 3D grocery-style UI, navy glass, and lime accents.
 
@@ -23,7 +23,7 @@ For people who open the fridge, freeze for ten seconds, and still don’t know w
 
 **Live app:** [https://frigo-chef-omega.vercel.app](https://frigo-chef-omega.vercel.app/)
 
-Open that link on your phone or desktop to use FrigoChef immediately (photo → recipes, classic cookbook, fridge organization, IT / EN / PL / ES).
+Open that link on your phone or desktop to use FridgeChef immediately (photo → recipes, classic cookbook, fridge organization, IT / EN / PL / ES).
 
 > Note: `https://frigo-chef.vercel.app` is a **different** public project (French “Cuisine Intelligente”). This app’s production URL is **https://frigo-chef-omega.vercel.app**.
 
@@ -53,8 +53,8 @@ Choice is saved in the browser (`localStorage`).
 ## Quick start
 
 ```bash
-git clone https://github.com/Dariolex/FrigoChef.git
-cd FrigoChef
+git clone https://github.com/Dariolex/FridgeChef.git
+cd FridgeChef
 npm install
 export GEMINI_API_KEY=your_key_from_aistudio
 npm run dev
@@ -71,7 +71,7 @@ Without a key, photo recognition is off — manual ingredients and the classic c
 
 ## Why this project
 
-Most “recipe AI” tools ask you to type a list and answer in a generic tone. FrigoChef was shaped with **a real Italian chef’s approach**: what to do with what is already in the fridge, how a home cook in Italy would actually cook it, and how to keep steps practical.
+Most “recipe AI” tools ask you to type a list and answer in a generic tone. FridgeChef was shaped with **a real Italian chef’s approach**: what to do with what is already in the fridge, how a home cook in Italy would actually cook it, and how to keep steps practical.
 
 The flow starts from the **fridge photo**, lets you **confirm chips**, then branches into three actions:
 
@@ -128,8 +128,8 @@ Recipe text follows the selected language (IT / EN / PL / ES).
 **macOS / Linux / Windows (terminal)**
 
 ```bash
-git clone https://github.com/Dariolex/FrigoChef.git
-cd FrigoChef
+git clone https://github.com/Dariolex/FridgeChef.git
+cd FridgeChef
 npm install
 ```
 
