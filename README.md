@@ -17,6 +17,14 @@ For people who open the fridge, freeze for ten seconds, and still don’t know w
 
 ---
 
+## Install on your phone (PWA)
+
+1. Open the site in **Chrome** (Android) or **Safari** (iOS).
+2. **Android:** browser menu → **Install app** / **Add to Home screen**.
+3. **iOS (Safari):** Share → **Add to Home Screen**.
+
+The app ships a web app manifest and a service worker for standalone display and a cached shell. Photo recognition and AI recipes still need network access and a configured `GEMINI_API_KEY`.
+
 ## Languages
 
 The app UI, AI chef prompts, error messages, and the classic cookbook text can be switched from the header language control (flag + fixed list — no free typing):

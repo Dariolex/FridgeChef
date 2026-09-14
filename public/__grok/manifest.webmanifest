@@ -1,0 +1,33 @@
+{
+  "name": "FrigoChef",
+  "short_name": "FrigoChef",
+  "description": "Snap a photo of your fridge and get tailored recipes. 3D grocery UI, navy glass, and lime.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B0E12",
+  "theme_color": "#0B0E12",
+  "lang": "en",
+  "categories": ["food", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "/__grok/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/__grok/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/__grok/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

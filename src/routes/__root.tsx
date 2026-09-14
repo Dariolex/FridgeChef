@@ -1,6 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
+import { PwaRegister } from "@/components/pwa-register";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "FrigoChef";
@@ -16,6 +17,11 @@ export const Route = createRootRoute({
         name: "description",
         content: "Snap a photo of your fridge and get tailored recipes. 3D grocery UI, navy glass, and lime.",
       },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "apple-mobile-web-app-title", content: APP_NAME },
+      { name: "application-name", content: APP_NAME },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -35,6 +41,7 @@ export const Route = createRootRoute({
       </head>
       <body className="bg-bg text-fg antialiased">
         <PreviewHostBridge />
+        <PwaRegister />
         <AuthProvider>
           <Outlet />
         </AuthProvider>
