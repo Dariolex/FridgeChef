@@ -522,7 +522,7 @@ export function FrigoChef() {
           <section className="relative z-10 glass flex flex-col items-center gap-4 rounded-[32px] px-6 py-16 text-center">
             <img src={FOOD_ART.hero} alt="" className="h-28 w-40 object-contain" />
             <p className="text-lg font-semibold">Sto guardando nel frigo</p>
-            <p className="text-sm text-muted">Riconosco gli alimenti nella foto.</p>
+            <p className="text-sm text-muted">{t(locale, "analyzing")}</p>
             <div className="h-1.5 w-40 overflow-hidden rounded-full bg-fg/10">
               <div className="h-full w-1/2 animate-pulse rounded-full bg-accent" />
             </div>
@@ -801,7 +801,7 @@ export function FrigoChef() {
 
         {tab === "profile" && (
           <section className="space-y-4">
-            <h2 className="text-lg font-semibold">Le tue preferenze</h2>
+            <h2 className="text-lg font-semibold">{t(locale, "profileTitle")}</h2>
 
             <div className="glass space-y-3 rounded-[28px] p-4">
               <p className="text-xs font-medium uppercase tracking-wide text-muted">Dieta</p>
@@ -840,7 +840,7 @@ export function FrigoChef() {
                 )}
               >
                 <Cake className="size-4" />
-                {prefs.course === "dessert" ? "Attivo" : "Off"}
+                {prefs.course === "dessert" ? t(locale, "on") : t(locale, "off")}
               </button>
             </div>
 

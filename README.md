@@ -1,11 +1,13 @@
 # FrigoChef
 
-> **UPDATE — VERSIONE AGGIORNATA**  
-> Interfaccia multilingua (**IT · EN · PL · ES**), selettore a bandiera, ricettario classico localizzato, prompt chef e flusso foto → ricette rivisti. Clona o fai pull di `main` per avere l’ultima release.
+> **UPDATE — UPDATED VERSION**  
+> Multilingual UI (**IT · EN · PL · ES**), flag language picker, localized classic cookbook, chef prompts, and photo → recipe flow. Clone or pull `main` for the latest release.
 
 Photograph the inside of your fridge. Confirm the ingredients. Get recipes you can cook tonight — written in the style of an Italian home kitchen — or a shelf-by-shelf plan to store the food correctly.
 
 **FrigoChef is the first app built with a real Italian chef** to generate everyday recipes in an Italian cooking style: clear steps, realistic times, pantry-aware dishes, and the taste of home rather than restaurant showpieces.
+
+Snap a photo of your fridge and get tailored recipes. 3D grocery-style UI, navy glass, and lime accents.
 
 For people who open the fridge, freeze for ten seconds, and still don’t know what to make.
 

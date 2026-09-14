@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       { name: "theme-color", content: "#0B0E12" },
       {
         name: "description",
-        content: "Scatta una foto del frigo e ottieni ricette su misura.",
+        content: "Snap a photo of your fridge and get tailored recipes. 3D grocery UI, navy glass, and lime.",
       },
     ],
     links: [
@@ -29,7 +29,7 @@ export const Route = createRootRoute({
     ],
   }),
   component: () => (
-    <html lang="it" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
