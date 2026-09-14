@@ -1,5 +1,9 @@
 # FridgeChef
 
+<p align="center">
+  <img src="docs/fridgechef-hero.png" alt="FridgeChef — robot chef in a neon kitchen" width="720" />
+</p>
+
 > **UPDATE — UPDATED VERSION**  
 > Multilingual UI (**IT · EN · PL · ES · HI**), flag language picker, localized classic cookbook, chef prompts, and photo → recipe flow. Clone or pull `main` for the latest release.  
 > **Try it now:** [https://frigo-chef-omega.vercel.app](https://frigo-chef-omega.vercel.app/)
