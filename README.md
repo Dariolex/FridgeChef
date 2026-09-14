@@ -1,19 +1,17 @@
 # FrigoChef
 
+> **UPDATE — VERSIONE AGGIORNATA**  
+> Interfaccia multilingua (**IT · EN · PL · ES**), selettore a bandiera, ricettario classico localizzato, prompt chef e flusso foto → ricette rivisti. Clona o fai pull di `main` per avere l’ultima release.
+
 Photograph the inside of your fridge. Confirm the ingredients. Get recipes you can cook tonight — written in the style of an Italian home kitchen — or a shelf-by-shelf plan to store the food correctly.
 
 **FrigoChef is the first app built with a real Italian chef** to generate everyday recipes in an Italian cooking style: clear steps, realistic times, pantry-aware dishes, and the taste of home rather than restaurant showpieces.
 
 For people who open the fridge, freeze for ten seconds, and still don’t know what to make.
 
-![FrigoChef — photo → ingredients → recipes](docs/demo.gif)
-
-*Photo of the fridge → editable ingredient chips → AI recipes, classic cookbook, or fridge layout.*
-
 [![Node](https://img.shields.io/badge/node-18%2B-blue)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-[DA%20VERIFICARE]-lightgrey)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Languages](https://img.shields.io/badge/UI-IT%20%7C%20EN%20%7C%20PL%20%7C%20ES-informational)](#languages)
-[![Demo](https://img.shields.io/badge/demo-[DA%20VERIFICARE]-orange)](https://[DA-VERIFICARE])
 
 ---
 
@@ -169,7 +167,7 @@ API calls use Gemini’s OpenAI-compatible endpoint (`generativelanguage.googlea
 
 Issues and pull requests are welcome on GitHub. Prefer small, focused changes (UI, cookbook recipes, i18n, tests under `src/lib/recipe-ai.test.ts`).
 
-License: **[DA VERIFICARE]** — see [`LICENSE`](./LICENSE) when published.
+License: **MIT** — see [`LICENSE`](./LICENSE).
 
 ---
 
