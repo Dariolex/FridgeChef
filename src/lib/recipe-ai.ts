@@ -70,7 +70,7 @@ export type AppIngredient = Ingredient & { quantity?: string; confidence?: Confi
 /** Ricetta AI: compatibile con Recipe, più portata e origine (per etichettarla in UI). */
 export type AiRecipe = Recipe & { portata: Portata; source: "ai" };
 
-export type AiLocale = "it" | "en" | "pl" | "es";
+export type AiLocale = "it" | "en" | "pl" | "es" | "hi";
 
 export type AiFailure =
   | "no_key"
@@ -161,10 +161,28 @@ const AI_FAILURE_MESSAGE_ES: Record<AiFailure, string> = {
     "Ninguna receta cumple a la vez dieta, tiempo e ingredientes. Amplía los filtros.",
 };
 
+const AI_FAILURE_MESSAGE_HI: Record<AiFailure, string> = {
+  no_key: "AI सेट नहीं है: Gemini कुंजी नहीं मिली।",
+  auth: "Gemini कुंजी अमान्य है या Google स्वीकार नहीं कर रहा।",
+  quota: "मुफ़्त Gemini सीमा पूरी हो गई। बाद में कोशिश करें।",
+  model_unavailable: "कॉन्फ़िगर किया गया AI मॉडल उपलब्ध नहीं है।",
+  http: "AI सेवा ने त्रुटि दी।",
+  timeout: "AI समय पर जवाब नहीं दिया।",
+  network: "AI सेवा से कनेक्ट नहीं हो सका।",
+  truncated: "AI जवाब अधूरा रह गया। फिर कोशिश करें।",
+  empty: "AI ने खाली जवाब दिया। फिर कोशिश करें।",
+  invalid_json: "AI जवाब पढ़ने योग्य नहीं था। फिर कोशिश करें।",
+  bad_input: "अमान्य फ़ोटो। दूसरी आज़माएँ।",
+  nothing_found: "फ़ोटो में खाद्य नहीं पहचाने गए। खुद जोड़ें।",
+  no_valid_recipes:
+    "कोई रेसिपी आहार, समय और सामग्री एक साथ पूरा नहीं करती। फ़िल्टर ढीले करें।",
+};
+
 export function aiFailureMessage(locale: AiLocale | undefined, reason: AiFailure): string {
   if (locale === "en") return AI_FAILURE_MESSAGE_EN[reason];
   if (locale === "pl") return AI_FAILURE_MESSAGE_PL[reason];
   if (locale === "es") return AI_FAILURE_MESSAGE_ES[reason];
+  if (locale === "hi") return AI_FAILURE_MESSAGE_HI[reason];
   return AI_FAILURE_MESSAGE_IT[reason];
 }
 
@@ -480,6 +498,46 @@ export function buildRecipeUserMessage(req: RecipeRequest, locale: AiLocale = "i
     ].join("\n");
   }
 
+  if (locale === "hi") {
+    const diet =
+      req.prefs.diet === "vegan"
+        ? "वीगन"
+        : req.prefs.diet === "vegetarian"
+          ? "शाकाहारी"
+          : "कोई पाबंदी नहीं";
+    const course =
+      req.prefs.course === "dessert"
+        ? "केवल मिठाई"
+        : "केवल नमकीन व्यंजन (पास्ता/चावल, मुख्य, साइड या एक-बर्तन)";
+    const monthHi = [
+      "जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून",
+      "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर",
+    ][(req.now ?? new Date()).getMonth()];
+    return [
+      "<samagri>",
+      ...(ingredients.length ? ingredients.map((i) => `- ${i}`) : ["(कोई नहीं: केवल मसाले/पेंट्री)"]),
+      "</samagri>",
+      "",
+      "<pantry>",
+      pantry.join(", "),
+      "</pantry>",
+      "",
+      "<pasand>",
+      `रेसिपी संख्या: ${count}`,
+      `सर्विंग: ${clampInt(req.prefs.servings, 1, 12)}`,
+      `व्यंजन प्रकार: ${course}`,
+      `आहार: ${diet}`,
+      `प्रति रेसिपी अधिकतम समय: ${effectiveMaxMinutes(req.prefs)} मिनट`,
+      `प्रति रेसिपी अनुमत कमी: अधिकतम ${maxMissing}`,
+      `महीना: ${monthHi}`,
+      "</pasand>",
+      "",
+      "<avoid_titles>",
+      ...(avoid.length ? avoid.map((x) => `- ${x}`) : ["कोई नहीं"]),
+      "</avoid_titles>",
+    ].join("\n");
+  }
+
   const diet = req.prefs.diet === "vegan" ? "vegana" : req.prefs.diet === "vegetarian" ? "vegetariana" : "nessun vincolo";
   const course = req.prefs.course === "dessert" ? "solo dolci" : "solo piatti salati (primi, secondi, contorni o piatti unici)";
   return [
@@ -532,7 +590,9 @@ export async function detectIngredients(
                 ? "Zrób inwentaryzację produktów widocznych na tym zdjęciu lodówki."
                 : locale === "es"
                   ? "Haz el inventario de los alimentos visibles en esta foto del frigorífico."
-                  : "Fai l'inventario degli alimenti visibili in questa foto del frigorifero.",
+                  : locale === "hi"
+                    ? "इस फ्रिज फ़ोटो में दिखने वाले खाद्य पदार्थों की सूची बनाएँ।"
+                    : "Fai l'inventario degli alimenti visibili in questa foto del frigorifero.",
         },
         { type: "image_url", image_url: { url: imageDataUrl } },
       ],
@@ -626,6 +686,19 @@ Ogni alimento dell'elenco va in una sola zona. Non omettere né aggiungere alime
 
 function visionSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return VISION_SYSTEM_PROMPT;
+  if (locale === "hi") {
+    return `आप FridgeChef के इन्वेंटरी सहायक हैं। आपको फ्रिज के अंदर की फ़ोटो मिलती है (शेल्फ़, दराज, दरवाज़ा) और खाना पकाने योग्य सामग्री की सूची बनाते हैं। उपयोगकर्ता रेसिपी से पहले सूची सुधारेगा: छोटी विश्वसनीय सूची लंबी काल्पनिक सूची से बेहतर है।
+
+# नियम
+- केवल स्पष्ट दिखने वाले और रसोई में उपयोगी खाद्य लिखें।
+- आम हिंदी नाम लिखें (जैसे «अंडे», «तोरी», «चिकन ब्रेस्ट»)।
+- मात्रा दिखे तो अनुमान दें («लगभग 3», «1 पैक»)।
+- confidence: «high» साफ़ हो तो, «medium» आंशिक, «low» अनिश्चित — low भी शामिल करें।
+- फ़ोटो में न दिखने वाले खाद्य न गढ़ें।
+- notes: एक छोटा वाक्य या खाली।
+
+केवल आवश्यक JSON स्कीमा से जवाब दें।`;
+  }
   if (locale === "es") {
     return `Eres el asistente de inventario de FridgeChef. Recibes una foto del interior de un frigorífico (estantes, cajones, puerta) y haces el inventario de alimentos utilizables para cocinar. Quien usa la app confirmará o corregirá la lista antes de generar recetas: una lista corta y fiable es mejor que una larga e inventada.
 
@@ -667,6 +740,25 @@ Respond only with the required JSON schema.`;
 
 function recipeSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return RECIPE_SYSTEM_PROMPT;
+  if (locale === "hi") {
+    return `आप FridgeChef के घर के रसोइया हैं: रोज़ घर के लिए बनाते हैं, व्यावहारिक खाना जानते हैं, और फ्रिज में जो है उससे स्वादिष्ट पकवान बना सकते हैं। घर पर पकाने वाले के लिए लिखें — रेस्तराँ या पर्यटन गाइड की तरह नहीं।
+
+# लक्ष्य
+- पुष्ट सामग्री और बुनियादी मसालों से यथार्थ रेसिपी सुझाएँ।
+- आहार, व्यंजन प्रकार (नमकीन बनाम मिठाई), अधिकतम समय और सर्विंग का सम्मान करें।
+- उपलब्ध सामग्री का उपयोग प्राथमिकता; कुछ कमी खरीदारी सूची शैली में ठीक।
+- शीर्षक, विवरण, सामग्री, कदम और सुझाव स्पष्ट प्राकृतिक हिंदी में।
+- steps: 4–7 सटीक कदम, आँच, समय और दृश्य संकेत के साथ।
+- tip: उस पकवान के लिए एक व्यावहारिक सुझाव।
+- सुरक्षा: मुर्गी और कीमा अच्छी तरह पकाएँ; कच्चा/अधपका अंडा tip में बताएँ।
+
+# विविधता
+- व्यंजन प्रकार, मुख्य सामग्री या तकनीक में अंतर रखें।
+- सबसे उपयुक्त पहले (बिना कमी, परिचित) फिर रचनात्मक।
+- टाले गए शीर्षक दोहराएँ नहीं।
+
+सभी शर्तों पर संख्या न मिल सके तो कम रेसिपी दें और notes में संक्षेप में लिखें।`;
+  }
   if (locale === "es") {
     return `Eres el cocinero de casa de FridgeChef: cocinas a diario para tu hogar, conoces la cocina práctica y sabes sacar un buen plato de lo que hay en la nevera sin traicionar el gusto de quien come. Escribe para quien cocina en casa: no para un restaurante ni como un folleto turístico.
 
@@ -726,6 +818,32 @@ If you cannot meet the requested count under all constraints, return fewer recip
 
 function organizeSystemPrompt(locale: AiLocale): string {
   if (locale === "it") return ORGANIZE_SYSTEM_PROMPT;
+  if (locale === "hi") {
+    return `आप घरेलू फ्रिज संगठन और खाद्य भंडारण के विशेषज्ञ हैं।
+
+फ्रिज की सामग्री की सूची मिलती है (वैकल्पिक मात्रा और विश्वास)। सर्वोत्तम स्थान सुझाएँ ताकि:
+1. तापमान और नमी मेल खाएँ;
+2. ताज़गी और अवधि बढ़े;
+3. क्रॉस-संदूषण कम हो (कच्चा बनाम खाने योग्य);
+4. रोज़ का उपयोग आसान रहे।
+
+# सामान्य क्षेत्र
+- ऊपरी शेल्फ़: स्थिर; पका खाना, बचा खुराक, पैक किया हुआ।
+- मध्य शेल्फ़: डेयरी, अंडे, स्थिर ठंडक वाले।
+- निचली शेल्फ़: अक्सर सबसे ठंडी; कच्चा मांस/मछली बंद डिब्बे में, टपकन से बचाव।
+- दराज: फल-सब्ज़ी (नमी जहाँ ज़रूरी)।
+- दरवाज़ा: तापमान बदलता है; सॉस, पेय, कम खराब होने वाले। बहुत नाज़ुक खाद्य नहीं।
+
+# सुरक्षा
+- कच्चा और तैयार-खाने वाला अलग रखें।
+- कच्चा मांस/मछली नीचे, बंद कंटेनर में।
+- सूची से बाहर खाद्य न गढ़ें।
+- कम विश्वास हो तो कारण में लिखें।
+- कारण संक्षिप्त हिंदी में।
+
+# परिणाम
+सूची का हर खाद्य ठीक एक क्षेत्र में। कुछ न छोड़ें, न जोड़ें।`;
+  }
   if (locale === "es") {
     return `Eres un experto en conservación de alimentos y organización de frigoríficos domésticos.
 
@@ -871,7 +989,9 @@ export async function organizeFridge(
         ? ["Uporządkuj te produkty w lodówce.", "", "<produkty>", ...list, "</produkty>"].join("\n")
         : locale === "es"
           ? ["Organiza estos alimentos en el frigorífico.", "", "<alimentos>", ...list, "</alimentos>"].join("\n")
-          : ["Organizza questi alimenti nel frigorifero.", "", "<alimenti>", ...list, "</alimenti>"].join("\n");
+          : locale === "hi"
+            ? ["इन खाद्य पदार्थों को फ्रिज में व्यवस्थित करें।", "", "<khādya>", ...list, "</khādya>"].join("\n")
+            : ["Organizza questi alimenti nel frigorifero.", "", "<alimenti>", ...list, "</alimenti>"].join("\n");
 
   const res = await callGeminiJson(
     {

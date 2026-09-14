@@ -1,10 +1,11 @@
-export type Locale = "it" | "en" | "pl" | "es";
+export type Locale = "it" | "en" | "pl" | "es" | "hi";
 
 export const LOCALES: { id: Locale; label: string; short: string; flag: string }[] = [
   { id: "it", label: "Italiano", short: "IT", flag: "🇮🇹" },
   { id: "en", label: "English", short: "EN", flag: "🇬🇧" },
   { id: "pl", label: "Polski", short: "PL", flag: "🇵🇱" },
   { id: "es", label: "Español", short: "ES", flag: "🇪🇸" },
+  { id: "hi", label: "हिन्दी", short: "HI", flag: "🇮🇳" },
 ];
 
 const STORAGE_KEY = "fridgechef_locale";
@@ -13,7 +14,7 @@ const LEGACY_LOCALE_KEY = "frigochef_locale";
 export function loadLocale(): Locale {
   try {
     const v = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_LOCALE_KEY);
-    if (v === "en" || v === "it" || v === "pl" || v === "es") return v;
+    if (v === "en" || v === "it" || v === "pl" || v === "es" || v === "hi") return v;
   } catch {
     /* ignore */
   }
@@ -424,7 +425,106 @@ const es: Dict = {
   sectionDessert: "Postre",
 };
 
-const tables: Record<Locale, Dict> = { it, en, pl, es };
+
+const hi: Dict = {
+  tagline: "फ्रिज से थाली तक",
+  searchPlaceholder: "रेसिपी खोजें",
+  dietAny: "सभी",
+  dietVegetarian: "शाकाहारी",
+  dietVegan: "वीगन",
+  dietFast: "तेज़",
+  dessert: "मिठाई",
+  shootPhoto: "फ़ोटो लें",
+  shootPhotoAria: "फ़ोटो लें",
+  orType: "या लिखें कि आपके पास क्या है",
+  manualPlaceholder: "अंडे, टमाटर, पास्ता",
+  go: "आगे",
+  analyzing: "फ्रिज देख रहे हैं…",
+  thinking: "रेसिपी सोच रहे हैं…",
+  inFridge: "फ्रिज में",
+  extraPlaceholder: "और सामग्री जोड़ें",
+  createRecipes: "रेसिपी बनाएँ",
+  classicCookbook: "क्लासिक कुकबुक",
+  organizeFridge: "फ्रिज व्यवस्थित करें",
+  organizing: "व्यवस्थित हो रहा है…",
+  updateWithFilters: "फ़िल्टर से रेसिपी अपडेट करें",
+  moreIdeas: "और आइडिया",
+  cookingNow: "अभी क्या बनाएँ",
+  fromReserve: "रिज़र्व कुकबुक से",
+  fromFridge: "आपके फ्रिज से",
+  fromBookFridge: "कुकबुक से (फ्रिज)",
+  classicTitle: "क्लासिक कुकबुक",
+  classicHint: "श्रेणी छूकर व्यंजन देखें। आहार, समय और खोज से फ़िल्टर करें।",
+  recipesCount1: "रेसिपी",
+  recipesCountN: "रेसिपी",
+  noRecipesSearch: "इस खोज के लिए कोई व्यंजन नहीं। फ़िल्टर या शब्द बदलें।",
+  historyTitle: "बनाए गए व्यंजन",
+  clearAll: "साफ़ करें",
+  historyEmpty: "अभी कुछ नहीं। रेसिपी खोलें और «मैंने यह बनाया» दबाएँ।",
+  profileTitle: "पसंद",
+  portions: "सर्विंग",
+  maxTime: "अधिकतम समय",
+  minutes: "मिनट",
+  onlyDessert: "केवल मिठाई",
+  onlyDessertHint: "केवल मिठाई और डेजर्ट दिखाएँ",
+  on: "चालू",
+  off: "बंद",
+  lessPortions: "कम सर्विंग",
+  morePortions: "ज़्यादा सर्विंग",
+  shoppingAria: "खरीदारी सूची",
+  shoppingAriaN: "खरीदारी सूची, {n} खरीदने हैं",
+  shoppingTitle: "खरीदारी सूची",
+  shoppingEmpty: "सूची खाली है। रेसिपी से सामग्री जोड़ें।",
+  clearDone: "पूर्ण हटाएँ",
+  missingLabel: "आपके पास नहीं",
+  addToShopping: "खरीदारी सूची में जोड़ें",
+  cookedThis: "मैंने यह बनाया",
+  tip: "सुझाव",
+  ingredients: "सामग्री",
+  steps: "तैयारी",
+  servingsWord: "सर्विंग",
+  dietOmnivore: "सामान्य",
+  dietVegetarianShort: "शाकाहारी",
+  dietVeganShort: "वीगन",
+  navHome: "होम",
+  navRecipes: "रेसिपी",
+  navHistory: "इतिहास",
+  navProfile: "प्रोफ़ाइल",
+  chefAI: "शेफ़ AI",
+  classic: "क्लासिक",
+  organizeTitle: "फ्रिज कैसे व्यवस्थित करें",
+  close: "बंद करें",
+  nothingInZone: "इस क्षेत्र में कुछ नहीं।",
+  welcome: "स्वागत है",
+  start: "शुरू करें",
+  next: "आगे",
+  skip: "छोड़ें",
+  onboarding1Title: "फ्रिज की फ़ोटो लें",
+  onboarding1Body:
+    "अंदर की फ़ोटो लें: FridgeChef सामग्री पहचानता है और पुष्टि के लिए चिप दिखाता है।",
+  onboarding2Title: "रास्ता चुनें",
+  onboarding2Body:
+    "रेसिपी बनाएँ (AI), क्लासिक कुकबुक, या फ्रिज व्यवस्थित करें (हर चीज़ कहाँ रखें)।",
+  onboarding3Title: "फ़िल्टर करें और बनाएँ",
+  onboarding3Body:
+    "जनरेट से पहले आहार, समय और सर्विंग सेट करें। रेसिपी खोलें, बनाएँ या कमी खरीदारी सूची में जोड़ें।",
+  errSelectIngredient: "कम से कम एक सामग्री चुनें या जोड़ें।",
+  errSelectFood: "व्यवस्थित करने के लिए कम से कम एक खाद्य चुनें।",
+  errAiConnection: "AI से कनेक्ट नहीं हो सका। फिर कोशिश करें या कुकबुक उपयोग करें।",
+  errOrganize: "अभी फ्रिज व्यवस्थित नहीं कर सकते। फिर कोशिश करें।",
+  errGeneric: "कुछ गलत हुआ। फिर कोशिश करें या सामग्री खुद लिखें।",
+  toastNothing: "जोड़ने को कुछ नहीं: सब है (या केवल मूल मसाले)।",
+  toastOne: "सूची में 1 सामग्री जोड़ी गई",
+  toastMany: "सूची में {n} सामग्री जोड़ी गईं",
+  language: "भाषा",
+  sectionPrimi: "पहले व्यंजन",
+  sectionSecondi: "मुख्य व्यंजन",
+  sectionUova: "अंडे और फ्रिटाटा",
+  sectionContorni: "साइड और ताज़ा",
+  sectionDessert: "मिठाई",
+};
+
+const tables: Record<Locale, Dict> = { it, en, pl, es, hi };
 
 export function t(locale: Locale, key: string, vars?: Record<string, string | number>): string {
   const raw = tables[locale][key] ?? tables.it[key] ?? key;

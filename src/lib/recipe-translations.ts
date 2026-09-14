@@ -1,4 +1,4 @@
-/** Auto-generated classic recipe translations (en, pl, es). Italian remains source in recipe files. */
+/** Auto-generated classic recipe translations (en, pl, es, hi). Italian remains source in recipe files. */
 export type RecipeLocaleText = {
   title: string;
   description: string;
@@ -9,7 +9,7 @@ export type RecipeLocaleText = {
 
 export const RECIPE_TRANSLATIONS: Record<
   string,
-  { en: RecipeLocaleText; pl: RecipeLocaleText; es: RecipeLocaleText }
+  { en: RecipeLocaleText; pl: RecipeLocaleText; es: RecipeLocaleText; hi: RecipeLocaleText }
 > = {
   "pesto": {
     "en": {
@@ -68,6 +68,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Assaggia, regola di sal e Sirve immediatamente. Non far bollire il pesto: il calore residuo della pasta è sufficiente."
       ],
       "tip": "Se il pesto è molto denso o freddo di nevera, allungalo solo con agua di cottura: l'amido lega meglio dell'olio da solo e mantiene il colore verde brillante."
+    },
+    "hi": {
+      "title": "क्रीमी पेस्टो पास्ता",
+      "description": "Il pesto genovese diventa una salsa setosa quando viene allungato con l'पानी di cottura amilacea: il तुलसी resta vivo, il formaggio si fonde senza grumi e la पास्ता esce lucida e profumata. Un piatto che sa di Liguria ma si cucina in venti मिनट con quello che hai già in फ्रिज.",
+      "ingredients": [
+        "320 g di पास्ता corta (trofie, penne o fusilli)",
+        "3–4 tbsp di pesto genovese",
+        "40 g di पार्मेज़ान grattugiato",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक grosso per l'पानी"
+      ],
+      "steps": [
+        "उबाल आने तक गरम करें una बर्तन abbondante d'पानी, sala generosamente e tuffa la पास्ता. Cuocila 1 minuto in meno rispetto al tempo indicato sulla confezione: finirà di cuocere in कड़ाही.",
+        "कटोरे में larga stempera il pesto con l'olio e 2–3 tbsp di पानी di cottura calda. Devi ottenere una salsa fluida, brillante e non pastosa.",
+        "पानी निकालें la पास्ता tenendo da parte un mestolo d'पानी. Transferla subito nella ciotola e manteca energicamente per farla assorbire.",
+        "जोड़ें il पार्मेज़ान e, se serve, ancora un filo d'पानी: la salsa deve avvolgere ogni pezzo senza restare sul fondo.",
+        "Assaggia, regola di नमक e परोसें immediatamente. Non far bollire il pesto: il calore residuo della पास्ता è sufficiente."
+      ],
+      "tip": "Se il pesto è molto denso o freddo di फ्रिज, allungalo solo con पानी di cottura: l'amido lega meglio dell'olio da solo e mantiene il colore verde brillante."
     }
   },
   "caprese": {
@@ -127,6 +146,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Deja riposare 2–3 minutos a temperatura ambiente e Sirve fresco, non di nevera: i sapori si aprono."
       ],
       "tip": "Sala i tomates solo un attimo antes de Sirvere: se li sali troppo presto riDejano agua e diluiscono l'olio."
+    },
+    "hi": {
+      "title": "पके टमाटर की कैप्रेसे",
+      "description": "Pochi ingredienti di qualità fanno un piatto che sa d'estate: मोज़ेरेला fredda e compatta, टमाटर sodi e dolci, olio intenso e तुलसी spezzettato a mano. Ideale come antipasto fresco o pranzo lअंडाero quando non hai voglia di accendere i fornelli.",
+      "ingredients": [
+        "250 g di मोज़ेरेला (o fior di दूध)",
+        "2–3 टमाटर maturi ma sodi",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक fino e काली मिर्च nero",
+        "qualche foglia di तुलसी (se ce l'hai)"
+      ],
+      "steps": [
+        "पानी निकालें bene la मोज़ेरेला e Letla 5 मिनट su carta assorbente: così non allaga il piatto con l'पानी di governo.",
+        "Affetta मोज़ेरेला e टमाटर a dischi spessi circa 1 cm, scartando i pezzi troppo acquosi o verdi.",
+        "Alterna i dischi sul piatto lअंडाermente sovrapposti. Sali e pepa con mano lअंडाera, solo al momento.",
+        "Condisci con l'olio a filo e, se presente, il तुलसी spezzettato a mano (non Cutto col coltello, perde meno aroma).",
+        "रहने दें riposare 2–3 मिनट a temperatura ambiente e परोसें fresco, non di फ्रिज: i sapori si aprono."
+      ],
+      "tip": "Sala i टमाटर solo un attimo before परोसेंre: se li sali troppo presto riLetno पानी e diluiscono l'olio."
     }
   },
   "frittata": {
@@ -192,6 +230,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Deja intiepidire 5 minutos antes de Cortare: si assesta e resta più umida al centro."
       ],
       "tip": "Low heat e sartén antiaderente evitano il fondo bruciato e un cuore ancora liquido."
+    },
+    "hi": {
+      "title": "Frittata alta di तोरी",
+      "description": "Frittata dorata fuori e soffice dentro, con तोरी rosate e पार्मेज़ान. Si cuoce lentamente in कड़ाही, si gira con un piatto e resta umida al centro. Perfetta tiepida, fredda o da asporto: un classico della cucina casalinga italiana.",
+      "ingredients": [
+        "4 अंडे medie",
+        "2 तोरी medie",
+        "1/2 प्याज़",
+        "40 g di पार्मेज़ान grattugiato",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "काटें la प्याज़ a fettine sottili e le तोरी a rondelle. गरमाएँ l'olio कड़ाही में antiaderente da 22–24 cm.",
+        "Rosola la प्याज़ 2 मिनट, poi जोड़ें le तोरी. Cuoci 8–10 मिनट over मध्यम आँच जब तक tenere e lअंडाermente dorate. Sali a metà cottura.",
+        "कटोरे में फेंटें le अंडे con पार्मेज़ान, un pizzico di नमक e काली मिर्च abbondante.",
+        "Distribuisci le verdure, versa le अंडे e livella. Cuoci coperto over धीमी आँच 6–7 मिनट, finché i bordi sono presi.",
+        "Con un piatto gira la frittata e cuoci altri 3–4 मिनट, oppure finisci 2 मिनट sotto il grill.",
+        "रहने दें intiepidire 5 मिनट before Cutre: si assesta e resta più umida al centro."
+      ],
+      "tip": "Low heat e कड़ाही antiaderente evitano il fondo bruciato e un cuore ancora liquido."
     }
   },
   "insalata": {
@@ -249,6 +308,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "En un bol emulsiona limón, olio e un pizzico di sal con una forchetta.",
         "Añade insalata e carote, condisci e Remueve delicatamente.",
         "Assaggia e Sirve subito per mantenere il croccante."
+      ],
+      "tip": "Condici solo al momento di portare in tavola, altrimenti l'insalata si affloscia."
+    },
+    "hi": {
+      "title": "Insalata croccante al नींबू",
+      "description": "Insalata fresca e acidula, con carote croccanti e un condimento al नींबू che sveglia il palato in pochi मिनट. Ideale come contorno o pranzo lअंडाero.",
+      "ingredients": [
+        "1 cespo di insalata (lattuga, iceberg o misticanza)",
+        "1 carota media",
+        "succo di 1/2 नींबू",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक fino"
+      ],
+      "steps": [
+        "धोएँ l'insalata in पानी fredda e asciugala bene: l'पानी residua diluisce il condimento.",
+        "Sbuccia la carota e Cutla a julienne fine o grattugiala a fori larghi.",
+        "कटोरे में emulsiona नींबू, olio e un pizzico di नमक con una forchetta.",
+        "जोड़ें insalata e carote, condisci e हिलाएँ delicatamente.",
+        "Assaggia e परोसें subito per mantenere il croccante."
       ],
       "tip": "Condici solo al momento di portare in tavola, altrimenti l'insalata si affloscia."
     }
@@ -313,6 +391,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spegni, Añade pimienta e albahaca se ce l'hai. Sirve subito."
       ],
       "tip": "Un pizzico di azúcar serve solo se i tomates sono acidi: assaggia prima."
+    },
+    "hi": {
+      "title": "Pasta al टमाटर semplice",
+      "description": "Sugo corto, dolce e lucido: प्याज़ soffritta, टमाटर e पास्ता mantecata in कड़ाही. Comfort food italiano che trasforma i टमाटर del फ्रिज in un piatto completo.",
+      "ingredients": [
+        "320 g di पास्ता",
+        "400 g di टमाटर maturi (o pelati)",
+        "1 प्याज़ piccola",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च",
+        "तुलसी fresco (opzionale)"
+      ],
+      "steps": [
+        "Trita la प्याज़ e soffriggila nell'olio over मध्यम आँच-basso 4–5 मिनट, senza bruciarla.",
+        "जोड़ें i टमाटर spezzettati, sala e रहने दें sobbollire 12–15 मिनट finché il sugo si restringe e diventa lucido.",
+        "Cuoci la पास्ता in पानी salata e पानी निकालेंla molto al dente (1–2 मिनट prima).",
+        "स्थानांतरित करें la पास्ता nel sugo con un mestolo d'पानी di cottura e manteca 1–2 मिनट over तेज़ आँच.",
+        "Spegni, जोड़ें काली मिर्च e तुलसी se ce l'hai. परोसें subito."
+      ],
+      "tip": "Un pizzico di चीनी serve solo se i टमाटर sono acidi: assaggia prima."
     }
   },
   "funghi": {
@@ -372,6 +470,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sali, pepa, togli l'ajo se preferisci e completa con prezzemolo. Sirve caldi."
       ],
       "tip": "Pan spaziosa e fuoco alto: se li sovrapponi, i champiñones lessano invece di salare."
+    },
+    "hi": {
+      "title": "Mushrooms नमकati all'लहसुन",
+      "description": "Mushrooms rosati a fiamma viva, लहसुन e prezzemolo: contorno saporito o base per crostini e पास्ता. Un modo veloce per dare carattere ai मशरूम del फ्रिज.",
+      "ingredients": [
+        "400 g di मशरूम champignon (o misti)",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "prezzemolo tritato",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Pulisci i मशरूम con un कड़ाहीno umido, senza immergerli. Cutli a fette regolari.",
+        "गरमाएँ bene la कड़ाही con l'olio. जोड़ें l'लहसुन schiacciato 30 secondi senza bruciarlo.",
+        "Tuffa i मशरूम e non हिलाएँre per 1–2 मिनट: devono rosolare e perdere l'पानी.",
+        "Quando l'पानी è evaporata, हिलाएँ e cuoci ancora 4–5 मिनट over मध्यम आँच-alto.",
+        "Sali, pepa, togli l'लहसुन se preferisci e completa con prezzemolo. परोसें caldi."
+      ],
+      "tip": "Pan spaziosa e fuoco alto: se li sovrapponi, i मशरूम lessano invece di नमकare."
     }
   },
   "peperoni": {
@@ -431,6 +548,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Regola di sal e Sirve caldi, tiepidi o freddi."
       ],
       "tip": "Un cucharadas d'aceto o un goccio di limón a fine cottura bilancia la dolcezza."
+    },
+    "hi": {
+      "title": "Pepperroni stufati in कड़ाही",
+      "description": "Pepperroni dolci e प्याज़ cotti lentamente जब तक diventare morbidi e caramellati. Ottimi anche il giorno dopo, come contorno o su bruschette.",
+      "ingredients": [
+        "3 काली मिर्चroni (rossi o misti)",
+        "1 प्याज़",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक",
+        "origano o काली मिर्च (opzionale)"
+      ],
+      "steps": [
+        "Mondate i काली मिर्चroni: togli picciolo, semi e filamenti. Cutli a strisce non troppo sottili.",
+        "Affetta la प्याज़ e mettila in कड़ाही con l'olio. Quando traspare, जोड़ें i काली मिर्चroni.",
+        "Sala, copri e cuoci 15 मिनट हिलाएँndo ogni tanto.",
+        "Scopri e alza il fuoco 5 मिनट per far restringere i succhi.",
+        "Regola di नमक e परोसें caldi, tiepidi o freddi."
+      ],
+      "tip": "Un tbsp d'aceto o un goccio di नींबू a fine cottura bilancia la dolcezza."
     }
   },
   "uova-strapazzate": {
@@ -488,6 +624,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Versa le huevos e Remueve in continuazione con una spatola, dal bordo verso il centro.",
         "Quando sono ancora lucide e cremose, spegni: finiscono di cuocere col calore residuo.",
         "Sirve subito su sartén tostato o da sole."
+      ],
+      "tip": "Il segreto è il fuoco bassissimo: a fiamma alta diventano secche in pochi secondi."
+    },
+    "hi": {
+      "title": "Eggs cremose al पार्मेज़ान",
+      "description": "Eggs strapazzate lente e cremose, arricchite di पार्मेज़ान e un filo di दूध. Colazione o cena lampo quando in फ्रिज ci sono solo अंडे e formaggio.",
+      "ingredients": [
+        "3 अंडे",
+        "2 tbsp di दूध",
+        "30 g di पार्मेज़ान grattugiato",
+        "un noce di मक्खन (o 1 tbsp d'olio)",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "फेंटें अंडे, दूध, पार्मेज़ान, नमक e काली मिर्च जब तक un composto omogeneo.",
+        "गरमाएँ una कड़ाही antiaderente over धीमी आँच con il मक्खन: deve fondere senza sफ्रिजlare forte.",
+        "Versa le अंडे e हिलाएँ in continuazione con una spatola, dal bordo verso il centro.",
+        "Quando sono ancora lucide e cremose, spegni: finiscono di cuocere col calore residuo.",
+        "परोसें subito su ब्रेड tostato o da sole."
       ],
       "tip": "Il segreto è il fuoco bassissimo: a fiamma alta diventano secche in pochi secondi."
     }
@@ -549,6 +704,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Regola la densità con altra agua: la salsa deve avvolgere la pasta. Pepa e Sirve subito."
       ],
       "tip": "Se la salsa si spezza, togli dal fuoco e manteca con un cucharadas d'agua fredda."
+    },
+    "hi": {
+      "title": "Pasta al नींबू e पार्मेज़ान",
+      "description": "Salsa al नींबू setosa, मक्खन e पार्मेज़ान: piatto luminoso e veloce quando in फ्रिज c'è solo un agrume. Acidità e cremosità in perfetto equilibrio.",
+      "ingredients": [
+        "320 g di पास्ता lunga o corta",
+        "1 नींबू non trattato (scorza e succo)",
+        "40 g di मक्खन",
+        "50 g di पार्मेज़ान grattugiato",
+        "नमक e काली मिर्च nero"
+      ],
+      "steps": [
+        "Metti a bollire l'पानी. Grattugia la scorza del नींबू e spremine metà, filtrando i semi.",
+        "कड़ाही में sciogli il मक्खन over धीमी आँच con la scorza, senza far colorire.",
+        "Cuoci la पास्ता e पानी निकालेंla al dente, tenendo da parte un mestolo d'पानी di cottura.",
+        "स्थानांतरित करें la पास्ता in कड़ाही con succo di नींबू, un po' d'पानी e il पार्मेज़ान. Manteca energicamente.",
+        "Regola la densità con altra पानी: la salsa deve avvolgere la पास्ता. Pepa e परोसें subito."
+      ],
+      "tip": "Se la salsa si spezza, togli dal fuoco e manteca con un tbsp d'पानी fredda."
     }
   },
   "carote-yogurt": {
@@ -608,6 +782,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Assaggia, regola di limón o sal e Sirve fresco."
       ],
       "tip": "Con yogurt greco denso, allunga con un cucharadas d'agua per non avere un composto pastoso."
+    },
+    "hi": {
+      "title": "Insalata di carote allo yogurt",
+      "description": "Carote grattugiate in una salsa allo yogurt e नींबू: contorno fresco, lअंडाero e pronto in pochi मिनट. Ideale per bilanciare piatti più ricchi.",
+      "ingredients": [
+        "3 carote medie",
+        "150 g di yogurt bianco",
+        "succo di 1/2 नींबू",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Sbuccia le carote e grattugiale a fori medi.",
+        "हिलाएँ yogurt, नींबू, olio, नमक e काली मिर्च जब तक una salsa cremosa ma fluida.",
+        "जोड़ें le carote e amalgama bene.",
+        "रहने दें riposare 5 मिनट in फ्रिज: i sapori si bilanciano.",
+        "Assaggia, regola di नींबू o नमक e परोसें fresco."
+      ],
+      "tip": "Con yogurt greco denso, allunga con un tbsp d'पानी per non avere un composto pastoso."
     }
   },
   "zucchine": {
@@ -667,6 +860,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Pepa, completa con prezzemolo se ce l'hai e Sirve."
       ],
       "tip": "Non coprire la sartén: il vapore le rende mollicce invece che rosate."
+    },
+    "hi": {
+      "title": "Zucchini trifolate in कड़ाही",
+      "description": "Zucchini नमकate con लहसुन e olio, tenere fuori e ancora con morso. Contorno veloce o condimento per पास्ता: un classico della cucina di casa.",
+      "ingredients": [
+        "3 तोरी medie",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च",
+        "prezzemolo (opzionale)"
+      ],
+      "steps": [
+        "काटें le तोरी a rondelle di 4–5 mm o a bastoncini.",
+        "गरमाएँ l'olio con l'लहसुन schiacciato. Quando profuma, togli l'लहसुन se preferisci un gusto delicato.",
+        "जोड़ें le तोरी e fallole नमकare 8–10 मिनट over मध्यम आँच-alto.",
+        "Sala a metà cottura: così non riLetno troppa पानी subito.",
+        "Pepa, completa con prezzemolo se ce l'hai e परोसें."
+      ],
+      "tip": "Non coprire la कड़ाही: il vapore le rende mollicce invece che rosate."
     }
   },
   "mozza-pesto": {
@@ -723,6 +935,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve subito con sartén tostato o crostini caldi."
       ],
       "tip": "Se la mozzarella è di nevera, Dejala 10 minutos a temperatura ambiente: il sapore si apre."
+    },
+    "hi": {
+      "title": "Mozzarella tiepida al pesto",
+      "description": "Antipasto lampo: मोज़ेरेला पानी निकालेंta, un velo di pesto e olio a crudo. Ideale con ब्रेड croccante quando hai poco tempo e vuoi qualcosa di buono.",
+      "ingredients": [
+        "200 g di मोज़ेरेला",
+        "2 tbsp di pesto",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "काली मिर्च nero",
+        "ब्रेड tostato per परोसेंre"
+      ],
+      "steps": [
+        "पानी निकालें e asciuga la मोज़ेरेला. Cutla a fette spesse o a cubetti grossi.",
+        "Disponila sul piatto e spalma un velo sottile di pesto su ogni pezzo.",
+        "Completa con un filo d'olio e una macinata di काली मिर्च.",
+        "परोसें subito con ब्रेड tostato o crostini caldi."
+      ],
+      "tip": "Se la मोज़ेरेला è di फ्रिज, Letla 10 मिनट a temperatura ambiente: il sapore si apre."
     }
   },
   "uova-pomodoro": {
@@ -785,6 +1015,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Pepa, completa con un filo d'olio e Sirve con sartén tostato."
       ],
       "tip": "Non alzare troppo il fuoco: le huevos devono cuocere piano nel sugo, non friggere."
+    },
+    "hi": {
+      "title": "Eggs in purgatorio",
+      "description": "Eggs poaché in un sugo di टमाटर speziato e lअंडाero: piatto unico saporito che usa अंडे e टमाटर del फ्रिज. Perfetto per una cena veloce e confortante.",
+      "ingredients": [
+        "4 अंडे",
+        "400 g di टमाटर maturi (o pelati)",
+        "1 spicchio d'लहसुन",
+        "1/2 प्याज़",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक, काली मिर्च e un pizzico di काली मिर्चroncino (opzionale)"
+      ],
+      "steps": [
+        "Trita प्याज़ e लहसुन. Soffriggili nell'olio over मध्यम आँच 3–4 मिनट.",
+        "जोड़ें i टमाटर spezzettati, sala e रहने दें sobbollire 10 मिनट जब तक un sugo denso ma ancora fluido.",
+        "Con un tbsp forma quattro nicchie nel sugo e rompi le अंडे dentro.",
+        "Copri e पकाएँ basso 4–6 मिनट: il bianco deve coagulare, il tuorlo restare morbido.",
+        "Pepa, completa con un filo d'olio e परोसें con ब्रेड tostato."
+      ],
+      "tip": "Non alzare troppo il fuoco: le अंडे devono cuocere piano nel sugo, non friggere."
     }
   },
   "pasta-zucchine": {
@@ -847,6 +1097,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Manteca a fuego fuerte 1 minuto: la salsa deve legare. Pepa e Sirve subito."
       ],
       "tip": "Se vuoi più cremosità, Añade un cucharadas di agua di cottura in più mentre mantechi: l'amido fa miracoli."
+    },
+    "hi": {
+      "title": "Pasta alle तोरी e पार्मेज़ान",
+      "description": "Pasta mantecata con तोरी dorate e पार्मेज़ान: piatto cremoso senza क्रीम, lअंडाero e pieno di sapore. Ideale quando le तोरी iniziano ad accumularsi in फ्रिज.",
+      "ingredients": [
+        "320 g di पास्ता",
+        "3 तोरी medie",
+        "40 g di पार्मेज़ान grattugiato",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "काटें le तोरी a rondelle sottili. गरमाएँ l'olio con l'लहसुन, poi जोड़ें le तोरी.",
+        "Cuoci 10–12 मिनट over मध्यम आँच-alto जब तक dorate e tenere. Sali a metà cottura.",
+        "Cuoci la पास्ता al dente e पानी निकालेंla tenendo da parte un mestolo d'पानी.",
+        "स्थानांतरित करें la पास्ता nella कड़ाही delle तोरी, जोड़ें पार्मेज़ान e un po' d'पानी di cottura.",
+        "Manteca over तेज़ आँच 1 minuto: la salsa deve legare. Pepa e परोसें subito."
+      ],
+      "tip": "Se vuoi più cremosità, जोड़ें un tbsp di पानी di cottura in più mentre mantechi: l'amido fa miracoli."
     }
   },
   "insalata-mozza": {
@@ -909,6 +1179,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve subito, eventualmente con sartén tostato a parte."
       ],
       "tip": "Se prepari in anticipo, tieni il condimento a parte e Añade tutto solo al momento di Sirvere."
+    },
+    "hi": {
+      "title": "Insalata di मोज़ेरेला e टमाटर",
+      "description": "Versione più ricca della caprese: insalata di base croccante, टमाटर a spicchi, मोज़ेरेला a cubetti e un condimento semplice all'olio e नींबू. Piatto completo, fresco e bilanciato, pronto in dieci मिनट.",
+      "ingredients": [
+        "1 cespo di insalata",
+        "200 g di मोज़ेरेला",
+        "2 टमाटर maturi",
+        "succo di 1/2 नींबू",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "धोएँ e asciuga l'insalata, poi spezzettala a pezzi grossolani. पानी निकालें e काटें la मोज़ेरेला a cubetti.",
+        "काटें i टमाटर a spicchi o a cubetti medi, scartando l'पानी in eccesso.",
+        "कटोरे में grande जोड़ें insalata, मोज़ेरेला e टमाटर.",
+        "Condisci con नींबू, olio, नमक e काली मिर्च. हिलाएँ delicatamente.",
+        "परोसें subito, eventualmente con ब्रेड tostato a parte."
+      ],
+      "tip": "Se prepari in anticipo, tieni il condimento a parte e जोड़ें tutto solo al momento di परोसेंre."
     }
   },
   "frittata-zucchine-prosciutto": {
@@ -974,6 +1264,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve subito ben calda o tiepida."
       ],
       "tip": "Non sbattere troppo a lungo le huevos: è sufficiente amalgamare tuorli e albumi senza incorporare troppa aria, così la frittata rimarrà compatta e umida al centro."
+    },
+    "hi": {
+      "title": "तोरी और हैम फ्रिटाटा",
+      "description": "Spessa, soffice e dorata in superficie: una frittata casalinga arricchita con तोरी नमकate e cubetti di पका हुआ हैम. Perfetta per salvare una cena dell'ultimo minuto unendo proteine e verdure in un solo piatto.",
+      "ingredients": [
+        "4 अंडे medie",
+        "1 तोरी grande",
+        "70 g di पका हुआ हैम in una sola fetta",
+        "2 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "धोएँ la तोरी e Cutla a rondelle sottili. Riduci il पका हुआ हैम a cubetti.",
+        "गरमाएँ l'olio कड़ाही में antiaderente, जोड़ें le तोरी e cuoci per 5 मिनट over तेज़ आँच finché non sono tenere.",
+        "कटोरे में फेंटें le अंडे con il पार्मेज़ान Rअंडाiano, un pizzico di नमक e una spolverata di काली मिर्च.",
+        "जोड़ें i cubetti di प्रोशुट्टो alle तोरी nella कड़ाही, quindi versa il composto di अंडे in modo uniforme.",
+        "पकाएँ medio-basso per 4 मिनट per lato, girando la frittata a metà cottura con l'aiuto di un piatto o di un coperchio.",
+        "परोसें subito ben calda o tiepida."
+      ],
+      "tip": "Non sbattere troppo a lungo le अंडे: è sufficiente amalgamare tuorli e albumi senza incorporare troppa aria, così la frittata rimarrà compatta e umida al centro."
     }
   },
   "caprese-calda-forno": {
@@ -1036,6 +1347,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Estrai dal horno e Deja riposare due minutos antes de Sirvere."
       ],
       "tip": "Fai Escurrere molto bene la mozzarella antes de Cortarla, premendola lhuevoermente con carta assorbente: eviterai che rilasci troppa agua sul fondo della pirofila durante la cottura."
+    },
+    "hi": {
+      "title": "गर्म बेक्ड कैप्रेसे",
+      "description": "Una rivisitazione invernale e filante del grande classico estivo: टमाटर succosi e मोज़ेरेला fresca cotti al ओवन जब तक creare una crosticina dorata e irresistibile.",
+      "ingredients": [
+        "2 टमाटर ramati grandi",
+        "125 g di मोज़ेरेला fresca",
+        "1 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक, काली मिर्च e origano"
+      ],
+      "steps": [
+        "धोएँ i टमाटर e Cutli a fette spesse circa un centimetro. काटें anche la मोज़ेरेला a fette simili.",
+        "Disponi le fette di टमाटर e मोज़ेरेला alternate in una pirofila lअंडाermente oliata.",
+        "Condisci la superficie con un pizzico di नमक, काली मिर्च nero e una generosa manciata di origano secco.",
+        "Spolvera con il पार्मेज़ान Rअंडाiano grattugiato e rifinisci con un filo d'olio a crudo.",
+        "Inforna sotto il grill preriHeatto a 200°C लगभग 8-10 मिनट, जब तक quando la मोज़ेरेला non sarà completamente fusa e dorata.",
+        "Estrai dal ओवन e रहने दें riposare due मिनट before परोसेंre."
+      ],
+      "tip": "Fai पानी निकालेंre molto bene la मोज़ेरेला before Cutrla, premendola lअंडाermente con carta assorbente: eviterai che rilasci troppa पानी sul fondo della pirofila durante la cottura."
     }
   },
   "omelette-ricotta-prosciutto-crudo": {
@@ -1098,6 +1429,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Ripiega l'omelette a mezzaluna e cuoci ancora per 1 minuto antes de farla scivolare sul piatto da portata."
       ],
       "tip": "Mantieni il fuego medio-basso durante tutta la cottura: l'omelette perfetta deve rimanere chiara all'esterno e baveuse (morbida e quasi cremosa) all'interno."
+    },
+    "hi": {
+      "title": "Omelette alla ricotta e प्रोशुट्टो",
+      "description": "Un guscio di अंडे morbido e ripiegato che racchiude un cuore cremoso di ricotta fresca e la sapidità del प्रोशुट्टो. Elegante nella sua estrema semplicità.",
+      "ingredients": [
+        "2 अंडे medie",
+        "60 g di ricotta fresca",
+        "2 fette di प्रोशुट्टो",
+        "1 tsp di मक्खन",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "कटोरे में lavora la ricotta con una forchetta insieme a un pizzico di नमक e काली मिर्च जब तक renderla una crema omogenea.",
+        "फेंटें lअंडाermente le अंडे in un'altra ciotola con un pizzico di नमक.",
+        "Sciogli il मक्खन कड़ाही में antiaderente over मध्यम आँच senza farlo scurire.",
+        "Versa le अंडे e muovi la कड़ाही per distribuire il composto; solleva i bordi man mano che si rapprendono per far scivolare l'अंडा liquido sotto.",
+        "Quando la superficie è ancora lअंडाermente umida, disponi il प्रोशुट्टो e la ricotta su una metà dell'omelette.",
+        "Ripiega l'omelette a mezzaluna e cuoci ancora per 1 minuto before farla scivolare sul piatto da portata."
+      ],
+      "tip": "Mantieni il मध्यम आँच-basso durante tutta la cottura: l'omelette perfetta deve rimanere chiara all'esterno e baveuse (morbida e quasi cremosa) all'interno."
     }
   },
   "risotto-parmigiano-salame": {
@@ -1163,6 +1514,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Remueve energicamente per mantecare il arroztto, copri con un coperchio e Deja riposare per 2 minutos antes de Sirvere con un pizzico di pimienta."
       ],
       "tip": "Usa sempre mantequilla freddissimo da neverarifero per la mantecatura: lo shock termico tra il arroz bollente e il grasso freddo creerà un'emulsione perfetta ed eccezionalmente cremosa."
+    },
+    "hi": {
+      "title": "Ricetto saporito al पार्मेज़ान e salame",
+      "description": "Un चावलtto cremoso e dal carattere deciso, dove la dolcezza della mantecatura al पार्मेज़ान incontra la nota croccante e speziata del salame tostato in कड़ाही.",
+      "ingredients": [
+        "160 g di चावल Carnaroli o Arborio",
+        "60 g di salame italiano",
+        "40 g di पार्मेज़ान Rअंडाiano grattugiato",
+        "20 g di मक्खन",
+        "1 litro di स्टॉक vegetale lअंडाero",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "काटें il salame a striscioline o dadini e tostalo in una casseruola senza grassi per 2 मिनट finché non diventa croccante. Prelevalo e tienilo da parte.",
+        "Nella stessa casseruola, sfrutta il grasso riLetto dal salame per tostare il चावल a secco per 2 मिनट over तेज़ आँच.",
+        "Inizia ad aggiungere il स्टॉक bollente un mestolo alla volta, हिलाएँndo spesso e aspettando che venga assorbito before aggiungerne altro.",
+        "Porta il चावल a cottura (circa 16-18 मिनट) regolando di नमक se necessario.",
+        "Spegni il fuoco, जोड़ें il salame croccante tenuto da parte, il मक्खन freddo di फ्रिज e il पार्मेज़ान Rअंडाiano.",
+        "हिलाएँ energicamente per mantecare il चावलtto, copri con un coperchio e रहने दें riposare per 2 मिनट before परोसेंre con un pizzico di काली मिर्च."
+      ],
+      "tip": "Usa sempre मक्खन freddissimo da फ्रिजrifero per la mantecatura: lo shock termico tra il चावल bollente e il grasso freddo creerà un'emulsione perfetta ed eccezionalmente cremosa."
     }
   },
   "zucchine-ripiene-ricotta-prosciutto": {
@@ -1228,6 +1600,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci in horno preriCalientato a 190°C durante unos 20 minutos, accendendo il grill negli ultimi 3 minutos per gratinare la superficie."
       ],
       "tip": "Se il ripieno dovesse risultare troppo umido a causa dell'agua residua delle calabacín, Añade un cucharadita di sarténgrattato al composto per renderlo più sodo."
+    },
+    "hi": {
+      "title": "Zucchini ripiene di ricotta e पका हुआ हैम",
+      "description": "Barchette di तोरी scavate e farcite con una mousse lअंडाera di ricotta, पार्मेज़ान e पका हुआ हैम tritato, cotte in ओवन per una consistenza morbida ma compatta.",
+      "ingredients": [
+        "2 तोरी lunghe medie",
+        "150 g di ricotta fresca",
+        "50 g di पका हुआ हैम",
+        "3 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक, काली मिर्च e noce moscata"
+      ],
+      "steps": [
+        "धोएँ le तोरी, spuntale e Cutle a metà nel senso della lunghezza. Sbollentale in पानी salata per 5 मिनट.",
+        "पानी निकालें le तोरी, Letle intiepidire e, usando un tsp, scava delicatamente la polpa centrale Letndo un guscio solido.",
+        "Trita finemente la polpa estratta e strizzala per eliminare l'पानी in eccesso; Addla कटोरे में con ricotta, पार्मेज़ान e पका हुआ हैम sminuzzato.",
+        "Condisci il ripieno con un pizzico di नमक, काली मिर्च e una grattugiata minima di noce moscata.",
+        "Farcisci i gusci di तोरी con il composto ottenuto e disponili in una teglia unta con l'एक्स्ट्रा वर्जिन जैतून तेल.",
+        "Cuoci in ओवन preriHeatto a 190°C लगभग 20 मिनट, accendendo il grill negli ultimi 3 मिनट per gratinare la superficie."
+      ],
+      "tip": "Se il ripieno dovesse risultare troppo umido a causa dell'पानी residua delle तोरी, जोड़ें un tsp di कड़ाहीgrattato al composto per renderlo più sodo."
     }
   },
   "bruschetta-pomodori-mozzarella": {
@@ -1293,6 +1686,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Añade un ultimo filo d'olio a crudo e Sirve immediatamente prima che il sartén si inumidisca eccessivamente."
       ],
       "tip": "Corta la mozzarella a cubetti e Dejala riposare in un colino antes de condire il tomate: in questo modo il sartén rimarrà fragrante e super croccante senza inzupparsi."
+    },
+    "hi": {
+      "title": "Bruschetta golosa टमाटर e मोज़ेरेला",
+      "description": "Fette di ब्रेड rustico tostate alla perfezione, strofinate con लहसुन e sormontate da un mix mediterraneo di टमाटरni freschi e dadini di मोज़ेरेला filante.",
+      "ingredients": [
+        "4 fette di ब्रेड casereccio",
+        "2 टमाटर maturi",
+        "100 g di मोज़ेरेला",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e origano"
+      ],
+      "steps": [
+        "काटें i टमाटर e la मोज़ेरेला a cubetti molto piccoli e raccoglili कटोरे में.",
+        "Condisci il mix con l'एक्स्ट्रा वर्जिन जैतून तेल, नमक e una generosa spolverata di origano; रहने दें insaporire per 5 मिनट.",
+        "Tosta le fette di ब्रेड su una piastra ben calda o in ओवन per 2-3 मिनट per lato, finché non risulteranno ben rigide e dorate.",
+        "Strofina lअंडाermente lo spicchio d'लहसुन pulito sulla superficie del ब्रेड caldo per riLetre l'aroma.",
+        "Distribuisci il condimento di टमाटर e मोज़ेरेला sopra le fette di ब्रेड ancora calde.",
+        "जोड़ें un ultimo filo d'olio a crudo e परोसें immediatamente prima che il ब्रेड si inumidisca eccessivamente."
+      ],
+      "tip": "काटें la मोज़ेरेला a cubetti e Letla riposare in un colino before condire il टमाटर: in questo modo il ब्रेड rimarrà fragrante e super croccante senza inzupparsi."
     }
   },
   "uova-in-purgatorio": {
@@ -1358,6 +1772,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spegni il fuoco, cospargi la superficie con il parmesano Rhuevoiano grattugiato, metti il coperchio ancora per 1 minuto per farlo fondere e Sirve con sartén per la scarpetta."
       ],
       "tip": "Mantieni il fuoco al minimo dopo aver inserito le huevos: il tuorlo deve rimanere liquido e cremoso all'interno, velato appena da una sottile pellicola bianca."
+    },
+    "hi": {
+      "title": "Eggs in purgatorio al टमाटर e पार्मेज़ान",
+      "description": "Un piatto della tradizione povera camकड़ाहीa: अंडे fresche cotte direttamente all'interno di un sugo denso di टमाटर, completate con abbondante पार्मेज़ान filante.",
+      "ingredients": [
+        "4 अंडे medie",
+        "300 g di टमाटर passata",
+        "1 spicchio d'लहसुन",
+        "3 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "कड़ाही में ampia गरमाएँ l'एक्स्ट्रा वर्जिन जैतून तेल e fai dorare lo spicchio d'लहसुन intero schiacciato.",
+        "Versa la टमाटर passata, regola di नमक e काली मिर्च e रहने दें cuocere over मध्यम आँच per 5-6 मिनट जब तक farla restringere lअंडाermente.",
+        "Rimuovi l'लहसुन e, usando un tbsp, crea quattro piccoli incavi nel sugo di टमाटर.",
+        "Rompi un अंडा all'interno di ciascun incavo, facendo attenzione a non rompere i tuorli.",
+        "Copri immediatamente la कड़ाही con un coperchio e पकाएँ basso लगभग 4-5 मिनट, finché l'albume non diventa bianco e sodo.",
+        "Spegni il fuoco, cospargi la superficie con il पार्मेज़ान Rअंडाiano grattugiato, metti il coperchio ancora per 1 minuto per farlo fondere e परोसें con ब्रेड per la scarpetta."
+      ],
+      "tip": "Mantieni il fuoco al minimo dopo aver inserito le अंडे: il tuorlo deve rimanere liquido e cremoso all'interno, velato appena da una sottile pellicola bianca."
     }
   },
   "involtini-prosciutto-ricotta": {
@@ -1420,6 +1855,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Arrotola delicatamente il jamón serrano intorno al ripieno formando degli involtini cilindrici compatti e disponili su un piatto da portata."
       ],
       "tip": "Per una presentazione più ordinata puoi inserire la crema di ricotta in una sac-à-poche con beccuccio rigato antes de farcire le fette di jamón serrano."
+    },
+    "hi": {
+      "title": "Involtini di प्रोशुट्टो e ricotta alle erbe",
+      "description": "Un antipasto freddo senza cottura, rapido e sfizioso: morbide fette di प्रोशुट्टो che avvolgono una crema di ricotta lअंडाera aromatizzata al काली मिर्च e formaggio.",
+      "ingredients": [
+        "6 fette di प्रोशुट्टो non troppo sottili",
+        "150 g di ricotta fresca",
+        "2 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 tsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च nero macinato fresco"
+      ],
+      "steps": [
+        "कटोरे में capiente जोड़ें la ricotta fresca, il पार्मेज़ान Rअंडाiano grattugiato e il tsp di एक्स्ट्रा वर्जिन जैतून तेल.",
+        "Lavora energicamente con una forchetta o una frusta a mano जब तक ottenere una crema liscia, vellutata e priva di grumi.",
+        "Regola di नमक e जोड़ें una generosa macinata di काली मिर्च nero secondo i tuoi gusti.",
+        "Stendi le fette di प्रोशुट्टो su un tagliere pulito ben distese.",
+        "Metti un tbsp abbondante di crema di ricotta all'estremità di ogni fetta di प्रोशुट्टो.",
+        "Arrotola delicatamente il प्रोशुट्टो intorno al ripieno formando degli involtini cilindrici compatti e disponili su un piatto da portata."
+      ],
+      "tip": "Per una presentazione più ordinata puoi inserire la crema di ricotta in una sac-à-poche con beccuccio rigato before farcire le fette di प्रोशुट्टो."
     }
   },
   "pasta-pomodorini-mozzarella": {
@@ -1485,6 +1940,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Se necessario, Añade un goccio di agua della pasta per legare il tutto e Sirve subito nei piatti."
       ],
       "tip": "Esegui l'ultimo passaggio rigorosamente a fuoco spento: il calore residuo della pasta è più che sufficiente per sciogliere la mozzarella senza farla aggregare in un unico blocco gommoso."
+    },
+    "hi": {
+      "title": "Pasta veloce टमाटरni e मोज़ेरेला filante",
+      "description": "Il primo piatto salvacena per eccellenza: una पास्ता corta नमकata in कड़ाही con टमाटर freschi e dadini di मोज़ेरेला che si sciolgono creando irresistibili fili.",
+      "ingredients": [
+        "160 g di पास्ता corta (penne o fusilli)",
+        "2 टमाटर ramati grandi (o टमाटरni)",
+        "125 g di मोज़ेरेला fresca",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "उबाल आने तक गरम करें una बर्तन di पानी salata e cuoci la पास्ता secondo i tempi indicati sulla confezione.",
+        "Nel frattempo, धोएँ i टमाटर e Cutli a cubetti; काटें a cubetti anche la मोज़ेरेला e tienila da parte.",
+        "कड़ाही में capiente गरमाएँ l'एक्स्ट्रा वर्जिन जैतून तेल con lo spicchio d'लहसुन intero; जोड़ें i टमाटर e नमकa over तेज़ आँच per 3-4 मिनट.",
+        "पानी निकालें la पास्ता al dente (conservando un mestolo di पानी di cottura) e versala direttamente nella कड़ाही con i टमाटर dopo aver rimosso l'लहसुन.",
+        "Spegni il fuoco, जोड़ें immediatamente i cubetti di मोज़ेरेला e हिलाएँ velocemente per farli Heatre e filare.",
+        "Se necessario, जोड़ें un goccio di पानी della पास्ता per legare il tutto e परोसें subito nei piatti."
+      ],
+      "tip": "Esegui l'ultimo passaggio rigorosamente a fuoco spento: il calore residuo della पास्ता è più che sufficiente per sciogliere la मोज़ेरेला senza farla aggregare in un unico blocco gommoso."
     }
   },
   "crostini-salame-mozzarella": {
@@ -1547,6 +2023,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Inforna la teglia nella parte più alta del horno durante unos 4-5 minutos, finché la mozzarella non fa le bolle e accenna a dorarsi. Sirve caldissimi."
       ],
       "tip": "Usa sartén lhuevoermente raffermo di un giorno: la cottura in horno lo renderà magnificamente croccante sotto lo strato morbido e filante del formaggio."
+    },
+    "hi": {
+      "title": "Crostini caldi con salame e मोज़ेरेला",
+      "description": "Snack o antipasto espresso super filante: fette di ब्रेड ricoperte di मोज़ेरेला e fette di salame saporito, passate sotto il grill del ओवन जब तक completa fusione.",
+      "ingredients": [
+        "4 fette di ब्रेड (tipo baguette o ब्रेड casereccio)",
+        "100 g di मोज़ेरेला",
+        "8 fette di salame italiano",
+        "1 tsp di origano",
+        "काली मिर्च nero"
+      ],
+      "steps": [
+        "Preriगरमाएँ il grill del ओवन alla massima बर्तनenza. काटें la मोज़ेरेला a fette non troppo spesse.",
+        "Disponi le fette di ब्रेड su una teglia foderata con carta da ओवन.",
+        "Metti una o due fette di salame su ciascun pezzo di ब्रेड, adattandole alla dimensione della fetta.",
+        "Copri il salame con le fette di मोज़ेरेला, facendo in modo che coprano bene la superficie.",
+        "Spolvera con un pizzico di origano e una macinata lअंडाera di काली मिर्च nero.",
+        "Inforna la teglia nella parte più alta del ओवन लगभग 4-5 मिनट, finché la मोज़ेरेला non fa le bolle e accenna a dorarsi. परोसें caldissimi."
+      ],
+      "tip": "Usa ब्रेड lअंडाermente raffermo di un giorno: la cottura in ओवन lo renderà magnificamente croccante sotto lo strato morbido e filante del formaggio."
     }
   },
   "zucchine-pomodori-parmigiano": {
@@ -1612,6 +2108,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spolvera uniformemente con il parmesano Rhuevoiano grattugiato, Remueve delicatamente per distribuirlo e Sirve caldo o a temperatura ambiente."
       ],
       "tip": "Corta le calabacín a pezzi di dimensioni uniformi per garantire una cottura omogenea e mantenerle piacevolmente sode sotto i denti."
+    },
+    "hi": {
+      "title": "Zucchini e टमाटर नमकati al पार्मेज़ान",
+      "description": "Un contorno vegetariano lअंडाero e colorato, नमकato velocemente in कड़ाही per mantenere le verdure croccanti e completato da una ricca spolverata di पार्मेज़ान.",
+      "ingredients": [
+        "2 तोरी medie",
+        "2 टमाटर maturi sodi",
+        "2 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "धोएँ le verdure; काटें le तोरी a mezzelune spesse e i टमाटर a cubetti eliminando parte dei semi interni.",
+        "कड़ाही में antiaderente गरमाएँ l'एक्स्ट्रा वर्जिन जैतून तेल con lo spicchio d'लहसुन schiacciato.",
+        "जोड़ें le तोरी e नमकale a fuoco vivace लगभग 5-6 मिनट, muओवनdo la कड़ाही finché non iniziano a prendere colore.",
+        "जोड़ें i cubetti di टमाटर, regola di नमक e काली मिर्च e continua la cottura per altri 3 मिनट (i टमाटर devono solo ammorbidirsi, non disfarsi).",
+        "Elimina lo spicchio d'लहसुन e spegni il fuoco.",
+        "Spolvera uniformemente con il पार्मेज़ान Rअंडाiano grattugiato, हिलाएँ delicatamente per distribuirlo e परोसें caldo o a temperatura ambiente."
+      ],
+      "tip": "काटें le तोरी a pezzi di dimensioni uniformi per garantire una cottura omogenea e mantenerle piacevolmente sode sotto i denti."
     }
   },
   "crema-ricotta-dolce": {
@@ -1668,6 +2185,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Deja riposare in neverarifero hasta quel momento di Sirvere per una consistenza più soda e fresca."
       ],
       "tip": "Per ottenere una crema dalla consistenza finissima e setosa simile a una mousse, setaccia la ricotta facendola passare attraverso un colino a maglie strette antes de lavorarla."
+    },
+    "hi": {
+      "title": "Crema di ricotta dolce veloce",
+      "description": "Un dessert al tbsp istantaneo e vellutato che unisce la delicatezza della ricotta alla dolcezza della marmellata. La soluzione perfetta quando si ha voglia di dolce senza accendere i fornelli.",
+      "ingredients": [
+        "200 g di ricotta fresca",
+        "4 tbsp di marmellata (gusto a scelta, es. fragole o frutti di bosco)",
+        "1 pizzico di cannella in polvere"
+      ],
+      "steps": [
+        "पानी निकालें accuratamente la ricotta dal suo siero per renderla il più asciutta possibile.",
+        "स्थानांतरित करें la ricotta कटोरे में, जोड़ें un pizzico di cannella in polvere e lavorala energicamente con una frusta जब तक ottenere una consistenza spumosa.",
+        "Prendi due bicchieri o coppette da dessert pulite.",
+        "Distribuisci la crema di ricotta sul fondo delle coppette livellando la superficie con un tbsp.",
+        "जोड़ें due tbsp generosi della tua marmellata preferita sopra lo strato di ricotta in ciascun bicchiere.",
+        "रहने दें riposare in फ्रिजrifero untill momento di परोसेंre per una consistenza più soda e fresca."
+      ],
+      "tip": "Per ottenere una crema dalla consistenza finissima e setosa simile a una mousse, setaccia la ricotta facendola passare attraverso un colino a maglie strette before lavorarla."
     }
   },
   "rotolo-frittata-prosciutto-mozzarella": {
@@ -1730,6 +2265,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Avvolgi il rotolo nella carta horno e rimettilo nel horno spento ma ancora caldo per 3 minutos per far fondere la mozzarella, poi Corta a fette e Sirve."
       ],
       "tip": "Usa una mozzarella specifica per pizza o Dejata Escurrere per ore: una mozzarella troppo acquosa rilascerebbe liquidi rovinando la compattezza del rotolo."
+    },
+    "hi": {
+      "title": "Rotolo di frittata al प्रोशुट्टो e मोज़ेरेला",
+      "description": "Una frittata sottile cotta in ओवन, farcita con पका हुआ हैम e मोज़ेरेला e arrotolata su se stessa per creare girelle filanti spettacolari e golose.",
+      "ingredients": [
+        "4 अंडे medie",
+        "100 g di मोज़ेरेला per pizza (asciutta)",
+        "4 fette di पका हुआ हैम",
+        "2 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "कटोरे में फेंटें le अंडे insieme al पार्मेज़ान Rअंडाiano, un pizzico di नमक e una macinata di काली मिर्च nero.",
+        "Fodera una teglia rettangolare piccola (circa 20x30 cm) con carta da ओवन bagnata e strizzata; versa il composto di अंडे livellandolo bene.",
+        "Cuoci in ओवन preriHeatto a 180°C लगभग 10-12 मिनट, finché l'अंडा non si sarà completamente rappreso.",
+        "Sforna la frittata e, mentre è ancora calda, disponi sulla superficie le fette di पका हुआ हैम e la मोज़ेरेला Cutta a fette sottilissime.",
+        "Aiutandoti con la carta da ओवन sottostante, arrotola la frittata strettamente partendo dal lato più corto formando un cilindro.",
+        "Avvolgi il rotolo nella carta ओवन e rimettilo nel ओवन spento ma ancora caldo per 3 मिनट per far fondere la मोज़ेरेला, poi काटें a fette e परोसें."
+      ],
+      "tip": "Usa una मोज़ेरेला specifica per pizza o Letta पानी निकालेंre per ore: una मोज़ेरेला troppo acquosa rilascerebbe liquidi rovinando la compattezza del rotolo."
     }
   },
   "rustico-salame-ricotta": {
@@ -1795,6 +2350,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci in horno preriCalientato a 180°C durante unos 20-25 minutos, hasta que quando il rustico risulterà gonfio, sodo al tatto e dorato in superficie."
       ],
       "tip": "Per verificare la cottura interna del rustico usa lo stecchino: inserito al centro del tortino deve uscire asciutto e pulito."
+    },
+    "hi": {
+      "title": "Rustico svuotaफ्रिज salame e ricotta",
+      "description": "Una torta salata veloce senza sfoglia: un impasto morbido a base di अंडे, ricotta e पार्मेज़ान arricchito da pezzetti di salame che creano un tortino fragrante.",
+      "ingredients": [
+        "3 अंडे medie",
+        "200 g di ricotta fresca",
+        "60 g di salame italiano",
+        "4 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 tsp di मक्खन (per la teglia)",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "कटोरे में lavora la ricotta con la forchetta जब तक renderla cremosa e morbida. काटें il salame a piccoli cubetti.",
+        "जोड़ें le अंडे una alla volta alla ricotta, incorporandole bene before inserire la successiva.",
+        "जोड़ें al composto il पार्मेज़ान Rअंडाiano grattugiato, i cubetti di salame e un pizzico di नमक e काली मिर्च nero.",
+        "हिलाएँ bene il tutto con un tbsp di legno जब तक ottenere un impasto omogeneo.",
+        "Imburra una pirofila da ओवन da 20 cm di diametro e versa il composto livellando la superficie.",
+        "Cuoci in ओवन preriHeatto a 180°C लगभग 20-25 मिनट, जब तक quando il rustico risulterà gonfio, sodo al tatto e dorato in superficie."
+      ],
+      "tip": "Per verificare la cottura interna del rustico usa lo stecchino: inserito al centro del tortino deve uscire asciutto e pulito."
     }
   },
   "involtini-zucchine-prosciutto-crudo": {
@@ -1857,6 +2433,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Arrotola la calabacín partendo dall'estremità con il formaggio formando un involtino e fissalo, se serve, con uno stuzzicadenti."
       ],
       "tip": "Non salare eccessivamente le calabacín durante la grigliatura poiché il jamón serrano e il parmesano Rhuevoiano conferiranno già una forte nota sapida al piatto."
+    },
+    "hi": {
+      "title": "Involtini di तोरी grigliate e प्रोशुट्टो",
+      "description": "Finger food fresco e lअंडाero: sottili fette di तोरी grigliate arrotolate attorno a un ripieno saporito di प्रोशुट्टो e scaglie di पार्मेज़ान Rअंडाiano.",
+      "ingredients": [
+        "2 तोरी lunghe e dritte",
+        "6 fette di प्रोशुट्टो",
+        "30 g di पार्मेज़ान Rअंडाiano in scaglie",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "धोएँ le तोरी e Cutle nel senso della lunghezza a fette sottili circa 3 millimetri usando una mandolina o un coltello affilato.",
+        "गरमाएँ una piastra di ghisa e griglia le fette di तोरी लगभग 2 मिनट per lato; disponile su un piatto e Letle raffreddare.",
+        "Condisci lअंडाermente le तोरी fredde con un pizzico di नमक e una goccia di एक्स्ट्रा वर्जिन जैतून तेल.",
+        "Posiziona mezza fetta di प्रोशुट्टो sopra ogni fetta di तोरी grigliata.",
+        "जोड़ें alcune scaglie di पार्मेज़ान Rअंडाiano sopra il प्रोशुट्टो a una delle estremità.",
+        "Arrotola la तोरी partendo dall'estremità con il formaggio formando un involtino e fissalo, se serve, con uno stuzzicadenti."
+      ],
+      "tip": "Non salare eccessivamente le तोरी durante la grigliatura poiché il प्रोशुट्टो e il पार्मेज़ान Rअंडाiano conferiranno già una forte nota sapida al piatto."
     }
   },
   "uova-strapazzate-parmigiano": {
@@ -1916,6 +2512,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Añade subito il parmesano Rhuevoiano grattugiato, Remueve un'ultima volta per amalgamare e Sirve immediatamente sul piatto."
       ],
       "tip": "Il segreto per la perfetta cremosità risiede nel controllo del calore: se vedi che le huevos si rapprendono troppo in fretta, solleva la sartén dal fuoco per qualche secondo continuando a Remuevere."
+    },
+    "hi": {
+      "title": "Eggs strapazzate cremose al मक्खन e पार्मेज़ान",
+      "description": "Le classiche अंडे della colazione o di un pranzo veloce, cotte a fuoco dolcissimo con मक्खन e arricchite alla fine da पार्मेज़ान per una consistenza vellutata.",
+      "ingredients": [
+        "2 अंडे medie",
+        "15 g di मक्खन",
+        "2 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "नमक e काली मिर्च nero"
+      ],
+      "steps": [
+        "Rompi le अंडे कटोरे में, जोड़ें un pizzico di नमक e काली मिर्च e Beatle lअंडाermente con una forchetta per soli 10 secondi.",
+        "Sciogli il मक्खन कड़ाही में antiaderente piccola over मध्यम आँच-basso, facendo attenzione a non farlo friggere o scurire.",
+        "Versa le अंडे nella कड़ाही e abbassa immediatamente il fuoco al minimo.",
+        "Usando una spatola di silicone, हिलाएँ continuamente il composto raschiando il fondo e i bordi man mano che l'अंडा inizia a rapprendersi.",
+        "Quando le अंडे sono ancora molto morbide, lucide e cremose (dopo circa 3-4 मिनट), spegni il fuoco e allontana la कड़ाही dal calore.",
+        "जोड़ें subito il पार्मेज़ान Rअंडाiano grattugiato, हिलाएँ un'ultima volta per amalgamare e परोसें immediatamente sul piatto."
+      ],
+      "tip": "Il segreto per la perfetta cremosità risiede nel controllo del calore: se vedi che le अंडे si rapprendono troppo in fretta, solleva la कड़ाही dal fuoco per qualche secondo continuando a हिलाएँre."
     }
   },
   "zucchine-trifolate": {
@@ -1975,6 +2590,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Elimina lo spicchio d'ajo antes de trasferire le verdure nel piatto da portata."
       ],
       "tip": "Evita di coprire la sartén con un coperchio durante i primi minutos di cottura: il vapore intrappolato farebbe bollire le calabacín rendendole molli invece che dorate e croccanti."
+    },
+    "hi": {
+      "title": "Zucchini trifolate veloci in कड़ाही",
+      "description": "Il contorno passe-partout della cucina di casa: rondelle sottili di तोरी नमकate in कड़ाही con लहसुन e olio, portate a cottura veloce per preservarne la brillantezza.",
+      "ingredients": [
+        "3 तोरी medie",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "धोएँ le तोरी, spuntale e Cutle a rondelle regolari non troppo spesse (circa 4-5 millimetri).",
+        "कड़ाही में ampia versa l'एक्स्ट्रा वर्जिन जैतून तेल e जोड़ें lo spicchio d'लहसुन sbucciato e schiacciato.",
+        "गरमाएँ over मध्यम आँच finché l'लहसुन non riरहने दें il suo profumo, quindi जोड़ें tutte le तोरी in un solo colpo.",
+        "Salta le तोरी a fuoco vivace per 5 मिनट senza coprire, girandole delicatamente per non romperle.",
+        "Abbassa la fiamma, regola di नमक e काली मिर्च e continua la cottura per altri 3-4 मिनट finché non risultano tenere ma ancora sode al cuore.",
+        "Elimina lo spicchio d'लहसुन before trasferire le verdure nel piatto da portata."
+      ],
+      "tip": "Evita di coprire la कड़ाही con un coperchio durante i primi मिनट di cottura: il vapore intrappolato farebbe bollire le तोरी rendendole molli invece che dorate e croccanti."
     }
   },
   "crostini-prosciutto-burro": {
@@ -2031,6 +2665,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Rifinisci a piacere con una rotazione lhuevoera di mulinello di pimienta nero macinato fresco. Sirve immediatamente."
       ],
       "tip": "Usa un mantequilla di centrifuga di alta qualità o un mantequilla salato per esalare al massimo il contrasto dolce-sapido con il jamón serrano."
+    },
+    "hi": {
+      "title": "Crostini rustici al प्रोशुट्टो e मक्खन",
+      "description": "L'antipasto vintage che non passa mai di moda: fette di ब्रेड tostate calde sulle quali il मक्खन si scioglie lअंडाermente, sormontate da प्रोशुट्टो di alta qualità.",
+      "ingredients": [
+        "4 fette di ब्रेड casereccio",
+        "4 fette di प्रोशुट्टो",
+        "20 g di मक्खन di ottima qualità",
+        "काली मिर्च nero in grani"
+      ],
+      "steps": [
+        "Tosta le fette di ब्रेड su una piastra rओवनte o nel tostaब्रेड लगभग 2 मिनट per lato जब तक renderle croccanti all'esterno.",
+        "Togli il मक्खन dal फ्रिजrifero qualche minuto prima in modo che sia facilmente spalmabile ma ancora sodo.",
+        "Spalma un velo generoso di मक्खन sulla superficie delle fette di ब्रेड calde, Letndo che penetri lअंडाermente nella mollica.",
+        "Adagia una fetta di प्रोशुट्टो sopra il मक्खन su ciascun crostino, ripiegandola morbidamente per dare volume.",
+        "Rifinisci a piacere con una rotazione lअंडाera di mulinello di काली मिर्च nero macinato fresco. परोसें immediatamente."
+      ],
+      "tip": "Usa un मक्खन di centrifuga di alta qualità o un मक्खन salato per eनमकare al massimo il contrasto dolce-sapido con il प्रोशुट्टो."
     }
   },
   "pomodori-gratinati-parmigiano": {
@@ -2093,6 +2745,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Irrora con un filo d'aceite de oliva virgen extra e inforna a 190°C per 20 minutos hasta que completa doratura dello strato superiore."
       ],
       "tip": "Se preferisci una crosticina ancora più spessa e rustica, puoi miscelare il parmesano Rhuevoiano con un cucharadas di sarténgrattato antes de cospargere i tomates."
+    },
+    "hi": {
+      "title": "Tomatoes gratinati saporiti al पार्मेज़ान",
+      "description": "Metà टमाटर carnosi ricoperti da una ricca कड़ाहीatura aromatica di पार्मेज़ान Rअंडाiano e olio, cotti al ओवन जब तक ottenere una crosticina croccante.",
+      "ingredients": [
+        "2 टमाटर ramati grandi e sodi",
+        "4 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 spicchio d'लहसुन tritato finissimo (opzionale)",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक, काली मिर्च e origano"
+      ],
+      "steps": [
+        "धोएँ i टमाटर e Cutli a metà in senso orizzontale. Elimina delicatamente parte dell'पानी di vegetazione e dei semi interni.",
+        "Disponi le quattro metà di टमाटर su una teglia rivestita di carta da ओवन con la parte Cutta rivolta verso l'alto.",
+        "Sala lअंडाermente la superficie dei टमाटर per favorire la perdita di liquidi in cottura.",
+        "In una ciotolina जोड़ें il पार्मेज़ान Rअंडाiano, l'लहसुन tritato, l'origano e un pizzico di काली मिर्च nero.",
+        "Distribuisci il mix di formaggio e aromi in modo uniforme sopra ogni metà di टमाटर creando uno strato compatto.",
+        "Irrora con un filo d'एक्स्ट्रा वर्जिन जैतून तेल e inforna a 190°C per 20 मिनट जब तक completa doratura dello strato superiore."
+      ],
+      "tip": "Se preferisci una crosticina ancora più spessa e rustica, puoi miscelare il पार्मेज़ान Rअंडाiano con un tbsp di कड़ाहीgrattato before cospargere i टमाटर."
     }
   },
   "rustico-zucchine-mozzarella": {
@@ -2158,6 +2830,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cocina a basso con coperchio per 6-7 minutos, poi gira delicatamente il rustico e cuoci per altri 5 minutos dall'altro lato hasta que cottura completa."
       ],
       "tip": "Per girare il rustico in totale sicurezza senza romperlo, fallo scivolare su un piatto piano grande, capovolgi la sartén sopra il piatto e rigira con un movimento deciso."
+    },
+    "hi": {
+      "title": "Rustico filante तोरी e मोज़ेरेला",
+      "description": "Un tortino da cuocere in कड़ाही o al ओवन, composto da अंडे e तोरी grattugiate che racchiudono un cuore filante e goloso di मोज़ेरेला fusa.",
+      "ingredients": [
+        "3 अंडे medie",
+        "2 तोरी medie",
+        "100 g di मोज़ेरेला ben sgocciolata",
+        "3 tbsp di पार्मेज़ान Rअंडाiano grattugiato",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "धोएँ le तोरी e grattugiale usando una grattugia a fori larghi. Strizzale con le mani per eliminare il liquido in eccesso.",
+        "कटोरे में फेंटें le अंडे con il पार्मेज़ान Rअंडाiano, नमक e काली मिर्च nero. जोड़ें le तोरी grattugiate e हिलाएँ bene.",
+        "गरमाएँ l'एक्स्ट्रा वर्जिन जैतून तेल कड़ाही में antiaderente da 20 cm e versa la metà del composto di अंडे e तोरी.",
+        "Distribuisci sopra la मोज़ेरेला Cutta a dadini piccoli, mantenendoti lअंडाermente lontana dai bordi esterni.",
+        "Copri la मोज़ेरेला con il restante composto di अंडे e तोरी livellando bene con il dorso di un tbsp.",
+        "पकाएँ basso con coperchio per 6-7 मिनट, poi gira delicatamente il rustico e cuoci per altri 5 मिनट dall'altro lato जब तक cottura completa."
+      ],
+      "tip": "Per girare il rustico in totale sicurezza senza romperlo, fallo scivolare su un piatto piano grande, capovolgi la कड़ाही sopra il piatto e rigira con un movimento deciso."
     }
   },
   "mousse-limone": {
@@ -2211,6 +2904,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve fresco, eventualmente con una grattugiata di scorza sopra."
       ],
       "tip": "Con yogurt greco resta più densa e setosa; con quello classico è più lhuevoera."
+    },
+    "hi": {
+      "title": "Mousse al नींबू con yogurt",
+      "description": "Yogurt, नींबू e un filo di miele: dessert fresco, lअंडाero e pronto in cinque मिनट. Ideale a fine pasto quando vuoi qualcosa di dolce senza accendere il ओवन.",
+      "ingredients": [
+        "250 g di yogurt greco o bianco",
+        "succo e scorza di 1 नींबू",
+        "2 tbsp di miele o चीनी",
+        "un pizzico di vaniglia (opzionale)"
+      ],
+      "steps": [
+        "कटोरे में हिलाएँ yogurt, succo di नींबू, scorza e miele.",
+        "Assaggia e regola di dolcezza o acidità.",
+        "Dividi in due coppette e रहने दें in फ्रिज almeno 15 मिनट se puoi.",
+        "परोसें fresco, eventualmente con una grattugiata di scorza sopra."
+      ],
+      "tip": "Con yogurt greco resta più densa e setosa; con quello classico è più lअंडाera."
     }
   },
   "crepes": {
@@ -2270,6 +2980,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Farcisci a piacere e Sirve calde."
       ],
       "tip": "La prima crêpe spesso viene male: non scoraggiarti, serve a regolare la temperatura della sartén."
+    },
+    "hi": {
+      "title": "Crêpes semplici",
+      "description": "Pastella lअंडाera di अंडे, दूध e आटा: crêpes sottili da farcire con चीनी, नींबू, nutella o marmellata. Un dessert (o colazione) versatile e sempre gradito.",
+      "ingredients": [
+        "2 अंडे",
+        "200 ml di दूध",
+        "100 g di आटा",
+        "1 tbsp di चीनी",
+        "un noce di मक्खन per la कड़ाही",
+        "ripieno a piacere"
+      ],
+      "steps": [
+        "फेंटें अंडे, दूध, आटा e चीनी जब तक una pastella liscia. रहने दें riposare 5 मिनट.",
+        "गरमाएँ una कड़ाही antiaderente con un filo di मक्खन. Versa un mestolino di pastella e inclina per stenderla.",
+        "Cuoci 1 minuto per lato जब तक dorata. Ripeti con il resto.",
+        "Farcisci a piacere e परोसें calde."
+      ],
+      "tip": "La prima crêpe spesso viene male: non scoraggiarti, serve a regolare la temperatura della कड़ाही."
     }
   },
   "budino-latte": {
@@ -2326,6 +3055,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Versa in stampini o coppette. Deja intiepidire e poi in nevera."
       ],
       "tip": "Remueve sempre sul fondo: l'amido attacca facilmente. Se si formano grumi, passa al setaccio."
+    },
+    "hi": {
+      "title": "Budino al दूध in कड़ाही",
+      "description": "Milk, चीनी e amido: budino cremoso cotto in कड़ाही senza ओवन. Un dolce della tradizione semplice, economico e consolante.",
+      "ingredients": [
+        "500 ml di दूध",
+        "60 g di चीनी",
+        "40 g di amido di mais (maizena)",
+        "scorza di नींबू o vaniglia",
+        "un pizzico di नमक"
+      ],
+      "steps": [
+        "कटोरे में हिलाएँ amido, चीनी e un filo di दूध freddo जब तक sciogliere i grumi.",
+        "उबाल आने तक गरम करें il resto del दूध con la scorza. Versa il composto di amido हिलाएँndo.",
+        "पकाएँ medio हिलाएँndo finché si addensa (3–4 मिनट).",
+        "Versa in stampini o coppette. रहने दें intiepidire e poi in फ्रिज."
+      ],
+      "tip": "हिलाएँ sempre sul fondo: l'amido attacca facilmente. Se si formano grumi, passa al setaccio."
     }
   },
   "tiramisu-express": {
@@ -2382,6 +3129,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spolvera di cacao e metti in nevera almeno 30 minutos."
       ],
       "tip": "Non inzuppare troppo i savoiardi: devono restare umidi ma non sfaldarsi."
+    },
+    "hi": {
+      "title": "Tiramisù express in coppa",
+      "description": "Versione lampo del tiramisù: savoiardi, caffè, mascarpone (o yogurt greco) e cacao. Niente अंडे crude, pronto in dieci मिनट e da Letre in फ्रिज.",
+      "ingredients": [
+        "8–10 savoiardi",
+        "200 g di mascarpone o yogurt greco",
+        "2 tbsp di चीनी",
+        "1 tazzina di caffè freddo",
+        "cacao amaro स्वादानुसार"
+      ],
+      "steps": [
+        "हिलाएँ mascarpone e चीनी जब तक una crema liscia.",
+        "Inzuppa i savoiardi nel caffè (pochi secondi) e disponili sul fondo di due coppette.",
+        "Copri con la crema. Ripeti se hai strati.",
+        "Spolvera di cacao e metti in फ्रिज almeno 30 मिनट."
+      ],
+      "tip": "Non inzuppare troppo i savoiardi: devono restare umidi ma non sfaldarsi."
     }
   },
   "frutta-yogurt": {
@@ -2435,6 +3200,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve subito."
       ],
       "tip": "Se usi banana, Añadela all'ultimo momento per non farla annerire."
+    },
+    "hi": {
+      "title": "Coppa di frutta e yogurt",
+      "description": "Yogurt, frutta di stagione e un filo di miele: dessert (o colazione) fresco, colorato e bilanciato. Il modo più semplice per chiudere un pasto in modo lअंडाero.",
+      "ingredients": [
+        "250 g di yogurt bianco o greco",
+        "frutta a piacere (mela, banana, frutti di bosco, arancia)",
+        "1 tbsp di miele",
+        "noci o mandorle sbriciolate (opzionale)"
+      ],
+      "steps": [
+        "काटें la frutta a pezzi o fette.",
+        "Disponi lo yogurt nelle coppette, जोड़ें la frutta.",
+        "Condisci con miele e, se vuoi, la frutta secca.",
+        "परोसें subito."
+      ],
+      "tip": "Se usi banana, Addla all'ultimo momento per non farla annerire."
     }
   },
   "pollo-limone": {
@@ -2492,6 +3274,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sfumalo con il succo di limón, Añade la scorza e un filo d'agua se serve.",
         "Cuoci ancora 2 minutos a fuego medio. Completa con prezzemolo.",
         "Sirve subito, eventualmente con arroz o verdure."
+      ],
+      "tip": "Non cuocere troppo il petto: appena non è più rosato al centro, spegni. Continua a cuocere col calore residuo."
+    },
+    "hi": {
+      "title": "Chicken al नींबू in कड़ाही",
+      "description": "Petto di चिकन dorato, deglassato con नींबू e un filo di स्टॉक: piatto lअंडाero, acidulo e succoso. Pronto in venti मिनट, perfetto con un contorno di verdure del फ्रिज.",
+      "ingredients": [
+        "400 g di petto di चिकन",
+        "1 नींबू (succo e scorza)",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक, काली मिर्च e prezzemolo"
+      ],
+      "steps": [
+        "काटें il चिकन a fette o striscioline. Sala e pepa.",
+        "गरमाएँ l'olio in कड़ाही, जोड़ें l'लहसुन e fai dorare il चिकन 3–4 मिनट per lato.",
+        "Sfumalo con il succo di नींबू, जोड़ें la scorza e un filo d'पानी se serve.",
+        "Cuoci ancora 2 मिनट over मध्यम आँच. Completa con prezzemolo.",
+        "परोसें subito, eventualmente con चावल o verdure."
       ],
       "tip": "Non cuocere troppo il petto: appena non è più rosato al centro, spegni. Continua a cuocere col calore residuo."
     }
@@ -2553,6 +3354,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Pepa, completa con prezzemolo e Sirve."
       ],
       "tip": "Se usi leche invece della nata, lega con un cucharadita di harina sciolta a freddo."
+    },
+    "hi": {
+      "title": "Chicken ai मशरूम",
+      "description": "Chicken e मशरूम rosolati insieme, legati da una lअंडाera cremina: piatto unico saporito e confortante. Ideale quando hai sia चिकन che मशरूम in फ्रिज.",
+      "ingredients": [
+        "400 g di चिकन a pezzi o striscioline",
+        "300 g di मशरूम",
+        "1 spicchio d'लहसुन",
+        "100 ml di क्रीम o दूध",
+        "2 tbsp di olio",
+        "नमक, काली मिर्च e prezzemolo"
+      ],
+      "steps": [
+        "Rosola il चिकन nell'olio over मध्यम आँच-alto finché dorato. Toglilo e tieni da parte.",
+        "Nella stessa कड़ाही fai rosolare i मशरूम con l'लहसुन 6–7 मिनट.",
+        "Rimetti il चिकन, जोड़ें la क्रीम, sala e रहने दें restringere 5 मिनट.",
+        "Pepa, completa con prezzemolo e परोसें."
+      ],
+      "tip": "Se usi दूध invece della क्रीम, lega con un tsp di आटा sciolta a freddo."
     }
   },
   "pollo-peperoni": {
@@ -2609,6 +3429,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sfumalo con un filo di aceto o limón a fine cottura. Sirve."
       ],
       "tip": "I pimientaroni devono diventare morbidi e lhuevoermente caramellati: non avere fretta."
+    },
+    "hi": {
+      "title": "Chicken e काली मिर्चroni in कड़ाही",
+      "description": "Striscioline di चिकन e काली मिर्चroni colorati cotti insieme: dolcezza dei काली मिर्चroni, sapore del चिकन e un filo di aceto per bilanciare. Piatto unico colorato e bilanciato.",
+      "ingredients": [
+        "400 g di petto di चिकन a striscioline",
+        "2 काली मिर्चroni",
+        "1 प्याज़",
+        "2 tbsp di olio",
+        "नमक, काली मिर्च e un filo di aceto o नींबू"
+      ],
+      "steps": [
+        "काटें काली मिर्चroni e प्याज़ a strisce. Rosola il चिकन nell'olio, poi toglilo.",
+        "Nella stessa कड़ाही stufa प्याज़ e काली मिर्चroni 12–15 मिनट over मध्यम आँच, coperti.",
+        "Rimetti il चिकन, sala, pepa e cuoci ancora 5 मिनट.",
+        "Sfumalo con un filo di aceto o नींबू a fine cottura. परोसें."
+      ],
+      "tip": "I काली मिर्चroni devono diventare morbidi e lअंडाermente caramellati: non avere fretta."
     }
   },
   "pollo-yogurt": {
@@ -2668,6 +3506,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve con insalata o arroz."
       ],
       "tip": "Lo yogurt intenerisce le fibre: anche 15 minutos fanno differenza. Non superare i 30 minutos a temperatura ambiente."
+    },
+    "hi": {
+      "title": "Chicken marinato allo yogurt",
+      "description": "Petto di चिकन marinato in yogurt, नींबू e spezie, poi cotto in कड़ाही: resta morbido e succoso. Una marinatura veloce che trasforma un tलहसुन magro.",
+      "ingredients": [
+        "400 g di petto di चिकन",
+        "150 g di yogurt bianco",
+        "succo di 1/2 नींबू",
+        "1 spicchio d'लहसुन",
+        "नमक, काली मिर्च e paprika (opzionale)",
+        "1 tbsp di olio"
+      ],
+      "steps": [
+        "हिलाएँ yogurt, नींबू, लहसुन grattugiato, नमक e काली मिर्च. Immergi il चिकन e रहने दें marinare almeno 15 मिनट (o di più).",
+        "गरमाएँ l'olio in कड़ाही. पानी निकालें il चिकन dall'eccesso di marinatura e cuocilo 4–5 मिनट per lato.",
+        "A fine cottura puoi aggiungere un tbsp di marinatura per legare.",
+        "परोसें con insalata o चावल."
+      ],
+      "tip": "Lo yogurt intenerisce le fibre: anche 15 मिनट fanno differenza. Non superare i 30 मिनट a temperatura ambiente."
     }
   },
   "polpette-sugo": {
@@ -2733,6 +3590,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve con sartén o pasta."
       ],
       "tip": "Non pressare troppo le polpette: devono restare morbide. Se si sbriciolano, Añade un filo di sarténgrattato."
+    },
+    "hi": {
+      "title": "Polpette al sugo",
+      "description": "Polpette morbide di carne macinata, passate in कड़ाही e finite nel sugo di टमाटर. Piatto della nonna, confortante e perfetto con il ब्रेड per fare la scarpetta.",
+      "ingredients": [
+        "400 g di carne macinata",
+        "1 अंडा",
+        "30 g di पार्मेज़ान",
+        "कड़ाहीgrattato स्वादानुसार",
+        "400 g di टमाटर passata",
+        "1/2 प्याज़",
+        "olio, नमक e काली मिर्च"
+      ],
+      "steps": [
+        "हिलाएँ carne, अंडा, पार्मेज़ान, un po' di कड़ाहीgrattato, नमक e काली मिर्च. Forma polpette della grandezza di una noce.",
+        "Rosolale in olio abbondante finché dorate. Toglie e tieni da parte.",
+        "Nella stessa कड़ाही soffriggi la प्याज़, जोड़ें la passata e रहने दें sobbollire 10 मिनट.",
+        "Rimetti le polpette nel sugo e cuoci altri 10 मिनट over धीमी आँच.",
+        "परोसें con ब्रेड o पास्ता."
+      ],
+      "tip": "Non pressare troppo le polpette: devono restare morbide. Se si sbriciolano, जोड़ें un filo di कड़ाहीgrattato."
     }
   },
   "ragu-veloce": {
@@ -2792,6 +3670,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Regola di sal e pimienta. Usa per condire pasta o come base per lasagne veloci."
       ],
       "tip": "Rosola bene la carne antes de aggiungere il tomate: il sapore di tostatura fa la differenza."
+    },
+    "hi": {
+      "title": "Ragù veloce in कड़ाही",
+      "description": "Carne macinata, प्याज़, टमाटर e un filo di vino: ragù in mezz'ora invece che in tre ore. Non è il ragù della domenica, ma è buono, saporito e salva-cena.",
+      "ingredients": [
+        "400 g di carne macinata",
+        "1 प्याज़",
+        "400 g di टमाटर passata",
+        "1/2 bicchiere di vino rosso (opzionale)",
+        "2 tbsp di olio",
+        "नमक, काली मिर्च e alloro"
+      ],
+      "steps": [
+        "Soffriggi la प्याज़ tritata nell'olio. जोड़ें la carne e rosolala bene sbriciolandola.",
+        "Sfumala con il vino e रहने दें evaporare. जोड़ें la passata, नमक e alloro.",
+        "रहने दें sobbollire 20 मिनट over मध्यम आँच-basso, हिलाएँndo ogni tanto.",
+        "Regola di नमक e काली मिर्च. Usa per condire पास्ता o come base per lasagne veloci."
+      ],
+      "tip": "Rosola bene la carne before aggiungere il टमाटर: il sapore di tostatura fa la differenza."
     }
   },
   "salsiccia-peperoni": {
@@ -2848,6 +3745,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sala, Añade origano e Sirve caldo."
       ],
       "tip": "Se le salsicce riDejano tanto grasso, eliminane un po' antes de aggiungere i pimientaroni."
+    },
+    "hi": {
+      "title": "Sausage e काली मिर्चroni",
+      "description": "Salsicce intere o a pezzi e काली मिर्चroni stufati insieme: piatto rustico, dolce e saporito. Ideale con ब्रेड casereccio o polenta. Un classico delle cucine del Centro-Sud.",
+      "ingredients": [
+        "4 salsicce",
+        "3 काली मिर्चroni",
+        "1 प्याज़",
+        "2 tbsp di olio",
+        "नमक e origano"
+      ],
+      "steps": [
+        "Rosola le salsicce intere o a pezzi in कड़ाही finché dorate. Toglie e tieni da parte.",
+        "Nella stessa कड़ाही stufa प्याज़ e काली मिर्चroni a strisce 15 मिनट.",
+        "Rimetti le salsicce, copri e cuoci altri 10 मिनट over मध्यम आँच.",
+        "Sala, जोड़ें origano e परोसें caldo."
+      ],
+      "tip": "Se le salsicce riLetno tanto grasso, eliminane un po' before aggiungere i काली मिर्चroni."
     }
   },
   "scaloppine-limone": {
@@ -2907,6 +3822,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Rimetti le scaloppine per 30 secondi. Completa con prezzemolo e Sirve."
       ],
       "tip": "Non sovraffollare la sartén: cuoci in due turni se serve, altrimenti non dorano."
+    },
+    "hi": {
+      "title": "Scaloppine al नींबू",
+      "description": "Fettine di vitello o चिकन inआटाte, dorate e deglassate al नींबू: piatto elegante e veloce della tradizione. Salsa lअंडाera, acidula e lucida.",
+      "ingredients": [
+        "400 g di fettine di चिकन o vitello",
+        "आटा स्वादानुसार",
+        "1 नींबू",
+        "30 g di मक्खन",
+        "1 tbsp di olio",
+        "नमक e prezzemolo"
+      ],
+      "steps": [
+        "Inआटा le fettine scuotendo l'eccesso. गरमाएँ olio e metà मक्खन in कड़ाही.",
+        "Cuoci le scaloppine 2 मिनट per lato over मध्यम आँच-alto. Sala e togli.",
+        "Nella stessa कड़ाही जोड़ें il resto del मक्खन e il succo di नींबू. Deglassa.",
+        "Rimetti le scaloppine per 30 secondi. Completa con prezzemolo e परोसें."
+      ],
+      "tip": "Non sovraffollare la कड़ाही: cuoci in due turni se serve, altrimenti non dorano."
     }
   },
   "hamburger-padella": {
@@ -2960,6 +3894,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sirve nel sartén con condimenti a piacere."
       ],
       "tip": "Per un hamburger più saporito, Remueve un filo di cebolla grattugiata nella carne antes de formare i dischi."
+    },
+    "hi": {
+      "title": "Hamburger in कड़ाही",
+      "description": "Hamburger di carne macinata cotti in कड़ाही, succosi e dorati. Semplici, buoni e pronti in dieci मिनट. परोसेंli con insalata, टमाटर e un filone di ब्रेड.",
+      "ingredients": [
+        "400 g di carne macinata",
+        "नमक e काली मिर्च",
+        "1 tbsp di olio",
+        "ब्रेड per hamburger, insalata, टमाटर (per परोसेंre)"
+      ],
+      "steps": [
+        "Sala e pepa la carne, forma due hamburger alti senza compattarli troppo.",
+        "गरमाएँ la कड़ाही con l'olio over मध्यम आँच-alto. Cuoci 3–4 मिनट per lato.",
+        "Non premere con la spatola: spremeresti i succhi.",
+        "परोसें nel ब्रेड con condimenti a piacere."
+      ],
+      "tip": "Per un hamburger più saporito, हिलाएँ un filo di प्याज़ grattugiata nella carne before formare i dischi."
     }
   },
   "pollo-forno": {
@@ -3016,6 +3967,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Fai riposare 5 minutos antes de Sirvere."
       ],
       "tip": "Per una pelle più croccante, asciuga bene il pollo con carta assorbente antes de condirlo."
+    },
+    "hi": {
+      "title": "Chicken al ओवन alle erbe",
+      "description": "Fusi o sovracosce di चिकन cotti in ओवन con नींबू, लहसुन e erbe: pelle croccante, carne succosa. Poco lavoro, grande risultato. Ideale per preparare in anticipo.",
+      "ingredients": [
+        "4 fusi o sovracosce di चिकन",
+        "1 नींबू",
+        "3 spicchi d'लहसुन",
+        "एक्स्ट्रा वर्जिन जैतून तेल",
+        "rosmarino o timo, नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Preriगरमाएँ il ओवन a 200°C. Disponi il चिकन in una teglia, condisci con olio, नमक, काली मिर्च, लहसुन e erbe.",
+        "जोड़ें fette di नींबू e un filo d'पानी sul fondo.",
+        "Cuoci 40–45 मिनट, girando a metà cottura, finché la pelle è dorata e il succo esce chiaro.",
+        "Fai riposare 5 मिनट before परोसेंre."
+      ],
+      "tip": "Per una pelle più croccante, asciuga bene il चिकन con carta assorbente before condirlo."
     }
   },
   "aglio-olio": {
@@ -3078,6 +4047,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spegni, completa con prezzemolo se ce l'hai e Sirve subito."
       ],
       "tip": "Se l'ajo inizia a scurirsi troppo, spegni e continua a Remuevere fuori dal fuoco: il calore residuo basta."
+    },
+    "hi": {
+      "title": "लहसुन, तेल और मिर्च वाले स्पघेटी",
+      "description": "Il piatto della dispensa per eccellenza: लहसुन dorato, olio fruttato e un pizzico di काली मिर्चroncino. Semplice, profumato e pronto in meno di un quarto d'ora. Perfetto quando il फ्रिज è quasi vuoto ma vuoi comunque qualcosa di buono.",
+      "ingredients": [
+        "320 g di स्पघेटी",
+        "3 spicchi d'लहसुन",
+        "4 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "1 काली मिर्चroncino fresco o secco",
+        "नमक grosso",
+        "prezzemolo (opzionale)"
+      ],
+      "steps": [
+        "Metti a bollire l'पानी e sala. Nel frattempo affetta l'लहसुन a fettine sottili e sminuzza il काली मिर्चroncino.",
+        "कड़ाही में larga गरमाएँ l'olio over मध्यम आँच-basso con लहसुन e काली मिर्चroncino: devono dorare senza bruciare (3–4 मिनट).",
+        "Cuoci gli स्पघेटी al dente e पानी निकालेंli tenendo da parte un mestolo d'पानी di cottura.",
+        "स्थानांतरित करें la पास्ता in कड़ाही, जोड़ें un filo d'पानी e manteca 1 minuto over तेज़ आँच.",
+        "Spegni, completa con prezzemolo se ce l'hai e परोसें subito."
+      ],
+      "tip": "Se l'लहसुन inizia a scurirsi troppo, spegni e continua a हिलाएँre fuori dal fuoco: il calore residuo basta."
     }
   },
   "cacio-pepe": {
@@ -3134,6 +4123,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "La salsa deve essere lucida e avvolgente. Sirve subito con altra grattugiata di formaggio e pimienta."
       ],
       "tip": "Niente sarténico se si gruma: togli dal fuoco e Añade un cucharadas d'agua fredda Remuevendo con vigore."
+    },
+    "hi": {
+      "title": "Cacio e काली मिर्च",
+      "description": "Pochi ingredienti, tecnica precisa: pecorino (o पार्मेज़ान), काली मिर्च tostato e amido dell'पानी di cottura creano una crema vellutata che avvolge la पास्ता. Un classico romano che si può fare anche in casa con quello che c'è.",
+      "ingredients": [
+        "320 g di tonnarelli o स्पघेटी",
+        "120 g di pecorino romano (o पार्मेज़ान grattugiato)",
+        "काली मिर्च nero macinato fresco",
+        "नमक grosso"
+      ],
+      "steps": [
+        "Tosta il काली मिर्च in कड़ाही a secco 1 minuto, poi pestalo grossolanamente. Metti a bollore poca पानी (serve concentrata).",
+        "Cuoci la पास्ता in पानी poco salata. Nel frattempo हिलाएँ il formaggio con un mestolo d'पानी di cottura calda जब तक una crema densa.",
+        "पानी निकालें la पास्ता al dente tenendo da parte l'पानी. Transferla कटोरे में con il काली मिर्च.",
+        "जोड़ें la crema di formaggio e manteca energicamente, aggiungendo पानी poco alla volta.",
+        "La salsa deve essere lucida e avvolgente. परोसें subito con altra grattugiata di formaggio e काली मिर्च."
+      ],
+      "tip": "Niente कड़ाहीico se si gruma: togli dal fuoco e जोड़ें un tbsp d'पानी fredda हिलाएँndo con vigore."
     }
   },
   "pasta-tonno": {
@@ -3196,6 +4203,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Completa con prezzemolo e pimienta. Sirve subito."
       ],
       "tip": "Non Escurrere troppo il atún: un po' del suo olio dà sapore e lega meglio."
+    },
+    "hi": {
+      "title": "Pasta al टूना e नींबू",
+      "description": "Tuna sott'olio, scorza di नींबू e un filo d'लहसुन: piatto di mare veloce, saporito e bilanciato. Ideale quando hai una scatoletta di टूना e un नींबू in फ्रिज.",
+      "ingredients": [
+        "320 g di पास्ता corta o lunga",
+        "1 scatoletta di टूना sott'olio (160 g sgocciolato)",
+        "1 नींबू (scorza e un filo di succo)",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "prezzemolo e काली मिर्च"
+      ],
+      "steps": [
+        "Metti a bollire l'पानी. In कड़ाही गरमाएँ l'olio con l'लहसुन schiacciato 1 minuto.",
+        "जोड़ें il टूना sbriciolato e la scorza di नींबू. Cuoci 2 मिनट over मध्यम आँच.",
+        "Cuoci la पास्ता al dente e पानी निकालेंla tenendo da parte un po' d'पानी.",
+        "जोड़ें पास्ता e टूना, manteca con un filo d'पानी e un goccio di succo di नींबू.",
+        "Completa con prezzemolo e काली मिर्च. परोसें subito."
+      ],
+      "tip": "Non पानी निकालेंre troppo il टूना: un po' del suo olio dà sapore e lega meglio."
     }
   },
   "pasta-ricotta": {
@@ -3258,6 +4285,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Completa con un filo d'olio e altra scorza. Sirve subito."
       ],
       "tip": "La ricotta deve essere a temperatura ambiente: se è di nevera, Dejala 10 minutos fuori antes de stemperarla."
+    },
+    "hi": {
+      "title": "Pasta alla ricotta e नींबू",
+      "description": "Ricotta stemperata con पानी di cottura, scorza di नींबू e पार्मेज़ान: crema bianca, fresca e lअंडाera. Un piatto elegante che si prepara mentre la पास्ता bolle.",
+      "ingredients": [
+        "320 g di पास्ता",
+        "200 g di ricotta fresca",
+        "1 नींबू non trattato (scorza)",
+        "40 g di पार्मेज़ान grattugiato",
+        "नमक e काली मिर्च nero",
+        "un filo d'olio"
+      ],
+      "steps": [
+        "Metti a bollire l'पानी. कटोरे में stempera la ricotta con un mestolo d'पानी calda, scorza di नींबू e पार्मेज़ान.",
+        "Devi ottenere una crema liscia e fluida. Regola di नमक e काली मिर्च.",
+        "Cuoci la पास्ता al dente e पानी निकालेंla tenendo da parte पानी.",
+        "स्थानांतरित करें la पास्ता nella ciotola e manteca energicamente, aggiungendo पानी se serve.",
+        "Completa con un filo d'olio e altra scorza. परोसें subito."
+      ],
+      "tip": "La ricotta deve essere a temperatura ambiente: se è di फ्रिज, Letla 10 मिनट fuori before stemperarla."
     }
   },
   "pasta-funghi": {
@@ -3320,6 +4367,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Completa con prezzemolo e pimienta. Sirve caldo."
       ],
       "tip": "Pan grande e fuoco alto all'inizio: i champiñones devono rosolare, non lessare."
+    },
+    "hi": {
+      "title": "Pasta ai मशरूम cremosa",
+      "description": "Mushrooms rosati, लहसुन e un filo di क्रीम o पानी di cottura: sugo terroso e avvolgente che si lega alla पास्ता in pochi मिनट. Ideale quando hai un vassoio di champignon in फ्रिज.",
+      "ingredients": [
+        "320 g di पास्ता",
+        "400 g di मशरूम champignon",
+        "1 spicchio d'लहसुन",
+        "100 ml di क्रीम fresca (o दूध + पार्मेज़ान)",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "prezzemolo, नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Pulisci e affetta i मशरूम. गरमाएँ l'olio con l'लहसुन, poi tuffa i मशरूम e falli rosolare a fuoco alto 6–7 मिनट.",
+        "Quando l'पानी è evaporata, जोड़ें la क्रीम, sala e रहने दें restringere 2 मिनट.",
+        "Cuoci la पास्ता al dente e पानी निकालेंla tenendo da parte पानी.",
+        "जोड़ें पास्ता e मशरूम, manteca con un filo d'पानी se serve.",
+        "Completa con prezzemolo e काली मिर्च. परोसें caldo."
+      ],
+      "tip": "Pan grande e fuoco alto all'inizio: i मशरूम devono rosolare, non lessare."
     }
   },
   "pasta-pomodorini": {
@@ -3382,6 +4449,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Manteca 1 minuto, spegni e Añade albahaca spezzettato. Sirve."
       ],
       "tip": "Non coprire la sartén: vuoi che i tomatesni si caramellino un po', non che si stufino."
+    },
+    "hi": {
+      "title": "Pasta ai टमाटरni scottati",
+      "description": "Tomatoesni fatti scoppiare in कड़ाही con लहसुन e तुलसी: sugo fresco, dolce e luminoso in meno di venti मिनट. Il segreto è non cuocerli troppo a lungo.",
+      "ingredients": [
+        "320 g di पास्ता",
+        "400 g di टमाटरni",
+        "2 spicchi d'लहसुन",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "तुलसी fresco",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "In कड़ाही larga गरमाएँ l'olio con l'लहसुन. जोड़ें i टमाटरni interi o a metà.",
+        "पकाएँ medio-alto 8–10 मिनट, schiacciandoli lअंडाermente finché riLetno il succo.",
+        "Sala e रहने दें restringere 2 मिनट. Cuoci la पास्ता al dente.",
+        "पानी निकालें la पास्ता e Transferla in कड़ाही con un filo d'पानी di cottura.",
+        "Manteca 1 minuto, spegni e जोड़ें तुलसी spezzettato. परोसें."
+      ],
+      "tip": "Non coprire la कड़ाही: vuoi che i टमाटरni si caramellino un po', non che si stufino."
     }
   },
   "pasta-broccoli": {
@@ -3441,6 +4528,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Regola di sal e Sirve con un filo d'olio a crudo."
       ],
       "tip": "L'agua di cottura dei broccoli è ricca di sapore: usala per legare invece di Escurrerla via."
+    },
+    "hi": {
+      "title": "Pasta e broccoli",
+      "description": "Broccoli cotti जब तक diventare cremosi, poi mantecati con पास्ता e un filo d'olio: piatto povero, sano e soddisfacente. Un classico del Sud che usa verdure e dispensa.",
+      "ingredients": [
+        "320 g di पास्ता corta",
+        "1 cespo di broccoli (circa 400 g)",
+        "2 spicchi d'लहसुन",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "नमक e काली मिर्चroncino"
+      ],
+      "steps": [
+        "Dividi i broccoli in cimette e cuocili nell'पानी della पास्ता per 8–10 मिनट.",
+        "In कड़ाही soffriggi लहसुन e काली मिर्चroncino nell'olio. जोड़ें i broccoli पानी निकालेंti e schiacciali lअंडाermente.",
+        "Cuoci la पास्ता nello stesso पानी dei broccoli e पानी निकालेंla al dente.",
+        "जोड़ें पास्ता e broccoli, manteca con un filo d'पानी di cottura.",
+        "Regola di नमक e परोसें con un filo d'olio a crudo."
+      ],
+      "tip": "L'पानी di cottura dei broccoli è ricca di sapore: usala per legare invece di पानी निकालेंrla via."
     }
   },
   "pasta-carbonara": {
@@ -3500,6 +4606,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Togli dal fuoco e Añade la crema di huevos Remuevendo velocemente: deve legare senza fare frittata. Sirve subito."
       ],
       "tip": "La temperatura è tutto: fuori dal fuoco e pasta ancora calda. Se serve, un cucharadas d'agua di cottura aiuta a stemperare."
+    },
+    "hi": {
+      "title": "Carbonara classica",
+      "description": "Eggs, pecorino, guanciale e काली मिर्च: la carbonara vera non usa क्रीम. Una crema vellutata che si forma col calore della पास्ता. Piatto iconico romano, ricco e profondamente saporito.",
+      "ingredients": [
+        "320 g di स्पघेटी o rigatoni",
+        "150 g di guanciale (o कड़ाहीcetta)",
+        "3 tuorli + 1 अंडा intero",
+        "80 g di pecorino romano grattugiato",
+        "काली मिर्च nero abbondante"
+      ],
+      "steps": [
+        "काटें il guanciale a listarelle e rosolalo in कड़ाही over मध्यम आँच finché diventa croccante e riरहने दें il grasso.",
+        "कटोरे में फेंटें tuorli, अंडा intero, pecorino e काली मिर्च जब तक una crema densa.",
+        "Cuoci la पास्ता al dente in पानी poco salata. पानी निकालेंla tenendo da parte पानी.",
+        "Spegni il fuoco sotto il guanciale, जोड़ें la पास्ता e un filo d'पानी. हिलाएँ.",
+        "Togli dal fuoco e जोड़ें la crema di अंडे हिलाएँndo velocemente: deve legare senza fare frittata. परोसें subito."
+      ],
+      "tip": "La temperatura è tutto: fuori dal fuoco e पास्ता ancora calda. Se serve, un tbsp d'पानी di cottura aiuta a stemperare."
     }
   },
   "pasta-salsiccia": {
@@ -3559,6 +4684,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Añade pasta e sugo, manteca 1 minuto. Pepa e Sirve."
       ],
       "tip": "Un goccio di vino bianco dopo aver rosolato la salchicha deglassia e aggiunge profondità."
+    },
+    "hi": {
+      "title": "Pasta con सॉसेज e टमाटर",
+      "description": "Sausage sbriciolata, टमाटर e un filo di vino: sugo ricco e confortante in mezz'ora. Ideale per una cena sostanziosa quando hai salsicce in फ्रिज.",
+      "ingredients": [
+        "320 g di पास्ता corta",
+        "300 g di सॉसेज",
+        "300 g di टमाटर pelati o passata",
+        "1/2 प्याज़",
+        "1 tbsp di olio",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Togli il budello alla सॉसेज e sbriciolala. Soffriggi la प्याज़ nell'olio, poi जोड़ें la सॉसेज.",
+        "Rosola 5–6 मिनट over मध्यम आँच-alto. जोड़ें i टमाटर, sala e रहने दें sobbollire 15 मिनट.",
+        "Cuoci la पास्ता al dente e पानी निकालेंla.",
+        "जोड़ें पास्ता e sugo, manteca 1 minuto. Pepa e परोसें."
+      ],
+      "tip": "Un goccio di vino bianco dopo aver rosolato la सॉसेज deglassia e aggiunge profondità."
     }
   },
   "pasta-melanzane": {
@@ -3621,6 +4765,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Completa con ricotta salata grattugiata e albahaca. Sirve."
       ],
       "tip": "Le melanzane devono essere ben dorate: se restano chiare assorbono olio e restano mollicce."
+    },
+    "hi": {
+      "title": "Pasta alla norma veloce",
+      "description": "Melanzane dorate, टमाटर e ricotta salata (o पार्मेज़ान): versione casalinga e veloce della Norma. Dolcezza delle melanzane e acidità del टमाटर in equilibrio.",
+      "ingredients": [
+        "320 g di पास्ता corta",
+        "2 melanzane medie",
+        "300 g di टमाटर pelati",
+        "1 spicchio d'लहसुन",
+        "olio per friggere e condire",
+        "ricotta salata o पार्मेज़ान",
+        "तुलसी"
+      ],
+      "steps": [
+        "काटें le melanzane a cubetti, salale e Letle 10 मिनट. Asciugale e friggile in olio abbondante finché dorate.",
+        "In un'altra कड़ाही soffriggi l'लहसुन, जोड़ें i टमाटर e cuoci 10 मिनट.",
+        "Cuoci la पास्ता al dente. जोड़ें sugo, melanzane e पास्ता, manteca.",
+        "Completa con ricotta salata grattugiata e तुलसी. परोसें."
+      ],
+      "tip": "Le melanzane devono essere ben dorate: se restano chiare assorbono olio e restano mollicce."
     }
   },
   "carbonara-veloce": {
@@ -3677,6 +4841,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Escurre la pasta al dente, Añadela al guanciale fuori dal fuoco e versa il composto di huevos Remuevendo rapidamente."
       ],
       "tip": "Se la crema risulta troppo densa, Añade un cucharadas di agua di cottura della pasta fuori dal fuoco per non far coagulare l'huevo."
+    },
+    "hi": {
+      "title": "त्वरित कार्बोनारा",
+      "description": "Il primo romano per eccellenza, cremoso e saporito, pronto nel tempo di cottura della पास्ता.",
+      "ingredients": [
+        "200 g di स्पघेटी",
+        "100 g di guanciale o कड़ाहीcetta",
+        "3 tuorli d'अंडा",
+        "40 g di pecorino romano o पार्मेज़ान",
+        "काली मिर्च nero स्वादानुसार"
+      ],
+      "steps": [
+        "Metti a bollire l'पानी per la पास्ता in una बर्तन capiente.",
+        "काटें il guanciale a striscioline e rosolalo in कड़ाही senza olio finché diventa croccante.",
+        "फेंटें i tuorli कटोरे में insieme al formaggio grattugiato e a un pizzico di काली मिर्च.",
+        "पानी निकालें la पास्ता al dente, Addla al guanciale fuori dal fuoco e versa il composto di अंडे हिलाएँndo rapidamente."
+      ],
+      "tip": "Se la crema risulta troppo densa, जोड़ें un tbsp di पानी di cottura della पास्ता fuori dal fuoco per non far coagulare l'अंडा."
     }
   },
   "gnocchi-sorrentina": {
@@ -3733,6 +4915,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Pasa in una pirofila, spolvera di parmesano e passa sotto il grill del horno per 5 minutos."
       ],
       "tip": "Fai sgocciolare bene la mozzarella antes de Cortarla a cubetti per evitare che rilasci troppa agua nel sugo."
+    },
+    "hi": {
+      "title": "Gnocchi alla sorrentina express",
+      "description": "Gnocchi filanti affogati nel टमाटर e मोज़ेरेला, passati velocemente in ओवन.",
+      "ingredients": [
+        "400 g di gnocchi di patate",
+        "250 g di टमाटर passata",
+        "125 g di मोज़ेरेला",
+        "20 g di पार्मेज़ान",
+        "एक्स्ट्रा वर्जिन जैतून तेल e तुलसी स्वादानुसार"
+      ],
+      "steps": [
+        "गरमाएँ la टमाटर passata कड़ाही में con un filo d'olio, नमक e तुलसी per 10 मिनट.",
+        "Cuoci gli gnocchi in पानी bollente salata e पानी निकालेंli as soon as salgono a galla.",
+        "Condisci gli gnocchi con il sugo di टमाटर e cubetti di मोज़ेरेला.",
+        "स्थानांतरित करें in una pirofila, spolvera di पार्मेज़ान e passa sotto il grill del ओवन per 5 मिनट."
+      ],
+      "tip": "Fai sgocciolare bene la मोज़ेरेला before Cutrla a cubetti per evitare che rilasci troppa पानी nel sugo."
     }
   },
   "pasta-alla-checca": {
@@ -3789,6 +4989,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Añade la pasta calda o tiepida nella ciotola, Remueve bene e Sirve immediatamente."
       ],
       "tip": "Puoi arricchire il piatto aggiungendo un cucharadas di pinoli tostati o scaglie di parmesano antes de Sirvere."
+    },
+    "hi": {
+      "title": "Pasta alla checca",
+      "description": "Un primo piatto freddo o tiepido tipico laziale, perfetto per l'estate con ingredienti crudi.",
+      "ingredients": [
+        "160 g di penne o fusilli",
+        "150 g di टमाटर ramati o ciliegini",
+        "100 g di मोज़ेरेला o caciotta",
+        "10 foglie di तुलसी fresco",
+        "एक्स्ट्रा वर्जिन जैतून तेल e नमक स्वादानुसार"
+      ],
+      "steps": [
+        "Cuoci la पास्ता in abbondante पानी salata e पानी निकालेंla al dente.",
+        "काटें i टमाटर e la मोज़ेरेला a piccoli cubetti dentro un'insalatiera capiente.",
+        "Condisci il mix crudo con एक्स्ट्रा वर्जिन जैतून तेल d'oliva, नमक e abbondante तुलसी spezzettato a mano.",
+        "जोड़ें la पास्ता calda o tiepida nella ciotola, हिलाएँ bene e परोसें immediatamente."
+      ],
+      "tip": "Puoi arricchire il piatto aggiungendo un tbsp di pinoli tostati o scaglie di पार्मेज़ान before परोसेंre."
     }
   },
   "risotto-zucchine": {
@@ -3848,6 +5066,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spegni il fuoco, Añade il mantequilla rimasto e il parmesano, quindi manteca energicamente."
       ],
       "tip": "Manteca sempre a fuoco spento Dejando riposare il arroztto coperto per 1 minuto antes de impiattare."
+    },
+    "hi": {
+      "title": "क्रीमी तोरी रिसोट्टो",
+      "description": "Un grande classico lअंडाero e delicato, mantecato alla perfezione con il पार्मेज़ान.",
+      "ingredients": [
+        "160 g di चावल Carnaroli o Arborio",
+        "2 तोरी",
+        "1/2 प्याज़ bionda",
+        "30 g di पार्मेज़ान",
+        "15 g di मक्खन",
+        "700 ml di स्टॉक vegetale"
+      ],
+      "steps": [
+        "Trita la प्याज़ e falla appassire in una casseruola con un filo d'olio e metà del मक्खन.",
+        "Grattugia le तोरी a fori larghi e Addle in casseruola Letndole insaporire per 3 मिनट.",
+        "Tosta il चावल per 2 मिनट, poi porta a cottura aggiungendo il स्टॉक caldo un mestolo alla volta.",
+        "Spegni il fuoco, जोड़ें il मक्खन rimasto e il पार्मेज़ान, quindi manteca energicamente."
+      ],
+      "tip": "Manteca sempre a fuoco spento Letndo riposare il चावलtto coperto per 1 minuto before impiattare."
     }
   },
   "frittata-pasta-riciclata": {
@@ -3904,6 +5141,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cocina a medio con coperchio per 5 minutos per lato, girandola aiutandoti con il coperchio stesso."
       ],
       "tip": "Se la pasta avanzata è in bianco, Añade dei cubetti di jamón cocido o mozzarella all'impasto."
+    },
+    "hi": {
+      "title": "Frittata di पास्ता riciclata",
+      "description": "Il modo migliore e più gustoso per recuperare la पास्ता avanzata del giorno prima.",
+      "ingredients": [
+        "200 g di पास्ता avanzata (condita o in bianco)",
+        "3 अंडे",
+        "20 g di पार्मेज़ान grattugiato",
+        "2 tbsp di दूध",
+        "एक्स्ट्रा वर्जिन जैतून तेल, नमक e काली मिर्च स्वादानुसार"
+      ],
+      "steps": [
+        "फेंटें le अंडे कटोरे में capiente insieme al दूध, पार्मेज़ान, नमक e काली मिर्च.",
+        "जोड़ें la पास्ता avanzata nella ciotola e हिलाएँ bene per distribuire l'अंडा uniformemente.",
+        "गरमाएँ un filo d'olio कड़ाही में antiaderente e versa tutto il composto livellandolo con una forchetta.",
+        "पकाएँ medio con coperchio per 5 मिनट per lato, girandola aiutandoti con il coperchio stesso."
+      ],
+      "tip": "Se la पास्ता avanzata è in bianco, जोड़ें dei cubetti di पका हुआ हैम o मोज़ेरेला all'impasto."
     }
   },
   "spaghetti-aglio-olio-peperoncino-classico": {
@@ -3960,6 +5215,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Añade un mestolo di agua di cottura e Remueve energicamente per creare un'emulsione cremosa."
       ],
       "tip": "Non far bruciare l'ajo, altrimenti il condimento prenderà un sapore amaro sgradevole."
+    },
+    "hi": {
+      "title": "लहसुन, तेल और मिर्च वाले स्पघेटी",
+      "description": "Il salva-cena di mezzanotte per antonomasia, piccante e profumato, con pochissimi ingredienti.",
+      "ingredients": [
+        "180 g di स्पघेटी",
+        "2 spicchi d'लहसुन",
+        "1 काली मिर्चroncino fresco o secco",
+        "4 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "prezzemolo fresco स्वादानुसार"
+      ],
+      "steps": [
+        "Cuoci gli स्पघेटी in पानी bollente lअंडाermente meno salata del solito.",
+        "Schiaccia gli spicchi d'लहसुन e falli dorare a fuoco bassissimo in कड़ाही con l'olio e il काली मिर्चroncino tritato.",
+        "पानी निकालें la पास्ता due मिनट prima del tempo e नमकala nella कड़ाही con il condimento.",
+        "जोड़ें un mestolo di पानी di cottura e हिलाएँ energicamente per creare un'emulsione cremosa."
+      ],
+      "tip": "Non far bruciare l'लहसुन, altrimenti il condimento prenderà un sapore amaro sgradevole."
     }
   },
   "pasta-ricotta-pepe": {
@@ -4016,6 +5289,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Escurre la pasta, versala direttamente nella ciotola con la ricotta e Remueve hasta que renderla omogenea."
       ],
       "tip": "Scegli una ricotta freschissima e Dejala fuori dal nevera 10 minutos antes de utilizzarla."
+    },
+    "hi": {
+      "title": "Pasta alla ricotta e काली मिर्च",
+      "description": "Una crema vellutata e avvolgente senza cottura, ideale quando si ha pochissimo tempo.",
+      "ingredients": [
+        "160 g di पास्ता (corta o lunga)",
+        "150 g di ricotta vaccina o di pecora",
+        "20 g di पार्मेज़ान",
+        "काली मिर्च nero macinato fresco स्वादानुसार",
+        "नमक स्वादानुसार"
+      ],
+      "steps": [
+        "Cuoci la पास्ता nella forma preferita in abbondante पानी salata.",
+        "Lavora la ricotta कटोरे में con una forchetta जब तक renderla una crema liscia.",
+        "जोड़ें alla ricotta il पार्मेज़ान, abbondante काली मिर्च nero e due tbsp di पानी di cottura della पास्ता.",
+        "पानी निकालें la पास्ता, versala direttamente nella ciotola con la ricotta e हिलाएँ जब तक renderla omogenea."
+      ],
+      "tip": "Scegli una ricotta freschissima e Letla fuori dal फ्रिज 10 मिनट before utilizzarla."
     }
   },
   "vellutata-svuotafrigo": {
@@ -4070,6 +5361,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "In una olla fai appassire la cebolla con l'olio, poi Añade le verdure e copri d'agua.",
         "Lleva a ebullición e Cocina a medio durante unos 20-25 minutos hasta que quando le patate sono tenere.",
         "Frulla il tutto con un mixer a immersione hasta que ottenere una crema liscia, servendo con crostini e parmesano."
+      ],
+      "tip": "Una patata inserita nel mix è il segreto per dare la consistenza vellutata e densa al piatto."
+    },
+    "hi": {
+      "title": "Vellutata confortevole svuotaफ्रिज",
+      "description": "Un caldo comfort food per riciclare tutte le verdure rimaste nel cassetto del फ्रिजrifero.",
+      "ingredients": [
+        "400 g di verdure miste (तोरी, carote, patate, टमाटर)",
+        "1/2 प्याज़",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल",
+        "crostini di ब्रेड स्वादानुसार",
+        "10 g di पार्मेज़ान"
+      ],
+      "steps": [
+        "Pela, धोएँ e काटें a cubetti regolari tutte le verdure a disposizione.",
+        "In una बर्तन fai appassire la प्याज़ con l'olio, poi जोड़ें le verdure e copri d'पानी.",
+        "उबाल आने तक गरम करें e पकाएँ medio लगभग 20-25 मिनट जब तक quando le patate sono tenere.",
+        "Frulla il tutto con un mixer a immersione जब तक ottenere una crema liscia, servendo con crostini e पार्मेज़ान."
       ],
       "tip": "Una patata inserita nel mix è il segreto per dare la consistenza vellutata e densa al piatto."
     }
@@ -4128,6 +5437,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci la pasta, Escurrela al dente e salala direttamente nel sugo rustico antes de Sirvere."
       ],
       "tip": "Sfumare la salchicha con un goccio di vino bianco antes de mettere il tomate eleva il sapore del piatto."
+    },
+    "hi": {
+      "title": "Pennette alla campagnola",
+      "description": "Un primo piatto rustico arricchito dal sapore deciso della सॉसेज sbriciolata.",
+      "ingredients": [
+        "160 g di pennette rigate",
+        "1 सॉसेज fresca",
+        "150 g di टमाटर passata",
+        "1/4 di प्याज़ bionda",
+        "एक्स्ट्रा वर्जिन जैतून तेल e नमक स्वादानुसार"
+      ],
+      "steps": [
+        "Sgrana la सॉसेज eliminando il budello e spezzettandola finemente con le mani.",
+        "Rosola la प्याज़ tritata in कड़ाही con un filo d'olio, poi जोड़ें la सॉसेज e Letla dorare.",
+        "Versa la टमाटर passata, regola di नमक e रहने दें cuocere a fuoco lento per 15 मिनट.",
+        "Cuoci la पास्ता, पानी निकालेंla al dente e नमकala direttamente nel sugo rustico before परोसेंre."
+      ],
+      "tip": "Sfumare la सॉसेज con un goccio di vino bianco before mettere il टमाटर eleva il sapore del piatto."
     }
   },
   "risotto-pomodoro-mozzarella": {
@@ -4184,6 +5511,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "A fuoco spento manteca con una noce di mantequilla e Añade la mozzarella, Remuevendo finché non fila."
       ],
       "tip": "Sirve immediatamente nei piatti per godere al massimo dell'effetto filante caldo della mozzarella."
+    },
+    "hi": {
+      "title": "Ricetto al टमाटर e मोज़ेरेला filante",
+      "description": "Un चावलtto semplice amato da grandi e bambini, dal cuore incredibilmente filante.",
+      "ingredients": [
+        "160 g di चावल per चावलtti",
+        "200 g di टमाटर passata",
+        "100 g di मोज़ेरेला",
+        "600 ml di स्टॉक vegetale",
+        "प्याज़ e मक्खन स्वादानुसार"
+      ],
+      "steps": [
+        "Tosta il चावल nella casseruola dopo aver fatto appassire un po' di प्याज़ tritata nel मक्खन.",
+        "जोड़ें la टमाटर passata e prosegui la cottura aggiungendo il स्टॉक bollente poco alla volta.",
+        "काटें la मोज़ेरेला a cubetti molto piccoli e tienila da parte.",
+        "A fuoco spento manteca con una noce di मक्खन e जोड़ें la मोज़ेरेला, हिलाएँndo finché non fila."
+      ],
+      "tip": "परोसें immediatamente nei piatti per godere al massimo dell'effetto filante caldo della मोज़ेरेला."
     }
   },
   "orecchiette-salsiccia-zucchine": {
@@ -4240,6 +5585,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci le orecchiette, Escurrele e salale nel condimento unendo un filo d'olio a crudo."
       ],
       "tip": "Mantieni le calabacín lhuevoermente croccanti per dare una consistenza piacevole al piatto."
+    },
+    "hi": {
+      "title": "Orecchiette सॉसेज e तोरी",
+      "description": "Un abbinamento azzeccato tra la dolcezza delle तोरी e la sapidità della सॉसेज.",
+      "ingredients": [
+        "160 g di orecchiette fresche o secche",
+        "1 सॉसेज",
+        "1 तोरी grande",
+        "1 spicchio d'लहसुन",
+        "एक्स्ट्रा वर्जिन जैतून तेल e नमक स्वादानुसार"
+      ],
+      "steps": [
+        "काटें la तोरी a rondelle sottili o a piccoli cubetti.",
+        "कड़ाही में fai dorare l'लहसुन con l'olio, जोड़ें la सॉसेज sgranata e cuoci per 5 मिनट.",
+        "जोड़ें le तोरी nella stessa कड़ाही e नमकa over तेज़ आँच per altri 7-8 मिनट.",
+        "Cuoci le orecchiette, पानी निकालेंle e नमकale nel condimento unendo un filo d'olio a crudo."
+      ],
+      "tip": "Mantieni le तोरी lअंडाermente croccanti per dare una consistenza piacevole al piatto."
     }
   },
   "pasta-boscaiola-veloce": {
@@ -4296,6 +5659,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Tuffa la pasta Escurreta al dente nella sartén e amalgama il tutto antes de impiattare."
       ],
       "tip": "Se usi la ricotta al posto della nata otterrai una versione più lhuevoera ma altrettanto cremosa."
+    },
+    "hi": {
+      "title": "Pasta alla boscaiola veloce",
+      "description": "Saporita e avvolgente, una finta boscaiola con ingredienti facili da dispensa.",
+      "ingredients": [
+        "160 g di penne rigate",
+        "80 g di पका हुआ हैम a dadini",
+        "100 g di मशरूम champignon (freschi o surgelati)",
+        "3 tbsp di टमाटर passata",
+        "50 g di क्रीम da cucina o ricotta"
+      ],
+      "steps": [
+        "कड़ाही में गरमाएँ un filo d'olio e rosola i cubetti di पका हुआ हैम insieme ai मशरूम.",
+        "जोड़ें la टमाटर passata e पकाएँ medio लगभग 10 मिनट.",
+        "जोड़ें la क्रीम (o la ricotta stemperata con पानी) per creare una salsa rosa e densa.",
+        "Tuffa la पास्ता पानी निकालेंta al dente nella कड़ाही e amalgama il tutto before impiattare."
+      ],
+      "tip": "Se usi la ricotta al posto della क्रीम otterrai una versione più lअंडाera ma altrettanto cremosa."
     }
   },
   "risotto-parmigiano-pepe": {
@@ -4352,6 +5733,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spegni il fuoco, Añade il mantequilla, il parmesano e il pimienta pestato, Remuevendo vigorosamente all'onda."
       ],
       "tip": "Tostare il pimienta nero da solo in un padellino per 30 secondi sprigiona gli oli essenziali e raddoppia il profumo."
+    },
+    "hi": {
+      "title": "Ricetto al पार्मेज़ान e काली मिर्च",
+      "description": "La versione चावलtto della celebre पास्ता cacio e काली मिर्च, chic e facilissima.",
+      "ingredients": [
+        "160 g di चावल Arborio o Carnaroli",
+        "50 g di पार्मेज़ान Rअंडाiano grattugiato",
+        "20 g di मक्खन",
+        "काली मिर्च nero in grani स्वादानुसार",
+        "600 ml di स्टॉक vegetale lअंडाero"
+      ],
+      "steps": [
+        "Tosta il चावल a secco in una casseruola per un paio di मिनट finché i chicchi sono caldi.",
+        "Bagna con il स्टॉक bollente e porta a cottura हिलाएँndo di tanto in tanto.",
+        "Nel frattempo, pesta il काली मिर्च nero in un mortaio o macinalo grossolanamente al momento.",
+        "Spegni il fuoco, जोड़ें il मक्खन, il पार्मेज़ान e il काली मिर्च pestato, हिलाएँndo vigorosamente all'onda."
+      ],
+      "tip": "Tostare il काली मिर्च nero da solo in un padellino per 30 secondi sprigiona gli oli essenziali e raddoppia il profumo."
     }
   },
   "pasta-del-maresciallo": {
@@ -4408,6 +5807,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Escurre i rigatoni ben al dente e finisci la cottura salandoli nella salsa cremosa."
       ],
       "tip": "Puoi sostituire la sarténcetta con il jamón cocido se preferisci un gusto più delicato."
+    },
+    "hi": {
+      "title": "Pasta del maresciallo",
+      "description": "Un primo super cremoso con una salsa densa a base di टमाटर, क्रीम e कड़ाहीcetta.",
+      "ingredients": [
+        "160 g di rigatoni o penne",
+        "80 g di कड़ाहीcetta affumicata o dolce",
+        "150 g di टमाटर passata",
+        "60 g di क्रीम da cucina",
+        "प्याज़ e olio स्वादानुसार"
+      ],
+      "steps": [
+        "Fai appassire pochissima प्याज़ tritata in कड़ाही con l'olio e जोड़ें la कड़ाहीcetta a dadini.",
+        "Quando la कड़ाहीcetta è dorata, versa la टमाटर passata e fai restringere per 8 मिनट.",
+        "Versa la क्रीम da cucina nel sugo di टमाटर हिलाएँndo जब तक ottenere un colore omogeneo.",
+        "पानी निकालें i rigatoni ben al dente e finisci la cottura नमकandoli nella salsa cremosa."
+      ],
+      "tip": "Puoi sostituire la कड़ाहीcetta con il पका हुआ हैम se preferisci un gusto più delicato."
     }
   },
   "gnocchi-zucchine-speck": {
@@ -4464,6 +5881,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci gli gnocchi, Escurreli e salali nella crema di calabacín, guarnendo alla fine con lo speck croccante."
       ],
       "tip": "Non salare il condimento antes de aver assaggiato: lo speck riDeja già molta sapidità."
+    },
+    "hi": {
+      "title": "Gnocchi तोरी e speck",
+      "description": "Un abbinamento intramontabile e rapidissimo, ideale per un pranzo dell'ultimo minuto.",
+      "ingredients": [
+        "400 g di gnocchi di patate",
+        "70 g di speck o प्रोशुट्टो a listarelle",
+        "1 तोरी",
+        "50 g di formaggio spalmabile o ricotta",
+        "एक्स्ट्रा वर्जिन जैतून तेल स्वादानुसार"
+      ],
+      "steps": [
+        "Metti a Heatre l'पानी per gli gnocchi. Nel frattempo काटें la तोरी a julienne sottile.",
+        "कड़ाही में ampia rosola lo speck senza grassi finché diventa croccante, poi toglilo e tienilo da parte.",
+        "Nella stessa कड़ाही metti un filo d'olio, नमकa le तोरी per 5 मिनट e जोड़ें il formaggio spalmabile.",
+        "Cuoci gli gnocchi, पानी निकालेंli e नमकali nella crema di तोरी, guarnendo alla fine con lo speck croccante."
+      ],
+      "tip": "Non salare il condimento before aver assaggiato: lo speck riरहने दें già molta sapidità."
     }
   },
   "puttanesca-veloce": {
@@ -4523,6 +5958,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci gli espaguetis, Escurreli al dente e tuffali nella sartén girando velocemente."
       ],
       "tip": "Sciagua i capperi sotto l'agua corrente con cura per eliminare tutto il sal in eccesso."
+    },
+    "hi": {
+      "title": "Spaghettata alla puttanesca veloce",
+      "description": "Un piatto della tradizione camकड़ाहीa, ricco di aromi mediterranei e facilissimo da improvvisare.",
+      "ingredients": [
+        "160 g di स्पघेटी",
+        "200 g di टमाटर passata o polpa",
+        "40 g di olive nere snocciolate",
+        "1 tbsp di capperi sotto नमक",
+        "2 filetti di alici sott'olio",
+        "लहसुन e काली मिर्चroncino स्वादानुसार"
+      ],
+      "steps": [
+        "Sciogli i filetti di alici in कड़ाही con olio caldo, lo spicchio d'लहसुन e il काली मिर्चroncino.",
+        "जोड़ें le olive Cutte a rondelle, i capperi dissalati e infine la टमाटर passata.",
+        "Fai cuocere il sugo लगभग 10 मिनट a fuoco dolce finché non si addensa bene.",
+        "Cuoci gli स्पघेटी, पानी निकालेंli al dente e tuffali nella कड़ाही girando velocemente."
+      ],
+      "tip": "Sciपानी i capperi sotto l'पानी corrente con cura per eliminare tutto il नमक in eccesso."
     }
   },
   "risotto-milanese-semplificato": {
@@ -4582,6 +6036,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Negli ultimi due minutos versa lo zafferano sciolto e infine manteca fuori dal fuoco con il mantequilla rimasto e il parmesano."
       ],
       "tip": "Per un perfetto arroz all'onda non farlo asciugare troppo prima della mantecatura finale."
+    },
+    "hi": {
+      "title": "Ricetto alla milanese semplificato",
+      "description": "Il चावलtto allo zafferano dorato e profumato, ridotto ai passaggi essenziali casalinghi.",
+      "ingredients": [
+        "160 g di चावल Carnaroli o Arborio",
+        "1 bustina di zafferano",
+        "1/4 di प्याज़ bionda",
+        "25 g di मक्खन",
+        "30 g di पार्मेज़ान grattugiato",
+        "600 ml di स्टॉक vegetale o di carne"
+      ],
+      "steps": [
+        "Sciogli lo zafferano in mezza tazzina di स्टॉक caldo preso dal totale.",
+        "Soffriggi la प्याज़ tritata finemente in metà del मक्खन जब तक farla diventare trasparente.",
+        "Tosta il चावल per un minuto, poi bagna costantemente con il स्टॉक portandolo a cottura.",
+        "Negli ultimi due मिनट versa lo zafferano sciolto e infine manteca fuori dal fuoco con il मक्खन rimasto e il पार्मेज़ान."
+      ],
+      "tip": "Per un perfetto चावल all'onda non farlo asciugare troppo prima della mantecatura finale."
     }
   },
   "pasta-del-campione": {
@@ -4638,6 +6111,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Remueve velocemente in modo che il calore della pasta sciolga il mantequilla e crei una cremina con l'huevo."
       ],
       "tip": "La ciotola deve essere preferibilmente calda per aiutare la fusione senza stracuocere l'huevo."
+    },
+    "hi": {
+      "title": "Pasta del campione (अंडा e पार्मेज़ान)",
+      "description": "La चावलtta del comfort alimentare quando il फ्रिज piange ma si vuole qualcosa di squisito.",
+      "ingredients": [
+        "160 g di पास्ता corta (es. mezze maniche)",
+        "1 अंडा intero",
+        "40 g di पार्मेज़ान Rअंडाiano",
+        "20 g di मक्खन di ottima qualità",
+        "काली मिर्च nero स्वादानुसार"
+      ],
+      "steps": [
+        "Cuoci la पास्ता in पानी bollente salata secondo i tempi indicati sulla confezione.",
+        "कटोरे में capiente फेंटें energicamente l'अंडा con il पार्मेज़ान e un pizzico di काली मिर्च.",
+        "पानी निकालें la पास्ता Letndola umida e versala bollente nella ciotola insieme al मक्खन a pezzetti.",
+        "हिलाएँ velocemente in modo che il calore della पास्ता sciolga il मक्खन e crei una cremina con l'अंडा."
+      ],
+      "tip": "La ciotola deve essere preferibilmente calda per aiutare la fusione senza stracuocere l'अंडा."
     }
   },
   "fusilli-pomodori-secchi": {
@@ -4694,6 +6185,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Versa la crema ottenuta in una terrina, Añade la pasta Escurreta al dente e amalgama con cura."
       ],
       "tip": "Fai attenzione al sal nell'agua della pasta, poiché i tomates secchi sono già molto sapidi."
+    },
+    "hi": {
+      "title": "Fusilli alla crema di टमाटर secchi",
+      "description": "Un primo piatto dal sapore concentrato e mediterraneo che si prepara nel tempo di cottura della पास्ता.",
+      "ingredients": [
+        "160 g di fusilli",
+        "6-7 टमाटर secchi sott'olio",
+        "60 g di ricotta o formaggio fresco",
+        "10 g di mandorle o pinoli",
+        "एक्स्ट्रा वर्जिन जैतून तेल स्वादानुसार"
+      ],
+      "steps": [
+        "Metti a cuocere i fusilli in abbondante पानी bollente salata.",
+        "Nel boccale del mixer inserisci i टमाटर secchi ben sgocciolati, la ricotta, le mandorle e un filo d'olio.",
+        "Frulla aggiungendo un mestolo di पानी di cottura della पास्ता जब तक ottenere un pesto liscio.",
+        "Versa la crema ottenuta in una terrina, जोड़ें la पास्ता पानी निकालेंta al dente e amalgama con cura."
+      ],
+      "tip": "Fai attenzione al नमक nell'पानी della पास्ता, poiché i टमाटर secchi sono già molto sapidi."
     }
   },
   "zuppa-lettere-formaggino": {
@@ -4747,6 +6256,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Dai una generosa spolverata di parmesano grattugiato e Remueve antes de Sirvere calda."
       ],
       "tip": "Regola la quantità di caldo alla fine se preferisci una consistenza più densa o più liquida."
+    },
+    "hi": {
+      "title": "Zuppa di lettere e formaggino",
+      "description": "Il piatto nostalgico e cremoso perfetto per le sere fredde o quando si vuole qualcosa di super lअंडाero.",
+      "ingredients": [
+        "100 g di pastina (letterine, stelline o चावलni)",
+        "500 ml di स्टॉक vegetale",
+        "2 formaggini o 80 g di ricotta",
+        "10 g di पार्मेज़ान grattugiato"
+      ],
+      "steps": [
+        "उबाल आने तक गरम करें il स्टॉक vegetale in un pentolino.",
+        "Versa la pastina e cuocila per il tempo indicato (solitamente dai 5 ai 7 मिनट).",
+        "Spegni il fuoco, जोड़ें i formaggini e schiacciali con la forchetta per farli sciogliere completamente.",
+        "Dai una generosa spolverata di पार्मेज़ान grattugiato e हिलाएँ before परोसेंre calda."
+      ],
+      "tip": "Regola la quantità di स्टॉक alla fine se preferisci una consistenza più densa o più liquida."
     }
   },
   "tiramisu-bicchiere": {
@@ -4799,6 +6325,24 @@ export const RECIPE_TRANSLATIONS: Record<
       "steps": [
         "Lavora il mascarpone (o la ricotta) En un bol con lo azúcar a velo hasta que creare una crema.",
         "Prepara il caffè e Dejalo intiepidire in un piatto fondo.",
+        "Spezza i biscotti a metà, inzuppali velocemente nel caffè e disponili sul fondo di due bicchieri.",
+        "Copri con uno strato di crema, ripeti l'operazione e completa spolverando abbondante cacao amaro."
+      ],
+      "tip": "Non inzuppare troppo i biscotti nel caffè per evitare liquido sul fondo del bicchiere."
+    },
+    "hi": {
+      "title": "ग्लास में त्वरित तिरमिसू",
+      "description": "La versione monodose e rapida del dolce italiano più famoso, senza albumi montati.",
+      "ingredients": [
+        "150 g di mascarpone o ricotta",
+        "1 tazza di caffè espresso zuccherato",
+        "6 biscotti savoiardi o frollini",
+        "30 g di चीनी a velo",
+        "cacao amaro in polvere स्वादानुसार"
+      ],
+      "steps": [
+        "Lavora il mascarpone (o la ricotta) कटोरे में con lo चीनी a velo जब तक creare una crema.",
+        "Prepara il caffè e Letlo intiepidire in un piatto fondo.",
         "Spezza i biscotti a metà, inzuppali velocemente nel caffè e disponili sul fondo di due bicchieri.",
         "Copri con uno strato di crema, ripeti l'operazione e completa spolverando abbondante cacao amaro."
       ],
@@ -4859,6 +6403,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Versa nei bicchieri e Deja rassodare in neverarifero per almeno 3 ore antes de guarnire con la marmellata."
       ],
       "tip": "Se hai fretta, metti i bicchieri in freezer per 30-45 minutos per accelerare la gelificazione."
+    },
+    "hi": {
+      "title": "Cream cotta espressa alla marmellata",
+      "description": "Un dolce al tbsp della pasticceria, velocizzato in bicchieri monoporzione.",
+      "ingredients": [
+        "200 ml di क्रीम fresca liquida",
+        "40 g di चीनी semolato",
+        "2 g di gelatina in fogli (1 foglio)",
+        "3 tbsp di confettura di frutta",
+        "1 tsp di estratto di vaniglia"
+      ],
+      "steps": [
+        "Ammolla il foglio di gelatina in पानी fredda per 10 मिनट.",
+        "In un pentolino गरमाएँ la क्रीम con lo चीनी e la vaniglia senza farle bollire.",
+        "Spegni il fuoco, strizza la gelatina e scioglila nella क्रीम calda हिलाएँndo bene.",
+        "Versa nei bicchieri e रहने दें rassodare in फ्रिजrifero per almeno 3 ore before guarnire con la marmellata."
+      ],
+      "tip": "Se hai fretta, metti i bicchieri in freezer per 30-45 मिनट per accelerare la gelificazione."
     }
   },
   "mattonella-caffe-biscotti": {
@@ -4915,6 +6477,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Ricopri l'ultimo strato con la crema rimasta e decora con le gocce di cioccolato antes de mettere in nevera."
       ],
       "tip": "Il mantequilla deve essere a temperatura ambiente per almeno un'ora antes de essere lavorato."
+    },
+    "hi": {
+      "title": "Mattonella al caffè e biscotti",
+      "description": "Un dolce freddo velocissimo che ricorda i sapori dell'infanzia e della colazione.",
+      "ingredients": [
+        "12 biscotti secchi",
+        "50 g di मक्खन morbido a pomata",
+        "40 g di चीनी",
+        "2 tazzine di caffè ristretto freddo",
+        "gocce di cioccolato स्वादानुसार"
+      ],
+      "steps": [
+        "Lavora il मक्खन morbido con lo चीनी जब तक ottenere una crema bianca e spumosa.",
+        "जोड़ें un tsp di caffè alla crema di मक्खन continuando a हिलाएँre.",
+        "Inzuppa i biscotti secchi nel restante caffè e crea una torretta alternando biscotto e crema di मक्खन.",
+        "Ricopri l'ultimo strato con la crema rimasta e decora con le gocce di cioccolato before mettere in फ्रिज."
+      ],
+      "tip": "Il मक्खन deve essere a temperatura ambiente per almeno un'ora before essere lavorato."
     }
   },
   "crumble-frutta-padella": {
@@ -4968,6 +6548,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Corta la frutta a piccoli cubetti eliminando la buccia se necessario.",
         "In un pentolino sala la frutta con metà del mantequilla, lo azúcar di canna e la cannella per 5 minutos.",
         "In un padellino a parte fai sciogliere il mantequilla rimasto e tosta i biscotti sbriciolati per 2 minutos.",
+        "Componi il dolce nei bicchieri mettendo la frutta calda sul fondo e il crumble di biscotti sopra."
+      ],
+      "tip": "Accompagna questo dolce tiepido con una pallina di gelato alla vaniglia o yogurt greco."
+    },
+    "hi": {
+      "title": "Crumble di frutta in कड़ाही",
+      "description": "Una versione furbissima e croccante senza ओवन, ideale per consumare la frutta matura.",
+      "ingredients": [
+        "2 pezzi di frutta di stagione (mele, pesche o fragole)",
+        "40 g di biscotti secchi sbriciolati",
+        "15 g di मक्खन",
+        "1 tbsp di चीनी di canna",
+        "1 pizzico di cannella"
+      ],
+      "steps": [
+        "काटें la frutta a piccoli cubetti eliminando la buccia se necessario.",
+        "In un pentolino नमकa la frutta con metà del मक्खन, lo चीनी di canna e la cannella per 5 मिनट.",
+        "In un padellino a parte fai sciogliere il मक्खन rimasto e tosta i biscotti sbriciolati per 2 मिनट.",
         "Componi il dolce nei bicchieri mettendo la frutta calda sul fondo e il crumble di biscotti sopra."
       ],
       "tip": "Accompagna questo dolce tiepido con una pallina di gelato alla vaniglia o yogurt greco."
@@ -5027,6 +6625,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Ripeti se necessario finché la crema non si addensa, poi elimina la scorza di limón."
       ],
       "tip": "Copri subito la crema con pellicola a contatto per evitare la pellicina in superficie."
+    },
+    "hi": {
+      "title": "Crema pasticcera rapida al microonde",
+      "description": "Il segreto per una crema pasticcera setosa e densa in pochissimi मिनट.",
+      "ingredients": [
+        "250 ml di दूध",
+        "2 tuorli d'अंडा",
+        "50 g di चीनी",
+        "20 g di amido di mais (Maizena) o आटा",
+        "1 pezzetto di scorza di नींबू"
+      ],
+      "steps": [
+        "कटोरे में adatta al microonde फेंटें i tuorli con lo चीनी e l'amido जब तक eliminare i grumi.",
+        "Versa il दूध a filo continuando a हिलाएँre e inserisci la scorza di नींबू.",
+        "Cuoci in microonde a 750W per 2 मिनट, estrai, हिलाएँ bene e cuoci per un altro minuto.",
+        "Ripeti se necessario finché la crema non si addensa, poi elimina la scorza di नींबू."
+      ],
+      "tip": "Copri subito la crema con pellicola a contatto per evitare la pellicina in superficie."
     }
   },
   "banane-caramellate": {
@@ -5080,6 +6696,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Versa la salsina al caramello rimasta in sartén sopra le banane calde antes de Sirvere."
       ],
       "tip": "Gira le banane con delicatezza per evitare che si sfaldino durante la cottura."
+    },
+    "hi": {
+      "title": "Banane caramellate al मक्खन",
+      "description": "Un dessert caldo e avvolgente che trasforma un frutto comune in una golosità da fine pasto.",
+      "ingredients": [
+        "2 banane mature ma salde",
+        "20 g di मक्खन",
+        "2 tbsp di चीनी di canna",
+        "1 tbsp di succo di नींबू"
+      ],
+      "steps": [
+        "Sbuccia le banane e Cutle in due parti per il lungo o a rondelle spesse.",
+        "कड़ाही में antiaderente fai sciogliere il मक्खन insieme allo चीनी di canna e al succo di नींबू.",
+        "Adagia le banane e cuocile over मध्यम आँच per 3 मिनट per lato finché non saranno dorate.",
+        "Versa la salsina al caramello rimasta in कड़ाही sopra le banane calde before परोसेंre."
+      ],
+      "tip": "Gira le banane con delicatezza per evitare che si sfaldino durante la cottura."
     }
   },
   "mousse-yogurt-marmellata": {
@@ -5130,6 +6763,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Monta la nata ben fredda a neve ferma insieme allo azúcar a velo.",
         "En un bol ammorbidisci lo yogurt greco Remuevendolo velocemente.",
         "Incorpora la nata montata allo yogurt con movimenti delicati dal basso verso l'alto.",
+        "Distribuisci la mousse nei bicchieri e guarnisci con un generoso strato di marmellata."
+      ],
+      "tip": "Usa lo yogurt greco: la consistenza compatta evita che la mousse diventi troppo liquida."
+    },
+    "hi": {
+      "title": "Mousse rapida allo yogurt e marmellata",
+      "description": "Un dessert freschissimo, lअंडाero e spumoso con ingredienti da फ्रिज.",
+      "ingredients": [
+        "200 g di yogurt greco bianco o alla vaniglia",
+        "100 ml di क्रीम da montare",
+        "3 tbsp di confettura di frutta o miele",
+        "1 tbsp di चीनी a velo"
+      ],
+      "steps": [
+        "Monta la क्रीम ben fredda a neve ferma insieme allo चीनी a velo.",
+        "कटोरे में ammorbidisci lo yogurt greco हिलाएँndolo velocemente.",
+        "Incorpora la क्रीम montata allo yogurt con movimenti delicati dal basso verso l'alto.",
         "Distribuisci la mousse nei bicchieri e guarnisci con un generoso strato di marmellata."
       ],
       "tip": "Usa lo yogurt greco: la consistenza compatta evita che la mousse diventi troppo liquida."
@@ -5192,6 +6842,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Deja intiepidire un minuto antes de gustare con il cucharadita."
       ],
       "tip": "Non cuocere oltre il tempo indicato altrimenti il tortino diventa gommoso."
+    },
+    "hi": {
+      "title": "Tortino al cioccolato in tazza (mug cake)",
+      "description": "La torta in tazza al microonde, soluzione d'emergenza per le voglie notturne.",
+      "ingredients": [
+        "3 tbsp di आटा 00",
+        "2 tbsp di चीनी",
+        "1 tbsp di cacao amaro",
+        "3 tbsp di दूध",
+        "1 tbsp di मक्खन fuso o olio",
+        "1 punta di tsp di lievito per dolci"
+      ],
+      "steps": [
+        "Inserisci gli ingredienti secchi direttamente in una tazza da colazione e हिलाएँ.",
+        "जोड़ें दूध e मक्खन fuso amalgamando bene.",
+        "Pulisci i bordi e cuoci nel microonde a 800W लगभग 90 secondi.",
+        "रहने दें intiepidire un minuto before gustare con il tsp."
+      ],
+      "tip": "Non cuocere oltre il tempo indicato altrimenti il tortino diventa gommoso."
     }
   },
   "crepes-marmellata": {
@@ -5248,6 +6917,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci 1 minuto per lato, farcisci con la marmellata e piega la crepe in quattro."
       ],
       "tip": "La sartén deve essere caldissima antes de versare il primo mestolo di pastella."
+    },
+    "hi": {
+      "title": "Crepes dolci alla marmellata",
+      "description": "Le crespelle intramontabili, sottili e profumate, ripiene della confettura preferita.",
+      "ingredients": [
+        "60 g di आटा 00",
+        "120 ml di दूध",
+        "1 अंडा",
+        "मक्खन per la कड़ाही स्वादानुसार",
+        "4 tbsp di confettura o marmellata"
+      ],
+      "steps": [
+        "कटोरे में फेंटें l'अंडा con la आटा e versa il दूध a filo per evitare grumi.",
+        "रहने दें riposare la pastella per 10 मिनट a temperatura ambiente.",
+        "गरमाएँ un velo di मक्खन in कड़ाही antiaderente e versa un mestolino di pastella.",
+        "Cuoci 1 minuto per lato, farcisci con la marmellata e piega la crepe in quattro."
+      ],
+      "tip": "La कड़ाही deve essere caldissima before versare il primo mestolo di pastella."
     }
   },
   "budino-cioccolato": {
@@ -5302,6 +6989,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Versa il leche a filo Remuevendo con una frusta per sciogliere i grumi.",
         "Metti sul fuego medio-basso e continua a Remuevere hasta que quando il composto si addensa.",
         "Togli dal fuoco, Añade il mantequilla a pezzetti e versa il budino nelle coppette."
+      ],
+      "tip": "Per evitare la crosticina in superficie, copri le coppette con pellicola a contatto."
+    },
+    "hi": {
+      "title": "Budino al cioccolato senza bustina",
+      "description": "Fare il budino al cioccolato in casa è un gioco da ragazzi, senza preparati industriali.",
+      "ingredients": [
+        "250 ml di दूध intero",
+        "25 g di cacao amaro",
+        "50 g di चीनी semolato",
+        "20 g di मक्खन",
+        "20 g di amido di mais (Maizena)"
+      ],
+      "steps": [
+        "In un pentolino जोड़ें चीनी, cacao e amido setacciato.",
+        "Versa il दूध a filo हिलाएँndo con una frusta per sciogliere i grumi.",
+        "Metti sul मध्यम आँच-basso e continua a हिलाएँre जब तक quando il composto si addensa.",
+        "Togli dal fuoco, जोड़ें il मक्खन a pezzetti e versa il budino nelle coppette."
       ],
       "tip": "Per evitare la crosticina in superficie, copri le coppette con pellicola a contatto."
     }
@@ -5360,6 +7065,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Metti in teglia con due cucharadas d'agua e inforna a 190°C per 20-25 minutos."
       ],
       "tip": "Le mele sono cotte quando la buccia inizia a raggrinzirsi e risultano morbide alla forchetta."
+    },
+    "hi": {
+      "title": "Mele al ओवन con cuore goloso",
+      "description": "Un dessert della nonna caldo e salutare, arricchito da una farcitura croccante.",
+      "ingredients": [
+        "2 mele (Renette o Golden)",
+        "2 tbsp di marmellata di albicocche o pesche",
+        "2 biscotti secchi sbriciolati",
+        "2 tocchetti di मक्खन",
+        "cannella स्वादानुसार"
+      ],
+      "steps": [
+        "धोएँ le mele e rimuovi il torsolo centrale Letndo la base intatta.",
+        "हिलाएँ la marmellata con i biscotti sbriciolati e un pizzico di cannella.",
+        "Riempi la cavità delle mele e adagia sopra ciascuna un tocchetto di मक्खन.",
+        "Metti in teglia con due tbsp d'पानी e inforna a 190°C per 20-25 मिनट."
+      ],
+      "tip": "Le mele sono cotte quando la buccia inizia a raggrinzirsi e risultano morbide alla forchetta."
     }
   },
   "tartufini-ricotta-cacao": {
@@ -5413,6 +7136,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Forma delle palline e rotolale nel cacao amaro rimasto."
       ],
       "tip": "Deja riposare i tartufini in neverarifero per 20 minutos antes de Sirverli."
+    },
+    "hi": {
+      "title": "Tartufini express ricotta e cacao",
+      "description": "Piccole sfere cioccolatose senza cottura, pronte in pochi passaggi.",
+      "ingredients": [
+        "120 g di ricotta vaccina ben sgocciolata",
+        "60 g di biscotti secchi polverizzati",
+        "40 g di चीनी a velo",
+        "2 tbsp di cacao amaro + स्वादानुसार per la copertura"
+      ],
+      "steps": [
+        "जोड़ें la ricotta con lo चीनी a velo lavorandola a crema.",
+        "जोड़ें i biscotti tritati e i due tbsp di cacao amaro.",
+        "हिलाएँ जब तक ottenere un impasto sodo e modellabile.",
+        "Forma delle palline e rotolale nel cacao amaro rimasto."
+      ],
+      "tip": "रहने दें riposare i tartufini in फ्रिजrifero per 20 मिनट before परोसेंrli."
     }
   },
   "rotolo-pane-tramezzini-dolce": {
@@ -5466,6 +7206,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spennella con mantequilla fuso, passa nello azúcar di canna e dora in sartén per 3 minutos."
       ],
       "tip": "Corta i rotoli a fette solo dopo che si sono lhuevoermente raffreddati."
+    },
+    "hi": {
+      "title": "Rotolo di ब्रेड per tramezzini dolce",
+      "description": "Un'idea furbissima che trasforma il ब्रेड bianco in un dolcetto da Cutre a fette.",
+      "ingredients": [
+        "2 fette lunghe di ब्रेड per tramezzini (senza crosta)",
+        "3 tbsp di confettura o marmellata",
+        "10 g di मक्खन fuso",
+        "1 tbsp di चीनी di canna"
+      ],
+      "steps": [
+        "Appiattisci le fette di ब्रेड con un mattarello.",
+        "Spalma un velo generoso di marmellata su tutta la superficie.",
+        "Arrotola dal lato corto stringendo bene per formare cilindri compatti.",
+        "Spennella con मक्खन fuso, passa nello चीनी di canna e dora in कड़ाही per 3 मिनट."
+      ],
+      "tip": "काटें i rotoli a fette solo dopo che si sono lअंडाermente raffreddati."
     }
   },
   "crema-limone-acqua": {
@@ -5522,6 +7279,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Lleva a ebullición girando finché la crema non diventa densa e lucida, poi Deja raffreddare."
       ],
       "tip": "Grattugia solo la parte gialla della buccia: il bianco Deja retrogusto amaro."
+    },
+    "hi": {
+      "title": "Crema al नींबू all'पानी (senza दूध)",
+      "description": "Una crema vellutata e profumata, senza lattosio e अंडे, rinfrescante.",
+      "ingredients": [
+        "250 ml di पानी",
+        "40 ml di succo di नींबू filtrato",
+        "60 g di चीनी",
+        "25 g di amido di mais (Maizena)",
+        "scorza di 1 नींबू grattugiata"
+      ],
+      "steps": [
+        "जोड़ें चीनी e amido di mais in un pentolino.",
+        "Versa l'पानी a filo हिलाएँndo con una frusta per non formare grumi.",
+        "जोड़ें scorza e succo di नींबू, poi metti sul मध्यम आँच.",
+        "उबाल आने तक गरम करें girando finché la crema non diventa densa e lucida, poi रहने दें raffreddare."
+      ],
+      "tip": "Grattugia solo la parte gialla della buccia: il bianco रहने दें retrogusto amaro."
     }
   },
   "bicchiere-yogurt-biscotti": {
@@ -5575,6 +7350,23 @@ export const RECIPE_TRANSLATIONS: Record<
         "Decora con gocce di cioccolato o biscotti sbriciolati."
       ],
       "tip": "Prepara poco antes de Sirvere se ami il biscotto ancora croccante."
+    },
+    "hi": {
+      "title": "Bicchiere sfizioso yogurt e biscotti",
+      "description": "Il dessert dell'ultimo secondo a strati, bello da vedere e lअंडाero.",
+      "ingredients": [
+        "250 g di yogurt bianco cremoso",
+        "6 biscotti secchi o frollini",
+        "2 tbsp di marmellata o miele",
+        "gocce di cioccolato स्वादानुसार"
+      ],
+      "steps": [
+        "Sbriciola i biscotti sul fondo di due bicchieri di vetro.",
+        "Copri con un generoso strato di yogurt.",
+        "जोड़ें un tbsp di marmellata o miele in modo uniforme.",
+        "Decora con gocce di cioccolato o biscotti sbriciolati."
+      ],
+      "tip": "Prepara poco before परोसेंre se ami il biscotto ancora croccante."
     }
   },
   "omelette-dolce-marmellata": {
@@ -5629,6 +7421,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Bate lhuevoermente i tuorli e incorporali delicatamente agli albumi.",
         "Sciogli il mantequilla in sartén antiaderente, versa il composto e copri per 4 minutos.",
         "Spalma la marmellata su metà omelette, piegala a libro e spolvera di azúcar a velo."
+      ],
+      "tip": "Cottura a fuoco molto basso per gonfiare senza bruciare."
+    },
+    "hi": {
+      "title": "Omelette dolce soufflé alla marmellata",
+      "description": "Una frittatina dolce gonfia e soffice, ripiegata su un cuore fruttato.",
+      "ingredients": [
+        "2 अंडे",
+        "1 tbsp di चीनी semolato",
+        "10 g di मक्खन",
+        "2 tbsp di confettura o marmellata",
+        "चीनी a velo स्वादानुसार"
+      ],
+      "steps": [
+        "Separa i tuorli dagli albumi. Monta gli albumi a neve con lo चीनी.",
+        "फेंटें lअंडाermente i tuorli e incorporali delicatamente agli albumi.",
+        "Sciogli il मक्खन in कड़ाही antiaderente, versa il composto e copri per 4 मिनट.",
+        "Spalma la marmellata su metà omelette, piegala a libro e spolvera di चीनी a velo."
       ],
       "tip": "Cottura a fuoco molto basso per gonfiare senza bruciare."
     }
@@ -5687,6 +7497,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Passa le fette calde in un piatto con azúcar e cannella miscelati."
       ],
       "tip": "Il sartén lhuevoermente raffermo assorbe meglio l'huevo senza sfaldarsi."
+    },
+    "hi": {
+      "title": "French toast dolce della dispensa",
+      "description": "La colazione-dessert internazionale con ingredienti sempre presenti in cucina.",
+      "ingredients": [
+        "4 fette di ब्रेड (anche raffermo)",
+        "1 अंडा",
+        "50 ml di दूध",
+        "15 g di मक्खन",
+        "चीनी e cannella स्वादानुसार"
+      ],
+      "steps": [
+        "In un piatto fondo फेंटें l'अंडा con il दूध e un pizzico di cannella.",
+        "Passa le fette di ब्रेड nel composto su entrambi i lati.",
+        "In कड़ाही sciogli il मक्खन e scotta le fette finché non si forma una crosticina dorata.",
+        "Passa le fette calde in un piatto con चीनी e cannella miscelati."
+      ],
+      "tip": "Il ब्रेड lअंडाermente raffermo assorbe meglio l'अंडा senza sfaldarsi."
     }
   },
   "finti-cioccolatini": {
@@ -5735,6 +7563,22 @@ export const RECIPE_TRANSLATIONS: Record<
         "Togli dal calore e Añade i biscotti sbriciolati.",
         "Remueve per rivestire tutti i pezzi di biscotto.",
         "Disponi a cucharadasate su carta horno e Deja solidificare in nevera."
+      ],
+      "tip": "Puoi aggiungere uvetta o frutta secca se ti è rimasta in dispensa."
+    },
+    "hi": {
+      "title": "Finti cioccolatini svuota-dispensa",
+      "description": "Piccoli bocconcini croccanti per riciclare rimasugli di biscotti o cereali.",
+      "ingredients": [
+        "100 g di cioccolato fondente o al दूध",
+        "40 g di biscotti secchi o cornflakes tritati",
+        "10 g di मक्खन"
+      ],
+      "steps": [
+        "Spezzetta il cioccolato e fallo sciogliere a bagnomaria o al microonde con il मक्खन.",
+        "Togli dal calore e जोड़ें i biscotti sbriciolati.",
+        "हिलाएँ per rivestire tutti i pezzi di biscotto.",
+        "Disponi a tbspate su carta ओवन e रहने दें solidificare in फ्रिज."
       ],
       "tip": "Puoi aggiungere uvetta o frutta secca se ti è rimasta in dispensa."
     }
@@ -5793,6 +7637,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Spegni e, se vuoi, sciogli pezzetti di cioccolato fondente con il calore della crema."
       ],
       "tip": "Sirve tiepida con qualche biscotto secco da intingere."
+    },
+    "hi": {
+      "title": "Crema pasticcera al cioccolato all'पानी",
+      "description": "Una variante vellutata senza दूध né अंडे, ideale come fine pasto lअंडाero.",
+      "ingredients": [
+        "250 ml di पानी",
+        "50 g di चीनी semolato",
+        "20 g di cacao amaro",
+        "20 g di amido di mais",
+        "20 g di cioccolato fondente (opzionale)"
+      ],
+      "steps": [
+        "Setaccia amido e cacao in un pentolino insieme allo चीनी.",
+        "जोड़ें l'पानी a filo lentamente हिलाएँndo con la frusta.",
+        "Metti sul मध्यम आँच e fai addensare हिलाएँndo continuamente.",
+        "Spegni e, se vuoi, sciogli pezzetti di cioccolato fondente con il calore della crema."
+      ],
+      "tip": "परोसें tiepida con qualche biscotto secco da intingere."
     }
   },
   "granita-limone": {
@@ -5841,6 +7703,22 @@ export const RECIPE_TRANSLATIONS: Record<
         "Añade il succo di limón allo sciroppo freddo e Remueve.",
         "Versa in un contenitore basso e largo e metti in freezer.",
         "Ogni 30-40 minutos gratta con una forchetta per rompere i cristalli, ripetendo 3 volte."
+      ],
+      "tip": "Rompere i cristalli spesso è fondamentale per la consistenza granulosa."
+    },
+    "hi": {
+      "title": "Granita rapida al नींबू da freezer",
+      "description": "Il dessert ghiacciato dissetante tipico dell'estate, in versione semplificata.",
+      "ingredients": [
+        "250 ml di पानी",
+        "80 ml di succo di नींबू filtrato",
+        "60 g di चीनी"
+      ],
+      "steps": [
+        "In un pentolino sciogli lo चीनी nell'पानी calda जब तक uno sciroppo limpido, poi raffredda.",
+        "जोड़ें il succo di नींबू allo sciroppo freddo e हिलाएँ.",
+        "Versa in un contenitore basso e largo e metti in freezer.",
+        "Ogni 30-40 मिनट gratta con una forchetta per rompere i cristalli, ripetendo 3 volte."
       ],
       "tip": "Rompere i cristalli spesso è fondamentale per la consistenza granulosa."
     }
@@ -5905,6 +7783,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Corta la mozzarella a fette e posizionala sopra la carne. Copri nhuevosmente per 2 minutos hasta que quando non sarà completamente fusa."
       ],
       "tip": "Asciuga bene la mozzarella antes de metterla in sartén per evitare che rilasci troppa agua nel sugo."
+    },
+    "hi": {
+      "title": "Tacchino alla pizzaiola con मोज़ेरेला",
+      "description": "Un secondo veloce e filante che unisce la lअंडाerezza del tacchino al gusto mediterraneo del टमाटर e della मोज़ेरेला.",
+      "ingredients": [
+        "300 g di fesa di tacchino a fette",
+        "125 g di मोज़ेरेला",
+        "150 g di टमाटर passata",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "origano secco स्वादानुसार",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "गरमाएँ l'olio कड़ाही में capiente insieme allo spicchio d'लहसुन schiacciato.",
+        "Adagia le fette di tacchino e rosolale per 2 मिनट su entrambi i lati.",
+        "Versa la टमाटर passata sulle fette, regola di नमक, काली मिर्च e origano, poi copri con un coperchio e पकाएँ medio per 8 मिनट.",
+        "काटें la मोज़ेरेला a fette e posizionala sopra la carne. Copri nअंडेmente per 2 मिनट जब तक quando non sarà completamente fusa."
+      ],
+      "tip": "Asciuga bene la मोज़ेरेला before metterla in कड़ाही per evitare che rilasci troppa पानी nel sugo."
     }
   },
   "hamburger-cipolle-caramellate": {
@@ -5961,6 +7859,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Affetta la cebolla finemente e Dejala appassire in sartén con l'olio e un goccio d'agua durante unos 10 minutos.",
         "Añade lo azúcar di canna e l'aceto balsamico alle cipolle, Remueve bene e Deja caramellare a fuego bajo per altri 5 minutos.",
         "Calienta una piastra o una sartén antiaderente e cuoci gli hamburger durante unos 3-4 minutos per lato, regolando di sal e pimienta.",
+        "Impiatta l'hamburger ben caldo coprendolo generosamente con le cipolle caramellate."
+      ],
+      "tip": "Non schiacciare mai l'hamburger con la paletta durante la cottura per non far uscire i succhi della carne."
+    },
+    "hi": {
+      "title": "Hamburger gourmet con cipolle caramellate",
+      "description": "Il classico hamburger casalingo arricchito da cipolle dolci e morbide per un contrasto di sapori irresistibile.",
+      "ingredients": [
+        "2 hamburger di manzo (circa 150 g l'uno)",
+        "1 प्याज़ rossa grande",
+        "1 tbsp di चीनी di canna",
+        "2 tbsp di aceto balsamico",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Affetta la प्याज़ finemente e Letla appassire in कड़ाही con l'olio e un goccio d'पानी लगभग 10 मिनट.",
+        "जोड़ें lo चीनी di canna e l'aceto balsamico alle cipolle, हिलाएँ bene e रहने दें caramellare over धीमी आँच per altri 5 मिनट.",
+        "गरमाएँ una piastra o una कड़ाही antiaderente e cuoci gli hamburger लगभग 3-4 मिनट per lato, regolando di नमक e काली मिर्च.",
         "Impiatta l'hamburger ben caldo coprendolo generosamente con le cipolle caramellate."
       ],
       "tip": "Non schiacciare mai l'hamburger con la paletta durante la cottura per non far uscire i succhi della carne."
@@ -6026,6 +7943,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sfuma con la salsa di soia negli ultimi 30 secondi di cottura antes de Sirvere."
       ],
       "tip": "Corta le verdure della stessa dimensione per garantire una cottura uniforme e veloce."
+    },
+    "hi": {
+      "title": "Macinato di manzo नमकato con तोरी e carote",
+      "description": "Un piatto unico espresso, lअंडाero e ricco di verdure, perfetto per una cena dell'ultimo minuto.",
+      "ingredients": [
+        "300 g di macinato di manzo",
+        "1 तोरी grande",
+        "1 carota",
+        "1/2 प्याज़ bianca",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "2 tbsp di salsa di soia (opzionale)",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Trita la प्याज़ e काटें la तोरी e la carota a listarelle sottili o a julienne.",
+        "कड़ाही में capiente o un wok, गरमाएँ l'olio e fai appassire la प्याज़. जोड़ें il macinato e sgranalo bene con un tbsp di legno mentre cuoce per 5 मिनट.",
+        "जोड़ें le तोरी e le carote, regola di नमक e काली मिर्च e नमकa over तेज़ आँच per altri 7-8 मिनट, mantenendo le verdure croccanti.",
+        "Sfuma con la salsa di soia negli ultimi 30 secondi di cottura before परोसेंre."
+      ],
+      "tip": "काटें le verdure della stessa dimensione per garantire una cottura uniforme e veloce."
     }
   },
   "vitello-milanese": {
@@ -6085,6 +8022,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Sciogli il mantequilla in sartén e friggi le fettine durante unos 3 minutos per lato hasta que doratura. Asciugale su carta assorbente e Sirvele calde con spicchi di limón."
       ],
       "tip": "Per una sarténatura ancora più croccante, puoi fare un doppio passaggio nell'huevo e nel sarténgrattato."
+    },
+    "hi": {
+      "title": "Fettine di vitello fritte alla milanese",
+      "description": "La cotoletta dorata e croccante amata da grandi e bambini, preparata secondo la tradizione casalinga.",
+      "ingredients": [
+        "4 fettine di vitello sottili",
+        "2 अंडे",
+        "150 g di कड़ाहीgrattato",
+        "50 g di मक्खन (o olio di semi per friggere)",
+        "नमक",
+        "1 नींबू (per परोसेंre)"
+      ],
+      "steps": [
+        "Batti lअंडाermente le fettine di vitello con un batticarne per renderle uniformi e pratica dei piccoli tagli sui bordi per non farle arricciare.",
+        "फेंटें le अंडे in un piatto fondo con un pizzico di नमक. Metti il कड़ाहीgrattato in un altro piatto capiente.",
+        "Passa ogni fettina prima nell'अंडा sbattuto e poi nel कड़ाहीgrattato, premendo bene con le dita per farlo aderire perfettamente.",
+        "Sciogli il मक्खन in कड़ाही e friggi le fettine लगभग 3 मिनट per lato जब तक doratura. Asciugale su carta assorbente e परोसेंle calde con spicchi di नींबू."
+      ],
+      "tip": "Per una कड़ाहीatura ancora più croccante, puoi fare un doppio passaggio nell'अंडा e nel कड़ाहीgrattato."
     }
   },
   "braciole-maiale-erbe": {
@@ -6147,6 +8103,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Regola di sal e pimienta nero macinato fresco solo a fine cottura antes de impiattare."
       ],
       "tip": "Deja riposare le braciole cotte su un tagliere per 2 minutos antes de Sirverle per ridistribuire i succhi."
+    },
+    "hi": {
+      "title": "Braciole di maiale alla griglia marinate alle erbe",
+      "description": "Un secondo saporito e succulento grazie a una marinatura veloce che ammorbidisce la carne di maiale.",
+      "ingredients": [
+        "2 braciole di maiale",
+        "1 rametto di rosmarino",
+        "2 foglie di salvia",
+        "1 spicchio d'लहसुन",
+        "succo di 1/2 नींबू",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e काली मिर्च in grani"
+      ],
+      "steps": [
+        "Prepara una marinatura unendo in una pirofila l'olio, il succo di नींबू, lo spicchio d'लहसुन schiacciato, il rosmarino e la salvia tritati.",
+        "Immergi le braciole di maiale nella marinatura, rigirale bene e Letle riposare a temperatura ambiente per 10 मिनट.",
+        "गरमाएँ una piastra in ghisa o una griglia sul fuoco. Quando è rओवनte, cuoci le braciole लगभग 5-6 मिनट per lato.",
+        "Regola di नमक e काली मिर्च nero macinato fresco solo a fine cottura before impiattare."
+      ],
+      "tip": "रहने दें riposare le braciole cotte su un tagliere per 2 मिनट before परोसेंrle per ridistribuire i succhi."
     }
   },
   "involtini-manzo-prosciutto-formaggio": {
@@ -6209,6 +8185,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Calienta l'olio con la salvia in sartén, dora gli involtini per 3 minutos, sfuma con il vino bianco e Deja cuocere coperto a fuego bajo per 12 minutos."
       ],
       "tip": "Fai sfumare completamente l'alcol del vino a fiamma alta antes de abbassare il fuoco e coprire."
+    },
+    "hi": {
+      "title": "Involtini di fettine di manzo con प्रोशुट्टो e formaggio",
+      "description": "I classici involtini della nonna, ripieni e cotti in un saporito sughetto al vino bianco.",
+      "ingredients": [
+        "4 fettine di manzo sottili",
+        "4 fette di पका हुआ हैम",
+        "4 fette di formaggio dolce (tipo provola o edamer)",
+        "1/2 bicchiere di vino bianco secco",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "1 foglia di salvia",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Stendi le fettine di manzo su un piano di lavoro, regola lअंडाermente di नमक e काली मिर्च.",
+        "Adagia su ogni fettina una fetta di पका हुआ हैम e una di formaggio.",
+        "Arrotola la carne strettamente su se stessa per formare l'involtino e blocca le estremità con degli stuzzicadenti.",
+        "गरमाएँ l'olio con la salvia in कड़ाही, dora gli involtini per 3 मिनट, sfuma con il vino bianco e रहने दें cuocere coperto over धीमी आँच per 12 मिनट."
+      ],
+      "tip": "Fai sfumare completamente l'alcol del vino a fiamma alta before abbassare il fuoco e coprire."
     }
   },
   "bistecca-burro-aromatico": {
@@ -6266,6 +8262,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Calienta l'olio En una sartén dal fondo spesso a fiamma alta. Quando scotta, cuoci le bistecche per 2-3 minutos per lato senza muoverle.",
         "Abbassa lhuevoermente la fiamma, Añade il mantequilla, gli spicchi d'ajo schiacciati in camicia e il rosmarino nella sartén.",
         "Inclina la sartén e, usando un cucharadas, irrora continuamente la carne con il mantequilla fuso spumhuevoiante per un altro minuto. Regola di sal grosso e pimienta."
+      ],
+      "tip": "Non bucare mai la carne con una forchetta per girarla, usa sempre delle pinze da cucina."
+    },
+    "hi": {
+      "title": "Bistecca di manzo al मक्खन aromatico e लहसुन",
+      "description": "Una cottura in stile steakhouse per valorizzare al massimo una buona fetta di carne con aromi semplici.",
+      "ingredients": [
+        "2 bistecche di manzo (controfiletto o costata)",
+        "30 g di मक्खन",
+        "2 spicchi d'लहसुन",
+        "1 rametto di rosmarino",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक grosso e काली मिर्च nero"
+      ],
+      "steps": [
+        "Tira fuori la carne dal फ्रिज almeno 20 मिनट before cuocerla e asciugala bene con carta da cucina.",
+        "गरमाएँ l'olio कड़ाही में dal fondo spesso a fiamma alta. Quando scotta, cuoci le bistecche per 2-3 मिनट per lato senza muoverle.",
+        "Abbassa lअंडाermente la fiamma, जोड़ें il मक्खन, gli spicchi d'लहसुन schiacciati in camicia e il rosmarino nella कड़ाही.",
+        "Inclina la कड़ाही e, usando un tbsp, irrora continuamente la carne con il मक्खन fuso spumअंडाiante per un altro minuto. Regola di नमक grosso e काली मिर्च."
       ],
       "tip": "Non bucare mai la carne con una forchetta per girarla, usa sempre delle pinze da cucina."
     }
@@ -6330,6 +8345,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Condisci il tutto con l'aceite de oliva virgen extra d'oliva, un pizzico di sal e abbondante origano, poi Remueve delicatamente."
       ],
       "tip": "Puoi arricchire l'insalata aggiungendo dei cubetti di formaggio primosal o della rucola fresca."
+    },
+    "hi": {
+      "title": "Polpette di carne fredde in insalata sfiziosa",
+      "description": "Il modo perfetto per trasformare le polpette avanzate del giorno prima in un secondo piatto estivo e fresco.",
+      "ingredients": [
+        "8-10 polpette di carne già cotte",
+        "100 g di टमाटरni",
+        "1/2 प्याज़ rossa (opzionale)",
+        "50 g di olive nere snocciolate",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "origano secco स्वादानुसार",
+        "नमक"
+      ],
+      "steps": [
+        "Prendi le polpette avanzate fredde di फ्रिजrifero e Cutle a metà o in quattro parti a seconda della dimensione.",
+        "धोएँ i टमाटरni e Cutli in quattro. Affetta la प्याज़ rossa molto sottilmente.",
+        "Riजोड़ें कटोरे में le polpette, i टमाटरni, la प्याज़ e le olive nere.",
+        "Condisci il tutto con l'एक्स्ट्रा वर्जिन जैतून तेल d'oliva, un pizzico di नमक e abbondante origano, poi हिलाएँ delicatamente."
+      ],
+      "tip": "Puoi arricchire l'insalata aggiungendo dei cubetti di formaggio primoनमक o della rucola fresca."
     }
   },
   "pollo-limone-capperi": {
@@ -6392,6 +8427,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Deja restringere il liquido a fuego medio per 5 minutos hasta que formare una cremina. Spolvera di prezzemolo tritato."
       ],
       "tip": "Se la cremina si asciuga troppo velocemente, Añade un altro goccio d'agua calda o caldo."
+    },
+    "hi": {
+      "title": "Petto di चिकन al नींबू e capperi in कड़ाही",
+      "description": "Un grande classico salvacena, cremoso e dal tocco aspro e sapido che trasforma il petto di चिकन.",
+      "ingredients": [
+        "300 g di petto di चिकन a fette",
+        "succo di 1 नींबू",
+        "1 tbsp di capperi sotto नमक",
+        "2 tbsp di आटा 00",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "1/2 bicchiere di स्टॉक vegetale o पानी",
+        "नमक e prezzemolo"
+      ],
+      "steps": [
+        "Passa le fettine di petto di चिकन nella आटा da entrambi i lati, scrollando l'eccesso.",
+        "Sciपानी i capperi per eliminare il नमक in eccesso. गरमाएँ l'olio कड़ाही में e जोड़ें il चिकन, facendolo dorare 2 मिनट per lato.",
+        "Versa il succo di नींबू e il स्टॉक (o l'पानी), जोड़ें i capperi e un pizzico di नमक.",
+        "रहने दें restringere il liquido over मध्यम आँच per 5 मिनट जब तक formare una cremina. Spolvera di prezzemolo tritato."
+      ],
+      "tip": "Se la cremina si asciuga troppo velocemente, जोड़ें un altro goccio d'पानी calda o स्टॉक."
     }
   },
   "wurstel-uova-tegamino": {
@@ -6448,6 +8503,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Metti il coperchio e Cocina a basso per 3-4 minutos, finché l'albume non sarà bianco e sodo, mantenendo il tuorlo morbido. Regola di sal e pimienta."
       ],
       "tip": "Accompagna questo piatto con dei crostini di sartén tostato per fare la scarpetta con l'huevo."
+    },
+    "hi": {
+      "title": "Panta svuotaफ्रिज di wurstel e अंडे al tegamino",
+      "description": "Una चावलtta super express ed economica che चावलlve il pasto con quello che si trova spesso nel फ्रिज.",
+      "ingredients": [
+        "3 wurstel grandi",
+        "2 अंडे",
+        "1/2 प्याज़ bianca",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "काटें i wurstel a rondelle non troppo sottili e trita finemente la प्याज़.",
+        "कड़ाही में antiaderente, गरमाएँ l'olio e fai dorare la प्याज़ per un minuto. जोड़ें i wurstel e नमकali per 4 मिनट finché non saranno lअंडाermente croccanti.",
+        "Distanzia i wurstel creando due piccoli spazi vuoti nella कड़ाही e rompi un अंडा in ciascuno spazio.",
+        "Metti il coperchio e पकाएँ basso per 3-4 मिनट, finché l'albume non sarà bianco e sodo, mantenendo il tuorlo morbido. Regola di नमक e काली मिर्च."
+      ],
+      "tip": "Accompagna questo piatto con dei crostini di ब्रेड tostato per fare la scarpetta con l'अंडा."
     }
   },
   "calamari-olive-capperi": {
@@ -6513,6 +8586,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Abbassa la fiamma e cuoci per altri 8 minutos. Regola di sal solo alla fine."
       ],
       "tip": "Non prolungare la cottura dei calamari oltre i tempi indicati, altrimenti diventeranno duri e gommosi."
+    },
+    "hi": {
+      "title": "Calamari नमकati in कड़ाही con olive e capperi",
+      "description": "Calamari teneri e saporiti cucinati in pochissimo tempo con i profumi tipici della cucina mediterranea.",
+      "ingredients": [
+        "400 g di calamari puliti",
+        "10 टमाटरni",
+        "1 tbsp di capperi sotto नमक",
+        "10 olive nere",
+        "1 spicchio d'लहसुन",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "1/2 bicchiere di vino bianco",
+        "नमक e काली मिर्चroncino"
+      ],
+      "steps": [
+        "काटें i tubi dei calamari a rondelle e रहने दें i tentacoli interi. Sciपानी i capperi.",
+        "कड़ाही में गरमाएँ l'olio con l'लहसुन e un pizzico di काली मिर्चroncino. जोड़ें i calamari e नमकa over तेज़ आँच per 2 मिनट.",
+        "Sfuma con il vino bianco e रहने दें evaporare l'alcol per un minuto, poi जोड़ें i टमाटरni Cutti a metà, le olive e i capperi.",
+        "Abbassa la fiamma e cuoci per altri 8 मिनट. Regola di नमक solo alla fine."
+      ],
+      "tip": "Non prolungare la cottura dei calamari oltre i tempi indicati, altrimenti diventeranno duri e gommosi."
     }
   },
   "seppie-umido-piselli": {
@@ -6575,6 +8669,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Copri con il coperchio, abbassa la fiamma e Deja cuocere durante unos 25 minutos hasta que quando le seppie saranno tenere. Regola di sal e spolvera di prezzemolo."
       ],
       "tip": "Se il sugo dovesse restringersi troppo durante la cottura, Añade un mestolo di agua calda."
+    },
+    "hi": {
+      "title": "Seppie in umido con piselli surgelati",
+      "description": "Un grande classico della cucina di casa, morbido e perfetto da gustare con fette di ब्रेड abbrustolito.",
+      "ingredients": [
+        "400 g di seppie pulite",
+        "200 g di piselli (freschi o surgelati)",
+        "200 g di टमाटर passata",
+        "1/2 प्याज़ bianca",
+        "1/2 bicchiere di vino bianco",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e prezzemolo"
+      ],
+      "steps": [
+        "काटें le seppie a striscioline o a cubetti. Trita la प्याज़.",
+        "In un tegame गरमाएँ l'olio e fai appassire la प्याज़. जोड़ें le seppie e rosolale per 3 मिनट.",
+        "Sfuma con il vino bianco. Quando è evaporato, जोड़ें la टमाटर passata e i piselli.",
+        "Copri con il coperchio, abbassa la fiamma e रहने दें cuocere लगभग 25 मिनट जब तक quando le seppie saranno tenere. Regola di नमक e spolvera di prezzemolo."
+      ],
+      "tip": "Se il sugo dovesse restringersi troppo durante la cottura, जोड़ें un mestolo di पानी calda."
     }
   },
   "zuppetta-cozze-vongole": {
@@ -6640,6 +8754,27 @@ export const RECIPE_TRANSLATIONS: Record<
         "Cuoci a fiamma viva per 5-6 minutos scuotendo la olla di tanto in tanto. Spegni il fuoco en cuanto tutti i gusci si saranno aperti e cospargi con il prezzemolo tritato."
       ],
       "tip": "Scarta sempre i frutti di mare che rimangono chiusi dopo la cottura."
+    },
+    "hi": {
+      "title": "Zuppetta veloce di cozze e vongole al टमाटर",
+      "description": "Il profumo del mare in tavola con un sauté rapido arricchito da टमाटरni freschi e tanto लहसुन.",
+      "ingredients": [
+        "400 g di cozze già pulite",
+        "400 g di vongole già spurgate",
+        "150 g di टमाटरni o polpa di टमाटर",
+        "2 spicchi d'लहसुन",
+        "1/2 bicchiere di vino bianco",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "prezzemolo fresco स्वादानुसार",
+        "काली मिर्चroncino स्वादानुसार"
+      ],
+      "steps": [
+        "In una बर्तन capiente गरमाएँ l'olio con gli spicchi d'लहसुन schiacciati e il काली मिर्चroncino.",
+        "जोड़ें i टमाटरni Cutti a pezzetti e falli नमकare per 3 मिनट.",
+        "जोड़ें le cozze e le vongole alla बर्तन, versa il vino bianco e copri immediatamente con il coperchio.",
+        "Cuoci a fiamma viva per 5-6 मिनट scuotendo la बर्तन di tanto in tanto. Spegni il fuoco as soon as tutti i gusci si saranno aperti e cospargi con il prezzemolo tritato."
+      ],
+      "tip": "Scarta sempre i frutti di mare che rimangono chiusi dopo la cottura."
     }
   },
   "sardine-limone-pangrattato": {
@@ -6699,6 +8834,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Adagia le sardine e cuocile a fuego medio-alto per 2-3 minutos per lato hasta que quando la sarténatura sarà dorata e croccante."
       ],
       "tip": "Manhuevoia le sardine con cura per evitare di romperle durante la girata in sartén."
+    },
+    "hi": {
+      "title": "Sardine al नींबू e कड़ाहीgrattato in कड़ाही",
+      "description": "Un secondo di pesce azzurro economico, ricco di omega-3 e saporito grazie alla कड़ाहीatura aromatica.",
+      "ingredients": [
+        "300 g di sardine fresche pulite e aperte a libro",
+        "4 tbsp di कड़ाहीgrattato",
+        "scorza grattugiata di 1 नींबू",
+        "1 spicchio d'लहसुन tritato",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e prezzemolo"
+      ],
+      "steps": [
+        "हिलाएँ कटोरे में il कड़ाहीgrattato con la scorza di नींबू, il prezzemolo tritato, l'लहसुन e un pizzico di नमक.",
+        "Passa le sardine aperte nel mix di कड़ाहीgrattato facendolo aderire bene alla polpa.",
+        "गरमाएँ l'olio कड़ाही में antiaderente capiente.",
+        "Adagia le sardine e cuocile over मध्यम आँच-alto per 2-3 मिनट per lato जब तक quando la कड़ाहीatura sarà dorata e croccante."
+      ],
+      "tip": "Manअंडाia le sardine con cura per evitare di romperle durante la girata in कड़ाही."
     }
   },
   "involtini-pesce-spada-siciliana": {
@@ -6756,6 +8910,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Distribuisci il ripieno al centro di ogni fettina di pesce spada.",
         "Arrotola le fettine per formare degli involtini e fermali con degli stuzzicadenti.",
         "Calienta un cucharadas d'olio En una sartén e cuoci gli involtini a fuego medio durante unos 3 minutos per lato, finché non saranno opachi e dorati."
+      ],
+      "tip": "Puoi aggiungere un pizzico di uvetta e pinoli al ripieno per un sapore ancora più autentico."
+    },
+    "hi": {
+      "title": "Involtini di pesce spada con ripieno alla siciliana",
+      "description": "Bocconcini succosi di pesce spada ripieni di sapori tipici del sud, veloci da cuocere sul fuoco.",
+      "ingredients": [
+        "4 fettine sottili di pesce spada (circa 250 g totali)",
+        "3 tbsp di कड़ाहीgrattato",
+        "1 tbsp di पार्मेज़ान grattugiato",
+        "1 tbsp di capperi tritati",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Prepara il ripieno unendo कटोरे में il कड़ाहीgrattato, il पार्मेज़ान, i capperi tritati, un tbsp d'olio, नमक e काली मिर्च.",
+        "Distribuisci il ripieno al centro di ogni fettina di pesce spada.",
+        "Arrotola le fettine per formare degli involtini e fermali con degli stuzzicadenti.",
+        "गरमाएँ un tbsp d'olio कड़ाही में e cuoci gli involtini over मध्यम आँच लगभग 3 मिनट per lato, finché non saranno opachi e dorati."
       ],
       "tip": "Puoi aggiungere un pizzico di uvetta e pinoli al ripieno per un sapore ancora più autentico."
     }
@@ -6817,6 +8990,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Condisci con l'aceite de oliva virgen extra d'oliva, il succo di limón, l'ajo intero (da togliere dopo), sal e abbondante prezzemolo tritato."
       ],
       "tip": "Per rendere il polpo fresco più tenero, congelalo per 24 ore antes de cucinarlo per rompere le fibre delle carni."
+    },
+    "hi": {
+      "title": "Polpo all'insalata tiepida con patate e prezzemolo",
+      "description": "Un abbinamento intramontabile, perfetto da परोसेंre tiepido come secondo piatto lअंडाero.",
+      "ingredients": [
+        "500 g di polpo (fresco o decongelato)",
+        "2 patate medie",
+        "succo di 1/2 नींबू",
+        "3 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "1 spicchio d'लहसुन (opzionale)",
+        "नमक e prezzemolo tritato"
+      ],
+      "steps": [
+        "Sbuccia le patate, Cutle a cubetti e lesनमक in पानी salata लगभग 15 मिनट finché non saranno tenere ma sode.",
+        "Cuoci il polpo in पानी bollente लगभग 30 मिनट. Letlo intiepidire nella sua पानी di cottura before पानी निकालेंrlo e Cutrlo a pezzetti.",
+        "Riजोड़ें कटोरे में i cubetti di patate e i pezzetti di polpo.",
+        "Condisci con l'एक्स्ट्रा वर्जिन जैतून तेल d'oliva, il succo di नींबू, l'लहसुन intero (da togliere dopo), नमक e abbondante prezzemolo tritato."
+      ],
+      "tip": "Per rendere il polpo fresco più tenero, congelalo per 24 ore before cucinarlo per rompere le fibre delle carni."
     }
   },
   "trota-crosta-patate": {
@@ -6873,6 +9065,24 @@ export const RECIPE_TRANSLATIONS: Record<
         "Copri con un coperchio e Cocina a medio per 10 minutos, poi gira delicatamente il filetto dal lato delle patate e cuoci scoperto a fiamma alta per altri 5 minutos hasta que renderle croccanti."
       ],
       "tip": "Asciuga bene le fettine di patata con un canovaccio antes de metterle sul pesce per renderle più croccanti."
+    },
+    "hi": {
+      "title": "Filetti di trota salmonata in crosta di patate",
+      "description": "Un modo elegante e saporito per cucinare la trota, coprendola con sfoglie croccanti di patate.",
+      "ingredients": [
+        "2 filetti di trota salmonata (senza lische)",
+        "1 patata grande",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "1 rametto di rosmarino",
+        "नमक e काली मिर्च"
+      ],
+      "steps": [
+        "Sbuccia la patata e Cutla a fettine sottilissime, preferibilmente usando una mandolina.",
+        "Adagia i filetti di trota con la pelle rivolta verso il basso कड़ाही में antiaderente unta d'olio. Regola di नमक e काली मिर्च.",
+        "Copri la superficie della polpa del pesce con le fettine di patata sovrapponendole lअंडाermente come se fossero squame.",
+        "Copri con un coperchio e पकाएँ medio per 10 मिनट, poi gira delicatamente il filetto dal lato delle patate e cuoci scoperto a fiamma alta per altri 5 मिनट जब तक renderle croccanti."
+      ],
+      "tip": "Asciuga bene le fettine di patata con un canovaccio before metterle sul pesce per renderle più croccanti."
     }
   },
   "sgombro-cipolle-agrodolce": {
@@ -6932,6 +9142,25 @@ export const RECIPE_TRANSLATIONS: Record<
         "Gira i filetti, Añade nhuevosmente le cipolle e cuoci per altri 2 minutos antes de Sirvere."
       ],
       "tip": "Lo sgombro ha un sapore intenso: questa arroztta si sposa bene con del sartén di segale."
+    },
+    "hi": {
+      "title": "Sgombro in कड़ाही con cipolle rosse in agrodolce",
+      "description": "Il sapore deciso dello sgombro viene bilanciato dalla dolcezza delle cipolle rosse sfumate con l'aceto.",
+      "ingredients": [
+        "2 filetti di sgombro fresco",
+        "2 cipolle rosse",
+        "1 tbsp di चीनी",
+        "3 tbsp di aceto di vino bianco",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक"
+      ],
+      "steps": [
+        "Affetta le cipolle rosse e cuocile in कड़ाही con l'olio e un pizzico di नमक per 10 मिनट over धीमी आँच finché non saranno morbide.",
+        "जोड़ें lo चीनी e l'aceto alle cipolle, alza la fiamma e रहने दें sfumare per 2 मिनट untild ottenere l'effetto agrodolce. Rimuovi le cipolle dalla कड़ाही.",
+        "Nella stessa कड़ाही, adagia i filetti di sgombro dal lato della pelle e cuocili per 4 मिनट.",
+        "Gira i filetti, जोड़ें nअंडेmente le cipolle e cuoci per altri 2 मिनट before परोसेंre."
+      ],
+      "tip": "Lo sgombro ha un sapore intenso: questa चावलtta si sposa bene con del ब्रेड di segale."
     }
   },
   "merluzzo-livornese": {
@@ -6994,6 +9223,26 @@ export const RECIPE_TRANSLATIONS: Record<
         "Regola di sal se necessario e completa con il prezzemolo tritato fresco."
       ],
       "tip": "Puoi usare questa base di sugo ricca anche per condire un primo piatto di pasta espresso."
+    },
+    "hi": {
+      "title": "Filetti di merluzzo alla livornese con टमाटर e olive",
+      "description": "Un classico della cucina di mare casalinga, ideale per trasformare i filetti di merluzzo in un piatto goloso.",
+      "ingredients": [
+        "400 g di filetti di merluzzo (freschi o surgelati scongelati)",
+        "200 g di polpa o टमाटर passata",
+        "10 olive verdi o nere snocciolate",
+        "1 tbsp di capperi sotto नमक dissalati",
+        "1 spicchio d'लहसुन",
+        "2 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक e prezzemolo"
+      ],
+      "steps": [
+        "कड़ाही में गरमाएँ l'olio con l'लहसुन schiacciato, poi जोड़ें la polpa di टमाटर, le olive Cutte a rondelle e i capperi. Cuoci il sugo per 5 मिनट.",
+        "Adagia i filetti di merluzzo nel sugo di टमाटर.",
+        "Copri con il coperchio e पकाएँ medio लगभग 10 मिनट, girando i filetti a metà cottura con molta delicatezza.",
+        "Regola di नमक se necessario e completa con il prezzemolo tritato fresco."
+      ],
+      "tip": "Puoi usare questa base di sugo ricca anche per condire un primo piatto di पास्ता espresso."
     }
   },
   "tonno-sesamo": {
@@ -7053,13 +9302,32 @@ export const RECIPE_TRANSLATIONS: Record<
         "Scotta il atún per esattamente 1 minuto e mezzo per lato. L'interno deve rimanere rosa. Corta a fette spesse e Sirve con sal e limón."
       ],
       "tip": "Assicurati che la sartén sia caldissima antes de appoggiare il atún per creare subito la crosticina senza stracuocere il cuore del pesce."
+    },
+    "hi": {
+      "title": "Tuna fresco scottato in crosta di sesamo",
+      "description": "Una preparazione raffinata ma semplicissima, che richiede pochissimi मिनट per mantenere il टूना succoso.",
+      "ingredients": [
+        "2 tranci di टूना fresco (circa 150 g l'uno)",
+        "2 tbsp di semi di sesamo bianco",
+        "2 tbsp di semi di sesamo nero",
+        "1 tbsp di एक्स्ट्रा वर्जिन जैतून तेल d'oliva",
+        "नमक in fiocchi o fine",
+        "1 नींबू"
+      ],
+      "steps": [
+        "हिलाएँ i semi di sesamo bianco e nero in un piatto piano.",
+        "Passa i tranci di टूना nel mix di sesamo facendolo aderire perfettamente su tutti i lati premendo lअंडाermente con le mani.",
+        "गरमाएँ una कड़ाही antiaderente con un filo d'olio a fiamma alta जब तक farla fumare.",
+        "Scotta il टूना per esattamente 1 minuto e mezzo per lato. L'interno deve rimanere rosa. काटें a fette spesse e परोसें con नमक e नींबू."
+      ],
+      "tip": "Assicurati che la कड़ाही sia caldissima before appoggiare il टूना per creare subito la crosticina senza stracuocere il cuore del pesce."
     }
   }
 } as const;
 
 export function translateRecipeText(
   id: string,
-  locale: "it" | "en" | "pl" | "es",
+  locale: "it" | "en" | "pl" | "es" | "hi",
   fallback: RecipeLocaleText,
 ): RecipeLocaleText {
   if (locale === "it") return fallback;

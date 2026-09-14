@@ -396,7 +396,7 @@ export function FridgeChef() {
                 value={locale}
                 onChange={(e) => {
                   const next = e.target.value as Locale;
-                  if (next === "it" || next === "en" || next === "pl" || next === "es") {
+                  if (next === "it" || next === "en" || next === "pl" || next === "es" || next === "hi") {
                     setLocale(next);
                     saveLocale(next);
                   }
