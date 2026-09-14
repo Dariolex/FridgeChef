@@ -1,8 +1,9 @@
-export type Locale = "it" | "en";
+export type Locale = "it" | "en" | "pl";
 
 export const LOCALES: { id: Locale; label: string; short: string }[] = [
   { id: "it", label: "Italiano", short: "IT" },
   { id: "en", label: "English", short: "EN" },
+  { id: "pl", label: "Polski", short: "PL" },
 ];
 
 const STORAGE_KEY = "frigochef_locale";
@@ -10,7 +11,7 @@ const STORAGE_KEY = "frigochef_locale";
 export function loadLocale(): Locale {
   try {
     const v = localStorage.getItem(STORAGE_KEY);
-    if (v === "en" || v === "it") return v;
+    if (v === "en" || v === "it" || v === "pl") return v;
   } catch {
     /* ignore */
   }
@@ -223,7 +224,106 @@ const en: Dict = {
   sectionDessert: "Dessert",
 };
 
-const tables: Record<Locale, Dict> = { it, en };
+
+const pl: Dict = {
+  tagline: "Z lodówki na talerz",
+  searchPlaceholder: "Szukaj przepisu",
+  dietAny: "Wszystkie",
+  dietVegetarian: "Wegetariańskie",
+  dietVegan: "Wegańskie",
+  dietFast: "Szybkie",
+  dessert: "Deser",
+  shootPhoto: "Zrób zdjęcie",
+  shootPhotoAria: "Zrób zdjęcie",
+  orType: "Albo wpisz, co masz",
+  manualPlaceholder: "jajka, pomidory, makaron",
+  go: "Dalej",
+  analyzing: "Przeglądam lodówkę…",
+  thinking: "Wymyślam przepisy…",
+  inFridge: "W lodówce",
+  extraPlaceholder: "Dodaj kolejne składniki",
+  createRecipes: "Utwórz przepisy",
+  classicCookbook: "Książka kucharska",
+  organizeFridge: "Uporządkuj lodówkę",
+  organizing: "Organizuję…",
+  updateWithFilters: "Zaktualizuj przepisy według filtrów",
+  moreIdeas: "Więcej pomysłów",
+  cookingNow: "Co ugotować teraz",
+  fromReserve: "Z zapasowej książki przepisów",
+  fromFridge: "Z Twojej lodówki",
+  fromBookFridge: "Z książki (lodówka)",
+  classicTitle: "Klasyczna książka kucharska",
+  classicHint: "Dotknij kategorii, by zobaczyć dania. Filtruj dietą, czasem i wyszukiwaniem.",
+  recipesCount1: "przepis",
+  recipesCountN: "przepisów",
+  noRecipesSearch: "Brak dań dla tego wyszukiwania. Zmień filtr lub słowo kluczowe.",
+  historyTitle: "Ugotowane dania",
+  clearAll: "Wyczyść",
+  historyEmpty: "Jeszcze nic tu nie ma. Otwórz przepis i dotknij „Ugotowałem to”, by znaleźć go tutaj.",
+  profileTitle: "Preferencje",
+  portions: "Porcje",
+  maxTime: "Maksymalny czas",
+  minutes: "min",
+  onlyDessert: "Tylko desery",
+  onlyDessertHint: "Pokaż tylko słodkości i desery",
+  on: "Wł.",
+  off: "Wył.",
+  lessPortions: "Mniej porcji",
+  morePortions: "Więcej porcji",
+  shoppingAria: "Lista zakupów",
+  shoppingAriaN: "Lista zakupów, {n} do kupienia",
+  shoppingTitle: "Lista zakupów",
+  shoppingEmpty: "Lista jest pusta. Dodaj składniki z przepisów.",
+  clearDone: "Usuń zrobione",
+  missingLabel: "Brakuje Ci",
+  addToShopping: "Dodaj do listy zakupów",
+  cookedThis: "Ugotowałem to",
+  tip: "Wskazówka",
+  ingredients: "Składniki",
+  steps: "Przygotowanie",
+  servingsWord: "porcje",
+  dietOmnivore: "klasyczne",
+  dietVegetarianShort: "wegetariańskie",
+  dietVeganShort: "wegańskie",
+  navHome: "Start",
+  navRecipes: "Przepisy",
+  navHistory: "Historia",
+  navProfile: "Profil",
+  chefAI: "Szef AI",
+  classic: "Klasyczny",
+  organizeTitle: "Jak uporządkować lodówkę",
+  close: "Zamknij",
+  nothingInZone: "Nic w tej strefie.",
+  welcome: "Witaj",
+  start: "Zaczynamy",
+  next: "Dalej",
+  skip: "Pomiń",
+  onboarding1Title: "Zrób zdjęcie lodówki",
+  onboarding1Body:
+    "Sfotografuj zawartość lodówki: FrigoChef rozpozna produkty i pokaże je jako chipy do potwierdzenia.",
+  onboarding2Title: "Wybierz ścieżkę",
+  onboarding2Body:
+    "Utwórz przepisy (AI), książka klasyczna (sprawdzone dania) albo uporządkuj lodówkę (gdzie położyć każdy produkt).",
+  onboarding3Title: "Filtruj i gotuj",
+  onboarding3Body:
+    "Ustaw dietę, czas i porcje przed generowaniem. Otwórz przepis, ugotuj go lub dodaj braki do listy zakupów.",
+  errSelectIngredient: "Wybierz lub dodaj co najmniej jeden składnik.",
+  errSelectFood: "Wybierz co najmniej jeden produkt do uporządkowania.",
+  errAiConnection: "Nie udało się połączyć z AI. Spróbuj ponownie lub użyj książki przepisów.",
+  errOrganize: "Nie mogę teraz uporządkować lodówki. Spróbuj ponownie.",
+  errGeneric: "Coś poszło nie tak. Spróbuj ponownie lub dodaj składniki ręcznie.",
+  toastNothing: "Nic do dodania: masz już wszystko (albo tylko podstawy z spiżarni).",
+  toastOne: "1 składnik dodany do listy",
+  toastMany: "{n} składników dodanych do listy",
+  language: "Język",
+  sectionPrimi: "Dania pierwsze",
+  sectionSecondi: "Dania główne",
+  sectionUova: "Jajka i frittaty",
+  sectionContorni: "Dodatki i świeże",
+  sectionDessert: "Deser",
+};
+
+const tables: Record<Locale, Dict> = { it, en, pl };
 
 export function t(locale: Locale, key: string, vars?: Record<string, string | number>): string {
   const raw = tables[locale][key] ?? tables.it[key] ?? key;

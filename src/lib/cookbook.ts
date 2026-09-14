@@ -1,5 +1,7 @@
 import type { Diet, Ingredient, Prefs, Recipe } from "./types";
 import { filterShoppingMissing } from "./shopping";
+import { translateRecipeText } from "./recipe-translations";
+import type { Locale } from "./i18n";
 import { RECIPES_BASE } from "./recipes-base";
 import { RECIPES_PASTA } from "./recipes-pasta";
 import { RECIPES_MEAT } from "./recipes-meat";
@@ -121,23 +123,30 @@ function courseOk(recipe: BookRecipe, course: Prefs["course"]) {
   return !isDessert(recipe);
 }
 
-function toRecipe(r: BookRecipe, servings: number, missing: string[]): Recipe {
+function toRecipe(r: BookRecipe, servings: number, missing: string[], locale: Locale = "it"): Recipe {
+  const text = translateRecipeText(r.id, locale, {
+    title: r.title,
+    description: r.description ?? "",
+    ingredients: r.ingredients,
+    steps: r.steps,
+    tip: r.tip ?? "",
+  });
   return {
     id: r.id,
-    title: r.title,
-    description: r.description,
+    title: text.title,
+    description: text.description,
     minutes: r.minutes,
     diet: r.diet,
     servings,
     missing: filterShoppingMissing(missing),
-    ingredients: r.ingredients,
-    steps: r.steps,
-    tip: r.tip,
+    ingredients: text.ingredients,
+    steps: text.steps,
+    tip: text.tip,
     art: r.art,
   };
 }
 
-export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
+export function matchCookbook(haveRaw: string[], prefs: Prefs, locale: Locale = "it"): Recipe[] {
   const have = haveRaw.map(norm).filter(Boolean);
   const pool = BOOK.filter((r) => dietOk(r, prefs.diet))
     .filter((r) => courseOk(r, prefs.course))
@@ -145,10 +154,17 @@ export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
 
   const scored = pool
     .map((r) => {
-      const missing = r.ingredients.filter((ing) => !hasIngredient(have, ing));
-      const hit = r.ingredients.length - missing.length;
+      const localized = translateRecipeText(r.id, locale, {
+        title: r.title,
+        description: r.description ?? "",
+        ingredients: r.ingredients,
+        steps: r.steps,
+        tip: r.tip ?? "",
+      });
+      const missing = localized.ingredients.filter((ing) => !hasIngredient(have, ing));
+      const hit = localized.ingredients.length - missing.length;
       const score = hit * 3 - missing.length + (r.minutes <= 15 ? 1 : 0);
-      return { recipe: toRecipe(r, prefs.servings, missing), score, hit };
+      return { recipe: toRecipe(r, prefs.servings, missing, locale), score, hit };
     })
     .filter((x) => x.hit > 0)
     .sort((a, b) => b.score - a.score);
@@ -160,21 +176,17 @@ export function matchCookbook(haveRaw: string[], prefs: Prefs): Recipe[] {
     .filter((r) => !out.some((o) => o.id === r.id))
     .slice(0, 6 - out.length)
     .map((r) =>
-      toRecipe(
-        r,
-        prefs.servings,
-        r.ingredients.filter((ing) => !hasIngredient(have, ing)),
-      ),
+      toRecipe(r, prefs.servings, r.ingredients.filter((ing) => !hasIngredient(have, ing)), locale),
     );
   return [...out, ...extras].slice(0, 6);
 }
 
-export function popularRecipes(prefs: Prefs): Recipe[] {
+export function popularRecipes(prefs: Prefs, locale: Locale = "it"): Recipe[] {
   return BOOK.filter((r) => dietOk(r, prefs.diet))
     .filter((r) => courseOk(r, prefs.course))
     .filter((r) => (prefs.diet === "fast" ? r.minutes <= 15 : r.minutes <= prefs.maxMinutes))
     .slice(0, 6)
-    .map((r) => toRecipe(r, prefs.servings, []));
+    .map((r) => toRecipe(r, prefs.servings, [], locale));
 }
 
 export type CatalogSection = {
@@ -184,7 +196,7 @@ export type CatalogSection = {
 };
 
 /** Catalogo del ricettario organizzato per tipo, filtrato da preferenze e ricerca. */
-export function catalogBySection(prefs: Prefs, query = ""): CatalogSection[] {
+export function catalogBySection(prefs: Prefs, query = "", locale: Locale = "it"): CatalogSection[] {
   const q = query.trim().toLowerCase();
   const maxMin = prefs.diet === "fast" ? 15 : prefs.maxMinutes;
 
@@ -239,7 +251,7 @@ export function catalogBySection(prefs: Prefs, query = ""): CatalogSection[] {
   for (const r of filtered) {
     const s = sectionOf(r);
     const bucket = buckets.get(s.id) ?? { title: s.title, recipes: [] };
-    bucket.recipes.push(toRecipe(r, prefs.servings, []));
+    bucket.recipes.push(toRecipe(r, prefs.servings, [], locale));
     buckets.set(s.id, bucket);
   }
 

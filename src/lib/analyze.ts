@@ -109,10 +109,14 @@ export const createRecipes = createServerFn({ method: "POST" })
 
     console.error("[createRecipes]", res.reason, res.detail);
     const names = ingredients.map((label) => label.replace(/\s*\([^)]*\)\s*$/, "").trim());
-    const bookRecipes = matchCookbook(names, {
-      ...prefs,
-      maxMinutes: prefs.diet === "fast" ? Math.min(15, prefs.maxMinutes) : prefs.maxMinutes,
-    });
+    const bookRecipes = matchCookbook(
+      names,
+      {
+        ...prefs,
+        maxMinutes: prefs.diet === "fast" ? Math.min(15, prefs.maxMinutes) : prefs.maxMinutes,
+      },
+      locale,
+    );
     return {
       ok: false,
       source: "book",
@@ -163,7 +167,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
         const inv = await detectIngredients(data.image, { locale });
         if (!inv.ok) {
           console.error("[cookFromFridge/vision]", inv.reason, inv.detail);
-          const book = matchCookbook(manual, prefs);
+          const book = matchCookbook(manual, prefs, locale);
           return {
             ok: false,
             error: aiFailureMessage(locale, inv.reason),
@@ -200,7 +204,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
           analysis: {
             ingredients: appIngredients,
             notes: inv.data.notes,
-            recipes: matchCookbook(names, prefs),
+            recipes: matchCookbook(names, prefs, locale),
             source: "book",
           },
         };
@@ -233,7 +237,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
         analysis: {
           ingredients: manual.map((name) => ({ name, have: true })),
           notes: "",
-          recipes: matchCookbook(manual, prefs),
+          recipes: matchCookbook(manual, prefs, locale),
           source: "book",
         },
       };

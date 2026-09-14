@@ -134,7 +134,7 @@ export function FrigoChef() {
     if (analysis?.recipes?.length) setPrefsDirty(true);
   };
 
-  const popular = useMemo(() => popularRecipes({ ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes }), [prefs]);
+  const popular = useMemo(() => popularRecipes({ ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes }, locale), [prefs, locale]);
 
 
   const cookRecipe = (recipe: Recipe) => {
@@ -220,10 +220,14 @@ export function FrigoChef() {
       return;
     }
     const names = ingredients.map((label) => label.replace(/\s*\([^)]*\)\s*$/, "").trim());
-    const recipes = matchCookbook(names, {
-      ...prefs,
-      maxMinutes: prefs.diet === "fast" ? Math.min(15, prefs.maxMinutes) : prefs.maxMinutes,
-    });
+    const recipes = matchCookbook(
+      names,
+      {
+        ...prefs,
+        maxMinutes: prefs.diet === "fast" ? Math.min(15, prefs.maxMinutes) : prefs.maxMinutes,
+      },
+      locale,
+    );
     setPrefsDirty(false);
     setAnalysis((prev) => ({
       ingredients: prev?.ingredients ?? names.map((name) => ({ name, have: true })),
@@ -349,8 +353,9 @@ export function FrigoChef() {
       catalogBySection(
         { ...prefs, maxMinutes: prefs.diet === "fast" ? 15 : prefs.maxMinutes },
         query,
+        locale,
       ),
-    [prefs, query],
+    [prefs, query, locale],
   );
   const shownRecipes = (analysis?.recipes ?? filteredPopular).filter(
     (r) => !query || r.title.toLowerCase().includes(query.toLowerCase()),
