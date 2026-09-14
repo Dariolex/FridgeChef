@@ -408,15 +408,18 @@ export function FrigoChef() {
                   />
                   <ul
                     role="listbox"
-                    className="absolute right-0 top-12 z-50 min-w-[9.5rem] overflow-hidden rounded-2xl border border-fg/10 bg-bg/95 py-1 shadow-xl backdrop-blur-xl"
+                    className="absolute right-0 top-12 z-50 min-w-[10rem] overflow-hidden rounded-2xl border border-fg/25 bg-[var(--color-bg)] py-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
+                    style={{ backgroundColor: "var(--color-bg)", opacity: 1 }}
                   >
                     {LOCALES.map((l) => (
                       <li key={l.id} role="option" aria-selected={locale === l.id}>
                         <button
                           type="button"
                           className={cn(
-                            "flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-sm transition",
-                            locale === l.id ? "bg-accent/20 font-semibold" : "hover:bg-fg/8",
+                            "flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition",
+                            locale === l.id
+                              ? "bg-accent font-semibold text-accent-fg"
+                              : "text-fg hover:bg-fg/10",
                           )}
                           onClick={() => {
                             setLocale(l.id);
