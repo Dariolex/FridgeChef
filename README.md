@@ -1,38 +1,178 @@
 # FrigoChef
 
-An Italian-language recipe app: snap a photo of your fridge and get recipe suggestions tailored to what you actually have on hand.
+Photograph the inside of your fridge. Confirm the ingredients. Get recipes you can cook tonight — written in the style of an Italian home kitchen — or a shelf-by-shelf plan to store the food correctly.
 
-## What it does
+**FrigoChef is the first app built with a real Italian chef** to generate everyday recipes in an Italian cooking style: clear steps, realistic times, pantry-aware dishes, and the taste of home rather than restaurant showpieces.
 
-- Take or upload a photo of your fridge contents
-- AI vision (Google Gemini) identifies the ingredients in the photo
-- Review and adjust the detected ingredients before generating recipes
-- Or skip the photo entirely and type ingredients in by hand
-- Filter by diet: Any, Vegetarian, Vegan, or Fast (≤15 minutes)
-- Toggle a dedicated Desserts mode
-- Adjust servings (1–8) and get recipes scaled accordingly
-- AI-generated recipes tailored to your ingredients, with automatic fallback to a built-in classic Italian cookbook if the AI call fails
-- Browse the classic cookbook by category (Primi, Secondi, Eggs & frittatas, Sides, Desserts)
-- Get an AI-suggested fridge organization plan (where to place each item on the shelves)
-- Automatic shopping list: missing ingredients from recipes are collected for you, with common pantry staples (salt, sugar, oil, pepper, chili) excluded
-- Cooking history: the last 30 dishes you've cooked, stored locally on your device
-- Installable as a Progressive Web App (add to home screen on iOS/Android)
+For people who open the fridge, freeze for ten seconds, and still don’t know what to make.
 
-## Getting started
+![FrigoChef — photo → ingredients → recipes](docs/demo.gif)
+
+*Photo of the fridge → editable ingredient chips → AI recipes, classic cookbook, or fridge layout.*
+
+[![Node](https://img.shields.io/badge/node-18%2B-blue)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/license-[DA%20VERIFICARE]-lightgrey)](./LICENSE)
+[![Languages](https://img.shields.io/badge/UI-IT%20%7C%20EN%20%7C%20PL%20%7C%20ES-informational)](#languages)
+[![Demo](https://img.shields.io/badge/demo-[DA%20VERIFICARE]-orange)](https://[DA-VERIFICARE])
+
+---
+
+## Languages
+
+The app UI, AI chef prompts, error messages, and the classic cookbook text can be switched from the header language control (flag + fixed list — no free typing):
+
+| Flag | Language |
+|------|----------|
+| 🇮🇹 | Italiano |
+| 🇬🇧 | English |
+| 🇵🇱 | Polski |
+| 🇪🇸 | Español |
+
+Choice is saved in the browser (`localStorage`).
+
+---
+
+## Quick start
 
 ```bash
+git clone https://github.com/Dariolex/FrigoChef.git
+cd FrigoChef
 npm install
+export GEMINI_API_KEY=your_key_from_aistudio
 npm run dev
 ```
 
-Set `GEMINI_API_KEY` in your environment for automatic photo recognition (a free key is available from [Google AI Studio](https://aistudio.google.com/apikey)). Without a key, the local cookbook and manual ingredient entry still work.
+Open [http://localhost:8080](http://localhost:8080).
 
-Optional environment variables:
-- `GEMINI_VISION_MODEL` (default: `gemini-3.5-flash-lite`) — model used to read ingredients from the photo
-- `GEMINI_RECIPE_MODEL` (default: `gemini-3.5-flash`) — model used to generate recipes
+**Expected result:** the app loads, the language control shows the current flag (🇮🇹 / 🇬🇧 / 🇵🇱 / 🇪🇸), and the home screen offers **Take a photo** (or type ingredients by hand).
 
-`GEMINI_API_KEY` must be an **auth**-type key from [Google AI Studio](https://aistudio.google.com/apikey).
+Get a free Gemini key (type **auth**) from [Google AI Studio](https://aistudio.google.com/apikey).  
+Without a key, photo recognition is off — manual ingredients and the classic cookbook still work.
 
-## Stack
+---
 
-React 19, TanStack Start, Tailwind v4, Google Gemini vision and text models (free tier, via an OpenAI-compatible endpoint). The shopping list and cooking history are stored locally in the browser — no server-side database is used.
+## Why this project
+
+Most “recipe AI” tools ask you to type a list and answer in a generic tone. FrigoChef was shaped with **a real Italian chef’s approach**: what to do with what is already in the fridge, how a home cook in Italy would actually cook it, and how to keep steps practical.
+
+The flow starts from the **fridge photo**, lets you **confirm chips**, then branches into three actions:
+
+1. **Create recipes** (Gemini, prompted for Italian-style home cooking)  
+2. **Classic cookbook** (~120 home-style recipes, shown in the active UI language)  
+3. **Organize fridge** (zone-by-zone placement with reasons)
+
+If the AI call fails, the app falls back to the built-in cookbook instead of a blank screen.  
+Shopping list and cooking history stay in the browser — no account required for the core flow.
+
+**What it does not do:** meal-plan a whole week, sync a smart fridge, or replace a full nutrition database.
+
+---
+
+## Real use
+
+### 1. Photo → recipes
+
+1. Tap **Take a photo** and shoot the open fridge.  
+2. Toggle ingredient chips on/off; add missing ones.  
+3. Tap **Create recipes** (or **Classic cookbook** / **Organize fridge**).
+
+AI returns structured recipes (title, minutes, ingredients, steps, tip, optional missing items for the shopping list).
+
+### 2. Manual ingredients only
+
+```text
+eggs, zucchini, cooked ham
+```
+
+Type them on the home screen → **Go** → same three actions as after a photo.
+
+### 3. Classic cookbook by category
+
+Open the **Recipes** tab. Expand categories (primi, secondi, eggs, sides, dessert).  
+Recipe text follows the selected language (IT / EN / PL / ES).
+
+### 4. Diet and time filters
+
+- Diet: Any, Vegetarian, Vegan, or Fast (≤15 minutes)  
+- Desserts-only mode  
+- Servings 1–8  
+
+---
+
+## Full installation
+
+**Prerequisites**
+
+- Node.js **18+** (LTS recommended)  
+- npm (comes with Node)  
+- Optional: Gemini API key for vision + recipe generation  
+
+**macOS / Linux / Windows (terminal)**
+
+```bash
+git clone https://github.com/Dariolex/FrigoChef.git
+cd FrigoChef
+npm install
+```
+
+**Run locally**
+
+```bash
+export GEMINI_API_KEY=...   # Windows PowerShell: $env:GEMINI_API_KEY="..."
+npm run dev
+```
+
+Server listens on **0.0.0.0:8080**.
+
+**Production build**
+
+```bash
+npm run build
+npm run preview
+```
+
+**Checks used in development**
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+```
+
+---
+
+## Configuration
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `GEMINI_API_KEY` | _(empty)_ | Google AI Studio **auth** key. Required for photo inventory, AI recipes, and fridge organization. |
+| `GEMINI_VISION_MODEL` | `gemini-3.5-flash-lite` | Model for reading foods from the photo. |
+| `GEMINI_RECIPE_MODEL` | `gemini-3.5-flash` | Model for recipes and fridge organization. |
+
+API calls use Gemini’s OpenAI-compatible endpoint (`generativelanguage.googleapis.com`).
+
+---
+
+## Troubleshooting
+
+| Symptom | What to try |
+|---------|-------------|
+| “AI is not configured” / `no_key` | Export `GEMINI_API_KEY` in the same shell that runs `npm run dev`, then restart the dev server. |
+| Auth / invalid key | Create a new **auth** key in AI Studio; restricted keys may not match what the app expects. |
+| Quota / rate limit | Free-tier limits; wait and retry, or use **Classic cookbook** / manual entry. |
+| No foods detected in the photo | Better light, open door fully, or add ingredients as chips by hand. |
+| Port 8080 already in use | Stop the other process, or change the port in the `dev` script in `package.json`. |
+
+---
+
+## Contributing and license
+
+Issues and pull requests are welcome on GitHub. Prefer small, focused changes (UI, cookbook recipes, i18n, tests under `src/lib/recipe-ai.test.ts`).
+
+License: **[DA VERIFICARE]** — see [`LICENSE`](./LICENSE) when published.
+
+---
+
+## Stack (for contributors)
+
+React 19 · TanStack Start / Router · Tailwind CSS v4 · Google Gemini (vision + text) · localStorage for shopping list and last 30 cooked dishes · PWA-ready static assets under `public/` · UI and classic cookbook localized for **Italian, English, Polish, and Spanish**.
