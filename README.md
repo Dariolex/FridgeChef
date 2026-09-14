@@ -2,7 +2,7 @@
 
 > **UPDATE — UPDATED VERSION**  
 > Multilingual UI (**IT · EN · PL · ES**), flag language picker, localized classic cookbook, chef prompts, and photo → recipe flow. Clone or pull `main` for the latest release.  
-> **Live URL:** set your own Vercel production domain (see [Use it now](#use-it-now)). Do **not** use `frigo-chef.vercel.app` — that is a different public app.
+> **Try it now:** [https://frigo-chef-omega.vercel.app](https://frigo-chef-omega.vercel.app/)
 
 Photograph the inside of your fridge. Confirm the ingredients. Get recipes you can cook tonight — written in the style of an Italian home kitchen — or a shelf-by-shelf plan to store the food correctly.
 
@@ -15,25 +15,22 @@ For people who open the fridge, freeze for ten seconds, and still don’t know w
 [![Node](https://img.shields.io/badge/node-18%2B-blue)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Languages](https://img.shields.io/badge/UI-IT%20%7C%20EN%20%7C%20PL%20%7C%20ES-informational)](#languages)
+[![Live](https://img.shields.io/badge/live-frigo--chef--omega.vercel.app-success)](https://frigo-chef-omega.vercel.app/)
 
 ---
 
 ## Use it now
 
-This repository deploys on **your** Vercel project linked to `Dariolex/FrigoChef`.
+**Live app:** [https://frigo-chef-omega.vercel.app](https://frigo-chef-omega.vercel.app/)
 
-1. Open [Vercel Dashboard](https://vercel.com/dashboard) → project connected to this repo.  
-2. Copy the **Production** domain (Settings → Domains), for example `something-yourteam.vercel.app`.  
-3. Open that URL on phone or desktop.
+Open that link on your phone or desktop to use FrigoChef immediately (photo → recipes, classic cookbook, fridge organization, IT / EN / PL / ES).
 
-**Important:** `https://frigo-chef.vercel.app` is **not** this app (it is another project titled “Cuisine Intelligente” in French). Use only the domain shown in **your** Vercel project.
-
-Optional: assign a clear production alias (e.g. `frigochef-dario.vercel.app`) under **Settings → Domains**, then put that link here and in the UPDATE banner.
+> Note: `https://frigo-chef.vercel.app` is a **different** public project (French “Cuisine Intelligente”). This app’s production URL is **https://frigo-chef-omega.vercel.app**.
 
 ### Install on your phone (PWA)
 
-1. Open **your** production URL in **Chrome** (Android) or **Safari** (iOS).  
-2. **Android:** menu → **Install app** / **Add to Home screen**.  
+1. Open **[https://frigo-chef-omega.vercel.app](https://frigo-chef-omega.vercel.app/)** in **Chrome** (Android) or **Safari** (iOS).
+2. **Android:** browser menu → **Install app** / **Add to Home screen**.
 3. **iOS (Safari):** Share → **Add to Home Screen**.
 
 Manifest + service worker enable standalone mode. AI features need network and `GEMINI_API_KEY` on the server.
