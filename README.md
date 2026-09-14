@@ -1,7 +1,8 @@
 # FrigoChef
 
 > **UPDATE — UPDATED VERSION**  
-> Multilingual UI (**IT · EN · PL · ES**), flag language picker, localized classic cookbook, chef prompts, and photo → recipe flow. Clone or pull `main` for the latest release.
+> Multilingual UI (**IT · EN · PL · ES**), flag language picker, localized classic cookbook, chef prompts, and photo → recipe flow. Clone or pull `main` for the latest release.  
+> **Try it now (no install):** [https://frigo-chef.vercel.app](https://frigo-chef.vercel.app)
 
 Photograph the inside of your fridge. Confirm the ingredients. Get recipes you can cook tonight — written in the style of an Italian home kitchen — or a shelf-by-shelf plan to store the food correctly.
 
@@ -17,13 +18,19 @@ For people who open the fridge, freeze for ten seconds, and still don’t know w
 
 ---
 
-## Install on your phone (PWA)
+## Use it now
 
-1. Open the site in **Chrome** (Android) or **Safari** (iOS).
+**Live app:** [https://frigo-chef.vercel.app](https://frigo-chef.vercel.app)
+
+Open that link on your phone or desktop to use FrigoChef immediately (photo → recipes, classic cookbook, fridge organization, IT/EN/PL/ES).
+
+### Install on your phone (PWA)
+
+1. Open **[https://frigo-chef.vercel.app](https://frigo-chef.vercel.app)** in **Chrome** (Android) or **Safari** (iOS).
 2. **Android:** browser menu → **Install app** / **Add to Home screen**.
 3. **iOS (Safari):** Share → **Add to Home Screen**.
 
-The app ships a web app manifest and a service worker for standalone display and a cached shell. Photo recognition and AI recipes still need network access and a configured `GEMINI_API_KEY`.
+The app ships a web app manifest and a service worker for standalone display and a cached shell. Photo recognition and AI recipes need network access (and `GEMINI_API_KEY` on the deployed server).
 
 ## Languages
 
