@@ -1,9 +1,9 @@
 export type Locale = "it" | "en" | "pl";
 
-export const LOCALES: { id: Locale; label: string; short: string }[] = [
-  { id: "it", label: "Italiano", short: "IT" },
-  { id: "en", label: "English", short: "EN" },
-  { id: "pl", label: "Polski", short: "PL" },
+export const LOCALES: { id: Locale; label: string; short: string; flag: string }[] = [
+  { id: "it", label: "Italiano", short: "IT", flag: "🇮🇹" },
+  { id: "en", label: "English", short: "EN", flag: "🇬🇧" },
+  { id: "pl", label: "Polski", short: "PL", flag: "🇵🇱" },
 ];
 
 const STORAGE_KEY = "frigochef_locale";

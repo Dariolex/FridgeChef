@@ -92,6 +92,7 @@ export function FrigoChef() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [locale, setLocale] = useState<Locale>("it");
+  const [langOpen, setLangOpen] = useState(false);
 
   useEffect(() => {
     setHistory(loadHistory());
@@ -386,25 +387,53 @@ export function FrigoChef() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <div className="glass flex items-center rounded-full p-1" role="group" aria-label="Language">
-              {LOCALES.map((l) => (
-                <button
-                  key={l.id}
-                  type="button"
-                  onClick={() => {
-                    setLocale(l.id);
-                    saveLocale(l.id);
-                  }}
-                  className={cn(
-                    "rounded-full px-2.5 py-1.5 text-[11px] font-semibold transition",
-                    locale === l.id ? "bg-accent text-accent-fg" : "text-muted",
-                  )}
-                  aria-label={l.label}
-                  aria-pressed={locale === l.id}
-                >
-                  {l.short}
-                </button>
-              ))}
+            <div className="relative">
+              <button
+                type="button"
+                className="glass flex size-11 items-center justify-center rounded-full text-lg leading-none"
+                aria-label={t(locale, "language")}
+                aria-expanded={langOpen}
+                aria-haspopup="listbox"
+                onClick={() => setLangOpen((o) => !o)}
+              >
+                {LOCALES.find((l) => l.id === locale)?.flag ?? "🌐"}
+              </button>
+              {langOpen && (
+                <>
+                  <button
+                    type="button"
+                    className="fixed inset-0 z-40 cursor-default"
+                    aria-label="Close"
+                    onClick={() => setLangOpen(false)}
+                  />
+                  <ul
+                    role="listbox"
+                    className="absolute right-0 top-12 z-50 min-w-[9.5rem] overflow-hidden rounded-2xl border border-fg/10 bg-bg/95 py-1 shadow-xl backdrop-blur-xl"
+                  >
+                    {LOCALES.map((l) => (
+                      <li key={l.id} role="option" aria-selected={locale === l.id}>
+                        <button
+                          type="button"
+                          className={cn(
+                            "flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-sm transition",
+                            locale === l.id ? "bg-accent/20 font-semibold" : "hover:bg-fg/8",
+                          )}
+                          onClick={() => {
+                            setLocale(l.id);
+                            saveLocale(l.id);
+                            setLangOpen(false);
+                          }}
+                        >
+                          <span className="text-base leading-none" aria-hidden>
+                            {l.flag}
+                          </span>
+                          <span>{l.label}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
             <button
               type="button"
