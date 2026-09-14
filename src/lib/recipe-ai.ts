@@ -70,6 +70,8 @@ export type AppIngredient = Ingredient & { quantity?: string; confidence?: Confi
 /** Ricetta AI: compatibile con Recipe, più portata e origine (per etichettarla in UI). */
 export type AiRecipe = Recipe & { portata: Portata; source: "ai" };
 
+export type AiLocale = "it" | "en";
+
 export type AiFailure =
   | "no_key"
   | "auth"
@@ -88,7 +90,7 @@ export type AiFailure =
 export type AiResult<T> = { ok: true; data: T } | { ok: false; reason: AiFailure; detail: string };
 
 /** Messaggi pronti per l'utente. Il campo `detail` va solo nei log, mai a schermo. */
-export const AI_FAILURE_MESSAGE: Record<AiFailure, string> = {
+const AI_FAILURE_MESSAGE_IT: Record<AiFailure, string> = {
   no_key: "L'AI non è configurata: manca la chiave Gemini.",
   auth: "La chiave Gemini non è valida o non è più accettata da Google.",
   quota: "Limite di utilizzo gratuito di Gemini raggiunto: riprova più tardi.",
@@ -104,6 +106,30 @@ export const AI_FAILURE_MESSAGE: Record<AiFailure, string> = {
   no_valid_recipes:
     "Nessuna ricetta rispetta insieme dieta, tempo e ingredienti: prova ad allargare i filtri.",
 };
+
+const AI_FAILURE_MESSAGE_EN: Record<AiFailure, string> = {
+  no_key: "AI is not configured: Gemini API key is missing.",
+  auth: "The Gemini key is invalid or no longer accepted by Google.",
+  quota: "Gemini free-tier limit reached. Try again later.",
+  model_unavailable: "The configured AI model is no longer available.",
+  http: "The AI service returned an error.",
+  timeout: "The AI did not respond in time.",
+  network: "Could not reach the AI service.",
+  truncated: "The AI response was cut off. Try again.",
+  empty: "The AI returned an empty response. Try again.",
+  invalid_json: "The AI response was not readable. Try again.",
+  bad_input: "Invalid image. Try another photo.",
+  nothing_found: "No foods recognized in the photo. Add them manually.",
+  no_valid_recipes:
+    "No recipe matches diet, time and ingredients together. Try relaxing the filters.",
+};
+
+/** @deprecated Prefer aiFailureMessage(locale, reason) */
+export const AI_FAILURE_MESSAGE = AI_FAILURE_MESSAGE_IT;
+
+export function aiFailureMessage(locale: AiLocale | undefined, reason: AiFailure): string {
+  return (locale === "en" ? AI_FAILURE_MESSAGE_EN : AI_FAILURE_MESSAGE_IT)[reason];
+}
 
 export type RecipeRequest = {
   /** Solo gli ingredienti confermati dall'utente; possono includere la quantità, es. "zucchine (circa 3)". */
@@ -121,7 +147,7 @@ export type RecipeRequest = {
 };
 
 /** Iniezione di dipendenze per test e override puntuali. */
-export type CallOptions = { apiKey?: string; model?: string; fetchImpl?: typeof fetch };
+export type CallOptions = { apiKey?: string; model?: string; fetchImpl?: typeof fetch; locale?: AiLocale };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Prompt 1 · Inventario dalla foto
@@ -303,40 +329,47 @@ export const RECIPES_SCHEMA = {
 };
 
 /** Messaggio utente con i dati variabili, delimitati da tag per separarli dalle istruzioni. */
-export function buildRecipeUserMessage(req: RecipeRequest): string {
+export function buildRecipeUserMessage(req: RecipeRequest, locale: AiLocale = "it"): string {
   const count = clampInt(req.count ?? 4, 1, 6);
   const maxMissing = clampInt(req.maxMissing ?? 2, 0, 4);
   const pantry = uniqueCaseInsensitive(
     (req.pantry?.length ? req.pantry : DISPENSA_BASE).map((p) => cleanItem(p)),
   );
   const ingredients = uniqueCaseInsensitive(req.ingredients.map((i) => cleanItem(i))).slice(0, 60);
-  const avoid = uniqueCaseInsensitive((req.avoidTitles ?? []).map((t) => cleanItem(t))).slice(
-    0,
-    30,
-  );
-  const month = MESI[(req.now ?? new Date()).getMonth()];
-  const diet =
-    req.prefs.diet === "vegan"
-      ? "vegana"
-      : req.prefs.diet === "vegetarian"
-        ? "vegetariana"
-        : "nessun vincolo";
-  const course =
-    req.prefs.course === "dessert"
-      ? "solo dolci"
-      : "solo piatti salati (primi, secondi, contorni o piatti unici)";
+  const avoid = uniqueCaseInsensitive((req.avoidTitles ?? []).map((t) => cleanItem(t))).slice(0, 30);
+  const monthIt = MESI[(req.now ?? new Date()).getMonth()];
+  const monthEn = ["January","February","March","April","May","June","July","August","September","October","November","December"][(req.now ?? new Date()).getMonth()];
 
+  if (locale === "en") {
+    const diet = req.prefs.diet === "vegan" ? "vegan" : req.prefs.diet === "vegetarian" ? "vegetarian" : "no restriction";
+    const course = req.prefs.course === "dessert" ? "desserts only" : "savory dishes only (pasta/rice, mains, sides or one-pot)";
+    return [
+      "<ingredients>",
+      ...(ingredients.length ? ingredients.map((i) => `- ${i}`) : ["(none: use pantry only)"]),
+      "</ingredients>", "",
+      "<pantry>", pantry.join(", "), "</pantry>", "",
+      "<preferences>",
+      `Number of recipes: ${count}`,
+      `Servings: ${clampInt(req.prefs.servings, 1, 12)}`,
+      `Course: ${course}`,
+      `Diet: ${diet}`,
+      `Max total time per recipe: ${effectiveMaxMinutes(req.prefs)} minutes`,
+      `Missing ingredients allowed per recipe: at most ${maxMissing}`,
+      `Month: ${monthEn}`,
+      "</preferences>", "",
+      "<avoid_titles>",
+      ...(avoid.length ? avoid.map((t) => `- ${t}`) : ["none"]),
+      "</avoid_titles>",
+    ].join("\n");
+  }
+
+  const diet = req.prefs.diet === "vegan" ? "vegana" : req.prefs.diet === "vegetarian" ? "vegetariana" : "nessun vincolo";
+  const course = req.prefs.course === "dessert" ? "solo dolci" : "solo piatti salati (primi, secondi, contorni o piatti unici)";
   return [
     "<ingredienti>",
-    ...(ingredients.length
-      ? ingredients.map((i) => `- ${i}`)
-      : ["(nessuno: usa solo la dispensa)"]),
-    "</ingredienti>",
-    "",
-    "<dispensa>",
-    pantry.join(", "),
-    "</dispensa>",
-    "",
+    ...(ingredients.length ? ingredients.map((i) => `- ${i}`) : ["(nessuno: usa solo la dispensa)"]),
+    "</ingredienti>", "",
+    "<dispensa>", pantry.join(", "), "</dispensa>", "",
     "<preferenze>",
     `Numero di ricette: ${count}`,
     `Porzioni: ${clampInt(req.prefs.servings, 1, 12)}`,
@@ -344,14 +377,14 @@ export function buildRecipeUserMessage(req: RecipeRequest): string {
     `Dieta: ${diet}`,
     `Tempo totale massimo per ricetta: ${effectiveMaxMinutes(req.prefs)} minuti`,
     `Ingredienti mancanti ammessi per ricetta: al massimo ${maxMissing}`,
-    `Mese corrente: ${month}`,
-    "</preferenze>",
-    "",
+    `Mese: ${monthIt}`,
+    "</preferenze>", "",
     "<titoli_da_evitare>",
     ...(avoid.length ? avoid.map((t) => `- ${t}`) : ["nessuno"]),
     "</titoli_da_evitare>",
   ].join("\n");
 }
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Funzioni pubbliche (da chiamare solo lato server)
@@ -367,14 +400,18 @@ export async function detectIngredients(
   ) {
     return fail("bad_input", "Serve un'immagine JPEG, PNG o WebP in formato data URL");
   }
+  const locale = opts.locale ?? "it";
   const res = await callGeminiJson(
     {
       model: opts.model ?? readEnv("GEMINI_VISION_MODEL") ?? DEFAULT_VISION_MODEL,
-      system: VISION_SYSTEM_PROMPT,
+      system: visionSystemPrompt(locale),
       user: [
         {
           type: "text",
-          text: "Fai l'inventario degli alimenti visibili in questa foto del frigorifero.",
+          text:
+            locale === "en"
+              ? "Inventory the foods visible in this refrigerator photo."
+              : "Fai l'inventario degli alimenti visibili in questa foto del frigorifero.",
         },
         { type: "image_url", image_url: { url: imageDataUrl } },
       ],
@@ -400,11 +437,12 @@ export async function generateRecipes(
 ): Promise<AiResult<{ recipes: AiRecipe[]; notes: string }>> {
   const count = clampInt(req.count ?? 4, 1, 6);
   const request: RecipeRequest = { ...req, count };
+  const locale = opts.locale ?? "it";
   const res = await callGeminiJson(
     {
       model: opts.model ?? readEnv("GEMINI_RECIPE_MODEL") ?? DEFAULT_RECIPE_MODEL,
-      system: RECIPE_SYSTEM_PROMPT,
-      user: buildRecipeUserMessage(request),
+      system: recipeSystemPrompt(locale),
+      user: buildRecipeUserMessage(request, locale),
       schemaName: "frigochef_ricette",
       schema: RECIPES_SCHEMA,
       // Il budget comprende anche i token di "ragionamento": se è troppo basso la risposta si tronca.
@@ -463,6 +501,71 @@ Ricevi l'elenco degli alimenti riconosciuti in un frigorifero (con eventuale qua
 
 # Output
 Ogni alimento dell'elenco va in una sola zona. Non omettere né aggiungere alimenti.`;
+
+
+function visionSystemPrompt(locale: AiLocale): string {
+  if (locale !== "en") return VISION_SYSTEM_PROMPT;
+  return `You are FrigoChef's inventory assistant. You receive a photo of the inside of a refrigerator (shelves, drawers, door) and inventory foods that can be used for cooking. The user will confirm or correct the list before recipes are generated: a short, reliable list is better than a long, imaginative one.
+
+# Rules
+- List only foods that are clearly visible and usable in cooking.
+- Prefer common food names in English (e.g. "eggs", "zucchini", "chicken breast").
+- Include an approximate quantity when visible ("about 3", "1 pack").
+- confidence: "high" if clear, "medium" if partial, "low" if uncertain — items with low confidence should still be listed.
+- Do not invent foods that are not in the photo.
+- notes: one short useful sentence, or empty.
+
+Respond only with the required JSON schema.`;
+}
+
+function recipeSystemPrompt(locale: AiLocale): string {
+  if (locale !== "en") return RECIPE_SYSTEM_PROMPT;
+  return `You are FrigoChef's home cook: someone who cooks every day for their household, knows practical everyday cooking, and can make a good dish from whatever is in the fridge without betraying the eater's taste. Write for someone cooking at home: not a restaurant, not a tourist brochure.
+
+# Goals
+- Propose tasty, realistic recipes from the confirmed ingredients plus a basic pantry.
+- Respect diet, course (savory vs dessert), max time, and servings.
+- Prefer dishes that use what is available; allow a few missing ingredients when needed (shopping-list style).
+- Write titles, descriptions, ingredients, steps and tips in clear natural English.
+- steps: 4–7 precise actions with heat level, timing and visual cues.
+- tip: one practical tip specific to that dish.
+- Safety: poultry and ground meat fully cooked; note raw/undercooked eggs in the tip when relevant.
+
+# Variety
+- Recipes should differ by course, main ingredient or technique.
+- Order from most suitable (no missing items, familiar) to more creative.
+- Do not repeat avoided titles.
+
+If you cannot meet the requested count under all constraints, return fewer recipes and explain briefly in "notes".`;
+}
+
+function organizeSystemPrompt(locale: AiLocale): string {
+  if (locale !== "en") return ORGANIZE_SYSTEM_PROMPT;
+  return `You are an expert in food storage and home refrigerator organization.
+
+You receive a list of foods found in a fridge (with optional quantity and confidence). Propose the best placement to:
+1. match temperature and humidity needs;
+2. maximize freshness and shelf life;
+3. reduce cross-contamination (raw vs ready-to-eat);
+4. keep daily use practical.
+
+# Typical zones (different temperatures)
+- Top shelf: more stable; cooked foods, leftovers, ready-to-eat and packaged items.
+- Middle shelves: dairy, eggs, foods needing steady refrigeration.
+- Bottom shelf: usually coldest; raw meat and fish in sealed containers to avoid drips.
+- Drawers: fruit and vegetables (consider humidity when relevant).
+- Door: temperature swings; condiments, sauces, drinks, less perishable items. Not for highly perishable foods.
+
+# Safety
+- Always separate raw and ready-to-eat foods.
+- Raw meat and fish in sealed containers, on the bottom.
+- Do not invent foods that are not in the list.
+- If confidence is low, say so in the reason and avoid over-specific rules.
+- Keep reasons short and concrete in plain English.
+
+# Output
+Every listed food goes in exactly one zone. Do not omit or add foods.`;
+}
 
 export const ORGANIZE_SCHEMA = {
   type: "object",
@@ -523,18 +626,16 @@ export async function organizeFridge(
     return fail("bad_input", "Nessun alimento da organizzare");
   }
 
-  const user = [
-    "Organizza questi alimenti nel frigorifero.",
-    "",
-    "<alimenti>",
-    ...list,
-    "</alimenti>",
-  ].join("\n");
+  const locale = opts.locale ?? "it";
+  const user =
+    locale === "en"
+      ? ["Organize these foods in the refrigerator.", "", "<foods>", ...list, "</foods>"].join("\n")
+      : ["Organizza questi alimenti nel frigorifero.", "", "<alimenti>", ...list, "</alimenti>"].join("\n");
 
   const res = await callGeminiJson(
     {
       model: opts.model ?? readEnv("GEMINI_RECIPE_MODEL") ?? DEFAULT_RECIPE_MODEL,
-      system: ORGANIZE_SYSTEM_PROMPT,
+      system: organizeSystemPrompt(locale),
       user,
       schemaName: "frigochef_organizza_frigo",
       schema: ORGANIZE_SCHEMA,

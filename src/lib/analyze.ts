@@ -6,12 +6,13 @@ import { createServerFn } from "@tanstack/react-start";
 import { matchCookbook } from "./cookbook";
 import { filterShoppingMissing } from "./shopping";
 import {
-  AI_FAILURE_MESSAGE,
+  aiFailureMessage,
   detectIngredients,
   generateRecipes,
   ingredientLabel,
   organizeFridge,
   toAppIngredients,
+  type AiLocale,
   type AiRecipe,
   type AppIngredient,
   type FridgeOrganization,
@@ -63,12 +64,13 @@ export type OrganizeFridgeErr = {
 
 /** Inventario dalla foto: solo riconoscimento, nessuna ricetta. */
 export const readFridgePhoto = createServerFn({ method: "POST" })
-  .validator((data: { image: string }) => data)
+  .validator((data: { image: string; locale?: AiLocale }) => data)
   .handler(async ({ data }): Promise<ReadFridgeOk | ReadFridgeErr> => {
-    const res = await detectIngredients(data.image);
+    const locale = data.locale ?? "it";
+    const res = await detectIngredients(data.image, { locale });
     if (!res.ok) {
       console.error("[readFridgePhoto]", res.reason, res.detail);
-      return { ok: false, message: AI_FAILURE_MESSAGE[res.reason] };
+      return { ok: false, message: aiFailureMessage(locale, res.reason) };
     }
     return {
       ok: true,
@@ -85,16 +87,16 @@ export const createRecipes = createServerFn({ method: "POST" })
       prefs: Prefs;
       avoidTitles?: string[];
       count?: number;
+      locale?: AiLocale;
     }) => data,
   )
   .handler(async ({ data }): Promise<CreateRecipesOk | CreateRecipesFallback> => {
     const { ingredients, prefs, avoidTitles, count } = data;
-    const res = await generateRecipes({
-      ingredients,
-      prefs,
-      avoidTitles,
-      count,
-    });
+    const locale = data.locale ?? "it";
+    const res = await generateRecipes(
+      { ingredients, prefs, avoidTitles, count },
+      { locale },
+    );
 
     if (res.ok) {
       return {
@@ -114,7 +116,7 @@ export const createRecipes = createServerFn({ method: "POST" })
     return {
       ok: false,
       source: "book",
-      message: AI_FAILURE_MESSAGE[res.reason],
+      message: aiFailureMessage(locale, res.reason),
       recipes: bookRecipes,
     };
   });
@@ -128,13 +130,17 @@ type CookInput = {
 /** Disposizione ottimale degli alimenti nei ripiani del frigo. */
 export const organizeFridgePlan = createServerFn({ method: "POST" })
   .validator(
-    (data: { ingredients: { name: string; quantity?: string; confidence?: string }[] }) => data,
+    (data: {
+      ingredients: { name: string; quantity?: string; confidence?: string }[];
+      locale?: AiLocale;
+    }) => data,
   )
   .handler(async ({ data }): Promise<OrganizeFridgeOk | OrganizeFridgeErr> => {
-    const res = await organizeFridge(data.ingredients ?? []);
+    const locale = data.locale ?? "it";
+    const res = await organizeFridge(data.ingredients ?? [], { locale });
     if (!res.ok) {
       console.error("[organizeFridgePlan]", res.reason, res.detail);
-      return { ok: false, message: AI_FAILURE_MESSAGE[res.reason] };
+      return { ok: false, message: aiFailureMessage(locale, res.reason) };
     }
     return { ok: true, plan: res.data };
   });
@@ -149,17 +155,18 @@ export const cookFromFridge = createServerFn({ method: "POST" })
     async ({
       data,
     }): Promise<{ ok: true; analysis: Analysis } | { ok: false; error: string; analysis?: Analysis }> => {
+      const locale = "it" as const;
       const prefs = data.prefs;
       const manual = (data.ingredients ?? []).map((s) => s.trim()).filter(Boolean);
 
       if (data.image) {
-        const inv = await detectIngredients(data.image);
+        const inv = await detectIngredients(data.image, { locale });
         if (!inv.ok) {
           console.error("[cookFromFridge/vision]", inv.reason, inv.detail);
           const book = matchCookbook(manual, prefs);
           return {
             ok: false,
-            error: AI_FAILURE_MESSAGE[inv.reason],
+            error: aiFailureMessage(locale, inv.reason),
             analysis: {
               ingredients: manual.map((name) => ({ name, have: true })),
               notes: "",
@@ -189,7 +196,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
         const names = labels.map((l) => l.replace(/\s*\([^)]*\)\s*$/, "").trim());
         return {
           ok: false,
-          error: AI_FAILURE_MESSAGE[gen.reason],
+          error: aiFailureMessage(locale, gen.reason),
           analysis: {
             ingredients: appIngredients,
             notes: inv.data.notes,
@@ -222,7 +229,7 @@ export const cookFromFridge = createServerFn({ method: "POST" })
       console.error("[cookFromFridge/manual]", gen.reason, gen.detail);
       return {
         ok: false,
-        error: AI_FAILURE_MESSAGE[gen.reason],
+        error: aiFailureMessage(locale, gen.reason),
         analysis: {
           ingredients: manual.map((name) => ({ name, have: true })),
           notes: "",

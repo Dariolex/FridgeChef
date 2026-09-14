@@ -32,6 +32,15 @@ import {
 import { compressImage } from "@/lib/image";
 import { cn } from "@/lib/utils";
 import {
+  catalogSectionTitle,
+  dietLabel,
+  loadLocale,
+  LOCALES,
+  saveLocale,
+  t,
+  type Locale,
+} from "@/lib/i18n";
+import {
   DEFAULT_PREFS,
   type Analysis,
   type Diet,
@@ -44,12 +53,7 @@ import {
 type Phase = "idle" | "analyzing" | "thinking" | "ready";
 type Tab = "home" | "recipes" | "camera" | "history" | "profile";
 
-const DIETS: { id: Diet; label: string }[] = [
-  { id: "any", label: "Qualsiasi" },
-  { id: "vegetarian", label: "Vegetariano" },
-  { id: "vegan", label: "Vegano" },
-  { id: "fast", label: "Veloce" },
-];
+const DIET_IDS: Diet[] = ["any", "vegetarian", "vegan", "fast"];
 
 function LeafMark({ className }: { className?: string }) {
   return (
@@ -87,10 +91,12 @@ export function FrigoChef() {
   const [organizing, setOrganizing] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(0);
+  const [locale, setLocale] = useState<Locale>("it");
 
   useEffect(() => {
     setHistory(loadHistory());
     setShopping(loadShopping());
+    setLocale(loadLocale());
   }, []);
   useEffect(() => {
     try {
@@ -114,14 +120,12 @@ export function FrigoChef() {
   const addMissing = (recipe: Recipe) => {
     const items = filterShoppingMissing(recipe.missing);
     if (!items.length) {
-      setToast("Niente da aggiungere: hai già tutto (o solo dispensa base).");
+      setToast(t(locale, "toastNothing"));
       return;
     }
     setShopping(addShopping(items, recipe.title));
     setToast(
-      items.length === 1
-        ? "1 ingrediente aggiunto alla spesa"
-        : `${items.length} ingredienti aggiunti alla spesa`,
+      items.length === 1 ? t(locale, "toastOne") : t(locale, "toastMany", { n: items.length }),
     );
   };
 
@@ -163,7 +167,7 @@ export function FrigoChef() {
   const runCreateRecipes = async (opts?: { avoidTitles?: string[]; append?: boolean }) => {
     const ingredients = selectedLabels();
     if (!ingredients.length) {
-      setError("Seleziona o aggiungi almeno un ingrediente.");
+      setError(t(locale, "errSelectIngredient"));
       return;
     }
     setPhase("thinking");
@@ -176,6 +180,7 @@ export function FrigoChef() {
           prefs,
           avoidTitles: opts?.avoidTitles,
           count: 4,
+          locale,
         },
       });
       if (res.ok) {
@@ -203,7 +208,7 @@ export function FrigoChef() {
       setTab("home");
     } catch (e) {
       console.error(e);
-      setError("Connessione al servizio AI non riuscita. Puoi riprovare o usare il ricettario.");
+      setError(t(locale, "errAiConnection"));
       setPhase("ready");
     }
   };
@@ -211,7 +216,7 @@ export function FrigoChef() {
   const runCookbookRecipes = () => {
     const ingredients = selectedLabels();
     if (!ingredients.length) {
-      setError("Seleziona o aggiungi almeno un ingrediente.");
+      setError(t(locale, "errSelectIngredient"));
       return;
     }
     const names = ingredients.map((label) => label.replace(/\s*\([^)]*\)\s*$/, "").trim());
@@ -234,7 +239,7 @@ export function FrigoChef() {
   const runOrganizeFridge = async () => {
     const items = (analysis?.ingredients ?? []).filter((i) => i.have);
     if (!items.length) {
-      setError("Seleziona almeno un alimento da organizzare.");
+      setError(t(locale, "errSelectFood"));
       return;
     }
     setOrganizing(true);
@@ -247,6 +252,7 @@ export function FrigoChef() {
             quantity: i.quantity,
             confidence: i.confidence,
           })),
+          locale,
         },
       });
       if (res.ok) {
@@ -256,7 +262,7 @@ export function FrigoChef() {
       }
     } catch (e) {
       console.error(e);
-      setError("Non riesco a organizzare il frigo in questo momento. Riprova.");
+      setError(t(locale, "errOrganize"));
     } finally {
       setOrganizing(false);
     }
@@ -272,7 +278,7 @@ export function FrigoChef() {
     try {
       const dataUrl = await compressImage(file);
       setPhoto(dataUrl);
-      const res = await readFridgePhoto({ data: { image: dataUrl } });
+      const res = await readFridgePhoto({ data: { image: dataUrl, locale } });
       if (!res.ok) {
         setError(res.message);
         setAnalysis({
@@ -293,7 +299,7 @@ export function FrigoChef() {
       setError(null);
       setPhase("ready");
     } catch {
-      setError("Qualcosa è andato storto. Riprova o aggiungi gli ingredienti a mano.");
+      setError(t(locale, "errGeneric"));
       setPhase("idle");
     }
   };
@@ -370,16 +376,36 @@ export function FrigoChef() {
           <div className="flex items-center gap-3">
             <LeafMark className="size-11" />
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">Dal frigo al piatto</p>
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">{t(locale, "tagline")}</p>
               <h1 className="text-xl font-semibold tracking-tight">FrigoChef</h1>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <div className="glass flex items-center rounded-full p-1" role="group" aria-label="Language">
+              {LOCALES.map((l) => (
+                <button
+                  key={l.id}
+                  type="button"
+                  onClick={() => {
+                    setLocale(l.id);
+                    saveLocale(l.id);
+                  }}
+                  className={cn(
+                    "rounded-full px-2.5 py-1.5 text-[11px] font-semibold transition",
+                    locale === l.id ? "bg-accent text-accent-fg" : "text-muted",
+                  )}
+                  aria-label={l.label}
+                  aria-pressed={locale === l.id}
+                >
+                  {l.short}
+                </button>
+              ))}
+            </div>
             <button
               type="button"
               onClick={() => setShoppingOpen(true)}
               className="glass relative grid size-11 place-items-center rounded-full"
-              aria-label={toBuy ? `Lista della spesa, ${toBuy} da prendere` : "Lista della spesa"}
+              aria-label={toBuy ? t(locale, "shoppingAriaN", { n: toBuy }) : t(locale, "shoppingAria")}
             >
               <ShoppingCart className="size-5" />
               {toBuy > 0 && (
@@ -416,7 +442,7 @@ export function FrigoChef() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Cerca una ricetta"
+              placeholder={t(locale, "searchPlaceholder")}
               className="w-full bg-transparent text-sm outline-none placeholder:text-muted"
             />
           </label>
@@ -428,17 +454,17 @@ export function FrigoChef() {
             tab !== "home" && tab !== "recipes" && "hidden",
           )}
         >
-          {DIETS.map((d) => (
+          {DIET_IDS.map((d) => (
             <button
-              key={d.id}
+              key={d}
               type="button"
-              onClick={() => updatePrefs({ diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 })}
+              onClick={() => updatePrefs({ diet: d, maxMinutes: d === "fast" ? 15 : 40 })}
               className={cn(
                 "h-10 shrink-0 rounded-full px-4 text-sm font-medium transition-colors",
-                prefs.diet === d.id ? "bg-accent text-accent-fg" : "glass text-fg",
+                prefs.diet === d ? "bg-accent text-accent-fg" : "glass text-fg",
               )}
             >
-              {d.label}
+              {dietLabel(locale, d)}
             </button>
           ))}
           <button
@@ -462,15 +488,15 @@ export function FrigoChef() {
           <section className="relative z-10 space-y-5">
             <Button variant="lime" size="lg" className="w-full" onClick={() => fileRef.current?.click()}>
               <Camera className="size-5" />
-              Scatta una foto
+              {t(locale, "shootPhoto")}
             </Button>
             <div className="glass rounded-[28px] p-4">
-              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted">Oppure scrivi cosa hai</p>
+              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted">{t(locale, "orType")}</p>
               <div className="flex gap-2">
                 <input
                   value={manual}
                   onChange={(e) => setManual(e.target.value)}
-                  placeholder="uova, pomodori, pasta"
+                  placeholder={t(locale, "manualPlaceholder")}
                   className="h-11 flex-1 rounded-full bg-fg/8 px-4 text-sm outline-none placeholder:text-muted"
                 />
                 <Button size="sm" onClick={addManual}>
@@ -517,7 +543,7 @@ export function FrigoChef() {
             )}
             <div>
               <div className="mb-3 flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Nel frigo</h2>
+                <h2 className="text-lg font-semibold">{t(locale, "inFridge")}</h2>
                 <button type="button" className="text-sm text-muted" onClick={reset}>
                   Nuova foto
                 </button>
@@ -544,7 +570,7 @@ export function FrigoChef() {
                 <input
                   value={extraIngredient}
                   onChange={(e) => setExtraIngredient(e.target.value)}
-                  placeholder="Aggiungi altri ingredienti"
+                  placeholder={t(locale, "extraPlaceholder")}
                   className="h-11 flex-1 rounded-full bg-fg/8 px-4 text-sm outline-none placeholder:text-muted"
                 />
               </div>
@@ -556,14 +582,14 @@ export function FrigoChef() {
                     onClick={() => void runCreateRecipes()}
                   >
                     <Sparkles className="size-4" />
-                    Crea ricette
+                    {t(locale, "createRecipes")}
                   </Button>
                   <Button
                     variant="yellow"
                     size="sm"
                     onClick={() => runCookbookRecipes()}
                   >
-                    Ricettario Classico
+                    {t(locale, "classicCookbook")}
                   </Button>
                   <Button
                     variant="sky"
@@ -571,18 +597,18 @@ export function FrigoChef() {
                     disabled={organizing}
                     onClick={() => void runOrganizeFridge()}
                   >
-                    {organizing ? "Organizzo…" : "Organizza frigo"}
+                    {organizing ? t(locale, "organizing") : t(locale, "organizeFridge")}
                   </Button>
                   {prefsDirty && analysis.recipes.length > 0 && (
                     <Button size="sm" onClick={() => void runCreateRecipes()}>
-                      Aggiorna ricette con i nuovi filtri
+                      {t(locale, "updateWithFilters")}
                     </Button>
                   )}
                 </div>
               </div>
             </div>
             {fridgePlan && (
-              <FridgePlanPanel plan={fridgePlan} onClose={() => setFridgePlan(null)} />
+              <FridgePlanPanel locale={locale} plan={fridgePlan} onClose={() => setFridgePlan(null)} />
             )}
 
             {analysis.recipes.length > 0 && (
@@ -595,6 +621,7 @@ export function FrigoChef() {
                   recipes={shownRecipes}
                   source={analysis.source}
                   onOpen={setSelected}
+                  locale={locale}
                 />
                 {analysis.recipes.length < 12 && (
                   <Button
@@ -607,7 +634,7 @@ export function FrigoChef() {
                       })
                     }
                   >
-                    Altre idee
+                    {t(locale, "moreIdeas")}
                   </Button>
                 )}
               </>
@@ -619,16 +646,17 @@ export function FrigoChef() {
           <section className="relative z-10 space-y-5">
             {analysis && analysis.recipes.length > 0 && (
               <RecipeGrid
-                title={analysis.source === "book" ? "Dal ricettario (frigo)" : "Dal tuo frigo"}
+                title={analysis.source === "book" ? t(locale, "fromBookFridge") : t(locale, "fromFridge")}
                 recipes={analysis.recipes}
                 source={analysis.source}
                 onOpen={setSelected}
+                locale={locale}
               />
             )}
             <div>
-              <h2 className="mb-1 text-lg font-semibold">Ricettario classico</h2>
+              <h2 className="mb-1 text-lg font-semibold">{t(locale, "classicTitle")}</h2>
               <p className="mb-3 text-sm text-muted">
-                Tocca una categoria per vedere i piatti. Filtra con dieta, tempo e ricerca.
+                {t(locale, "classicHint")}
               </p>
             </div>
             <div className="space-y-2">
@@ -643,7 +671,7 @@ export function FrigoChef() {
                       className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left"
                     >
                       <span className="min-w-0">
-                        <span className="block text-sm font-semibold">{section.title}</span>
+                        <span className="block text-sm font-semibold">{catalogSectionTitle(locale, section.id, section.title)}</span>
                         <span className="text-xs text-muted">
                           {section.recipes.length}{" "}
                           {section.recipes.length === 1 ? "ricetta" : "ricette"}
@@ -693,7 +721,7 @@ export function FrigoChef() {
             </div>
             {catalogSections.length === 0 && (
               <p className="glass rounded-2xl px-4 py-3 text-sm text-muted">
-                Nessun piatto per questa ricerca. Prova a cambiare filtro o parola.
+                {t(locale, "noRecipesSearch")}
               </p>
             )}
           </section>
@@ -702,7 +730,7 @@ export function FrigoChef() {
         {tab === "history" && (
           <section className="space-y-5">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Piatti cucinati</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "historyTitle")}</h2>
               {history.length > 0 && (
                 <button
                   type="button"
@@ -721,7 +749,7 @@ export function FrigoChef() {
               <div className="glass flex flex-col items-center gap-3 rounded-[32px] px-6 py-14 text-center">
                 <img src={FOOD_ART.hero} alt="" className="h-24 w-36 object-contain" />
                 <p className="text-sm text-muted">
-                  Ancora nessun piatto. Apri una ricetta e tocca “Ho cucinato questo” per ritrovarla qui.
+                  Ancora nessun piatto. Apri una ricetta e tocca “{t(locale, "cookedThis")}” per ritrovarla qui.
                 </p>
               </div>
             ) : (
@@ -767,17 +795,17 @@ export function FrigoChef() {
             <div className="glass space-y-3 rounded-[28px] p-4">
               <p className="text-xs font-medium uppercase tracking-wide text-muted">Dieta</p>
               <div className="flex flex-wrap gap-2">
-                {DIETS.map((d) => (
+                {DIET_IDS.map((d) => (
                   <button
-                    key={d.id}
+                    key={d}
                     type="button"
-                    onClick={() => updatePrefs({ diet: d.id, maxMinutes: d.id === "fast" ? 15 : 40 })}
+                    onClick={() => updatePrefs({ diet: d, maxMinutes: d === "fast" ? 15 : 40 })}
                     className={cn(
                       "h-10 rounded-full px-4 text-sm font-medium transition-colors",
-                      prefs.diet === d.id ? "bg-accent text-accent-fg" : "bg-fg/8 text-fg",
+                      prefs.diet === d ? "bg-accent text-accent-fg" : "bg-fg/8 text-fg",
                     )}
                   >
-                    {d.label}
+                    {dietLabel(locale, d)}
                   </button>
                 ))}
               </div>
@@ -785,8 +813,8 @@ export function FrigoChef() {
 
             <div className="glass flex items-center justify-between rounded-[28px] p-4">
               <div>
-                <p className="text-sm font-semibold">Solo dessert</p>
-                <p className="text-xs text-muted">Mostra solo dolci e dessert</p>
+                <p className="text-sm font-semibold">{t(locale, "onlyDessert")}</p>
+                <p className="text-xs text-muted">{t(locale, "onlyDessertHint")}</p>
               </div>
               <button
                 type="button"
@@ -807,7 +835,7 @@ export function FrigoChef() {
 
             <div className="glass flex items-center justify-between rounded-[28px] p-4">
               <div>
-                <p className="text-sm font-semibold">Porzioni</p>
+                <p className="text-sm font-semibold">{t(locale, "portions")}</p>
                 <p className="text-xs text-muted">Per quante persone cucini</p>
               </div>
               <div className="flex items-center gap-2">
@@ -833,7 +861,7 @@ export function FrigoChef() {
 
             <div className="glass flex items-center justify-between rounded-[28px] p-4">
               <div>
-                <p className="text-sm font-semibold">Tempo massimo</p>
+                <p className="text-sm font-semibold">{t(locale, "maxTime")}</p>
                 <p className="text-xs text-muted">Quanto vuoi stare ai fornelli</p>
               </div>
               <div className="flex items-center gap-2">
@@ -871,6 +899,7 @@ export function FrigoChef() {
 
       {showOnboarding && (
         <OnboardingOverlay
+          locale={locale}
           step={onboardingStep}
           onNext={() => {
             if (onboardingStep >= 2) dismissOnboarding();
@@ -882,18 +911,18 @@ export function FrigoChef() {
 
       <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-fg/10 bg-bg/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[430px] items-center justify-around px-2 py-2">
-          <NavBtn active={tab === "home"} onClick={() => { setTab("home"); if (phase !== "ready") setPhase("idle"); }} icon={Home} label="Home" />
-          <NavBtn active={tab === "recipes"} onClick={() => setTab("recipes")} icon={ChefHat} label="Ricette" />
+          <NavBtn active={tab === "home"} onClick={() => { setTab("home"); if (phase !== "ready") setPhase("idle"); }} icon={Home} label={t(locale, "navHome")} />
+          <NavBtn active={tab === "recipes"} onClick={() => setTab("recipes")} icon={ChefHat} label={t(locale, "navRecipes")} />
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
             className="grid size-14 -translate-y-3 place-items-center rounded-full bg-accent text-accent-fg shadow-lg shadow-accent/30"
-            aria-label="Scatta foto"
+            aria-label={t(locale, "shootPhotoAria")}
           >
             <Camera className="size-6" />
           </button>
-          <NavBtn active={tab === "history"} onClick={() => setTab("history")} icon={Clock3} label="Storia" />
-          <NavBtn active={tab === "profile"} onClick={() => setTab("profile")} icon={UserRound} label="Profilo" />
+          <NavBtn active={tab === "history"} onClick={() => setTab("history")} icon={Clock3} label={t(locale, "navHistory")} />
+          <NavBtn active={tab === "profile"} onClick={() => setTab("profile")} icon={UserRound} label={t(locale, "navProfile")} />
         </div>
       </nav>
 
@@ -905,6 +934,7 @@ export function FrigoChef() {
 
       {selected && (
         <RecipeSheet
+          locale={locale}
           recipe={selected}
           servings={prefs.servings}
           onClose={() => setSelected(null)}
@@ -916,6 +946,7 @@ export function FrigoChef() {
 
       {shoppingOpen && (
         <ShoppingSheet
+          locale={locale}
           items={shopping}
           onClose={() => setShoppingOpen(false)}
           onToggle={(id) => setShopping(toggleShopping(id))}
@@ -955,11 +986,13 @@ function RecipeGrid({
   recipes,
   onOpen,
   source,
+  locale = "it",
 }: {
   title: string;
   recipes: Recipe[];
   onOpen: (r: Recipe) => void;
   source?: "ai" | "book";
+  locale?: Locale;
 }) {
   if (!recipes.length) return null;
   return (
@@ -981,12 +1014,12 @@ function RecipeGrid({
               />
               {source === "ai" && (
                 <span className="absolute left-2 top-2 rounded-full bg-accent/95 px-2 py-0.5 text-[10px] font-semibold text-accent-fg">
-                  Chef AI
+                  {t(locale, "chefAI")}
                 </span>
               )}
               {source === "book" && (
                 <span className="absolute left-2 top-2 rounded-full bg-amber-400/95 px-2 py-0.5 text-[10px] font-semibold text-stone-900">
-                  Classico
+                  {t(locale, "classic")}
                 </span>
               )}
             </div>
@@ -1005,6 +1038,7 @@ function RecipeGrid({
 }
 
 function RecipeSheet({
+  locale = "it",
   recipe,
   servings,
   onClose,
@@ -1012,6 +1046,7 @@ function RecipeSheet({
   onAddMissing,
   shoppingEnabled = false,
 }: {
+  locale?: Locale;
   recipe: Recipe;
   servings: number;
   onClose: () => void;
@@ -1045,7 +1080,7 @@ function RecipeSheet({
 
           {filterShoppingMissing(recipe.missing).length > 0 && (
             <div className="mt-4 rounded-2xl bg-fg/8 p-3">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted">Ti manca</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">{t(locale, "missingLabel")}</p>
               <p className="mt-1 text-sm">{filterShoppingMissing(recipe.missing).join(", ")}</p>
             </div>
           )}
@@ -1091,7 +1126,7 @@ function RecipeSheet({
               onClick={() => onAddMissing(recipe)}
             >
               <ShoppingCart className="size-5" />
-              Aggiungi a lista spesa
+              {t(locale, "addToShopping")}
             </Button>
           )}
           <Button
@@ -1104,7 +1139,7 @@ function RecipeSheet({
             }}
           >
             <Check className="size-5" />
-            Ho cucinato questo
+            {t(locale, "cookedThis")}
           </Button>
         </div>
       </div>
@@ -1113,12 +1148,14 @@ function RecipeSheet({
 }
 
 function ShoppingSheet({
+  locale = "it",
   items,
   onClose,
   onToggle,
   onRemove,
   onClearDone,
 }: {
+  locale?: Locale;
   items: ShoppingItem[];
   onClose: () => void;
   onToggle: (id: string) => void;
@@ -1131,14 +1168,14 @@ function ShoppingSheet({
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 sm:items-center sm:p-4">
       <div className="relative flex max-h-[85dvh] w-full max-w-[430px] flex-col overflow-hidden rounded-t-[32px] bg-bg sm:rounded-[32px]">
         <div className="flex items-center justify-between border-b border-fg/10 px-5 py-4">
-          <h2 className="text-lg font-semibold">Lista della spesa</h2>
+          <h2 className="text-lg font-semibold">{t(locale, "shoppingTitle")}</h2>
           <button type="button" onClick={onClose} className="grid size-9 place-items-center rounded-full bg-fg/8" aria-label="Chiudi">
             <X className="size-4" />
           </button>
         </div>
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {items.length === 0 ? (
-            <p className="py-10 text-center text-sm text-muted">La lista è vuota. Aggiungi ingredienti dalle ricette.</p>
+            <p className="py-10 text-center text-sm text-muted">{t(locale, "shoppingEmpty")}</p>
           ) : (
             <div className="space-y-5">
               {toBuy.length > 0 && (
@@ -1221,9 +1258,11 @@ const FRIDGE_ZONE_ORDER = [
 function FridgePlanPanel({
   plan,
   onClose,
+  locale = "it",
 }: {
   plan: FridgeOrganization;
   onClose: () => void;
+  locale?: Locale;
 }) {
   const [active, setActive] = useState(0);
 
@@ -1256,7 +1295,7 @@ function FridgePlanPanel({
   return (
     <div className="glass space-y-3 rounded-[24px] p-4">
       <div className="flex items-center justify-between gap-2">
-        <h2 className="text-lg font-semibold">Come organizzare il frigo</h2>
+        <h2 className="text-lg font-semibold">{t(locale, "organizeTitle")}</h2>
         <button type="button" className="text-sm text-muted" onClick={onClose}>
           Chiudi
         </button>
@@ -1325,47 +1364,39 @@ function FridgePlanPanel({
   );
 }
 
-const ONBOARDING_STEPS = [
-  {
-    title: "Scatta il frigo",
-    body: "Fotografa il contenuto del frigorifero: FrigoChef riconosce gli alimenti e te li mostra come chip da confermare.",
-  },
-  {
-    title: "Scegli il percorso",
-    body: "Crea ricette (AI), Ricettario Classico (ricette collaudate) oppure Organizza frigo (dove mettere ogni alimento).",
-  },
-  {
-    title: "Filtra e cucina",
-    body: "Usa dieta, tempo e porzioni prima di generare. Apri una ricetta, cuocila o aggiungi i mancanti alla lista della spesa.",
-  },
-] as const;
-
 function OnboardingOverlay({
+  locale = "it",
   step,
   onNext,
   onSkip,
 }: {
+  locale?: Locale;
   step: number;
   onNext: () => void;
   onSkip: () => void;
 }) {
-  const s = ONBOARDING_STEPS[Math.min(step, ONBOARDING_STEPS.length - 1)];
-  const last = step >= ONBOARDING_STEPS.length - 1;
+  const steps = [
+    { title: t(locale, "onboarding1Title"), body: t(locale, "onboarding1Body") },
+    { title: t(locale, "onboarding2Title"), body: t(locale, "onboarding2Body") },
+    { title: t(locale, "onboarding3Title"), body: t(locale, "onboarding3Body") },
+  ];
+  const s = steps[Math.min(step, steps.length - 1)];
+  const last = step >= steps.length - 1;
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 p-4 sm:items-center">
       <div className="w-full max-w-[400px] rounded-[28px] bg-bg p-5 shadow-2xl">
         <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
-          Benvenuto · {step + 1}/{ONBOARDING_STEPS.length}
+          {t(locale, "welcome")} · {step + 1}/{steps.length}
         </p>
         <h2 className="mt-2 text-xl font-semibold">{s.title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
         <div className="mt-5 flex items-center gap-2">
           <Button variant="lime" className="flex-1" onClick={onNext}>
-            {last ? "Inizia" : "Avanti"}
+            {last ? t(locale, "start") : t(locale, "next")}
           </Button>
           {!last && (
             <button type="button" className="px-3 text-sm text-muted" onClick={onSkip}>
-              Salta
+              {t(locale, "skip")}
             </button>
           )}
         </div>
